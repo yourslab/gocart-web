@@ -26,10 +26,14 @@
   .MainDrawerNotification-itemHeading {
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
   }
 
   .MainDrawerNotification-itemAvatar {
     margin-right: 10px;
+    // For some reason, there's an allowance below the avatar.
+    // This is a "workaround" for it.
+    height: 30px;
   }
 
   .MainDrawerNotification-itemAvatarImage {
@@ -39,13 +43,15 @@
   }
 
   .MainDrawerNotification-itemName {
-    line-height: 1;;
-    margin-bottom: 0;
+    margin-bottom: 1px;
+    line-height: 1;
   }
 
   .MainDrawerNotification-itemTime {
+    margin-bottom: 0;
     line-height: 1;
-    color: $mainDrawer-logoColor;
+    font-weight: 400;
+    color: $color-grayDark;
   }
 
   .MainDrawerNotification-itemBody {

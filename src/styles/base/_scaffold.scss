@@ -15,6 +15,11 @@ html, body {
   color: $color-black;
 }
 
+img {
+  // Cancel the set default line-height
+  line-height: 1;
+}
+
 .Container {
   @include clearfix;
   padding-left: 20px;

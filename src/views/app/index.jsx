@@ -46,7 +46,7 @@ export default class AppView extends Component {
 
                     <div>
                       <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
-                      <small className="MainDrawerNotification-itemTime">5 mins ago</small>
+                      <h6 className="MainDrawerNotification-itemTime"><small>5 mins ago</small></h6>
                     </div>
                   </div>
 
