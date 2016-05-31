@@ -65,6 +65,8 @@
   .MainDrawerNotification-itemDetails {
     color: $mainDrawer-logoColor;
     line-height: 1;
+    font-weight: 400;
+    color: $color-grayDark;
   }
 
   .MainDrawerNotification-itemThumbnail {
