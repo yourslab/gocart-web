@@ -1,0 +1,22 @@
+.MainDrawer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: $mainDrawer;
+  background: $color-white;
+
+  .MainDrawer-body {
+    margin-top: 50px;
+  }
+
+  .MainDrawer-logoSection {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  .MainDrawer-logo {
+    width: 50px;
+  }
+}

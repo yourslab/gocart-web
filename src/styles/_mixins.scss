@@ -1,0 +1,39 @@
+@mixin clearfix() {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin verticalRhythm() {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+@mixin linkNoUnderscore() {
+  &, &:hover {
+    text-decoration: none;
+  }
+}
+
+@mixin textEllipsis($maxWidth: 100%) {
+  display: inline-block;
+  overflow: hidden;
+  max-width: $maxWidth;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Utility to remove the default styling
+// of an `li`, and turn it into a block.
+@mixin listBlock() {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@mixin backdrop() {
+  box-shadow: 0 1px 5px $color-backdrop;
+}

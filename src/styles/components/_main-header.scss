@@ -1,0 +1,80 @@
+.MainHeader {
+  @include backdrop;
+  background: $color-white;
+  border-top: 3px solid $color-red;
+
+  .MainHeader-inner {
+    display: flex;
+    justify-content: space-between;
+    height: 90px;
+  }
+
+  .MainHeader-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .MainHeader-sectionItem:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .MainHeader-logoLink {
+    @include linkNoUnderscore;
+    display: block;
+    margin-top: 5px; // Slightly lower the logo
+    padding: 30px 20px;
+    line-height: 1;
+    background: $color-red;
+    border-radius: $borderRadius-base;
+  }
+
+  .MainHeader-logo {
+    width: 50px;
+  }
+
+  .MainHeader-link,
+  .MainHeader-button {
+    display: block;
+    color: $color-orange;
+  }
+
+  .MainHeader-link {
+    @include linkNoUnderscore;
+    border-bottom: 2px solid transparent;
+  }
+
+  .MainHeader-link--active {
+    color: $color-red;
+    border-bottom-color: $color-red;
+  }
+
+  .MainHeader-button {
+    color: $color-orange;
+    padding: 0;
+    background: transparent;
+    border: transparent;
+    outline: 0;
+  }
+
+  .MainHeader-separator {
+    height: 20px;
+    width: 1px;
+    background: $color-grayDarker;
+  }
+
+  .MainHeader-sidebar {
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    height: 90px;
+  }
+
+  .MainHeader-sidebar--left {
+    left: 20px;
+  }
+
+  .MainHeader-sidebar--right {
+    right: 20px;
+  }
+}

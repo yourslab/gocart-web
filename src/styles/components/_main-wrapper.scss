@@ -1,0 +1,38 @@
+.MainWrapper {
+  .MainWrapper-body {
+    background: $color-gray;
+  }
+
+  .MainWrapper-content {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    min-height: 640px;
+    border-bottom: 1px solid $color-grayDarker;
+    z-index: $zIndex-mainComponents;
+  }
+
+  .MainWrapper-drawer {
+    position: fixed;
+    top: 0;
+    transition: 0.4s all;
+    z-index: $zIndex-mainDrawer;
+  }
+
+  .MainWrapper-drawer--left {
+    left: ($mainDrawer * -1);
+    box-shadow: 5px 0 5px $color-backdrop;
+  }
+
+  .MainWrapper-drawer--left.MainWrapper-drawer--active {
+    left: 0;
+  }
+
+  .MainWrapper-drawer--right {
+    right: ($mainDrawer * -1);
+  }
+
+  .MainWrapper-drawer--right.MainWrapper-drawer--active {
+    right: 0;
+    box-shadow: -5px 0 5px $color-backdrop;
+  }
+}

@@ -1,0 +1,39 @@
+$color-blue: #2584D0;
+$color-red: #CF3137;
+$color-orange: #EB4728;
+$color-white: #fff;
+$color-black: #333;
+$color-gray: #F8F8F8;
+$color-grayDark: #999;
+$color-grayDarker: #979797;
+$color-backdrop: rgba(0,0,0,0.25);
+
+// Typography
+$lineHeight-small: 1.7;
+$lineHeight-base: 2.0;
+$fontSize-base: 14px;
+$fontSize-jumbo: 30px;
+$fontSize-largest: 26px;
+$fontSize-larger: 22px;
+$fontSize-large: 18px;
+$fontSize-small: 12px;
+$fontSans: 'San Francisco', -apple-system, BlinkMacSystemFont, '.SFSNText-Regular', 'Segoe UI', 'Ubuntu', Helvetica, sans-serif;
+
+// Form
+$formSize-small: 30px;
+$formSize-base: 40px;
+
+$containerWidth: 998px;
+$gridGutter: 10px;
+
+$borderRadius-base: 5px;
+
+$spacer-small: 15px;
+$spacer-base: 25px;
+$spacer-large: 50px;
+
+$mainDrawer: 250px;
+$mainDrawer-logoColor: #d5d5d5;
+
+$zIndex-mainComponents: 600;
+$zIndex-mainDrawer: 700;

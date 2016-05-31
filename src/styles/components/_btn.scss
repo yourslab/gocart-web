@@ -1,0 +1,68 @@
+/**
+ * @param $bg Background color
+ * @param $text Text color
+ */
+@mixin buttonVariant($bg, $text: $color-white) {
+  background: $bg;
+
+  &:hover { background: lighten($bg, 5%); }
+  &, &:hover { color: $text; }
+}
+
+/**
+ * @param $border Border color
+ * @param $text Text color
+ */
+@mixin buttonAltVariant($border, $text: $color-black) {
+  color: $text;
+  border-color: $border;
+
+  &:hover {
+    color: darken($text, 10%);
+    border-color: darken($border, 10%);
+  }
+}
+
+.Btn {
+  @include linkNoUnderscore;
+  display: inline-block;
+  height: $formSize-base;
+  line-height: $formSize-base - 1px;
+  padding: 0 20px;
+  font-size: $fontSize-base;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $borderRadius-base;
+  transition: 0.25s all ease;
+
+  &.Btn--primary {
+    @include buttonVariant($color-red);
+  }
+
+  &.Btn--default {
+    @include buttonAltVariant($color-gray, $color-grayDark);
+    background: $color-white;
+  }
+
+  &.Btn--plain {
+    padding: 0;
+  }
+
+  &.Btn--small {
+    height: $formSize-small;
+    line-height: $formSize-small - 1;
+    padding: 0 10px;
+  }
+
+  &.Btn--block {
+    display: block;
+  }
+
+  .Btn-icon:first-child {
+    margin-right: 5px;
+  }
+
+  .Btn-icon:last-child {
+    margin-left: 5px;
+  }
+}
