@@ -32,7 +32,7 @@ export default class LoginView extends Component {
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <input type="text" className="FormInput FormInput--large" placeholder="Email Address" />
+                  <input type="password" className="FormInput FormInput--large" placeholder="Password" />
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
