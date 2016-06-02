@@ -1,13 +1,35 @@
 import React, { Component } from 'react';
+import cn from 'classnames';
 import StaticImg from 'app/components/StaticImg';
 
 export default class AppView extends Component {
+  state = {
+    left: false,
+    right: false
+  };
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleEscapeKeydown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleEscapeKeydown);
+  }
+
   render() {
+    const {left, right} = this.state;
+
     return (
       <div className="MainWrapper">
-        <div className="MainWrapper-drawer MainWrapper-drawer--left MainWrapper-drawer--active">
+        <div className={cn('MainWrapper-drawer MainWrapper-drawer--left', { 'MainWrapper-drawer--active': left })}>
           <div className="MainDrawer">
             <div className="MainDrawer-body">
+              <div className="MainDrawer-close">
+                <button className="Btn Btn--plain" type="button" onClick={this.handleToggleLeftDrawer}>
+                  <StaticImg src="icons/close_black@1x.png" alt="Close" />
+                </button>
+              </div>
+
               <div className="MainDrawerSidebar">
                 <a href="#" className="MainDrawerSidebar-link MainDrawerSidebar-link--active">Discover</a>
                 <a href="#" className="MainDrawerSidebar-link">Create a post</a>
@@ -30,9 +52,15 @@ export default class AppView extends Component {
           </div>
         </div>
 
-        <div className="MainWrapper-drawer MainWrapper-drawer--right MainWrapper-drawer--active">
+        <div className={cn('MainWrapper-drawer MainWrapper-drawer--right', { 'MainWrapper-drawer--active': right })}>
           <div className="MainDrawer">
             <div className="MainDrawer-body">
+              <div className="MainDrawer-close">
+                <button className="Btn Btn--plain" type="button" onClick={this.handleToggleRightDrawer}>
+                  <StaticImg src="icons/close_black@1x.png" alt="Close" />
+                </button>
+              </div>
+
               <div className="MainDrawerNotification">
                 <div className="MainDrawerNotification-heading">
                   <h4>Notifications</h4>
@@ -85,8 +113,8 @@ export default class AppView extends Component {
         <div className="MainWrapper-body">
           <div className="MainHeader">
             <div className="MainHeader-sidebar MainHeader-sidebar--left">
-              <button className="Btn Btn--plain">
-                Left
+              <button className="Btn Btn--plain" type="button" onClick={this.handleToggleLeftDrawer}>
+                <StaticImg src="icons/drawer_red@1x.png" alt="Drawer Icon" />
               </button>
             </div>
 
@@ -137,8 +165,8 @@ export default class AppView extends Component {
             </div>
 
             <div className="MainHeader-sidebar MainHeader-sidebar--right">
-              <button className="Btn Btn--plain">
-                Right
+              <button className="Btn Btn--plain" type="button" onClick={this.handleToggleRightDrawer}>
+                <StaticImg src="icons/notif_red@1x.png" alt="Drawer Icon" />
               </button>
             </div>
           </div>
@@ -174,5 +202,22 @@ export default class AppView extends Component {
         </div>
       </div>
     );
+  }
+
+  handleEscapeKeydown = (evt) => {
+    const key = evt.which || evt.keyCode;
+    console.log(key);
+
+    if ( key === 27 && (this.state.left || this.state.right) ) {
+      this.setState({ left: false, right: false });
+    }
+  }
+
+  handleToggleLeftDrawer = () => {
+    this.setState((state) => ({ left: !state.left }));
+  }
+
+  handleToggleRightDrawer = () => {
+    this.setState((state) => ({ right: !state.right }));
   }
 }

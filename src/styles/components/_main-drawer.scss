@@ -6,8 +6,14 @@
   width: $mainDrawer;
   background: $color-white;
 
+  .MainDrawer-close {
+    margin-bottom: 10px;
+    padding-right: 20px;
+    text-align: right;;
+  }
+
   .MainDrawer-body {
-    margin-top: 50px;
+    margin-top: 25px;
   }
 
   .MainDrawer-logoSection {
