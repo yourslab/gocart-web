@@ -26,10 +26,11 @@
 .Btn {
   @include linkNoUnderscore;
   display: inline-block;
+  padding: 0 20px;
   height: $formSize-base;
   line-height: $formSize-base - 1px;
-  padding: 0 20px;
   font-size: $fontSize-base;
+  text-align: center;
   background: transparent;
   border: 1px solid transparent;
   border-radius: $borderRadius-base;
