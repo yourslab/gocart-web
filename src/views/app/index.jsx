@@ -168,6 +168,8 @@ export default class AppView extends Component {
               <button className="Btn Btn--plain" type="button" onClick={this.handleToggleRightDrawer}>
                 <StaticImg src="icons/notif_red@1x.png" alt="Drawer Icon" />
               </button>
+
+              <div className="MainHeader-notificationBadge">12</div>
             </div>
           </div>
 

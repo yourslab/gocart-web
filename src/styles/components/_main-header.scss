@@ -77,4 +77,16 @@
   .MainHeader-sidebar--right {
     right: 20px;
   }
+
+  .MainHeader-notificationBadge {
+    margin-left: 10px;
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 29px;
+    text-align: center;
+    color: $color-white;
+    background: $color-red;
+    border-radius: 50%;
+  }
 }
