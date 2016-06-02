@@ -150,10 +150,10 @@ export default class AppView extends Component {
 
                 <div className="MainHeader-section">
                   <form>
-                    <div className="FormGroup FormGroup--backdrop">
-                      <input type="text" className="FormGroup-input" placeholder="Search" />
+                    <div className="FormInputGroup FormInputGroup--backdrop">
+                      <input type="text" className="FormInputGroup-input" placeholder="Search" />
 
-                      <div className="FormGroup-button">
+                      <div className="FormInputGroup-button">
                         <button className="Btn Btn--plain Btn--small">
                           <StaticImg src="icons/search_icon_red@1x.png" alt="Search" />
                         </button>

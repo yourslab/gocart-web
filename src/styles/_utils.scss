@@ -16,8 +16,9 @@
 .u-spacer-base { margin-bottom: $spacer-base; }
 .u-spacer-large { margin-bottom: $spacer-large; }
 
-.u-text-blue { color: $color-blue; }
-.u-text-gray { color: $color-gray; }
+.u-text-info { color: $color-blue; }
+.u-text-muted { color: $color-grayDark; }
+.u-text-center { text-align: center; }
 
 // Text
 .u-ellipsis {
