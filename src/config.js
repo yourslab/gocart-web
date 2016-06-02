@@ -18,7 +18,7 @@ export default {
   // App-related configuration
   // ==============================
   app: {
-    title: 'Hello, World',
+    title: 'GoCart',
 
     meta: {
       description: '',

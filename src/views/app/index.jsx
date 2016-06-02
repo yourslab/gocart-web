@@ -144,6 +144,7 @@ export default class AppView extends Component {
           </div>
 
           <div className="MainWrapper-content">
+            {this.props.children}
           </div>
 
           <div className="Footer">
