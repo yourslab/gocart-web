@@ -1,10 +1,13 @@
 import React, {Component} from 'react';
+import Helmet from 'react-helmet';
 import StaticImg from 'app/components/StaticImg';
 
 export default class LoginView extends Component {
   render() {
     return (
       <div className="PortalWrapper">
+        <Helmet title="Sign Up" />
+
         <div className="PortalWrapper-side">
         </div>
 
