@@ -155,7 +155,7 @@ export default class AppView extends Component {
 
                       <div className="FormGroup-button">
                         <button className="Btn Btn--plain Btn--small">
-                          Search
+                          <StaticImg src="icons/search_icon_red@1x.png" alt="Search" />
                         </button>
                       </div>
                     </div>
