@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
+import {Link} from 'react-router';
 import StaticImg from 'app/components/StaticImg';
 
 export default class RegistrationView extends Component {
@@ -58,7 +59,7 @@ export default class RegistrationView extends Component {
             <hr className="PortalWrapper-separator" />
 
             <div className="PortalWrapper-contentFooterText">
-              New to GoCart? <a href="#" className="PortalWrapper-contentFooterLink">Sign Up!</a>
+              Already registered? <Link to="/login" className="PortalWrapper-contentFooterLink">Log in here!</Link>
             </div>
           </div>
 
