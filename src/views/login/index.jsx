@@ -7,7 +7,7 @@ export default class LoginView extends Component {
   render() {
     return (
       <div className="PortalWrapper">
-        <Helmet title="Sign Up" />
+        <Helmet title="Sign In" />
 
         <div className="PortalWrapper-side">
         </div>
