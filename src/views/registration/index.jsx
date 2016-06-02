@@ -49,8 +49,8 @@ export default class RegistrationView extends Component {
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <button className="Btn Btn--success Btn--large Btn--block">
-                    Registration
+                  <button className="Btn Btn--info Btn--large Btn--block">
+                    Register
                   </button>
                 </div>
               </form>
