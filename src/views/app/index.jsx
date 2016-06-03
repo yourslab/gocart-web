@@ -208,7 +208,6 @@ export default class AppView extends Component {
 
   handleEscapeKeydown = (evt) => {
     const key = evt.which || evt.keyCode;
-    console.log(key);
 
     if ( key === 27 && (this.state.left || this.state.right) ) {
       this.setState({ left: false, right: false });
