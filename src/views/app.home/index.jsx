@@ -5,7 +5,9 @@ class AppHomeView extends React.Component {
   render() {
     return (
       <div>
-        <Helmet title="Home" />;
+        <Helmet title="Home" />
+
+
       </div>
     );
   }
