@@ -1,0 +1,102 @@
+.ProductCard {
+  @include backdrop;
+  background: $color-white;
+  border-radius: $borderRadius-base;
+  // Make border-radius work for children
+  // http://stackoverflow.com/a/3724210/2698227
+  overflow: hidden;
+
+  .ProductCard-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    background: $color-black;
+  }
+
+  .ProductCard-thumbnailImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ProductCard-thumbnailOverlay {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding-top: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .ProductCard-pricing {
+    color: $color-white;
+    margin-bottom: 10px;
+    margin-left: 30px;
+  }
+
+  .ProductCard-userPanel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid $color-grayDark;
+  }
+
+  .ProductCard-userPanelSection {
+    display: flex;
+    align-items: center;
+  }
+
+  .ProductCard-avatar {
+    display: block;
+    margin-right: 10px;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+  }
+
+  .ProductCard-body {
+    padding: 10px;
+    border-bottom: 1px solid $color-grayDark;
+  }
+
+  .ProductCard-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .ProductCard-headingSection {
+    display: flex;
+  }
+
+  .ProductCard-headingSectionItem:not(:last-child) {
+    margin-right: 15px;
+  }
+
+  .ProductCard-title {
+    margin-bottom: 0;
+    color: $color-red;
+  }
+
+  .ProductCard-meta {
+    color: $color-grayDark;
+  }
+
+  .ProductCard-description {
+    margin-bottom: 10px;
+  }
+
+  .ProductCard-tags {
+    margin-bottom: 15px;
+  }
+
+  .ProductCard-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+}

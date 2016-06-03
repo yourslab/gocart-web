@@ -41,7 +41,7 @@
   }
 
   &.Btn--default {
-    @include buttonAltVariant($color-gray, $color-grayDark);
+    @include buttonAltVariant(transparent, $color-blue);
     background: $color-white;
   }
 
