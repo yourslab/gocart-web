@@ -10,7 +10,7 @@ class AppHomeView extends React.Component {
 
         <div className="Grid">
           {[null, null, null, null].map(() =>
-            <div className="Grid-cell u-size6 u-spacer">
+            <div className="Grid-cell u-size6 u-spacer-large">
               <ProductCard />
             </div>
           )}
