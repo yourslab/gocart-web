@@ -1,0 +1,10 @@
+// @TODO: Rename into a more general component backdrop
+.OverlaySearchbarBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: $color-backdrop;
+  z-index: $zIndex-backdrop;
+}

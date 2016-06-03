@@ -34,8 +34,16 @@ $spacer-small: 15px;
 $spacer-base: 25px;
 $spacer-large: 50px;
 
+$zIndex-mainComponents: 600;
+$zIndex-mainDrawer: 700;
+$zIndex-backdrop: 1000;
+$zIndex-modal: 1001;
+
+// Component-related variables
+$mainHeader-height: 90px;
+$mainHeader-borderSize: 3px;
 $mainDrawer: 250px;
 $mainDrawer-logoColor: #d5d5d5;
 
-$zIndex-mainComponents: 600;
-$zIndex-mainDrawer: 700;
+$overlaySearchbar-componentHeight: 70px; // $mainHeader-height - (arbitrary allowance)
+$overlaySearchbar-fontSize: 36px;

@@ -1,0 +1,14 @@
+.ActionMenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .ActionMenu-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .ActionMenu-section:not(:last-child) {
+    margin-right: 10px;
+  }
+}

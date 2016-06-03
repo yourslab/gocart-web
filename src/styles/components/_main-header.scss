@@ -1,12 +1,12 @@
 .MainHeader {
   @include backdrop;
   background: $color-white;
-  border-top: 3px solid $color-red;
+  border-top: $mainHeader-borderSize solid $color-red;
 
   .MainHeader-inner {
     display: flex;
     justify-content: space-between;
-    height: 90px;
+    height: $mainHeader-height;
   }
 
   .MainHeader-section {
