@@ -85,7 +85,7 @@ export default class AppProfileView extends Component {
 
               <div className="Grid">
                 {[[], [], [], [], [], []].map(() =>
-                  <div className="Grid-cell u-size6">
+                  <div className="Grid-cell u-size6 u-spacer-base">
                     <ProductCard />
                   </div>
                 )}
