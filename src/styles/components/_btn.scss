@@ -15,10 +15,12 @@
  */
 @mixin buttonAltVariant($border, $text: $color-black) {
   color: $text;
+  background: transparent;
   border-color: $border;
 
   &:hover {
     color: darken($text, 10%);
+    background: transparent;
     border-color: darken($border, 10%);
   }
 }
@@ -35,6 +37,11 @@
   border: 1px solid transparent;
   border-radius: $borderRadius-base;
   transition: 0.25s all ease;
+
+  &.Btn--borderless {
+    // @REFACTOR: Remove !important
+    border-color: transparent !important;
+  }
 
   &.Btn--primary {
     @include buttonVariant($color-red);
@@ -55,6 +62,12 @@
 
   &.Btn--facebook {
     @include buttonVariant($color-facebook);
+  }
+
+  // Make a more high-level button modifier
+  // (chaining modifiers like this is a bit weird)
+  &.Btn--primary.Btn--inverted {
+    @include buttonAltVariant($color-red, $color-red);
   }
 
   &.Btn--small {

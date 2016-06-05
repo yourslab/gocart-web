@@ -1,5 +1,20 @@
+@mixin tabVariant($color) {
+  .Tab-item {
+    color: $color-blue;
+  }
+
+  .Tab-item:hover,
+  .Tab-item--active {
+    border-bottom-color: $color-blue;
+  }
+}
+
 .Tab {
   display: flex;
+
+  &.Tab--info {
+    @include tabVariant($color-blue);
+  }
 
   .Tab-item {
     @include linkNoUnderscore;
