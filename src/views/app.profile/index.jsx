@@ -27,7 +27,7 @@ export default class AppProfileView extends Component {
                 </div>
 
                 <div>
-                  <a href="#" className="Btn Btn--inverted Btn--default">
+                  <a href="#" className="Btn Btn--clean">
                     Edit Profile
                   </a>
                 </div>

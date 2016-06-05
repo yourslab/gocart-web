@@ -25,7 +25,7 @@ export default class AppView extends Component {
           <div className="MainDrawer">
             <div className="MainDrawer-body">
               <div className="MainDrawer-close">
-                <button className="Btn Btn--plain" type="button" onClick={this.handleToggleLeftDrawer}>
+                <button className="PlainBtn" type="button" onClick={this.handleToggleLeftDrawer}>
                   <StaticImg src="icons/close_black@1x.png" alt="Close" />
                 </button>
               </div>
@@ -56,7 +56,7 @@ export default class AppView extends Component {
           <div className="MainDrawer">
             <div className="MainDrawer-body">
               <div className="MainDrawer-close">
-                <button className="Btn Btn--plain" type="button" onClick={this.handleToggleRightDrawer}>
+                <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
                   <StaticImg src="icons/close_black@1x.png" alt="Close" />
                 </button>
               </div>
@@ -113,7 +113,7 @@ export default class AppView extends Component {
         <div className="MainWrapper-body">
           <div className="MainHeader">
             <div className="MainHeader-sidebar MainHeader-sidebar--left">
-              <button className="Btn Btn--plain" type="button" onClick={this.handleToggleLeftDrawer}>
+              <button className="PlainBtn" type="button" onClick={this.handleToggleLeftDrawer}>
                 <StaticImg src="icons/drawer_red@1x.png" alt="Drawer Icon" />
               </button>
             </div>
@@ -154,7 +154,7 @@ export default class AppView extends Component {
                       <input type="text" className="FormInputGroup-input" placeholder="Search" />
 
                       <div className="FormInputGroup-button">
-                        <button className="Btn Btn--plain Btn--small">
+                        <button className="PlainBtn">
                           <StaticImg src="icons/search_icon_red@1x.png" alt="Search" />
                         </button>
                       </div>
@@ -165,7 +165,7 @@ export default class AppView extends Component {
             </div>
 
             <div className="MainHeader-sidebar MainHeader-sidebar--right">
-              <button className="Btn Btn--plain" type="button" onClick={this.handleToggleRightDrawer}>
+              <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
                 <StaticImg src="icons/notif_red@1x.png" alt="Drawer Icon" />
               </button>
 
