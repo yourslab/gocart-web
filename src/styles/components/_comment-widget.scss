@@ -1,0 +1,27 @@
+.CommentWidget {
+  .CommentWidget-inner {
+    height: 175px;
+    overflow-y: scroll;
+  }
+
+  .CommentWidget-item {
+    margin-bottom: 10px;
+  }
+
+  .CommentWidget-itemName {
+    @include linkNoUnderscore;
+    font-weight: bold;
+  }
+
+  .CommentWidget-form {
+    display: flex;
+  }
+
+  .CommentWidget-input {
+    display: block;
+    width: 100%;
+    height: $formSize-base;
+    padding: ($formSize-base / 5);
+    border: 1px solid $color-gray;
+  }
+}

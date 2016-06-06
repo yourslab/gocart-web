@@ -1,0 +1,110 @@
+.ProductCardFull {
+  @include backdrop;
+  display: flex;
+  height: 600px;
+  border-radius: $borderRadius-base;
+  overflow: hidden;
+
+  .ProductCardFull-thumbnail {
+    position: relative;
+    width: 60%;
+    background: $color-black;
+  }
+
+  .ProductCardFull-thumbnailImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .ProductCardFull-thumbnailOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    color: $color-white;
+  }
+
+  .ProductCardFull-thumbnailOverlaySection {
+    display: flex;
+  }
+
+  .ProductCardFull-thumbnailOverlaySectionItem:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .ProductCardFull-overlayText {
+    margin-bottom: 0;
+  }
+
+  .ProductCardFull-panel {
+    padding: 20px;
+    width: 40%;
+    background: $color-white;
+  }
+
+  .ProductCardFull-panelCanopy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $color-gray;
+  }
+
+  .ProductCardFull-avatar {
+    display: block;
+    margin-right: 10px;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+  }
+
+  .ProductCardFull-panelCanopySection {
+    display: flex;
+  }
+
+  .ProductCardFull-panelCanopySectionItem:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  .ProductCardFull-panelHeading {
+    margin-bottom: 10px;
+    display: flex;
+  }
+
+  .ProductCardFull-name {
+    margin-bottom: 0;
+    color: $color-red;
+  }
+
+  .ProductCardFull-description {
+    margin-bottom: 20px;
+  }
+
+  .ProductCardFull-tags {
+    margin-bottom: 20px;
+  }
+
+  .ProductCardFull-actions {}
+
+  .ProductCardFull-commentInfo {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid $color-gray;
+    border-bottom: 1px solid $color-gray;
+  }
+
+  .ProductCardFull-commentLoadMore {
+    @include linkNoUnderscore;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
