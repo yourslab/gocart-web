@@ -12,10 +12,6 @@
 .Tab {
   display: flex;
 
-  &.Tab--info {
-    @include tabVariant($color-blue);
-  }
-
   .Tab-item {
     @include linkNoUnderscore;
     padding: 5px 3px;
@@ -31,5 +27,9 @@
   .Tab-item:hover,
   .Tab-item--active {
     border-bottom-color: $color-red;
+  }
+
+  &.Tab--info {
+    @include tabVariant($color-blue);
   }
 }

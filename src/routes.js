@@ -5,6 +5,10 @@ import AppView from './views/app';
 import AppHomeView from './views/app.home';
 import AppSearchView from './views/app.search';
 import AppProfileView from './views/app.profile';
+import AppManagePostsView from './views/app.manage-posts';
+import AppManagePostsHomeView from './views/app.manage-posts.home';
+import AppManagePostsCreateView from './views/app.manage-posts.create';
+import AppManagePostsArchivedView from './views/app.manage-posts.archived';
 import LoginView from './views/login';
 import RegistrationView from './views/registration';
 
@@ -14,6 +18,12 @@ export default (
       <IndexRoute component={AppHomeView} />
       <Route path="search" component={AppSearchView} />
       <Route path="@:user" component={AppProfileView} />
+
+      <Route path="manage-posts" component={AppManagePostsView}>
+        <IndexRoute component={AppManagePostsHomeView} />
+        <Route path="create" component={AppManagePostsCreateView} />
+        <Route path="archived" component={AppManagePostsArchivedView} />
+      </Route>
     </Route>
 
     <Route path="login" component={LoginView} />

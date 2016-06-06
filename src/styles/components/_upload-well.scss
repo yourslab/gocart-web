@@ -1,0 +1,37 @@
+.UploadWell {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background: $color-gray;
+
+  .UploadWell-item {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: $color-white;
+    border-radius: $borderRadius-base;
+    overflow: hidden;
+  }
+
+  .UploadWell-item:hover .UploadWell-itemOverlay {
+    opacity: 1;
+  }
+
+  .UploadWell-itemThumbnail,
+  .UploadWell-itemOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .UploadWell-itemOverlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.5);
+    transition: 0.2s all;
+    opacity: 0;
+  }
+}

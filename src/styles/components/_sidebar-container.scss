@@ -1,0 +1,29 @@
+.SidebarContainer {
+  display: flex;
+
+  .SidebarContainer-panel {
+    padding: 20px;
+    padding-top: 0; // Remove padding for heading
+    width: 100%;
+    background: $color-white;
+    border-left: 2px solid $color-red;
+  }
+
+  .SidebarContainer-panelHeading {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $color-gray;
+  }
+
+  .SidebarContainer-panelHeadingSection {
+    display: flex;
+    align-items: center;
+  }
+
+  .SidebarContainer-panelHeadingSectionItem:not(:last-child) {
+    margin-right: 20px;
+  }
+}
