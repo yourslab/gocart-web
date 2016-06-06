@@ -123,21 +123,21 @@ export default class AppView extends Component {
               <div className="MainHeader-inner">
                 <div className="MainHeader-section">
                   <div className="MainHeader-sectionItem">
-                    <a href="#" className="MainHeader-logoLink">
+                    <Link to="/" className="MainHeader-logoLink">
                       <StaticImg src="logo.svg" alt="logo" className="MainHeader-logo" />
-                    </a>
+                    </Link>
                   </div>
 
                   <div className="MainHeader-sectionItem">
-                    <a href="#" className="MainHeader-link MainHeader-link--active">Popular</a>
+                    <Link to="/" className="MainHeader-link MainHeader-link--active">Popular</Link>
                   </div>
 
                   <div className="MainHeader-sectionItem">
-                    <a href="#" className="MainHeader-link">Recent</a>
+                    <Link to="/" className="MainHeader-link">Recent</Link>
                   </div>
 
                   <div className="MainHeader-sectionItem">
-                    <a href="#" className="MainHeader-link">Nearby</a>
+                    <Link to="/" className="MainHeader-link">Nearby</Link>
                   </div>
 
                   <div className="MainHeader-sectionItem">
