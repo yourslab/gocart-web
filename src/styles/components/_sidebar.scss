@@ -1,5 +1,6 @@
 .Sidebar {
-  width: 150px;
+  width: 200px;
+
   .Sidebar-item {
     @include linkNoUnderscore;
     display: block;
