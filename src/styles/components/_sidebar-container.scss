@@ -2,12 +2,12 @@
   display: flex;
 
   .SidebarContainer-panel {
-    @include backdrop('small');
     padding: 20px;
     padding-top: 0; // Remove padding for heading
     width: 100%;
     background: $color-white;
     border-left: 2px solid $color-red;
+    box-shadow: $backdrop-small;
   }
 
   .SidebarContainer-panelHeading {

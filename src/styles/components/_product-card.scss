@@ -1,7 +1,7 @@
 .ProductCard {
-  @include backdrop;
   background: $color-white;
   border-radius: $borderRadius-base;
+  box-shadow: $backdrop-base;
   // Make border-radius work for children
   // http://stackoverflow.com/a/3724210/2698227
   overflow: hidden;

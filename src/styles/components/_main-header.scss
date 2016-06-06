@@ -1,7 +1,7 @@
 .MainHeader {
-  @include backdrop;
   background: $color-white;
   border-top: $mainHeader-borderSize solid $color-red;
+  box-shadow: $backdrop-base;
 
   .MainHeader-inner {
     display: flex;

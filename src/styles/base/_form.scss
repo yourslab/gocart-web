@@ -40,7 +40,7 @@ textarea.FormInput {
   border-radius: $borderRadius-base;
 
   &.FormInputGroup--backdrop {
-    @include backdrop;
+    box-shadow: $backdrop-base;
   }
 
   &:hover .FormInputGroup-addon {

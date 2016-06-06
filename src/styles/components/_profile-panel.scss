@@ -1,8 +1,8 @@
 .ProfilePanel {
-  @include backdrop;
   background: $color-white;
   border-radius: $borderRadius-base;
   overflow: hidden;
+  box-shadow: $backdrop-base;
 
   .ProfilePanel-cover {
     position: relative;

@@ -40,6 +40,10 @@ $zIndex-mainDrawer: 700;
 $zIndex-backdrop: 1000;
 $zIndex-modal: 1001;
 
+$backdrop-small: 0 1px 1px $color-backdrop;
+$backdrop-base: 0 1px 5px $color-backdrop;
+$backdrop-large: 0 5px 5px $color-backdrop;
+
 // Component-related variables
 $mainHeader-height: 90px;
 $mainHeader-borderSize: 3px;

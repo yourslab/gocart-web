@@ -1,8 +1,8 @@
 .ProductCardFull {
-  @include backdrop;
   display: flex;
   height: 600px;
   border-radius: $borderRadius-base;
+  box-shadow: $backdrop-base;
   overflow: hidden;
 
   .ProductCardFull-thumbnail {

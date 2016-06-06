@@ -1,10 +1,10 @@
 .SearchProductCard {
-  @include backdrop(small);
   display: flex;
   padding: 15px;
   height: 145px;
   background: $color-white;
   border-radius: $borderRadius-base;
+  box-shadow: $backdrop-small;
 
   .SearchProductCard-thumbnail {
     position: relative;

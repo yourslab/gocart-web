@@ -33,13 +33,3 @@
   padding: 0;
   margin: 0;
 }
-
-// @TODO: Refactor into variable since
-// a mixin doesn't make any sense (overkill).
-@mixin backdrop($size: small) {
-  @if $size == small {
-    box-shadow: 0 1px 1px $color-backdrop;
-  } @else {
-    box-shadow: 0 1px 5px $color-backdrop;
-  }
-}
