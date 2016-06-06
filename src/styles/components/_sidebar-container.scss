@@ -2,6 +2,7 @@
   display: flex;
 
   .SidebarContainer-panel {
+    @include backdrop('small');
     padding: 20px;
     padding-top: 0; // Remove padding for heading
     width: 100%;
