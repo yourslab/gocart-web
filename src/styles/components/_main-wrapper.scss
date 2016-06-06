@@ -20,11 +20,11 @@
 
   .MainWrapper-drawer--left {
     left: ($mainDrawer * -1);
-    box-shadow: 5px 0 5px $color-backdrop;
   }
 
   .MainWrapper-drawer--left.MainWrapper-drawer--active {
     left: 0;
+    box-shadow: 5px 0 5px $color-backdrop;
   }
 
   .MainWrapper-drawer--right {
