@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import {Link} from 'react-router';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
 
@@ -27,9 +28,9 @@ export default class AppProfileView extends Component {
                 </div>
 
                 <div>
-                  <a href="#" className="Btn Btn--clean">
+                  <Link to="/me" className="Btn Btn--clean">
                     Edit Profile
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
