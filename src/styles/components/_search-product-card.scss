@@ -5,6 +5,11 @@
   background: $color-white;
   border-radius: $borderRadius-base;
   box-shadow: $backdrop-small;
+  transition: 0.15s box-shadow;
+
+  &:hover {
+    box-shadow: $backdrop-large;
+  }
 
   .SearchProductCard-thumbnail {
     position: relative;
