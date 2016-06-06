@@ -71,6 +71,13 @@
     @include buttonAltVariant($color-red, $color-red);
   }
 
+  // Make a more high-level button modifier
+  // (chaining modifiers like this is a bit weird)
+  // and name it `Btn--plainPrimary`
+  &.Btn--info.Btn--inverted {
+    @include buttonAltVariant($color-blue, $color-blue);
+  }
+
   &.Btn--clean {
     color: $color-white;
     background: transparent;
