@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import cn from 'classnames';
+import {Link} from 'react-router';
 import StaticImg from 'app/components/StaticImg';
 
 export default class AppView extends Component {
@@ -32,9 +33,9 @@ export default class AppView extends Component {
 
               <div className="MainDrawerSidebar">
                 <a href="#" className="MainDrawerSidebar-link MainDrawerSidebar-link--active">Discover</a>
-                <a href="#" className="MainDrawerSidebar-link">Create a post</a>
+                <Link to="/manage-posts/create" className="MainDrawerSidebar-link">Create a post</Link>
                 <div className="MainDrawerSidebar-separator" />
-                <a href="#" className="MainDrawerSidebar-link">My Profile</a>
+                <Link to="/@srph" className="MainDrawerSidebar-link">My Profile</Link>
                 <a href="#" className="MainDrawerSidebar-link">My Cart</a>
                 <a href="#" className="MainDrawerSidebar-link">Payments</a>
                 <a href="#" className="MainDrawerSidebar-link">Billing</a>
