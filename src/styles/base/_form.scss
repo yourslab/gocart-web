@@ -18,6 +18,9 @@ textarea.FormInput {
   height: auto;
 }
 
+// @NOTE: Use this only with the typical
+// label-above-input format since we added
+// a line-height rule to the label.
 .FormGroup {
   margin-bottom: $spacer-base;
 
@@ -27,6 +30,10 @@ textarea.FormInput {
 
   &.FormGroup--large {
     margin-bottom: $spacer-large;
+  }
+
+  label {
+    line-height: 2;
   }
 }
 

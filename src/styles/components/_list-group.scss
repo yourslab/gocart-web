@@ -1,0 +1,34 @@
+.ListGroup {
+  .ListGroup-heading {
+    margin-bottom: 0;
+    padding-bottom: 5px;
+    color: $color-grayDark;
+    border-bottom: 1px solid $color-grayDark;
+  }
+
+  .ListGroup-item {
+    border-bottom: 1px solid $color-grayDark;
+  }
+
+  .ListGroup-item--open .ListGroup-itemPanel {
+    max-height: 1000px;
+  }
+
+  .ListGroup-itemHeading {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .ListGroup-itemHeadingText {
+    color: $color-grayDark;
+    font-weight: normal;
+    margin-bottom: 0;
+  }
+
+  .ListGroup-itemPanel {
+    max-height: 0px;
+    overflow: hidden;
+    transition: 0.2s all;
+  }
+}
