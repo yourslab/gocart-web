@@ -6,7 +6,7 @@ import flowRight from 'lodash/flowRight';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {login} from 'app/modules/auth';
-import {guest} from 'app/components/Permissions/guest';
+import guest from 'app/components/Permission/guest';
 import StaticImg from 'app/components/StaticImg';
 import ButtonLoader from 'app/components/ButtonLoader';
 
