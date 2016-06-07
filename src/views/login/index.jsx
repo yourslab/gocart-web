@@ -1,9 +1,21 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
+import linkState from 'react-link-state';
+import flowRight from 'lodash/flowRight';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {login} from 'app/modules/auth';
+import {guest} from 'app/components/Permissions/guest';
 import StaticImg from 'app/components/StaticImg';
+import ButtonLoader from 'app/components/ButtonLoader';
 
-export default class LoginView extends Component {
+class LoginView extends Component {
+  state = {
+    username: '',
+    password: ''
+  };
+
   render() {
     return (
       <div className="PortalWrapper">
@@ -29,17 +41,17 @@ export default class LoginView extends Component {
             <div className="PortalWrapper-content">
               <form>
                 <div className="FormGroup FormGroup--narrow">
-                  <input type="text" className="FormInput FormInput--large" placeholder="Email Address" />
+                  <input type="email" className="FormInput FormInput--large" placeholder="Email Address" valueLink={linkState(this, 'username')} />
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <input type="password" className="FormInput FormInput--large" placeholder="Password" />
+                  <input type="password" className="FormInput FormInput--large" placeholder="Password" valueLink={linkState(this, 'password')} />
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <button className="Btn Btn--success Btn--large Btn--block">
+                  <ButtonLoader className="Btn Btn--success Btn--large Btn--block">
                     Login
-                  </button>
+                  </ButtonLoader>
                 </div>
 
                 <p className="u-text-muted u-text-center">
@@ -86,4 +98,14 @@ export default class LoginView extends Component {
       </div>
     );
   }
+
+  handle = () => {
+    evt.preventDefault();
+    this.props.dispatch(login(this.state));
+  }
 }
+
+export default flowRight(
+  guest,
+  connect(({auth}) => ({ state: auth.authentication })),
+)(LoginView);
