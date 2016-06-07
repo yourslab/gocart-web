@@ -1,14 +1,5 @@
-# react-redux-starter-kit
-An opinionated non-universal react+redux starter kit.
-
-## Libraries
-- [React](https://github.com/facebook/react)
-- [React Router](https://github.com/reactjs/react-router)
-- [Redux](https://github.com/reactjs/redux)
-- [Axios](https://github.com/mzabriskie/axios)
-- Build: [Babel](babeljs.io) / [Webpack](https://webpack.github.io/)
-- Testing: [Karma](https://karma-runner.github.io/) / [Mocha](http://mochajs.org) / [Chai](http://chaijs.com) / [Sinon](http://sinonjs.org/) / [Enzyme](http://airbnb.io/enzyme/docs/api/shallow.html)
-- Styling: [Sass](https://github.com/sass/node-sass) / [Autoprefixer](https://github.com/postcss/autoprefixer) / [CSS Nano](https://github.com/ben-eb/cssnano)
+# GoCart Web
+The repository for GoCart Web Front-End.
 
 ## Getting Started
 To get your fingers typing asap:
