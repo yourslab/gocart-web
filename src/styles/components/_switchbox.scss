@@ -8,11 +8,11 @@
   }
 
   > input:checked + span {
-    background: $color-green;
+    background: #00dd6e;
   }
 
   > input:checked + span::after {
-    left: 28px; // (50 - 18 - 3)
+    left: 18px; // (40 - 18 - 3)
   }
 
   > input:disabled + span,
@@ -41,7 +41,7 @@
     position: relative;
     display: inline-block;
     height: 25px;
-    width: 50px;
+    width: 40px;
     background: $color-white;
     border-radius: $borderRadius-rounded;
     cursor: pointer;
@@ -55,10 +55,10 @@
     position: absolute;
     top: 2px;
     left: 2px;
-    height: 18px;
-    width: 18px;
+    height: 19px;
+    width: 19px;
     background: $color-white;
     border-radius: 50%;
-    box-shadow: $backdrop-base;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
   }
 }
