@@ -50,7 +50,7 @@ textarea.FormInput {
   .FormInputGroup-input {
     display: block;
     padding: 0 ($formSize-base / 5);
-    width: 100%;
+    width: auto;
     border: 0;
     outline: 0;
   }
