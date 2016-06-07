@@ -107,5 +107,5 @@ class LoginView extends Component {
 
 export default flowRight(
   guest,
-  connect(({auth}) => ({ state: auth.authentication })),
+  connect(({auth}) => ({ state: auth.authentication }))
 )(LoginView);
