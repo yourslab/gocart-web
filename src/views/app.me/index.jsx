@@ -12,7 +12,7 @@ export default class AppMeView extends Component {
             <a href="#" className="Sidebar-item">Billing</a>
             <a href="#" className="Sidebar-item">Orders</a>
             <Link to="/me/settings" className="Sidebar-item" activeClassName="Sidebar-item--active">Privacy</Link>
-            <a href="#" className="Sidebar-item">Profile</a>
+            <a href="#" className="Sidebar-item">Settings</a>
           </div>
 
           <div className="SidebarContainer-panel">
