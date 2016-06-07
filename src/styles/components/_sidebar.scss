@@ -14,13 +14,16 @@
     transition: 0.12s all;
   }
 
-  .Sidebar-item:hover,
-  .Sidebar-item--active {
+  .Sidebar-item:hover {
     color: $color-red;
   }
 
-  .Sidebar-item--active {
+  .Sidebar-item--active,
+  .Sidebar-item--active:hover {
     color: $color-white;
+  }
+
+  .Sidebar-item--active {
     background: $color-red;
   }
 }
