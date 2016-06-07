@@ -16,7 +16,7 @@ class Root extends React.Component {
   render() {
     return (
       <div>
-        <Helmet titleTemplate={`${config.app.title} - %s (Dev Mode)`} />
+        <Helmet titleTemplate={`%s - ${config.app.title} (Dev Mode)`} />
 
         <Provider store={this.props.store}>
           <div>
