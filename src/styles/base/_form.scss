@@ -50,9 +50,15 @@ textarea.FormInput {
   .FormInputGroup-input {
     display: block;
     padding: 0 ($formSize-base / 5);
-    width: auto;
+    width: 100%;
     border: 0;
     outline: 0;
+  }
+
+  .FormInputGroup-addon,
+  .FormInputGroup-button {
+    display: flex;
+    flex-shrink: 0;
   }
 
   .FormInputGroup-addon {
@@ -63,7 +69,6 @@ textarea.FormInput {
   }
 
   .FormInputGroup-button {
-    display: flex;
     padding: 5px;
   }
 }
