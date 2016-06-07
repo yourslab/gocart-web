@@ -20,9 +20,11 @@
   }
 
   .Footer-link {
-    display: block;
-    padding-left: 5px;
-    padding-right: 5px;
     @include linkNoUnderscore;
+    display: block;
+  }
+
+  .Footer-link:not(:last-child) {
+    margin-right: 10px;
   }
 }
