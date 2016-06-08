@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
+import axios from 'axios';
+import history from 'app/history';
 import StaticImg from 'app/components/StaticImg';
+import RegistrationForm from './components/RegistrationForm';
 
 export default class RegistrationView extends Component {
+  state = {
+    loading: false,
+    errors: false,
+    message: ''
+  };
+
   render() {
     return (
       <div className="PortalWrapper">
@@ -27,33 +36,10 @@ export default class RegistrationView extends Component {
             <hr className="PortalWrapper-separator" />
 
             <div className="PortalWrapper-content">
-              <form>
-                <div className="FormGroup FormGroup--narrow">
-                  <input type="email" className="FormInput FormInput--large" placeholder="Email Address" />
-                </div>
-
-                <div className="FormGroup FormGroup--narrow">
-                  <input type="text" className="FormInput FormInput--large" placeholder="Username" />
-                </div>
-
-                <div className="FormGroup">
-                  <input type="text" className="FormInput FormInput--large" placeholder="Name" />
-                </div>
-
-                <div className="FormGroup FormGroup--narrow">
-                  <input type="password" className="FormInput FormInput--large" placeholder="Password" />
-                </div>
-
-                <div className="FormGroup FormGroup--narrow">
-                  <input type="password" className="FormInput FormInput--large" placeholder="Confirm password" />
-                </div>
-
-                <div className="FormGroup FormGroup--narrow">
-                  <button className="Btn Btn--info Btn--large Btn--block">
-                    Register
-                  </button>
-                </div>
-              </form>
+              <RegistrationForm
+                loading={this.state.loading}
+                errors={this.state.errors}
+                onRegister={this.handleRegister} />
             </div>
 
             <hr className="PortalWrapper-separator" />
@@ -87,5 +73,48 @@ export default class RegistrationView extends Component {
         </div>
       </div>
     );
+  }
+
+  handleRegister = (data) => {
+    if ( this.state.loading ) {
+      return;
+    }
+
+    // Handle password_confirmation;
+    // The backend isn't supposed to handle this,
+    // so we're imitating the backend's response
+    // to manually produce a validation error.
+    if ( data.password !== data.password_confirmation ) {
+      return this.setState({
+        errors: {
+          password_confirmation: ['This field must match the password field.']
+        }
+      });
+    }
+
+    this.setState({
+      loading: true,
+      errors: {}
+    });
+
+    return axios.post('/auth/registration', data)
+      .then((res) => {
+        this.setState({
+          errors: {},
+          loading: false,
+        });
+
+        history.push('/');
+
+        return res;
+      })
+      .catch((res) => {
+        this.setState({
+          loading: false,
+          errors: res.data,
+        });
+
+        return Promise.reject(res);
+      });
   }
 }

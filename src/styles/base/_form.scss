@@ -12,6 +12,10 @@
     padding: ($formSize-large / 5);
     height: $formSize-large;
   }
+
+  &.FormInput--danger {
+    border-color: $color-red;
+  }
 }
 
 textarea.FormInput {
@@ -32,8 +36,14 @@ textarea.FormInput {
     margin-bottom: $spacer-large;
   }
 
-  label {
+  label,
+  .FormGroup-message {
     line-height: 2;
+  }
+
+  .FormGroup-message {
+    color: $color-red;
+    font-size: $fontSize-small;
   }
 }
 

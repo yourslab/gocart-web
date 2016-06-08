@@ -17,6 +17,8 @@ class LoginView extends Component {
   };
 
   render() {
+    const {state} = this.props;
+
     return (
       <div className="PortalWrapper">
         <Helmet title="Sign In" />
@@ -39,9 +41,9 @@ class LoginView extends Component {
             <hr className="PortalWrapper-separator" />
 
             <div className="PortalWrapper-content">
-              <form>
+              <form onSubmit={this.handle} formNoValidate>
                 <div className="FormGroup FormGroup--narrow">
-                  <input type="email" className="FormInput FormInput--large" placeholder="Email Address" valueLink={linkState(this, 'username')} />
+                  <input type="text" className="FormInput FormInput--large" placeholder="Email Address" valueLink={linkState(this, 'username')} />
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
@@ -49,7 +51,7 @@ class LoginView extends Component {
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <ButtonLoader className="Btn Btn--success Btn--large Btn--block">
+                  <ButtonLoader className="Btn Btn--success Btn--large Btn--block" loading={state.loading}>
                     Login
                   </ButtonLoader>
                 </div>
@@ -99,7 +101,7 @@ class LoginView extends Component {
     );
   }
 
-  handle = () => {
+  handle = (evt) => {
     evt.preventDefault();
     this.props.dispatch(login(this.state));
   }

@@ -2,7 +2,7 @@ export default {
   // ==============================
   // The API Host
   // ==============================
-  api: process.env.API || 'http://api.gocart.ph',
+  api: process.env.API || 'https://api.gocart.ph',
 
   // ==============================
   // Assets
@@ -24,5 +24,9 @@ export default {
       description: '',
       keywords: ''
     }
-  }
+  },
+
+  auth: {
+    key: process.env.AUTH_KEY || 'FkrSi'
+  },
 };

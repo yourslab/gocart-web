@@ -82,16 +82,14 @@ export function login(data, redirect = '/') {
 
     dispatch({ type: AUTHENTICATE });
 
-    const payload = {
-      ...data,
-      grant_type: config.oauth.grantType,
-      client_id: config.oauth.clientId,
-      client_secret: config.oauth.clientSecret
-    };
-
     let token; // Cache the token from the response
 
-    return axios.post('oauth/access_token', payload)
+    return axios.get('user/email_token', {
+        headers: {
+          identity: data.username,
+          password: data.password
+        }
+      })
       .then((res) => {
         token = res.data.data.access_token;
 
@@ -99,17 +97,27 @@ export function login(data, redirect = '/') {
         // It's a good place. While we also need to override
         // the current token stored in the cookie before the request
         // takes place.
-        cookie.set(config.oauth.key, res.data.data.access_token);
+        cookie.set(
+          config.auth.key,
+          JSON.stringify({
+            token: res.data.data.auth_token,
+            id: res.data.id
+          })
+        );
 
         // We're using an axios interceptor which
-        // includes the oauth token from the cookie for us.
-        return axios.get('me');
+        // includes the auth token from the cookie for us.
+        return axios.get(`user/${res.data.id}`, {
+          headers: {
+            'auth-token': res.data.data.auth_token
+          }
+        });
       })
       .then((res) => {
         dispatch({
           type: AUTHENTICATE_SUCCESS,
           payload: {
-            user: res.data.data,
+            user: res.data,
             token
           }
         });
@@ -134,7 +142,7 @@ export function login(data, redirect = '/') {
 export function logout() {
   return (dispatch) => {
     dispatch({ type: LOGOUT });
-    cookie.remove(config.oauth.key);
+    cookie.remove(config.auth.key);
     history.replace('/login');
   }
 }
@@ -147,23 +155,27 @@ export function getData() {
       return;
     }
 
-    const token = cookie.get(config.oauth.key);
+    const auth = JSON.parse(cookie.get(config.auth.key));
 
-    if ( token == null ) {
+    if ( auth == null ) {
       return;
     }
 
-    return axios.get('me')
+    return axios.get(`/user/${auth.id}`, {
+        headers: {
+          'auth-token': auth.token
+        }
+      })
       .then((res) => {
         dispatch({
           type: AUTH_GET_DATA,
           payload: {
             token,
-            data: res.data.data
+            data: res.data
           }
         });
 
-        return res.data.data;
+        return res;
       });
   }
 }
