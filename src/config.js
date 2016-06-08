@@ -2,7 +2,7 @@ export default {
   // ==============================
   // The API Host
   // ==============================
-  api: process.env.API || 'http://example.com',
+  api: process.env.API || 'http://api.gocart.ph',
 
   // ==============================
   // Assets
