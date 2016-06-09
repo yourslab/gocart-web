@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 
 export default class FollowingList extends Component {
-	state = {
-		action: false
-	};
-
 	render() {
 		return (
 			<div className="UserListGroup">
@@ -66,14 +62,6 @@ export default class FollowingList extends Component {
 		 		</div>
 		 	</div>
 		);
-	}
-
-	onMouseEnterHandler = () => {
-		this.setState({ action: true });
-	}
-
-	onMouseLeaveHandler = () => {
-		this.setState({ action: false });
 	}
 
 	onCloseModal = () => {

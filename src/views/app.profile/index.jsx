@@ -102,13 +102,13 @@ export default class AppProfileView extends Component {
         <Modal
           ref="followers"
           size="sm">
-          <FollowersList closeModal={this.closeModal} />
+          <FollowersList closeModal={() => this.refs.followers.onClose()} />
         </Modal>
 
         <Modal
           ref="following"
           size="sm">
-          <FollowingList closeModal={this.closeModal} />
+          <FollowingList closeModal={() => this.refs.following.onClose()} />
         </Modal>
       </div>
     );
