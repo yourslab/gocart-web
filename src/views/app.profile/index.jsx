@@ -128,14 +128,14 @@ export default class AppProfileView extends Component {
           isOpen={this.state.openFollowers}
           onRequestClose={this.closeModal}
           style={dialogStyle}>
-          <FollowersList />
+          <FollowersList closeModal={this.closeModal} />
         </Modal>
 
         <Modal
           isOpen={this.state.openFollowing}
           onRequestClose={this.closeModal}
           style={dialogStyle}>
-          <FollowingList />
+          <FollowingList closeModal={this.closeModal} />
         </Modal>
 
         {this.props.children}

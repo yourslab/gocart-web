@@ -84,9 +84,9 @@ export default class FollowingList extends Component {
 		 		</div>
 
 		 		<div className="ModalListPanel-footer">
-		 			<Link to="/@srph" className="Btn Btn--info Btn--block">
+		 			<button onClick={this.onCloseModal} className="Btn Btn--info Btn--block">
 		 				Done 
-		 			</Link>
+		 			</button>
 		 		</div>
 		 	</div>
 		);
@@ -98,5 +98,9 @@ export default class FollowingList extends Component {
 
 	onMouseLeaveHandler = () => {
 		this.setState({ action: false });
+	}
+
+	onCloseModal = () => {
+		this.props.closeModal();
 	}
 }
