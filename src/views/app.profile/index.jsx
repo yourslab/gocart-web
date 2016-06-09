@@ -1,10 +1,39 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
+import Modal from 'react-modal';
+
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
+import FollowersList from './components/FollowersList';
+import FollowingList from './components/FollowingList';
+
+const dialogStyle = {
+  content: {
+    width: '35%',
+    height: 450,
+    overflow: 'visible',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 100,
+    padding: 0,
+    boxShadow: '0px 0px 4px rgba(0, 0, 0, .14), 0px 4px 8px rgba(0, 0, 0, .28)',
+    zIndex: 100
+  },
+
+  overlay: {
+    zIndex: 99,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)'
+  }
+};
+
 
 export default class AppProfileView extends Component {
+  state = {
+    openFollowers: false,
+    openFollowing: false
+  };
+
   render() {
     return (
       <div>
@@ -39,11 +68,11 @@ export default class AppProfileView extends Component {
               <div className="ProfilePanel-canopy">
                 <div className="ProfilePanel-canopySection">
                   <div className="ProfilePanel-canopySectionItem">
-                    <Link to="/@srph/followers" className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</Link>
+                    <button onClick={this.openFollowersModal} className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <Link to="/@srph/followers" className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</Link>
+                    <button onClick={this.openFollowingModal} className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
@@ -95,8 +124,34 @@ export default class AppProfileView extends Component {
           </div>
         </div>
 
+        <Modal
+          isOpen={this.state.openFollowers}
+          onRequestClose={this.closeModal}
+          style={dialogStyle}>
+          <FollowersList />
+        </Modal>
+
+        <Modal
+          isOpen={this.state.openFollowing}
+          onRequestClose={this.closeModal}
+          style={dialogStyle}>
+          <FollowingList />
+        </Modal>
+
         {this.props.children}
       </div>
     );
+  }
+
+  openFollowersModal = () => {
+    this.setState({ openFollowers: true });
+  }
+
+  openFollowingModal = () => {
+    this.setState({ openFollowing: true });
+  }
+
+  closeModal = () => {
+    this.setState({ openFollowers: false, openFollowing: false});
   }
 }
