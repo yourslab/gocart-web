@@ -39,11 +39,11 @@ export default class AppProfileView extends Component {
               <div className="ProfilePanel-canopy">
                 <div className="ProfilePanel-canopySection">
                   <div className="ProfilePanel-canopySectionItem">
-                    <button className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</button>
+                    <Link to="/@srph/followers" className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</Link>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</button>
+                    <Link to="/@srph/followers" className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</Link>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
@@ -94,6 +94,8 @@ export default class AppProfileView extends Component {
             </div>
           </div>
         </div>
+
+        {this.props.children}
       </div>
     );
   }
