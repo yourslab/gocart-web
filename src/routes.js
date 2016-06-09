@@ -15,6 +15,7 @@ import AppMeHomeView from './views/app.me.home';
 import AppMePasswordView from './views/app.me.password';
 import AppMePrivacyView from './views/app.me.privacy';
 import LoginView from './views/login';
+import LogoutView from './views/logout';
 import RegistrationView from './views/registration';
 
 export default (
@@ -39,6 +40,7 @@ export default (
     </Route>
 
     <Route path="login" component={LoginView} />
+    <Route path="logout" component={LogoutView} />
     <Route path="registration" component={RegistrationView} />
   </Route>
 );
