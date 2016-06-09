@@ -20,14 +20,8 @@ export default class FollowingList extends Component {
 		 					<h5 className="ModalListPanel-name"> John Doe </h5>
 		 					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
 		 				</div>
-		 				<div 
-		 					onMouseEnter={this.onMouseEnterHandler}
-		 					onMouseLeave={this.onMouseLeaveHandler}
-		 					className="ModalListPanel-actions">
-			 				{this.state.action 
-			 					? <button className="Btn Btn--primary"> Unfollow </button>
-			 					: <button className="Btn Btn--info"> Following </button>
-			 				}
+		 				<div className="ModalListPanel-actions">
+			 				<button className="Btn Btn--info"> Following </button>
 		 				</div>
 		 			</div>
 
@@ -37,14 +31,8 @@ export default class FollowingList extends Component {
 		 					<h5 className="ModalListPanel-name"> John Doe </h5>
 		 					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
 		 				</div>
-		 				<div 
-		 					onMouseEnter={this.onMouseEnterHandler}
-		 					onMouseLeave={this.onMouseLeaveHandler}
-		 					className="ModalListPanel-actions">
-			 				{this.state.action 
-			 					? <button className="Btn Btn--primary"> Unfollow </button>
-			 					: <button className="Btn Btn--info"> Following </button>
-			 				}
+		 				<div className="ModalListPanel-actions"> 
+		 					<button className="Btn Btn--info"> Following </button>
 		 				</div>
 		 			</div>
 
@@ -54,14 +42,8 @@ export default class FollowingList extends Component {
 		 					<h5 className="ModalListPanel-name"> John Doe </h5>
 		 					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
 		 				</div>
-		 				<div 
-		 					onMouseEnter={this.onMouseEnterHandler}
-		 					onMouseLeave={this.onMouseLeaveHandler}
-		 					className="ModalListPanel-actions">
-			 				{this.state.action 
-			 					? <button className="Btn Btn--primary"> Unfollow </button>
-			 					: <button className="Btn Btn--info"> Following </button>
-			 				}
+		 				<div className="ModalListPanel-actions">
+			 				<button className="Btn Btn--info"> Following </button>
 		 				</div>
 		 			</div>
 
@@ -71,14 +53,8 @@ export default class FollowingList extends Component {
 		 					<h5 className="ModalListPanel-name"> John Doe </h5>
 		 					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
 		 				</div>
-		 				<div 
-		 					onMouseEnter={this.onMouseEnterHandler}
-		 					onMouseLeave={this.onMouseLeaveHandler}
-		 					className="ModalListPanel-actions">
-			 				{this.state.action 
-			 					? <button className="Btn Btn--primary"> Unfollow </button>
-			 					: <button className="Btn Btn--info"> Following </button>
-			 				}
+		 				<div className="ModalListPanel-actions">
+			 				<button className="Btn Btn--info"> Following </button>
 		 				</div>
 		 			</div>
 		 		</div>
