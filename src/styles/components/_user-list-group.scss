@@ -1,0 +1,59 @@
+.UserListGroup {
+	color: $color-black;
+	background-color: $color-white;
+
+	.UserListGroup-heading {
+		padding: 15px;
+		border-bottom: 1px solid $color-gray;
+		text-align: center;
+	}
+
+	.UserListGroup-heading > * {
+		margin: 0;
+		font-weight: normal;
+		font-size: 32px;
+	}
+
+	.UserListGroup-item {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		width: 90%;
+		padding: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		border-bottom: 1px solid $color-gray;
+	}
+
+	.UserListGroup-image {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+	}
+
+	.UserListGroup-details {
+		width: 200px;
+	}
+
+	.UserListGroup-details > .UserListGroup-name,
+	.UserListGroup-details > .UserListGroup-followers {
+		margin: 0;
+		font-weight: normal;
+	}
+
+	.UserListGroup-details > .UserListGroup-followers {
+		color: $color-grayDark;
+	}
+
+	.UserListGroup-item > .UserListGroup-actions {
+		width: 100px;
+	}
+
+	.UserListGroup-item > .UserListGroup-actions > .Btn {
+		width: 100%;
+	}
+
+	.UserListGroup-footer {
+		padding: 25px;
+	}
+}

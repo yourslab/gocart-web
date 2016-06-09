@@ -3,6 +3,10 @@ import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
+import Modal from 'app/components/Modal';
+import FollowersList from './components/FollowersList';
+import FollowingList from './components/FollowingList';
+
 
 export default class AppProfileView extends Component {
   render() {
@@ -39,11 +43,11 @@ export default class AppProfileView extends Component {
               <div className="ProfilePanel-canopy">
                 <div className="ProfilePanel-canopySection">
                   <div className="ProfilePanel-canopySectionItem">
-                    <button className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</button>
+                    <button onClick={() => this.refs.followers.show()} className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</button>
+                    <button onClick={() => this.refs.following.show()} className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
@@ -94,6 +98,18 @@ export default class AppProfileView extends Component {
             </div>
           </div>
         </div>
+
+        <Modal
+          ref="followers"
+          size="sm">
+          <FollowersList closeModal={() => this.refs.followers.onClose()} />
+        </Modal>
+
+        <Modal
+          ref="following"
+          size="sm">
+          <FollowingList closeModal={() => this.refs.following.onClose()} />
+        </Modal>
       </div>
     );
   }
