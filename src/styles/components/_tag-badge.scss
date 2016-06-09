@@ -1,0 +1,13 @@
+.TagBadge {
+  @include linkNoUnderscore;
+  padding: 5px;
+  color: $color-blue;
+  font-size: $fontSize-small;
+  background: $color-gray;
+  border-radius: $borderRadius-base;
+  transition: 0.1s all;
+
+  &:hover {
+    background: $color-grayDark;
+  }
+}

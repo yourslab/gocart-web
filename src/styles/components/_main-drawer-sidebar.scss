@@ -1,0 +1,26 @@
+.MainDrawerSidebar {
+  .MainDrawerSidebar-link:not(:last-child),
+  .MainDrawerSidebar-separator {
+    margin-bottom: 15px;
+  }
+
+  .MainDrawerSidebar-link {
+    @include linkNoUnderscore;
+    display: block;
+    padding-left: 20px;
+    color: $color-red;
+    border-left: 3px solid transparent;
+  }
+
+  .MainDrawerSidebar-link:hover,
+  .MainDrawerSidebar-link--active {
+    border-left-color: $color-red;
+  }
+
+  .MainDrawerSidebar-separator {
+    margin-left: 20px;
+    width: 75%;
+    height: 1px;
+    background: $mainDrawer-logoColor;
+  }
+}

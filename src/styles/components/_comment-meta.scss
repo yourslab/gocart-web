@@ -1,0 +1,15 @@
+.CommentMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: $fontSize-small;
+
+  .CommentMeta-highlight {
+    @include linkNoUnderscore;
+    color: $color-blue;
+  }
+
+  .CommentMeta-count {
+    color: $color-grayDark;
+  }
+}

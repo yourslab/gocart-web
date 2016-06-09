@@ -1,0 +1,35 @@
+@mixin tabVariant($color) {
+  .Tab-item {
+    color: $color-blue;
+  }
+
+  .Tab-item:hover,
+  .Tab-item--active {
+    border-bottom-color: $color-blue;
+  }
+}
+
+.Tab {
+  display: flex;
+
+  .Tab-item {
+    @include linkNoUnderscore;
+    padding: 5px 3px;
+    color: $color-red;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s border;
+  }
+
+  .Tab-item:not(:last-child) {
+    margin-right: 20px;
+  }
+
+  .Tab-item:hover,
+  .Tab-item--active {
+    border-bottom-color: $color-red;
+  }
+
+  &.Tab--info {
+    @include tabVariant($color-blue);
+  }
+}

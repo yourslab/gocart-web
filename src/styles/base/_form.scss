@@ -1,0 +1,104 @@
+.FormInput {
+  display: block;
+  padding: ($formSize-base / 5);
+  width: 100%;
+  height: $formSize-base;
+  background: $color-white;
+  border: 1px solid $color-gray;
+  border-radius: $borderRadius-base;
+  outline: 0;
+
+  &.FormInput--large {
+    padding: ($formSize-large / 5);
+    height: $formSize-large;
+  }
+
+  &.FormInput--danger {
+    border-color: $color-red;
+  }
+}
+
+textarea.FormInput {
+  height: auto;
+}
+
+// @NOTE: Use this only with the typical
+// label-above-input format since we added
+// a line-height rule to the label.
+.FormGroup {
+  margin-bottom: $spacer-base;
+
+  &.FormGroup--narrow {
+    margin-bottom: $spacer-small;
+  }
+
+  &.FormGroup--large {
+    margin-bottom: $spacer-large;
+  }
+
+  label,
+  .FormGroup-message {
+    line-height: 2;
+  }
+
+  .FormGroup-message {
+    color: $color-red;
+    font-size: $fontSize-small;
+  }
+}
+
+.FormInputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+    // padding: ($formSize-base / 3) ($formSize-base / 5);
+  height: $formSize-base;
+  border: 1px solid $color-gray;
+  border-radius: $borderRadius-base;
+
+  &.FormInputGroup--backdrop {
+    box-shadow: $backdrop-base;
+  }
+
+  &:hover .FormInputGroup-addon {
+    color: $color-black;
+  }
+
+  .FormInputGroup-input {
+    display: block;
+    padding: 0 ($formSize-base / 5);
+    width: 100%;
+    border: 0;
+    outline: 0;
+  }
+
+  .FormInputGroup-addon,
+  .FormInputGroup-button {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  .FormInputGroup-addon {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: $color-gray;
+    transition: 0.2s all;
+  }
+
+  .FormInputGroup-button {
+    padding: 5px;
+  }
+}
+
+.FormActions {
+  @include clearfix;
+
+  > * {
+    float: left;
+    margin-right: 10px;
+  }
+
+  > *:last-child {
+    margin-right: 0;
+  }
+}

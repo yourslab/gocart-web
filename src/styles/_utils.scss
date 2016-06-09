@@ -1,0 +1,30 @@
+.u-clearfix { @include clearfix; }
+.u-pullLeft { float: left !important; }
+.u-pullRight { float: right !important; }
+
+// Grid Utilities
+// Generates block sizes;
+// u-size5, u-size6, etc.
+@for $i from 1 through 12 {
+  .u-size#{$i} {
+    width: percentage($i / 12);
+  }
+}
+
+// Spacers
+.u-spacer-small { margin-bottom: $spacer-small; }
+.u-spacer-base { margin-bottom: $spacer-base; }
+.u-spacer-large { margin-bottom: $spacer-large; }
+
+.u-text-info { color: $color-blue; }
+.u-text-muted { color: $color-grayDark; }
+.u-text-center { text-align: center; }
+
+// Text
+.u-ellipsis {
+  @include textEllipsis;
+
+  &.-expander:hover {
+    max-width: 10000px !important;
+  }
+}

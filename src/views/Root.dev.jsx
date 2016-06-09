@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
 import {Provider} from 'react-redux';
-import {Router} from 'react-router';
-import routes from '../routes';
+import {Router, applyRouterMiddleware} from 'react-router';
+import scroll from 'react-router-scroll';
 import Helmet from 'react-helmet';
 import DevTools from 'app/components/DevTools';
+import routes from '../routes';
+import config from '../config';
 
 class Root extends React.Component {
   static propTypes = {
@@ -14,7 +16,7 @@ class Root extends React.Component {
   render() {
     return (
       <div>
-        <Helmet titleTemplate={`${config.app.title} - %s (Dev Mode)`} />
+        <Helmet titleTemplate={`%s - ${config.app.title} (Dev Mode)`} />
 
         <Provider store={this.props.store}>
           <div>

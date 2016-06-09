@@ -2,7 +2,7 @@ export default {
   // ==============================
   // The API Host
   // ==============================
-  api: process.env.API || 'http://example.com',
+  api: process.env.API || 'https://api.gocart.ph',
 
   // ==============================
   // Assets
@@ -18,11 +18,15 @@ export default {
   // App-related configuration
   // ==============================
   app: {
-    title: 'Hello, World',
+    title: 'GoCart',
 
     meta: {
       description: '',
       keywords: ''
     }
-  }
+  },
+
+  auth: {
+    key: process.env.AUTH_KEY || 'FkrSi'
+  },
 };

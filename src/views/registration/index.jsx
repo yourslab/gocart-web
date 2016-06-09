@@ -1,0 +1,120 @@
+import React, {Component} from 'react';
+import Helmet from 'react-helmet';
+import {Link} from 'react-router';
+import axios from 'axios';
+import history from 'app/history';
+import StaticImg from 'app/components/StaticImg';
+import RegistrationForm from './components/RegistrationForm';
+
+export default class RegistrationView extends Component {
+  state = {
+    loading: false,
+    errors: false,
+    message: ''
+  };
+
+  render() {
+    return (
+      <div className="PortalWrapper">
+        <Helmet title="Sign Up" />
+
+        <div className="PortalWrapper-side">
+        </div>
+
+        <div className="PortalWrapper-body">
+          <div>
+            <div className="PortalWrapper-content">
+              <div className="PortalWrapper-logo">
+                <StaticImg src="logo-red.svg" alt="Logo" />
+              </div>
+
+              <a href="#" className="Btn Btn--primary Btn--large Btn--block">
+                Explore GoCart
+              </a>
+            </div>
+
+            <hr className="PortalWrapper-separator" />
+
+            <div className="PortalWrapper-content">
+              <RegistrationForm
+                loading={this.state.loading}
+                errors={this.state.errors}
+                onRegister={this.handleRegister} />
+            </div>
+
+            <hr className="PortalWrapper-separator" />
+
+            <div className="PortalWrapper-contentFooterText">
+              Already registered? <Link to="/login" className="PortalWrapper-contentFooterLink">Log in here!</Link>
+            </div>
+          </div>
+
+          <div className="Footer Footer--small">
+            <div className="ContainerFluid">
+              <div className="Footer-inner">
+                <div className="Footer-section">
+                  <a href="#" className="Footer-link">About Us</a>
+                  <a href="#" className="Footer-link">Support</a>
+                  <a href="#" className="Footer-link">Blog</a>
+                  <a href="#" className="Footer-link">Press</a>
+                  <a href="#" className="Footer-link">Jobs</a>
+                  <a href="#" className="Footer-link">Privacy</a>
+                  <a href="#" className="Footer-link">Terms</a>
+                </div>
+
+                <div className="Footer-section">
+                  <span className="Footer-text">
+                    &copy; 2015 GoCart, Philippines.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  handleRegister = (data) => {
+    if ( this.state.loading ) {
+      return;
+    }
+
+    // Handle password_confirmation;
+    // The backend isn't supposed to handle this,
+    // so we're imitating the backend's response
+    // to manually produce a validation error.
+    if ( data.password !== data.password_confirmation ) {
+      return this.setState({
+        errors: {
+          password_confirmation: ['This field must match the password field.']
+        }
+      });
+    }
+
+    this.setState({
+      loading: true,
+      errors: {}
+    });
+
+    return axios.post('/auth/registration', data)
+      .then((res) => {
+        this.setState({
+          errors: {},
+          loading: false,
+        });
+
+        history.push('/');
+
+        return res;
+      })
+      .catch((res) => {
+        this.setState({
+          loading: false,
+          errors: res.data,
+        });
+
+        return Promise.reject(res);
+      });
+  }
+}

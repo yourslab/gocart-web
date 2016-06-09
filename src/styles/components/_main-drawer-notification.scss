@@ -1,0 +1,77 @@
+.MainDrawerNotification {
+  .MainDrawerNotification-heading {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .MainDrawerNotification-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    width: 220px;
+    border-left: 3px solid transparent;
+  }
+
+  .MainDrawerNotification-item:not(:last-child) {
+    border-bottom: 1px solid $mainDrawer-logoColor;
+  }
+
+  .MainDrawerNotification-item--unseen {
+    border-left-color: $color-red;
+  }
+
+  .MainDrawerNotification-itemHeading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .MainDrawerNotification-itemAvatar {
+    margin-right: 10px;
+    // For some reason, there's an allowance below the avatar.
+    // This is a "workaround" for it.
+    height: 30px;
+  }
+
+  .MainDrawerNotification-itemAvatarImage {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+  }
+
+  .MainDrawerNotification-itemName {
+    margin-bottom: 1px;
+    line-height: 1;
+  }
+
+  .MainDrawerNotification-itemTime {
+    margin-bottom: 0;
+    line-height: 1;
+    font-weight: 400;
+    color: $color-grayDark;
+  }
+
+  .MainDrawerNotification-itemBody {
+    margin-left: 40px;
+  }
+
+  .MainDrawerNotification-itemAction {
+    margin-bottom: 0;
+  }
+
+  .MainDrawerNotification-itemDetails {
+    color: $mainDrawer-logoColor;
+    line-height: 1;
+    font-weight: 400;
+    color: $color-grayDark;
+  }
+
+  .MainDrawerNotification-itemThumbnail {
+    width: 120px;
+    height: 60px;
+    border-radius: $borderRadius-base;
+  }
+}

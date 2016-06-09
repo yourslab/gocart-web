@@ -1,0 +1,116 @@
+/**
+ * @param $bg Background color
+ * @param $text Text color
+ */
+@mixin buttonVariant($bg, $text: $color-white) {
+  background: $bg;
+
+  &:hover { background: lighten($bg, 5%); }
+  &, &:hover { color: $text; }
+}
+
+/**
+ * @param $border Border color
+ * @param $text Text color
+ */
+@mixin buttonAltVariant($border, $text: $color-black) {
+  color: $text;
+  background: transparent;
+  border-color: $border;
+
+  &:hover {
+    color: darken($text, 10%);
+    background: transparent;
+    border-color: darken($border, 10%);
+  }
+}
+
+.Btn {
+  @include linkNoUnderscore;
+  display: inline-block;
+  padding: 0 20px;
+  height: $formSize-base;
+  line-height: $formSize-base - 1px;
+  font-size: $fontSize-base;
+  text-align: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: $borderRadius-base;
+  transition: 0.25s all ease;
+
+  &.Btn--borderless {
+    // @REFACTOR: Remove !important
+    border-color: transparent !important;
+  }
+
+  &.Btn--primary {
+    @include buttonVariant($color-red);
+  }
+
+  &.Btn--default {
+    @include buttonAltVariant(transparent, $color-blue);
+    background: $color-white;
+  }
+
+  &.Btn--info {
+    @include buttonVariant($color-blue);
+  }
+
+  &.Btn--success {
+    @include buttonVariant($color-green);
+  }
+
+  &.Btn--facebook {
+    @include buttonVariant($color-facebook);
+  }
+
+  // Make a more high-level button modifier
+  // (chaining modifiers like this is a bit weird)
+  // and name it `Btn--plainPrimary`
+  &.Btn--primary.Btn--inverted {
+    @include buttonAltVariant($color-red, $color-red);
+  }
+
+  // Make a more high-level button modifier
+  // (chaining modifiers like this is a bit weird)
+  // and name it `Btn--plainPrimary`
+  &.Btn--info.Btn--inverted {
+    @include buttonAltVariant($color-blue, $color-blue);
+  }
+
+  &.Btn--clean {
+    color: $color-white;
+    background: transparent;
+    border-color: $color-white;
+  }
+
+  &.Btn--clean:hover {
+    color: darken($color-white, 10%);
+    background: rgba(255,255,255,0.2);
+    border-color: darken($color-white, 10%);
+  }
+
+  &.Btn--small {
+    height: $formSize-small;
+    line-height: $formSize-small - 1;
+    padding: 0 10px;
+  }
+
+  &.Btn--block {
+    display: block;
+    width: 100%;
+  }
+
+  &.Btn--large {
+    height: $formSize-large;
+    line-height: $formSize-large - 1px;
+  }
+
+  .Btn-icon:first-child {
+    margin-right: 5px;
+  }
+
+  .Btn-icon:last-child {
+    margin-left: 5px;
+  }
+}

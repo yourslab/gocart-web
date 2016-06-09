@@ -1,0 +1,90 @@
+.ProfilePanel {
+  background: $color-white;
+  border-radius: $borderRadius-base;
+  overflow: hidden;
+  box-shadow: $backdrop-base;
+
+  .ProfilePanel-cover {
+    position: relative;
+    height: 375px;
+  }
+
+  .ProfilePanel-coverImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .ProfilePanel-coverOverlay {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 25px;
+    width: 100%;
+    color: $color-white;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+  }
+
+  .ProfilePanel-coverOverlayInfo {
+    display: flex;
+  }
+
+  .ProfilePanel-name {
+    margin-bottom: 10px;
+  }
+
+  .ProfilePanel-bio {
+    margin-bottom: 0;
+  }
+
+  .ProfilePanel-avatar {
+    margin-bottom: -50%;
+    margin-right: 20px;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+  }
+
+  .ProfilePanel-body {
+    padding: 20px;
+    padding-top: 0;
+  }
+
+  .ProfilePanel-canopy {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid $color-gray;
+  }
+
+  .ProfilePanel-canopySection {
+    display: flex;
+  }
+
+  .ProfilePanel-canopySection:first-child {
+    // Avatar size + 20px allowance
+    margin-left: 170px;
+  }
+
+  .ProfilePanel-canopySectionItem:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  .ProfilePanel-bodyHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .ProfilePanel-bodyHeadingTitle {
+    margin-bottom: 0;
+  }
+}

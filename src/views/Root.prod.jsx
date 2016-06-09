@@ -15,7 +15,7 @@ class Root extends React.Component {
   render() {
     return (
       <div>
-        <Helmet titleTemplate={`${config.app.title} - %s`} />
+        <Helmet titleTemplate={`%s - ${config.app.title}`} />
 
         <Provider store={this.props.store}>
           <Router history={this.props.history} render={applyRouterMiddleware(scroll())}>

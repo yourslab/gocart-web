@@ -1,0 +1,15 @@
+h1, h2, h3, h4, h5, h6, p {
+  @include verticalRhythm;
+}
+
+h1 { font-size: $fontSize-jumbo; }
+h2 { font-size: $fontSize-largest; }
+h3 { font-size: $fontSize-larger; }
+h4 { font-size: $fontSize-large; }
+h5 { font-size: $fontSize-base; }
+h6 { font-size: $fontSize-small; }
+small { font-size: 90%; }
+
+a {
+  color: $color-blue;
+}

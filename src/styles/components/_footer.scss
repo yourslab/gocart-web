@@ -1,0 +1,30 @@
+.Footer {
+  &.Footer--small {
+    font-size: 80%
+  }
+
+  .Footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+  }
+
+  .Footer-section {
+    display: flex;
+  }
+
+  .Footer-link,
+  .Footer-text {
+    color: $color-grayDark;
+  }
+
+  .Footer-link {
+    @include linkNoUnderscore;
+    display: block;
+  }
+
+  .Footer-link:not(:last-child) {
+    margin-right: 10px;
+  }
+}

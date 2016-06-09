@@ -1,0 +1,54 @@
+$color-blue: #2584D0;
+$color-red: #CF3137;
+$color-orange: #EB4728;
+$color-green: #39a053;
+$color-white: #fff;
+$color-black: #333;
+$color-gray: #F8F8F8;
+$color-grayDark: #999;
+$color-grayDarker: #979797;
+$color-backdrop: rgba(0,0,0,0.25);
+$color-facebook: #0767ba;
+
+// Typography
+$lineHeight-base: 1.4;
+$fontSize-base: 14px;
+$fontSize-jumbo: 30px;
+$fontSize-largest: 26px;
+$fontSize-larger: 22px;
+$fontSize-large: 18px;
+$fontSize-small: 12px;
+$fontSans: 'San Francisco', -apple-system, BlinkMacSystemFont, '.SFSNText-Regular', 'Segoe UI', 'Ubuntu', Helvetica, sans-serif;
+
+// Form
+$formSize-small: 30px;
+$formSize-base: 40px;
+$formSize-large: 50px;
+
+$containerWidth: 998px;
+$gridGutter: 10px;
+
+$borderRadius-base: 5px;
+$borderRadius-rounded: 25px;
+
+$spacer-small: 15px;
+$spacer-base: 25px;
+$spacer-large: 50px;
+
+$zIndex-mainComponents: 600;
+$zIndex-mainDrawer: 700;
+$zIndex-backdrop: 1000;
+$zIndex-modal: 1001;
+
+$backdrop-small: 0 1px 1px $color-backdrop;
+$backdrop-base: 0 1px 5px $color-backdrop;
+$backdrop-large: 0 5px 5px $color-backdrop;
+
+// Component-related variables
+$mainHeader-height: 90px;
+$mainHeader-borderSize: 3px;
+$mainDrawer: 250px;
+$mainDrawer-logoColor: #d5d5d5;
+
+$overlaySearchbar-componentHeight: 70px; // $mainHeader-height - (arbitrary allowance)
+$overlaySearchbar-fontSize: 36px;

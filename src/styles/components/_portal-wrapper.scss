@@ -1,0 +1,45 @@
+.PortalWrapper {
+  display: flex;
+  min-height: 100vh;
+
+  .PortalWrapper-side {
+    width: 50%;
+    background: #ddd;
+  }
+
+  .PortalWrapper-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 50px;
+    width: 50%;
+  }
+
+  .PortalWrapper-logo {
+    margin-bottom: $spacer-base;
+    text-align: center;
+  }
+
+  .PortalWrapper-content {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: $spacer-large;
+  }
+
+  .PortalWrapper-separator {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: $spacer-large;
+    width: 75%;
+  }
+
+  .PortalWrapper-contentFooterText {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .PortalWrapper-contentFooterLink {
+    @include linkNoUnderscore;
+  }
+}
