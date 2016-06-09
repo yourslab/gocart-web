@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import cn from 'classnames';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 import StaticImg from 'app/components/StaticImg';
+import Permission from 'app/components/Permission';
 
-export default class AppView extends Component {
+class AppView extends Component {
   state = {
     left: false,
     right: false
@@ -19,6 +21,7 @@ export default class AppView extends Component {
 
   render() {
     const {left, right} = this.state;
+    const {user} = this.props;
 
     return (
       <div className="MainWrapper">
@@ -35,7 +38,7 @@ export default class AppView extends Component {
                 <a href="#" className="MainDrawerSidebar-link MainDrawerSidebar-link--active">Discover</a>
                 <Link to="/manage-posts/create" className="MainDrawerSidebar-link">Create a post</Link>
                 <div className="MainDrawerSidebar-separator" />
-                <Link to="/@srph" className="MainDrawerSidebar-link">My Profile</Link>
+                <Permission rule="auth"><Link to={`/@${user.username}`} className="MainDrawerSidebar-link">My Profile</Link></Permission>
                 <a href="#" className="MainDrawerSidebar-link">My Cart</a>
                 <a href="#" className="MainDrawerSidebar-link">Payments</a>
                 <a href="#" className="MainDrawerSidebar-link">Billing</a>
@@ -53,63 +56,65 @@ export default class AppView extends Component {
           </div>
         </div>
 
-        <div className={cn('MainWrapper-drawer MainWrapper-drawer--right', { 'MainWrapper-drawer--active': right })}>
-          <div className="MainDrawer">
-            <div className="MainDrawer-body">
-              <div className="MainDrawer-close">
-                <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
-                  <StaticImg src="icons/close_black@1x.png" alt="Close" />
-                </button>
+        <Permission rule="auth">
+          <div className={cn('MainWrapper-drawer MainWrapper-drawer--right', { 'MainWrapper-drawer--active': right })}>
+            <div className="MainDrawer">
+              <div className="MainDrawer-body">
+                <div className="MainDrawer-close">
+                  <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
+                    <StaticImg src="icons/close_black@1x.png" alt="Close" />
+                  </button>
+                </div>
+
+                <div className="MainDrawerNotification">
+                  <div className="MainDrawerNotification-heading">
+                    <h4>Notifications</h4>
+                  </div>
+
+                  <div className="MainDrawerNotification-item MainDrawerNotification-item--unseen">
+                    <div className="MainDrawerNotification-itemHeading">
+                      <div className="MainDrawerNotification-itemAvatar">
+                        <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
+                      </div>
+
+                      <div>
+                        <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
+                        <h6 className="MainDrawerNotification-itemTime"><small>5 mins ago</small></h6>
+                      </div>
+                    </div>
+
+                    <div className="MainDrawerNotification-itemBody">
+                      <h6 className="MainDrawerNotification-itemAction">Posted a comment</h6>
+                      <h6 className="MainDrawerNotification-itemDetails">Lorem ipsum dolor sit amet...</h6>
+                    </div>
+                  </div>
+
+                  <div className="MainDrawerNotification-item">
+                    <div className="MainDrawerNotification-itemHeading">
+                      <div className="MainDrawerNotification-itemAvatar">
+                        <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
+                      </div>
+
+                      <div>
+                        <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
+                        <small className="MainDrawerNotification-itemTime">5 mins ago</small>
+                      </div>
+                    </div>
+
+                    <div className="MainDrawerNotification-itemBody">
+                      <h6 className="MainDrawerNotification-itemAction">Bumped your post</h6>
+                      <img src="https://placeimg.com/120/60/any" className="MainDrawerNotification-itemThumbnail" alt="Thumbnail" />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="MainDrawerNotification">
-                <div className="MainDrawerNotification-heading">
-                  <h4>Notifications</h4>
-                </div>
-
-                <div className="MainDrawerNotification-item MainDrawerNotification-item--unseen">
-                  <div className="MainDrawerNotification-itemHeading">
-                    <div className="MainDrawerNotification-itemAvatar">
-                      <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
-                    </div>
-
-                    <div>
-                      <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
-                      <h6 className="MainDrawerNotification-itemTime"><small>5 mins ago</small></h6>
-                    </div>
-                  </div>
-
-                  <div className="MainDrawerNotification-itemBody">
-                    <h6 className="MainDrawerNotification-itemAction">Posted a comment</h6>
-                    <h6 className="MainDrawerNotification-itemDetails">Lorem ipsum dolor sit amet...</h6>
-                  </div>
-                </div>
-
-                <div className="MainDrawerNotification-item">
-                  <div className="MainDrawerNotification-itemHeading">
-                    <div className="MainDrawerNotification-itemAvatar">
-                      <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
-                    </div>
-
-                    <div>
-                      <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
-                      <small className="MainDrawerNotification-itemTime">5 mins ago</small>
-                    </div>
-                  </div>
-
-                  <div className="MainDrawerNotification-itemBody">
-                    <h6 className="MainDrawerNotification-itemAction">Bumped your post</h6>
-                    <img src="https://placeimg.com/120/60/any" className="MainDrawerNotification-itemThumbnail" alt="Thumbnail" />
-                  </div>
-                </div>
+              <div className="MainDrawer-logoSection">
+                <StaticImg src="logo-gray.svg" alt="Logo" className="MainDrawer-logo" />
               </div>
-            </div>
-
-            <div className="MainDrawer-logoSection">
-              <StaticImg src="logo-gray.svg" alt="Logo" className="MainDrawer-logo" />
             </div>
           </div>
-        </div>
+        </Permission>
 
         <div className="MainWrapper-body">
           <div className="MainHeader">
@@ -165,13 +170,15 @@ export default class AppView extends Component {
               </div>
             </div>
 
-            <div className="MainHeader-sidebar MainHeader-sidebar--right">
-              <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
-                <StaticImg src="icons/notif_red@1x.png" alt="Drawer Icon" />
-              </button>
+            <Permission rule="auth">
+              <div className="MainHeader-sidebar MainHeader-sidebar--right">
+                <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
+                  <StaticImg src="icons/notif_red@1x.png" alt="Drawer Icon" />
+                </button>
 
-              <div className="MainHeader-notificationBadge">12</div>
-            </div>
+                <div className="MainHeader-notificationBadge">12</div>
+              </div>
+            </Permission>
           </div>
 
           <div className="MainWrapper-content">
@@ -223,3 +230,6 @@ export default class AppView extends Component {
     this.setState((state) => ({ right: !state.right }));
   }
 }
+
+const mapState = ({auth}) => ({ user: auth.user });
+export default connect(mapState)(AppView);
