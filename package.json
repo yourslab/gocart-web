@@ -29,6 +29,7 @@
     "react-resolver": "^2.0.5",
     "react-router": "^2.4.0",
     "react-router-scroll": "^0.2.0",
+    "react-skylight": "^0.4.0",
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.0",
     "url-join": "0.0.1"
@@ -61,7 +62,6 @@
     "phantomjs": "^1.9.18",
     "postcss": "^5.0.19",
     "postcss-cli": "^2.5.1",
-    "react-skylight": "^0.4.0",
     "redux-devtools": "^3.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
