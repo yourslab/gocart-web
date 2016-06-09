@@ -8,16 +8,12 @@ import cn from 'classnames';
    error={error}
    name="yolo" />
  */
-const InputError = ({className, errors, element, ...props}) => {
-  const error = errors == null
-    ? undefined
-    : errors[0];
-
+const InputError = ({className, error, element, ...props}) => {
   return (
     <div>
       {element == null
         ? createElement('input', {
-          ...other,
+          ...props,
           className: cn(className, { 'FormInput--danger': error != null })
         })
         : element
@@ -28,7 +24,8 @@ const InputError = ({className, errors, element, ...props}) => {
 }
 
 InputError.propTypes = {
-  element: PropTypes.element
+  element: PropTypes.element,
+  error: PropTypes.string
 };
 
 export default InputError;

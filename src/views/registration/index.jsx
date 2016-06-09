@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import axios from 'axios';
 import history from 'app/history';
+import formatValidationErrors from 'app/utils/formatValidationErrors';
 import StaticImg from 'app/components/StaticImg';
 import RegistrationForm from './components/RegistrationForm';
 
@@ -97,7 +98,7 @@ export default class RegistrationView extends Component {
       errors: {}
     });
 
-    return axios.post('/auth/registration', data)
+    return axios.post('/user', data)
       .then((res) => {
         this.setState({
           errors: {},
@@ -111,7 +112,7 @@ export default class RegistrationView extends Component {
       .catch((res) => {
         this.setState({
           loading: false,
-          errors: res.data,
+          errors: formatValidationErrors(res.data.errors),
         });
 
         return Promise.reject(res);
