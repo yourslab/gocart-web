@@ -3,7 +3,7 @@ import {Link} from 'react-router';
 
 export default class FollowingList extends Component {
 	state = {
-		style: false
+		action: false
 	};
 
 	render() {
@@ -24,7 +24,7 @@ export default class FollowingList extends Component {
 		 					onMouseEnter={this.onMouseEnterHandler}
 		 					onMouseLeave={this.onMouseLeaveHandler}
 		 					className="ModalListPanel-actions">
-			 				{this.state.style 
+			 				{this.state.action 
 			 					? <button className="Btn Btn--primary"> Unfollow </button>
 			 					: <button className="Btn Btn--info"> Following </button>
 			 				}
@@ -41,7 +41,7 @@ export default class FollowingList extends Component {
 		 					onMouseEnter={this.onMouseEnterHandler}
 		 					onMouseLeave={this.onMouseLeaveHandler}
 		 					className="ModalListPanel-actions">
-			 				{this.state.style 
+			 				{this.state.action 
 			 					? <button className="Btn Btn--primary"> Unfollow </button>
 			 					: <button className="Btn Btn--info"> Following </button>
 			 				}
@@ -58,7 +58,7 @@ export default class FollowingList extends Component {
 		 					onMouseEnter={this.onMouseEnterHandler}
 		 					onMouseLeave={this.onMouseLeaveHandler}
 		 					className="ModalListPanel-actions">
-			 				{this.state.style 
+			 				{this.state.action 
 			 					? <button className="Btn Btn--primary"> Unfollow </button>
 			 					: <button className="Btn Btn--info"> Following </button>
 			 				}
@@ -75,7 +75,7 @@ export default class FollowingList extends Component {
 		 					onMouseEnter={this.onMouseEnterHandler}
 		 					onMouseLeave={this.onMouseLeaveHandler}
 		 					className="ModalListPanel-actions">
-			 				{this.state.style 
+			 				{this.state.action 
 			 					? <button className="Btn Btn--primary"> Unfollow </button>
 			 					: <button className="Btn Btn--info"> Following </button>
 			 				}
@@ -93,10 +93,10 @@ export default class FollowingList extends Component {
 	}
 
 	onMouseEnterHandler = () => {
-		this.setState({ style: true });
+		this.setState({ action: true });
 	}
 
 	onMouseLeaveHandler = () => {
-		this.setState({ style: false });
+		this.setState({ action: false });
 	}
 }
