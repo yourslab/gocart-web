@@ -33,67 +33,56 @@ export default class AppManagePostsArchivedView extends Component {
                   </div>
                 </div>
 
-                <div className="ProductCard-userPanel">
-                  <div className="ProductCard-userPanelSection">
-                    <img src="https://placeimg.com/48/48/people" className="ProductCard-avatar" />
-
-                    <div className="ProductCard-userPanelMeta">
-                      <h4 className="Productcard-name">Mike Greene</h4>
-                    </div>
-                  </div>
-
-                  <div className="ProductCard-userPanelSection">
-                  </div>
-                </div>
-
-                <div className="ProductCard-body">
-                  <div className="ProductCard-heading">
-                    <div>
-                      <h4 className="ProductCard-title">Looking for</h4>
-                    </div>
-
-                    <div className="ProductCard-headingSection">
-                      <div className="ProductCard-headingSectionItem">
-                        <span className="ProductCard-meta">2 months</span>
+                <div className="ProductCard-inner">
+                  <div className="ProductCard-body">
+                    <div className="ProductCard-heading">
+                      <div>
+                        <h4 className="ProductCard-title">Looking for</h4>
                       </div>
 
-                      <div className="ProductCard-headingSectionItem">
-                        <span className="ProductCard-meta">0.5km</span>
+                      <div className="ProductCard-headingSection">
+                        <div className="ProductCard-headingSectionItem">
+                          <span className="ProductCard-meta">2 months</span>
+                        </div>
+
+                        <div className="ProductCard-headingSectionItem">
+                          <span className="ProductCard-meta">0.5km</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="ProductCard-description">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                      tempor incididunt  ut labore et dolore magna aliqua.
+                    </p>
+
+                    <div className="ProductCard-tags">
+                      <a href="#" className="TagBadge">Tags</a>
+                    </div>
+
+                    <div className="CommentMeta">
+                      <div>
+                        <a href="#" className="CommentMeta-highlight">Mary Ann Smithson</a>&nbsp;
+                        and <a href="#" className="CommentMeta-highlight">20 bumped this</a>
+                      </div>
+
+                      <div>
+                        <span className="CommentMeta-count">3 comments</span>
                       </div>
                     </div>
                   </div>
 
-                  <p className="ProductCard-description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt  ut labore et dolore magna aliqua.
-                  </p>
-
-                  <div className="ProductCard-tags">
-                    <a href="#" className="TagBadge">Tags</a>
-                  </div>
-
-                  <div className="CommentMeta">
-                    <div>
-                      <a href="#" className="CommentMeta-highlight">Mary Ann Smithson</a>&nbsp;
-                      and <a href="#" className="CommentMeta-highlight">20 bumped this</a>
+                  <div className="ProductCard-actions">
+                    <div className="ProductCard-actionsSection">
+                      <Switchbox />
+                      &nbsp; Reactivate
                     </div>
 
                     <div>
-                      <span className="CommentMeta-count">3 comments</span>
+                      <button className="Btn Btn--primary Btn--inverted Btn--borderless">
+                        Delete Permanently
+                      </button>
                     </div>
-                  </div>
-                </div>
-
-                <div className="ProductCard-actions">
-                  <div className="ProductCard-actionsSection">
-                    <Switchbox />
-                    &nbsp; Reactivate
-                  </div>
-
-                  <div>
-                    <button className="Btn Btn--primary Btn--inverted Btn--borderless">
-                      Delete Permanently
-                    </button>
                   </div>
                 </div>
               </div>

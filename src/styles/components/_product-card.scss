@@ -41,7 +41,6 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    border-bottom: 1px solid $color-grayDark;
   }
 
   .ProductCard-userPanelSection {
@@ -55,6 +54,10 @@
     height: 48px;
     width: 48px;
     border-radius: 50%;
+  }
+
+  .ProductCard-inner {
+    border-left: 2px solid $color-red;
   }
 
   .ProductCard-body {

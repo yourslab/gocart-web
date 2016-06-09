@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cookie from 'cookie-machine';
+import cookie from 'app/cookie';
 import history from 'app/history'
 import lang from 'app/lang';
 import config from 'app/config';
@@ -155,7 +155,7 @@ export function getData() {
       return;
     }
 
-    const auth = JSON.parse(cookie.get(config.auth.key));
+    const auth = cookie.get(config.auth.key);
 
     if ( auth == null ) {
       return;
