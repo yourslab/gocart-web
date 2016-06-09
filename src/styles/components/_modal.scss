@@ -1,0 +1,28 @@
+.ReactModal__Body--open {
+    overflow: hidden !important;
+}
+
+.ReactModal__Overlay {
+    z-index: 99;
+    backgroundColor: rgba(0, 0, 0, 0.3);
+
+	.ReactModal__Content {
+        height: 450px;
+        width: 50%;
+        overflow: visible;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 100px;
+        padding: 0;
+        boxShadow: 0px 0px 4px rgba(0, 0, 0, .14), 0px 4px 8px rgba(0, 0, 0, .28);
+        z-index: 100
+	}
+
+    .ReactModal__Content-small {
+        width: 35% !important;
+    }
+
+    .ReactModal__Content-large {
+        width: 75% !important;
+    }
+}
