@@ -91,7 +91,7 @@ export function login(data, redirect = '/') {
         }
       })
       .then((res) => {
-        token = res.data.data.access_token;
+        token = res.data.auth_token;
 
         // You're probably not wondering why this is placed here.
         // It's a good place. While we also need to override
@@ -100,7 +100,7 @@ export function login(data, redirect = '/') {
         cookie.set(
           config.auth.key,
           JSON.stringify({
-            token: res.data.data.auth_token,
+            token: res.data.auth_token,
             id: res.data.id
           })
         );
@@ -109,7 +109,7 @@ export function login(data, redirect = '/') {
         // includes the auth token from the cookie for us.
         return axios.get(`user/${res.data.id}`, {
           headers: {
-            'auth-token': res.data.data.auth_token
+            'auth-token': res.data.auth_token
           }
         });
       })
@@ -170,7 +170,7 @@ export function getData() {
         dispatch({
           type: AUTH_GET_DATA,
           payload: {
-            token,
+            token: auth.token,
             data: res.data
           }
         });
