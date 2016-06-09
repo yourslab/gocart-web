@@ -145,7 +145,7 @@ export default class AppManagePostsCreateView extends Component {
                   <div className="FormGroup FormGroup--narrow">
                     <label>
                       <input type="checkbox" />
-                      &nbsp; Make this default addaress
+                      &nbsp; Make this default address
                     </label>
                   </div>
                 </div>
