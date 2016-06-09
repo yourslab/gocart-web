@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Link} from 'react-router';
 
 const FollowersList = () => 
@@ -14,7 +14,9 @@ const FollowersList = () =>
  					<h5 className="ModalListPanel-name"> John Doe </h5>
  					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
  				</div>
- 				<button className="Btn Btn--info Btn--inverted"> Follow </button>
+ 				<div className="ModalListPanel-actions">
+ 					<button className="Btn Btn--info Btn--inverted"> Follow </button>
+ 				</div>
  			</div>
 
  			<div className="ModalListPanel-item">
@@ -23,7 +25,9 @@ const FollowersList = () =>
  					<h5 className="ModalListPanel-name"> John Doe </h5>
  					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
  				</div>
- 				<button className="Btn Btn--info Btn--inverted"> Follow </button>
+ 				<div className="ModalListPanel-actions">
+ 					<button className="Btn Btn--info Btn--inverted"> Follow </button>
+ 				</div>
  			</div>
 
  			<div className="ModalListPanel-item">
@@ -32,7 +36,9 @@ const FollowersList = () =>
  					<h5 className="ModalListPanel-name"> John Doe </h5>
  					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
  				</div>
- 				<button className="Btn Btn--info"> Following </button>
+ 				<div className="ModalListPanel-actions">
+ 					<button className="Btn Btn--info"> Following </button>
+ 				</div>
  			</div>
 
  			<div className="ModalListPanel-item">
@@ -41,11 +47,13 @@ const FollowersList = () =>
  					<h5 className="ModalListPanel-name"> John Doe </h5>
  					<h6 className="ModalListPanel-followers"> 6969 followers </h6>
  				</div>
- 				<button className="Btn Btn--info"> Following </button>
+ 				<div className="ModalListPanel-actions">
+ 					<button className="Btn Btn--info"> Following </button>
+ 				</div>
  			</div>
  		</div>
 
- 		<div className="ModalListPanel-actions">
+ 		<div className="ModalListPanel-footer">
  			<Link to="/@srph" className="Btn Btn--info Btn--block">
  				Done 
  			</Link>

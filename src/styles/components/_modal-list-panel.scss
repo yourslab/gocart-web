@@ -45,11 +45,11 @@
 		color: $color-grayDark;
 	}
 
-	.ModalListPanel-item > .Btn {
+	.ModalListPanel-item > .ModalListPanel-actions {
 		width: 100px;
 	}
 
-	.ModalListPanel-actions {
+	.ModalListPanel-footer {
 		padding: 25px;
 	}
 }
