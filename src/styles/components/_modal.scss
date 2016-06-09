@@ -7,6 +7,7 @@
     background-color: rgba(0, 0, 0, 0.3) !important;
 
 	.ReactModal__Content {
+        position: relative;
         height: 450px;
         width: 50%;
         overflow: visible;
@@ -24,5 +25,11 @@
 
     .ReactModal__Content-large {
         width: 75% !important;
+    }
+
+    .ReactModal__closeButton {
+        position: absolute;
+        top: -50px;
+        right: -50px;
     }
 }
