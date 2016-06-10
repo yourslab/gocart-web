@@ -71,11 +71,11 @@ export default class Filters extends Component {
     );
   }
 
-  show = () => {
-    this.refs.modal.show();
+  open = () => {
+    this.refs.modal.open();
   }
 
   close = () => {
-    this.refs.modal.onClose();
+    this.refs.modal.close();
   }
 }

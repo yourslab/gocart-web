@@ -14,10 +14,10 @@ export default class Modal extends Component {
 		return (
 			<ReactModal
 				isOpen={this.state.open}
-				onRequestClose={this.onClose}
+				onRequestClose={this.close}
 				className={cn({'ReactModal__Content-small': size === 'sm'}, {'ReactModal__Content-large': size === 'lg'})}>
-				<div className="ReactModal__closeButton"> 
-					<button onClick={this.onClose} className="PlainBtn">
+				<div className="ReactModal__closeButton">
+					<button onClick={this.close} className="PlainBtn">
 						<StaticImg src="icons/close_white@1x.png" />
 					</button>
 				</div>
@@ -26,11 +26,11 @@ export default class Modal extends Component {
 		);
 	}
 
-	show = () => {
+	open = () => {
 		this.setState({ open: true });
 	}
 
-	onClose = () => {
+	close = () => {
 		this.setState({ open: false })
 	}
 }

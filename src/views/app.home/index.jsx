@@ -47,7 +47,7 @@ class AppHomeView extends React.Component {
         </Gateway>
 
         <Gateway into="header-filters">
-          <button className="MainHeader-button" onClick={() => this.refs.filters.show()}>More Filters</button>
+          <button className="MainHeader-button" onClick={() => this.refs.filters.open()}>More Filters</button>
         </Gateway>
 
         <Filters ref="filters" />
