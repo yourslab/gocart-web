@@ -3,8 +3,8 @@
 }
 
 .ReactModal__Overlay {
-    z-index: 99;
-    background-color: rgba(0, 0, 0, 0.3) !important;
+  z-index: $zIndex-backdrop;
+  background-color: rgba(0, 0, 0, 0.3) !important;
 
 	.ReactModal__Content {
     position: relative;
@@ -17,20 +17,20 @@
     padding: 15px;
     background: $color-white;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, .14), 0px 4px 8px rgba(0, 0, 0, .28);
-    z-index: 100
+    z-index: $zIndex-modal;
 	}
 
-    .ReactModal__Content-small {
-        width: 35% !important;
-    }
+  .ReactModal__Content--small {
+    width: 35% !important;
+  }
 
-    .ReactModal__Content-large {
-        width: 75% !important;
-    }
+  .ReactModal__Content--large {
+    width: 75% !important;
+  }
 
-    .ReactModal__closeButton {
-        position: absolute;
-        top: -50px;
-        right: -50px;
-    }
+  .ReactModal__closeButton {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+  }
 }
