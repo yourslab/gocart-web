@@ -13,6 +13,9 @@ const ProductCard = () =>
       </div>
 
       <div className="ProductCard-userPanelSection">
+        <button type="button" className="PlainBtn">
+          <StaticImg src="icons/follow_icon@1x.png" alt="Follow" />
+        </button>
       </div>
     </div>
 
