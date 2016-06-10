@@ -15,7 +15,7 @@ export default class Modal extends Component {
 			<ReactModal
 				isOpen={this.state.open}
 				onRequestClose={this.close}
-				className={cn({'ReactModal__Content-small': size === 'sm'}, {'ReactModal__Content-large': size === 'lg'})}>
+				className={cn({'ReactModal__Content--small': size === 'sm'}, {'ReactModal__Content--large': size === 'lg'})}>
 				<div className="ReactModal__closeButton">
 					<button onClick={this.close} className="PlainBtn">
 						<StaticImg src="icons/close_white@1x.png" />
