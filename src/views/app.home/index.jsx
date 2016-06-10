@@ -1,11 +1,13 @@
 import React, {PropTypes} from 'react';
-import Helmet from 'react-helmet';
 import axios from 'axios';
 import map from 'lodash/map';
 import groupBy from 'lodash/groupBy';
 import toPairs from 'lodash/toPairs';
+import Helmet from 'react-helmet';
+import {Gateway} from 'react-gateway';
 import Infinite from 'app/components/Infinite';
 import ProductCard from 'app/components/ProductCard';
+import Filters from './components/Filters';
 
 class AppHomeView extends React.Component {
   state = {
@@ -39,6 +41,16 @@ class AppHomeView extends React.Component {
         </div>
 
         {this.state.loading ? <div className="Spinner u-spacer-large" /> : null }
+
+        <Gateway into="header-separator">
+          <div className="MainHeader-separator" />
+        </Gateway>
+
+        <Gateway into="header-filters">
+          <button className="MainHeader-button" onClick={() => this.refs.filters.show()}>More Filters</button>
+        </Gateway>
+
+        <Filters ref="filters" />
       </div>
     );
   }
