@@ -11,11 +11,13 @@
   }
 
   .FormListGroup-label {
+    flex-shrink: 0;
+    margin-right: 15px;
     color: $color-gray;
-    width: 40%;
+    width: 100px;
   }
 
   .FormListGroup-input {
-    width: 55%;
+    width: 100%;
   }
 }
