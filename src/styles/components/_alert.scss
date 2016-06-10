@@ -1,0 +1,12 @@
+.Alert {
+  padding: 5px;
+  font-size: $fontSize-small;
+  color: $color-white;
+  background: $color-grayDark;
+  text-align: center;
+  border-radius: $borderRadius-rounded;
+
+  &.Alert--danger {
+    background: #d93824;
+  }
+}
