@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import cn from 'classnames';
+import linkState from 'react-link-state';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {GatewayProvider, GatewayDest} from 'react-gateway';
+import defer from 'app/utils/defer';
+import history from 'app/history';
 import StaticImg from 'app/components/StaticImg';
 import Permission from 'app/components/Permission';
 
 class AppView extends Component {
   state = {
     left: false,
-    right: false
+    right: false,
+    search: ''
   };
 
   componentDidMount() {
@@ -152,9 +156,9 @@ class AppView extends Component {
                   </div>
 
                   <div className="MainHeader-section">
-                    <form>
+                    <form onSubmit={this.handleSearch}>
                       <div className="FormInputGroup FormInputGroup--backdrop">
-                        <input type="text" className="FormInputGroup-input" placeholder="Search" />
+                        <input onChange={this.handleInput} value={this.state.search} type="search" className="FormInputGroup-input" placeholder="Search" />
 
                         <div className="FormInputGroup-button">
                           <button className="PlainBtn">
@@ -227,6 +231,32 @@ class AppView extends Component {
   handleToggleRightDrawer = () => {
     this.setState((state) => ({ right: !state.right }));
   }
+
+  handleInput = (evt) => {
+    this.setState(
+      { search: evt.target.value },
+      this.deferredSearch);
+  }
+
+  handleSearch = (evt) => {
+    evt.preventDefault();
+    this.search();
+  }
+
+  search = () => {
+    const {search} = this.state;
+
+    if ( !search.length ) {
+      return;
+    }
+
+    history.push({
+      pathname: 'search',
+      query: { q: search }
+    });
+  }
+
+  deferredSearch = defer(this.search, 250)
 }
 
 const mapState = ({auth}) => ({ user: auth.user });
