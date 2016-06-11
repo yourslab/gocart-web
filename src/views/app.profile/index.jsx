@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {getData} from 'app/modules/auth';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
 import FollowersList from './components/FollowersList';
 import FollowingList from './components/FollowingList';
 
-
-export default class AppProfileView extends Component {
+class AppProfileView extends Component {
   render() {
+    const {auth} = this.props;
+
+    console.log(auth);
     return (
       <div>
         <Helmet title="John Doe" />
@@ -114,3 +119,11 @@ export default class AppProfileView extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  auth: state.auth.user
+});
+
+const mapActionsToProps = dispatch => ({ actions: bindActionCreators({ getData }, dispatch) });
+
+export default connect(mapStateToProps, mapActionsToProps)(AppProfileView);
