@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {getData} from 'app/modules/auth';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
@@ -103,10 +101,6 @@ class AppProfileView extends Component {
                 <div className="Grid-cell u-size6 u-spacer-base">
                   <ShelfSlate /> 
                 </div>
-
-                <div className="Grid-cell u-size6 u-spacer-base">
-                  <ProductCard /> 
-                </div>
               </div>
             </div>
           </div>
@@ -128,12 +122,8 @@ class AppProfileView extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapState = state => ({
   auth: state.auth.user
 });
 
-const mapActionsToProps = dispatch => ({ 
-  actions: bindActionCreators({ getData }, dispatch) 
-});
-
-export default connect(mapStateToProps, mapActionsToProps)(AppProfileView);
+export default connect(mapState, null)(AppProfileView);
