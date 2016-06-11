@@ -3,11 +3,11 @@
   padding: 5px;
   color: $color-blue;
   font-size: $fontSize-small;
-  background: $color-gray;
+  background: #eaeaea;
   border-radius: $borderRadius-base;
   transition: 0.1s all;
 
   &:hover {
-    background: $color-grayDark;
+    background: darken(#eaeaea, 3%);
   }
 }

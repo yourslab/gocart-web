@@ -1,0 +1,23 @@
+// @NOTE: Refactor to `FormListGroupItem`
+// since the containing element serves no purpose
+.FormListGroup {
+  .FormListGroup-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid $color-gray;
+  }
+
+  .FormListGroup-label {
+    flex-shrink: 0;
+    margin-right: 15px;
+    color: $color-gray;
+    width: 100px;
+  }
+
+  .FormListGroup-input {
+    width: 100%;
+  }
+}

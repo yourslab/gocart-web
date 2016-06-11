@@ -62,6 +62,7 @@ textarea.FormInput {
   border-radius: $borderRadius-base;
 
   &.FormInputGroup--backdrop {
+    border: 0;
     box-shadow: $backdrop-base;
   }
 
