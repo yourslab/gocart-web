@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import Infinite from 'app/components/Infinite';
+import map from 'lodash/map';
+import groupBy from 'lodash/groupBy';
+import toPairs from 'lodash/toPairs';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
@@ -10,8 +14,18 @@ import FollowersList from './components/FollowersList';
 import FollowingList from './components/FollowingList';
 
 class AppProfileView extends Component {
+  state = {
+    feed: [{}, {}, {}, {}],
+    loading: false,
+    error: false
+  };
+
   render() {
     const {auth} = this.props;
+    const feed = map(
+      groupBy(toPairs(this.state.feed), ([i]) => i % 2 === 0 ? i : i - 1),
+      (set) => [set[0][1], set[1][1]]
+    );
 
     return (
       <div>
@@ -91,17 +105,19 @@ class AppProfileView extends Component {
                 </div>
               </div>
 
-              <div className="Grid">
-                {[[], [], [], [], [], []].map(() =>
-                  <div className="Grid-cell u-size6 u-spacer-base">
-                    <ProductCard />
+              <Infinite callback={this.handleRequest}>
+                {feed.map((set, i) =>
+                  <div className="Grid" key={i}>
+                    {set.map((product, j) => 
+                      <div className="Grid-cell u-size6 u-spacer-base" key={j}>
+                        <ProductCard />
+                      </div>
+                    )}
                   </div>
                 )}
+              </Infinite>
 
-                <div className="Grid-cell u-size6 u-spacer-base">
-                  <ShelfSlate /> 
-                </div>
-              </div>
+              {this.state.loading ? <div className="Spinner u-spacer-large" /> : null }
             </div>
           </div>
         </div>
@@ -119,6 +135,24 @@ class AppProfileView extends Component {
         </Modal>
       </div>
     );
+  }
+
+  handleRequest = () => {
+    if ( this.state.loading ) {
+      return;
+    }
+
+    this.setState({
+      loading: true,
+      error: false
+    });
+
+    setTimeout(() => {
+      this.setState((state) => ({
+        feed: [...state.feed, {}, {}],
+        loading: false
+      }));
+    }, 1500);
   }
 }
 
