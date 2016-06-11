@@ -48,11 +48,11 @@ class AppProfileView extends Component {
               <div className="ProfilePanel-canopy">
                 <div className="ProfilePanel-canopySection">
                   <div className="ProfilePanel-canopySectionItem">
-                    <button onClick={() => this.refs.followers.show()} className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</button>
+                    <button onClick={() => this.refs.followers.open()} className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button onClick={() => this.refs.following.show()} className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</button>
+                    <button onClick={() => this.refs.following.open()} className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
@@ -107,13 +107,13 @@ class AppProfileView extends Component {
         <Modal
           ref="followers"
           size="sm">
-          <FollowersList closeModal={() => this.refs.followers.onClose()} />
+          <FollowersList onClose={() => this.refs.followers.close()} />
         </Modal>
 
         <Modal
           ref="following"
           size="sm">
-          <FollowingList closeModal={() => this.refs.following.onClose()} />
+          <FollowingList onClose={() => this.refs.following.close()} />
         </Modal>
       </div>
     );

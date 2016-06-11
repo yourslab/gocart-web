@@ -24,11 +24,7 @@
   }
 
   .OverlaySearchbarResult-result:hover {
-    background: $color-gray;
-  }
-
-  .OverlaySearchbarResult-result:hover .OverlaySearchbarResult-resultSubText {
-    color: $color-grayDark;
+    background: $color-grayLighter;
   }
 
   .OverlaySearchbarResult-resultSection {

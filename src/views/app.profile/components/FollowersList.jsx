@@ -5,8 +5,8 @@ export default class FollowersList extends Component {
 	render() {
 		return (
 			<div className="UserListGroup">
-		 		<div className="UserListGroup-heading"> 
-		 			<h1> Followers </h1>  
+		 		<div className="UserListGroup-heading">
+		 			<h1> Followers </h1>
 		 		</div>
 
 		 		<div className="UserListGroup-body">
@@ -56,15 +56,11 @@ export default class FollowersList extends Component {
 		 		</div>
 
 		 		<div className="UserListGroup-footer">
-		 			<button onClick={this.onCloseModal} className="Btn Btn--info Btn--block">
-		 				Done 
+		 			<button onClick={this.props.onClose} className="Btn Btn--info Btn--block">
+		 				Done
 		 			</button>
 		 		</div>
 		 	</div>
 		);
-	}
-
-	onCloseModal = () => {
-		this.props.closeModal();
 	}
 }
