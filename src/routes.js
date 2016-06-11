@@ -4,6 +4,8 @@ import MainView from './views/main';
 import AppView from './views/app';
 import AppHomeView from './views/app.home';
 import AppSearchView from './views/app.search';
+import AppSearchPostsView from './views/app.search.posts';
+import AppSearchUsersView from './views/app.search.users';
 import AppProfileView from './views/app.profile';
 import AppProductView from './views/app.product';
 import AppManagePostsView from './views/app.manage-posts';
@@ -22,7 +24,12 @@ export default (
   <Route path="/" component={MainView}>
     <Route component={AppView}>
       <IndexRoute component={AppHomeView} />
-      <Route path="search" component={AppSearchView} />
+
+      <Route path="search" component={AppSearchView}>
+        <IndexRoute component={AppSearchPostsView} />
+        <Route path="users" component={AppSearchUsersView} />
+      </Route>
+
       <Route path="@:user" component={AppProfileView} />
       <Route path="/products/:slug" component={AppProductView} />
 
