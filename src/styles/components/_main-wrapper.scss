@@ -1,13 +1,13 @@
 .MainWrapper {
   .MainWrapper-body {
-    background: $color-gray;
+    background: $color-grayLight;
   }
 
   .MainWrapper-content {
     padding-top: 25px;
     padding-bottom: 25px;
     min-height: 640px;
-    border-bottom: 1px solid $color-grayDarker;
+    border-bottom: 1px solid $color-gray;
     z-index: $zIndex-mainComponents;
   }
 
