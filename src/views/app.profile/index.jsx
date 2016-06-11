@@ -7,6 +7,7 @@ import {getData} from 'app/modules/auth';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
+import ShelfSlate from 'app/components/ShelfSlate';
 import FollowersList from './components/FollowersList';
 import FollowingList from './components/FollowingList';
 
@@ -14,7 +15,6 @@ class AppProfileView extends Component {
   render() {
     const {auth} = this.props;
 
-    console.log(auth);
     return (
       <div>
         <Helmet title="John Doe" />
@@ -99,6 +99,14 @@ class AppProfileView extends Component {
                     <ProductCard />
                   </div>
                 )}
+
+                <div className="Grid-cell u-size6 u-spacer-base">
+                  <ShelfSlate /> 
+                </div>
+
+                <div className="Grid-cell u-size6 u-spacer-base">
+                  <ProductCard /> 
+                </div>
               </div>
             </div>
           </div>
@@ -124,6 +132,8 @@ const mapStateToProps = state => ({
   auth: state.auth.user
 });
 
-const mapActionsToProps = dispatch => ({ actions: bindActionCreators({ getData }, dispatch) });
+const mapActionsToProps = dispatch => ({ 
+  actions: bindActionCreators({ getData }, dispatch) 
+});
 
 export default connect(mapStateToProps, mapActionsToProps)(AppProfileView);

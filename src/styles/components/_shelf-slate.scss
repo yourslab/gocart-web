@@ -1,0 +1,19 @@
+.ShelfSlate {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 555px;
+
+	background: $color-white;
+	border: 2px solid $color-blue;
+	border-radius: 5px;
+	box-shadow: $backdrop-base;
+	overflow: hidden;
+	text-decoration: none;
+
+	.ShelfSlate-heading {
+		font-weight: normal;
+		color: $color-blue;
+	}
+}
