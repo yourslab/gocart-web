@@ -16,7 +16,11 @@ export default class FollowersList extends Component {
 		 			<h1> Followers </h1>
 		 		</div>
 
-	 			<Infinite callback={this.handleRequest} className="UserListGroup-body" container>
+	 			<Infinite 
+	 				callback={this.handleRequest} 
+	 				className="UserListGroup-body" 
+	 				offset={0}
+	 				container>
 	 				{this.state.followers.map((follower, i) =>
 	 					<div className="UserListGroup-item" key={i}>
 			 				<img className="UserListGroup-image" src="https://placeimg.com/50/50/people" />
@@ -30,7 +34,7 @@ export default class FollowersList extends Component {
 				 		</div>
 	 				)}
 	 			</Infinite>
-	 			{this.state.loading ? <div className="Spinner u-spacer-small" /> : null }
+	 			{this.state.loading ? <div className="Spinner" /> : null }
 
 		 		<div className="UserListGroup-footer">
 		 			<button onClick={this.props.onClose} className="Btn Btn--info Btn--block">
