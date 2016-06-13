@@ -22,10 +22,9 @@ export default class Infinite extends Component {
   // If the container is window, this is set to window.
   // Otherwise, set to the container element.
   get scroller() {
-    // return this.props.container
-    //   ? this.refs.
-    //   : window;
-    return window;
+    return this.props.container
+      ? this.refs.container
+      : window;
   }
 
   // The container.
@@ -44,7 +43,8 @@ export default class Infinite extends Component {
   }
 
   render() {
-    return <div ref="container">{this.props.children}</div>;
+    const {children, ...props} = this.props;
+    return <div ref="container" {...props}>{children}</div>;
   }
 
   handle = () => {
@@ -56,7 +56,7 @@ export default class Infinite extends Component {
     }
 
     const totalScroll = scrollTop(scroller);
-    const containerBottom = container.scrollHeight;
+    const containerBottom = this.props.container ? this.refs.container.scrollHeight : container.scrollHeight;
     const scrollerHeight = height(scroller);
 
     if ( totalScroll + offset >= containerBottom - scrollerHeight ) {
