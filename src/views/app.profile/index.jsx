@@ -9,7 +9,6 @@ import toPairs from 'lodash/toPairs';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
-import ShelfSlate from 'app/components/ShelfSlate';
 import FollowersList from './components/FollowersList';
 import FollowingList from './components/FollowingList';
 
@@ -160,4 +159,4 @@ const mapState = state => ({
   auth: state.auth.user
 });
 
-export default connect(mapState, null)(AppProfileView);
+export default connect(mapState)(AppProfileView);
