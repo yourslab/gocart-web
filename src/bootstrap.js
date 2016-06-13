@@ -12,7 +12,8 @@ if ( process.env.NODE_ENV !== 'production' ) {
   let app = global.app = {
     config: require('./config').default,
     axios: require('axios'),
-    cookie: require('cookie-machine')
+    cookie: require('cookie-machine'),
+    history: require('./history').default
   };
 }
 
