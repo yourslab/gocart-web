@@ -31,7 +31,9 @@ export default class Infinite extends Component {
   // If the container is window, this is set to body.
   // Otherwise, set to the container element.
   get container() {
-    return document.querySelector('html, body');
+    return this.props.container 
+      ? this.refs.container 
+      : document.querySelector('html, body');
   }
 
   componentDidMount() {
@@ -56,7 +58,7 @@ export default class Infinite extends Component {
     }
 
     const totalScroll = scrollTop(scroller);
-    const containerBottom = this.props.container ? this.refs.container.scrollHeight : container.scrollHeight;
+    const containerBottom = container.scrollHeight;
     const scrollerHeight = height(scroller);
 
     if ( totalScroll + offset >= containerBottom - scrollerHeight ) {

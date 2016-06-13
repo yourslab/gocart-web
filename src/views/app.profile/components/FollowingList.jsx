@@ -21,7 +21,7 @@ export default class FollowingList extends Component {
 	 				className="UserListGroup-body" 
 	 				offset={0}
 	 				container>
-	 				{this.state.following.map((followed, i) =>
+	 				{this.state.following.map((user, i) =>
 	 					<div className="UserListGroup-item" key={i}>
 			 				<img className="UserListGroup-image" src="https://placeimg.com/50/50/people" />
 			 				<div className="UserListGroup-details">
