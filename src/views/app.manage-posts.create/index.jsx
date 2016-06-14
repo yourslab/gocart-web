@@ -80,16 +80,6 @@ export default class AppManagePostsCreateView extends Component {
           </div>
 
           <div className="Grid-cell u-size6">
-            <div className="Tab Tab--info u-spacer-base">
-              <a href="#" className="Tab-item">
-                Single Image
-              </a>
-
-              <a href="#" className="Tab-item Tab-item--active">
-                Multiple Images
-              </a>
-            </div>
-
             <div className="UploadWell">
               <div className="UploadWell-item">
                 <div className="UploadWell-itemOverlay">
