@@ -18,8 +18,7 @@ export default class FollowingList extends Component {
 
 		 		<Infinite 
 	 				callback={this.handleRequest} 
-	 				className="UserListGroup-body" 
-	 				offset={0}
+	 				className="UserListGroup-body"
 	 				container>
 	 				{this.state.following.map((user, i) =>
 	 					<div className="UserListGroup-item" key={i}>
