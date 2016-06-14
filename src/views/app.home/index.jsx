@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
 import axios from 'axios';
-import map from 'lodash/map';
-import groupBy from 'lodash/groupBy';
-import toPairs from 'lodash/toPairs';
+import qs from 'qs';
 import Helmet from 'react-helmet';
 import {Gateway} from 'react-gateway';
+import {connect} from 'react-redux';
 import Infinite from 'app/components/Infinite';
 import ProductCard from 'app/components/ProductCard';
 import Filters from './components/Filters';
@@ -12,50 +11,62 @@ import Filters from './components/Filters';
 class AppHomeView extends React.Component {
   state = {
     feed: [{}, {}, {}, {}],
+    offset: 0,
+    filters: {
+      longtitude: 0,
+      latitude: 0,
+      type: 0,
+      distance: 0,
+      rating: 0
+    },
+
     loading: false,
     error: false
   };
 
   render() {
-    const feed = map(
-      groupBy(toPairs(this.state.feed), ([i]) => i % 2 === 0 ? i : i - 1),
-      (set) => [set[0][1], set[1][1]]
-    );
+    const {feed, loading, filters} = this.state;
 
     return (
       <div className="Container">
         <Helmet title="Home" />
-
-        <div className="u-spacer-large">
-          <Infinite callback={this.handleRequest}>
-            {feed.map((set, i) =>
-              <div className="Grid" key={i}>
-                {set.map((product, j) =>
-                  <div className="Grid-cell u-size6 u-spacer-large" key={j}>
-                    <ProductCard />
-                  </div>
-                )}
-              </div>
-            )}
-          </Infinite>
-        </div>
-
-        {this.state.loading ? <div className="Spinner u-spacer-large" /> : null }
 
         <Gateway into="header-separator">
           <div className="MainHeader-separator" />
         </Gateway>
 
         <Gateway into="header-filters">
-          <button className="MainHeader-button" onClick={() => this.refs.filters.open()}>More Filters</button>
+          <button className="MainHeader-button" onClick={() => this.refs.filters.open()}>
+            More Filters
+          </button>
         </Gateway>
 
-        <Filters ref="filters" />
+        <div className="u-spacer-large">
+          <Infinite callback={this.handleRequest}>
+            <div className="Grid">
+              {feed.map((product, i) =>
+                <div className="Grid-cell u-size6 u-spacer-large" key={i}>
+                  <ProductCard product={product} />
+                </div>
+              )}
+            </div>
+          </Infinite>
+        </div>
+
+        <Filters ref="filters"
+          filters={filters}
+          onFilter={this.handleFilter} />
       </div>
     );
   }
 
-  handleRequest = () => {
+  handleFilter = (filters) => {
+    this.setState({ filters }, () => {
+      this.handleRequest(0, filters)
+    });
+  }
+
+  handleRequest = (offset = this.state.offset) => {
     if ( this.state.loading ) {
       return;
     }
@@ -65,31 +76,33 @@ class AppHomeView extends React.Component {
       error: false
     });
 
-    setTimeout(() => {
-      this.setState((state) => ({
-        feed: [...state.feed, {}, {}],
-        loading: false
-      }));
-    }, 1500);
+    const {state, props} = this;
 
-    // return axios.get('/user/2/feed/posts/1/2')
-    //   .then((res) => {
-    //     this.setState({
-    //       feed: res.data,
-    //       loading: false
-    //     });
+    const query = qs.stringify({
+      ...state.filters,
+      start: offset,
+      end: offset + 20,
+    });
 
-    //     return res;
-    //   })
-    //   .catch((res) => {
-    //     this.setState({
-    //       loading: false,
-    //       error: true
-    //     });
+    return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)
+      .then((res) => {
+        this.setState({
+          feed: res.data,
+          loading: false,
+          offset: offset + 21
+        });
 
-    //     return Promise.reject(res);
-    //   });
+        return res;
+      })
+      .catch((res) => {
+        this.setState({
+          loading: false,
+          error: true
+        });
+
+        return Promise.reject(res);
+      });
   }
 }
 
-export default AppHomeView;
+export default connect((state) => ({ auth: state.auth.user }))(AppHomeView);
