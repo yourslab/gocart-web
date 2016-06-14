@@ -156,17 +156,23 @@ class AppView extends Component {
                   </div>
 
                   <div className="MainHeader-section">
-                    <form onSubmit={this.handleSearch}>
-                      <div className="FormInputGroup FormInputGroup--backdrop">
-                        <input onChange={this.handleInput} value={this.state.search} type="search" className="FormInputGroup-input" placeholder="Search" />
+                    <div className="MainHeader-sectionItem">
+                      <Link to="/manage-posts/create" className="Btn Btn--primary">Create Post</Link>
+                    </div>
 
-                        <div className="FormInputGroup-button">
-                          <button className="PlainBtn">
-                            <StaticImg src="icons/search_icon_red@1x.png" alt="Search" />
-                          </button>
+                    <div className="MainHeader-sectionItem">
+                      <form onSubmit={this.handleSearch}>
+                        <div className="FormInputGroup FormInputGroup--backdrop">
+                          <input onChange={this.handleInput} value={this.state.search} type="search" className="FormInputGroup-input" placeholder="Search" />
+
+                          <div className="FormInputGroup-button">
+                            <button className="PlainBtn">
+                              <StaticImg src="icons/search_icon_red@1x.png" alt="Search" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </form>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
