@@ -49,7 +49,7 @@ class LoginView extends Component {
 
             <div className="PortalWrapper-content">
               <form onSubmit={this.handle} formNoValidate>
-                {authentication.message ? <div className="Alert Alert--danger">{authentication.message}</div> : null}
+                {authentication.message ? <div className="Alert Alert--danger u-spacer-base">{authentication.message}</div> : null}
 
                 <div className="FormGroup FormGroup--narrow">
                   <input type="text" className="FormInput FormInput--large" placeholder="Email Address" valueLink={linkState(this, 'username')} />
