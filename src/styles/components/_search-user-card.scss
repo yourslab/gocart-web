@@ -1,0 +1,31 @@
+.SearchUserCard {
+  @include linkNoUnderscore;
+  display: flex;
+  padding: 15px;
+  height: 80px;
+  background: $color-white;
+  border-radius: $borderRadius-base;
+  box-shadow: $backdrop-small;
+  transition: 0.15s box-shadow;
+
+  &:hover {
+    box-shadow: $backdrop-large;
+  }
+
+  .SearchUserCard-avatar {
+    margin-right: 15px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+
+  .SearchUserCard-title {
+    margin-bottom: 5px;
+    color: $color-red;
+  }
+
+  .SearchUserCard-sub {
+    margin-bottom: 0;
+    color: $color-black;
+  }
+}

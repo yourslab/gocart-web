@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router';
 import Infinite from 'app/components/Infinite';
 import StaticImg from 'app/components/StaticImg';
-import ProductCard from './components/ProductCard';
+import UserCard from './components/UserCard';
 
 export default class AppSearchUsersView extends Component {
   state = {
@@ -18,7 +18,7 @@ export default class AppSearchUsersView extends Component {
     return (
       <Infinite callback={this.request}>
         <div className="Grid">
-          {feed.map((_, i) => <ProductCard key={i} />)}
+          {feed.map((_, i) => <UserCard key={i} />)}
         </div>
       </Infinite>
     );
