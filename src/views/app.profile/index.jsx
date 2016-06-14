@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
-import map from 'lodash/map';
-import groupBy from 'lodash/groupBy';
-import toPairs from 'lodash/toPairs';
+import {resolve} from 'react-resolver';
+import axios from 'axios';
+import flowRight from 'lodash/flowRight';
 import Infinite from 'app/components/Infinite';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
@@ -20,11 +20,11 @@ class AppProfileView extends Component {
   };
 
   render() {
-    const {auth} = this.props;
+    const {auth, user} = this.props;
 
     return (
       <div>
-        <Helmet title="John Doe" />
+        <Helmet title={user.name} />
 
         <div className="Container">
           <div className="ProfilePanel">
@@ -37,16 +37,19 @@ class AppProfileView extends Component {
                     <img src="https://placeimg.com/150/150/any" className="ProfilePanel-avatar" alt="Avatar" />
 
                     <div>
-                      <h1 className="ProfilePanel-name">Berkie Senders</h1>
-                      <h5 className="ProfilePanel-bio">Marine Biologist</h5>
+                      <h1 className="ProfilePanel-name">{user.name}</h1>
+                      <h5 className="ProfilePanel-bio">{user.about}</h5>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <Link to="/me" className="Btn Btn--clean">
-                    Edit Profile
-                  </Link>
+                  {user.id === auth.id 
+                    ? <Link to="/me" className="Btn Btn--clean">
+                      Edit Profile
+                      </Link>
+                    : null 
+                  }
                 </div>
               </div>
             </div>
@@ -55,15 +58,26 @@ class AppProfileView extends Component {
               <div className="ProfilePanel-canopy">
                 <div className="ProfilePanel-canopySection">
                   <div className="ProfilePanel-canopySectionItem">
-                    <button onClick={() => this.refs.followers.open()} className="Btn Btn--primary Btn--inverted Btn--borderless">28 Followers</button>
+                    <button 
+                      onClick={() => this.refs.followers.open()} 
+                      className="Btn Btn--primary Btn--inverted Btn--borderless">
+                      {user.num_followers} Followers
+                    </button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button onClick={() => this.refs.following.open()} className="Btn Btn--primary Btn--inverted Btn--borderless">45 Following</button>
+                    <button 
+                      onClick={() => this.refs.following.open()} 
+                      className="Btn Btn--primary Btn--inverted Btn--borderless">
+                      {user.num_following} Following
+                    </button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button className="Btn Btn--primary Btn--inverted Btn--borderless">5 Reviews</button>
+                    <button 
+                      className="Btn Btn--primary Btn--inverted Btn--borderless">
+                      {user.num_reviews} Reviews
+                    </button>
                   </div>
                 </div>
 
@@ -153,4 +167,11 @@ const mapState = state => ({
   auth: state.auth.user
 });
 
-export default connect(mapState)(AppProfileView);
+export default flowRight(
+  resolve('user', (props) => { 
+    return axios
+      .get(`user/@${props.routeParams.user}`)
+      .then((res) => res.data);
+  }),
+  connect(mapState)
+)(AppProfileView);
