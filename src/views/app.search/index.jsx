@@ -16,6 +16,12 @@ export default class AppSearchView extends Component {
         {/*<div className="OverlaySearchbarBackdrop" />*/}
 
         <div className="OverlaySearchbar">
+          <div className="OverlaySearchbar-actions">
+            <Link to="/" className="PlainBtn">
+              <StaticImg src="icons/close_black@1x.png" alt="Close" />
+            </Link>
+          </div>
+
           <div className="Container">
             <form onSubmit={this.handleSearch}>
               <div className="OverlaySearchbar-inner">
