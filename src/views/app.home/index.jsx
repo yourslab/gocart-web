@@ -53,6 +53,8 @@ class AppHomeView extends React.Component {
           </Infinite>
         </div>
 
+        {loading ? <div className="Spinner u-spacer-base" /> : null}
+
         <Filters ref="filters"
           filters={filters}
           onFilter={this.handleFilter} />
