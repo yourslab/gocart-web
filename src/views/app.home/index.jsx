@@ -83,7 +83,7 @@ class AppHomeView extends React.Component {
     const query = qs.stringify({
       ...state.filters,
       start: offset,
-      end: offset + 20,
+      end: offset + 19,
     });
 
     return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)
@@ -91,7 +91,7 @@ class AppHomeView extends React.Component {
         this.setState({
           feed: res.data,
           loading: false,
-          offset: offset + 21
+          offset: offset + 20
         });
 
         return res;
