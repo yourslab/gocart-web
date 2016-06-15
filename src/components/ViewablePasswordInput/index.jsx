@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StaticImg from 'app/components/StaticImg';
 
 export default class ViewablePasswordInput extends Component {
   state = {
@@ -15,7 +16,7 @@ export default class ViewablePasswordInput extends Component {
 
         <div className="FormInputGroup-addon">
           <button className="PlainBtn" type="button" onClick={this.handle}>
-            {show ? 'Hide' : 'Show'}
+            <StaticImg src={`icons/privacy-${show ? 'hide' : 'show'}.svg`} alt="Toggle" />
           </button>
         </div>
       </div>
