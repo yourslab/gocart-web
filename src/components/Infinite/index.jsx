@@ -18,6 +18,9 @@ export default class Infinite extends Component {
     container: false
   };
 
+  // Last scroll, to check if we scrolled up or down
+  last = 0;
+
   // The scrolling container.
   // If the container is window, this is set to window.
   // Otherwise, set to the container element.
@@ -51,13 +54,15 @@ export default class Infinite extends Component {
     const {container, scroller} = this;
     const {disabled, offset, callback} = this.props;
 
-    if ( this.props.disabled ) {
-      return;
-    }
-
     const totalScroll = scrollTop(scroller);
     const containerBottom = container.scrollHeight;
     const scrollerHeight = height(scroller);
+
+    if ( this.props.disabled || this.last > totalScroll ) {
+      return;
+    }
+
+    this.last = totalScroll;
 
     if ( totalScroll + offset >= containerBottom - scrollerHeight ) {
       callback();
