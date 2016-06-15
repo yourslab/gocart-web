@@ -4,7 +4,8 @@ import Switchbox from 'app/components/Switchbox';
 import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
 import InputLocation from 'app/components/InputLocation';
-import {AdTypeahead, TagTypeahead} from 'app/components/Typeahead';
+import {TagTypeahead} from 'app/components/Typeahead';
+import AdTypeSelect from 'app/components/AdTypeSelect';
 import PostPreview from 'app/components/PostPreview';
 import UploadWell from './UploadWell';
 
@@ -15,7 +16,7 @@ export default class CreatePostForm extends Component {
     price: '',
     price_enabled: true,
     category: '',
-    ad_type: '',
+    ad_type: 1,
     mobile: '',
     location: '',
     photos: []
@@ -90,7 +91,7 @@ export default class CreatePostForm extends Component {
 
               <div className="FormGroup">
                 <label htmlFor="ad_type">Type of ad</label>
-                <InputError type="text" id="ad_type" className="FormInput" valueLink={linkState(this, 'ad_type')} error={state.errors.ad_type} />
+                <AdTypeSelect id="ad_type" className="FormInput" value={this.state.ad_type} onChange={this.handleAd} />
               </div>
 
               <div className="FormGroup">
@@ -129,6 +130,10 @@ export default class CreatePostForm extends Component {
 
   handlePreview = () => {
     this.refs.preview.open();
+  }
+
+  handleAd = (type) => {
+    this.setState({ ad_type: type });
   }
 
   handleLocation = (location) => {
