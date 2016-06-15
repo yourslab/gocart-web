@@ -10,7 +10,7 @@ export default class AppProductView extends Component {
 
         <div className="ProductCardFull">
           <div className="ProductCardFull-thumbnail">
-            <img src="ProductCardFull-thumbnailImage" alt="Thumbnail" />
+            <img className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
 
             <div className="ProductCardFull-thumbnailOverlay">
               <div className="ProductCardFull-thumbnailOverlaySection">
@@ -28,7 +28,7 @@ export default class AppProductView extends Component {
             <div className="ProductCardFull-panelCanopy">
               <div className="ProductCardFull-panelCanopySection">
                 <div className="ProductCardFull-panelCanopySectionItem">
-                  <img src="https://placeimg.com/120/100/any" className="SearchProductCard-avatar" alt="Thumbnail" />
+                  <img src="https://placeimg.com/120/100/any" className="ProductCardFull-avatar" alt="Thumbnail" />
                 </div>
 
                 <div className="ProductCardFull-panelCanopySectionItem">

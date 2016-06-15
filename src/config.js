@@ -29,4 +29,8 @@ export default {
   auth: {
     key: process.env.AUTH_KEY || 'FkrSi'
   },
+
+  facebook: {
+    appId: '548682991936531'
+  }
 };

@@ -5,7 +5,8 @@ import linkState from 'react-link-state';
 import flowRight from 'lodash/flowRight';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {login} from 'app/modules/auth';
+import {login, loginWithFacebook} from 'app/modules/auth';
+import facebook from 'app/utils/facebook';
 import guest from 'app/components/Permission/guest';
 import StaticImg from 'app/components/StaticImg';
 import ButtonLoader from 'app/components/ButtonLoader';
@@ -16,8 +17,14 @@ class LoginView extends Component {
     password: ''
   };
 
+  componentDidMount() {
+    // @REFACTOR: Make a high-level abstraction for the
+    // FB Login (Make a wrapper component).
+    facebook.init();
+  }
+
   render() {
-    const {state} = this.props;
+    const {authentication, facebook} = this.props;
 
     return (
       <div className="PortalWrapper">
@@ -42,7 +49,7 @@ class LoginView extends Component {
 
             <div className="PortalWrapper-content">
               <form onSubmit={this.handle} formNoValidate>
-                {state.message ? <div className="Alert Alert--danger">{state.message}</div> : null}
+                {authentication.message ? <div className="Alert Alert--danger u-spacer-base">{authentication.message}</div> : null}
 
                 <div className="FormGroup FormGroup--narrow">
                   <input type="text" className="FormInput FormInput--large" placeholder="Email Address" valueLink={linkState(this, 'username')} />
@@ -53,7 +60,7 @@ class LoginView extends Component {
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <ButtonLoader className="Btn Btn--success Btn--large Btn--block" loading={state.loading}>
+                  <ButtonLoader className="Btn Btn--success Btn--large Btn--block" loading={authentication.loading}>
                     Login
                   </ButtonLoader>
                 </div>
@@ -63,9 +70,9 @@ class LoginView extends Component {
                 </p>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <button className="Btn Btn--facebook Btn--large Btn--block">
+                  <ButtonLoader className="Btn Btn--facebook Btn--large Btn--block" type="button" onClick={this.props.actions.loginWithFacebook} loading={facebook.loading}>
                     Sign In using Facebook
-                  </button>
+                  </ButtonLoader>
                 </div>
               </form>
             </div>
@@ -105,11 +112,23 @@ class LoginView extends Component {
 
   handle = (evt) => {
     evt.preventDefault();
-    this.props.dispatch(login(this.state));
+    this.props.actions.login(this.state);
   }
 }
 
+const mapState = ({auth}) => ({
+  authentication: auth.authentication,
+  facebook: auth.facebook
+});
+
+const mapActions = (dispatch) => ({
+  actions: bindActionCreators({
+    login,
+    loginWithFacebook
+  }, dispatch)
+});
+
 export default flowRight(
   guest,
-  connect(({auth}) => ({ state: auth.authentication }))
+  connect(mapState, mapActions)
 )(LoginView);

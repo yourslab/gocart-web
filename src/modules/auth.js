@@ -3,6 +3,7 @@ import cookie from 'app/cookie';
 import history from 'app/history'
 import lang from 'app/lang';
 import config from 'app/config';
+import facebook from 'app/utils/facebook';
 import isServerError from 'app/utils/isServerError';
 
 const LOGOUT = 'authentication:logout';
@@ -10,12 +11,20 @@ const AUTHENTICATE = 'authentication:start';
 const AUTHENTICATE_SUCCESS = 'authentication:success';
 const AUTHENTICATE_ERROR = 'authentication:error';
 const AUTH_GET_DATA = 'user:get';
+const FACEBOOK_AUTHENTICATE = 'authentication:facebook';
+const FACEBOOK_AUTHENTICATE_SUCCESS = 'authentication:facebook-success';
+const FACEBOOK_AUTHENTICATE_ERROR = 'authentication:facebook-error';
 
 const initialState = {
   user: {},
   token: null,
 
   authentication: {
+    loading: false,
+    message: '',
+  },
+
+  facebook: {
     loading: false,
     message: '',
   }
@@ -53,6 +62,36 @@ export default function authReducer(state = initialState, action) {
         }
       };
 
+    case FACEBOOK_AUTHENTICATE:
+      return {
+        ...state,
+        facebook: {
+          loading: true,
+          message: ''
+        }
+      };
+
+    case FACEBOOK_AUTHENTICATE_SUCCESS:
+      return {
+        ...state,
+        facebook: {
+          ...state.authentication,
+          loading: false
+        },
+
+        user: action.payload.user,
+        token: action.payload.token
+      };
+
+    case FACEBOOK_AUTHENTICATE_ERROR:
+      return {
+        ...state,
+        facebook: {
+          loading: false,
+          message: action.payload
+        }
+      };
+
     case LOGOUT:
       return {
         ...state,
@@ -72,7 +111,7 @@ export default function authReducer(state = initialState, action) {
   }
 }
 
-export function login(data, redirect = '/') {
+export function login({username, password}, redirect = '/') {
   return (dispatch, getState) => {
     const {auth} = getState();
 
@@ -84,12 +123,7 @@ export function login(data, redirect = '/') {
 
     let token; // Cache the token from the response
 
-    return axios.get('user/email_token', {
-        headers: {
-          identity: data.username,
-          password: data.password
-        }
-      })
+    return axios.get(`user/email_token?identity=${username}&password=${password}`)
       .then((res) => {
         token = res.data.auth_token;
 
@@ -132,6 +166,56 @@ export function login(data, redirect = '/') {
           payload: isServerError(res.status)
             ? lang.errors.server
             : lang.errors.authentication
+        });
+
+        return Promise.reject(res);
+      });
+  }
+}
+
+export function loginWithFacebook() {
+  return (dispatch, getState) => {
+    if ( getState().auth.facebook.loading ) {
+      return;
+    }
+
+    dispatch({ type: FACEBOOK_AUTHENTICATE });
+
+    return facebook.login()
+      .then(facebook.fetch)
+      .then((res) => axios.post('user', {
+        username: res.id,
+        fb_token: facebook.token(),
+        user_type: 0
+      }))
+      // @TODO: Handle the case where a user with the
+      // email/username is already registered (but not
+      // with facebook login)
+      .catch(
+        (res) => axios.get(`user/fb_token/${facebook.token()}`),
+        (res) => axios.get(`user/fb_token/${facebook.token()}`)
+      )
+      .then((res) => {
+        dispatch({
+          type: FACEBOOK_AUTHENTICATE_SUCCESS,
+          payload: res
+        });
+
+        cookie.set(
+          config.auth.key,
+          JSON.stringify({
+            token: res.data.auth_token,
+            id: res.data.id
+          })
+        );
+
+        return res;
+      })
+      .catch((res) => {
+        dispatch({
+          type: FACEBOOK_AUTHENTICATE_ERROR,
+          // @TODO: Add error message
+          payload: ''
         });
 
         return Promise.reject(res);

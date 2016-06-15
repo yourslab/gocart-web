@@ -13,7 +13,8 @@ if ( process.env.NODE_ENV !== 'production' ) {
     config: require('./config').default,
     axios: require('axios'),
     cookie: require('cookie-machine'),
-    history: require('./history').default
+    history: require('./history').default,
+    store: require('app/store').default
   };
 }
 

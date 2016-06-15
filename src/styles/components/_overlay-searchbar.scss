@@ -7,6 +7,15 @@
   box-shadow: $backdrop-base;
   z-index: $zIndex-modal;
 
+  .OverlaySearchbar-actions {
+    position: absolute;
+    top: 0;
+    right: 30px;
+    display: flex;
+    height: ($mainHeader-height + $mainHeader-borderSize);
+    align-items: center;
+  }
+
   .OverlaySearchbar-inner {
     display: flex;
     align-items: center;
