@@ -6,6 +6,7 @@ import {Gateway} from 'react-gateway';
 import {connect} from 'react-redux';
 import Infinite from 'app/components/Infinite';
 import ProductCard from 'app/components/ProductCard';
+import StaticImg from 'app/components/StaticImg';
 import Filters from './components/Filters';
 
 class AppHomeView extends React.Component {
@@ -38,6 +39,7 @@ class AppHomeView extends React.Component {
         <Gateway into="header-filters">
           <button className="MainHeader-button" onClick={() => this.refs.filters.open()}>
             More Filters
+            <StaticImg className="MainHeader-buttonIcon" src="icons/caret_dropdown_red.svg" alt="Filter Icon" />
           </button>
         </Gateway>
 

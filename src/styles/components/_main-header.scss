@@ -51,11 +51,17 @@
 
   .MainHeader-button {
     color: $color-orange;
+    padding-top: 0;
     padding-left: 0;
     padding-right: 0;
     background: transparent;
     border: transparent;
     outline: 0;
+  }
+
+  .MainHeader-buttonIcon {
+    position: relative;
+    margin-left: 10px;
   }
 
   .MainHeader-separator {
