@@ -4,6 +4,7 @@ import range from 'lodash/range';
 import map from 'lodash/map';
 import reader from 'app/utils/filereader';
 import slice from 'lodash/slice';
+import StaticImg from 'app/components/StaticImg';
 
 export default class UploadWell extends Component {
   static propTypes = {
@@ -24,15 +25,11 @@ export default class UploadWell extends Component {
 
         {photos.map((photo, i) =>
           <div className="UploadWell-item" key={i}>
-            <img src={photo} />
+            <img src={photo} className="UploadWell-itemThumbnail" />
 
-            <div className="UploadWell-itemOverlay">
-              <div>
-                <button type="button" className="PlainBtn" onClick={this.handleRemove(i)}>
-                  -
-                </button>
-              </div>
-            </div>
+            <button type="button" className="UploadWell-itemRemove" onClick={this.handleRemove(i)}>
+              &times;
+            </button>
           </div>
         )}
 
@@ -41,7 +38,7 @@ export default class UploadWell extends Component {
             <div className="UploadWell-itemOverlay">
               <div>
                 <button type="button" className="PlainBtn" onClick={this.handleAdd}>
-                  +
+                  <StaticImg src="icons/uploadplus.svg" alt="+" />
                 </button>
               </div>
             </div>

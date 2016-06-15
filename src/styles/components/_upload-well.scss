@@ -16,11 +16,11 @@
     background: $color-white;
     border-radius: $borderRadius-base;
     box-shadow: $backdrop-small;
-    overflow: hidden;
   }
 
   .UploadWell-item:hover .UploadWell-itemOverlay {
     opacity: 1;
+    transform: translateY(0);
   }
 
   .UploadWell-itemThumbnail,
@@ -28,16 +28,43 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
+    width: 100px;
+    height: 100px;
+  }
+
+  .UploadWell-itemThumbnail {
+    overflow: hidden;
   }
 
   .UploadWell-itemOverlay {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255,255,255,0.5);
     transition: 0.2s all;
     opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  .UploadWell-itemRemove {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: 16px;
+    width: 16px;
+    line-height: 1;
+    font-size: $fontSize-base;
+    color: $color-white;
+    background: $color-black;
+    border: 1px solid $color-grayLighter;
+    border-radius: 50%;
+    transition: 0.15s background;
+  }
+
+  .UploadWell-itemRemove:hover {
+    background: lighten($color-black, 10%);
   }
 }
