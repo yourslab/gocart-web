@@ -175,12 +175,7 @@ export default flowRight(
   }),
   resolve('posts', (props) => {
     return axios
-      .get(`/user/${props.user.id}/posts?start=0&end=20`, {
-        headers: {
-          latitude: 14.599512,
-          longitude: 120.984219
-        }
-      })
+      .get(`/user/${props.user.id}/posts?start=0&end=20&latitude=14.599512&longitude=120.984219`)
       .then((res) => res.data);
   }),
   connect(mapState)

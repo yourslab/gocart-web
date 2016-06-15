@@ -1,11 +1,33 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
+import linkState from 'react-link-state';
+import InputError from 'app/components/InputError';
 
 export default class AppManagePostsCreateView extends Component {
+  state = {
+    loading: false,
+    messages: '', 
+    username: '',
+    email: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
+    website: '',
+    bio: '',
+    subdivision: '',
+    barangay: '',
+    city: '',
+    province: '',
+    state: '',
+    postal_code: '',
+    landmark: '',
+    default_address: false
+  };
+
   render() {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <Helmet title="Profile Settings" />
 
         <div className="SidebarContainer-panelHeading">
@@ -19,8 +41,8 @@ export default class AppManagePostsCreateView extends Component {
             </div>
 
             <div className="SidebarContainer-panelHeadingSectionItem">
-              <button className="Btn Btn--info">
-                Save
+              <button type="submit" className="Btn Btn--info">
+                {this.state.loading ? 'Loading...' : 'Save' }
               </button>
             </div>
           </div>
@@ -44,37 +66,72 @@ export default class AppManagePostsCreateView extends Component {
 
             <div className="FormGroup">
               <label htmlFor="username">Username</label>
-              <input type="text" className="FormInput" id="username" />
+              <InputError
+                error={this.state.messages}
+                className="FormInput"
+                type="text"
+                valueLink={linkState(this, 'username')}
+                id="username" />
             </div>
 
             <div className="FormGroup">
               <label htmlFor="email">Email Address</label>
-              <input type="email" className="FormInput" id="email" />
+              <InputError
+                error={this.state.messages}
+                className="FormInput"
+                type="email"
+                valueLink={linkState(this, 'email')}
+                id="email" />
             </div>
 
             <div className="FormGroup">
               <label htmlFor="first_name">First Name</label>
-              <input type="text" className="FormInput" id="first_name" />
+              <InputError
+                error={this.state.messages}
+                className="FormInput"
+                type="text"
+                valueLink={linkState(this, 'first_name')}
+                id="first_name" />
             </div>
 
             <div className="FormGroup">
               <label htmlFor="middle_name">Middle Name</label>
-              <input type="text" className="FormInput" id="middle_name" />
+              <InputError
+                error={this.state.messages}
+                className="FormInput"
+                type="text"
+                valueLink={linkState(this, 'middle_name')}
+                id="middle_name" />
             </div>
 
             <div className="FormGroup">
               <label htmlFor="last_name">Last Name</label>
-              <input type="text" className="FormInput" id="last_name" />
+              <InputError
+                error={this.state.messages}
+                className="FormInput"
+                type="text"
+                valueLink={linkState(this, 'last_name')}
+                id="last_name" />
             </div>
 
             <div className="FormGroup">
               <label htmlFor="website">Website</label>
-              <input type="text" className="FormInput" id="website" />
+              <InputError
+                error={this.state.messages}
+                className="FormInput"
+                type="text"
+                valueLink={linkState(this, 'website')}
+                id="website" />
             </div>
 
             <div className="FormGroup">
               <label htmlFor="bio">Bio</label>
-              <textarea type="text" className="FormInput" id="bio" />
+              <InputError
+                error={this.state.messages}
+                className="FormInput"
+                type="text"
+                valueLink={linkState(this, 'bio')}
+                id="bio" />
             </div>
           </div>
 
@@ -103,19 +160,43 @@ export default class AppManagePostsCreateView extends Component {
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-                    <input type="text" className="FormInput" placeholder="Unit No., Building / Subdivision" />
+                    <InputError
+                      error={this.state.messages}
+                      className="FormInput"
+                      type="text"
+                      valueLink={linkState(this, 'subdivision')}
+                      id="subdivision" 
+                      placeholder="Unit No., Building / Subdivision" />
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
                     <input type="text" className="FormInput" placeholder="Street Name, Barangay" />
+                    <InputError
+                      error={this.state.messages}
+                      className="FormInput"
+                      type="text"
+                      valueLink={linkState(this, 'barangay')}
+                      id="barangay" 
+                      placeholder="Street Name, Barangay" />
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-                    <input type="text" className="FormInput" placeholder="Town / City" />
+                    <InputError
+                      error={this.state.messages}
+                      className="FormInput"
+                      type="text"
+                      valueLink={linkState(this, 'city')}
+                      id="city" 
+                      placeholder="Town / City" />
                   </div>
 
-                  <div className="FormGroup FormGroup--narrow">
-                    <input type="text" className="FormInput" placeholder="Province" />
+                  <div className="FormGroup FormGroup--narrow"><InputError
+                      error={this.state.messages}
+                      className="FormInput"
+                      type="text"
+                      valueLink={linkState(this, 'province')}
+                      id="province" 
+                      placeholder="Province" />
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
@@ -128,23 +209,45 @@ export default class AppManagePostsCreateView extends Component {
                     <div className="Grid-cell u-size6">
                       <div className="FormGroup FormGroup--narrow">
                         <input type="text" className="FormInput" placeholder="State" />
+                        <InputError
+                          error={this.state.messages}
+                          className="FormInput"
+                          type="text"
+                          valueLink={linkState(this, 'state')}
+                          id="state" 
+                          placeholder="State" />
                       </div>
                     </div>
 
                     <div className="Grid-cell u-size6">
                       <div className="FormGroup FormGroup--narrow">
-                        <input type="text" className="FormInput" placeholder="Postal Code" />
+                        <InputError
+                          error={this.state.messages}
+                          className="FormInput"
+                          type="text"
+                          valueLink={linkState(this, 'subdivision')}
+                          id="subdivision" 
+                          placeholder="postal_code" />
                       </div>
                     </div>
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-                    <input type="text" className="FormInput" placeholder="Landmark(s)" />
+                    <InputError
+                      error={this.state.messages}
+                      className="FormInput"
+                      type="text"
+                      valueLink={linkState(this, 'landmark')}
+                      id="landmark" 
+                      placeholder="Landmarks(s)" />
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
                     <label>
-                      <input type="checkbox" />
+                      <InputError
+                        type="checkbox"
+                        checkedLink={linkState(this, 'default_address')}
+                        id="default_address" />
                       &nbsp; Make this default address
                     </label>
                   </div>
@@ -157,7 +260,28 @@ export default class AppManagePostsCreateView extends Component {
             </button>
           </div>
         </div>
-      </div>
+      </form>
     );
+  }
+
+  handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    if ( this.state.loading ) {
+      return;
+    }
+
+    this.setState({
+      loading: true,
+      error: false
+    });
+
+    setTimeout(() => {
+      this.setState({ loading: false })
+    }, 1500);
+
+    // axios.put('/user', this.state)
+    //   .then((res) => res.data)
+    //   .catch((res) => res.errors);
   }
 }
