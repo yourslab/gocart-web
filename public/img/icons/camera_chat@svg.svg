@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="24px" viewBox="0 0 26 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>camera_chat@svg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Full-message-page" transform="translate(-580.000000, -881.000000)">
+            <g id="Group-3" filter="url(#filter-1)" transform="translate(269.000000, 116.000000)">
+                <g id="Group-5">
+                    <g id="camera_chat" transform="translate(311.000000, 763.000000)">
+                        <g id="Icon-24px">
+                            <circle id="Oval" fill="#CB3433" cx="13" cy="13" r="3.46666667"></circle>
+                            <path d="M9.75,2.16666667 L7.7675,4.33333333 L4.33333333,4.33333333 C3.14166667,4.33333333 2.16666667,5.30833333 2.16666667,6.5 L2.16666667,19.5 C2.16666667,20.6916667 3.14166667,21.6666667 4.33333333,21.6666667 L21.6666667,21.6666667 C22.8583333,21.6666667 23.8333333,20.6916667 23.8333333,19.5 L23.8333333,6.5 C23.8333333,5.30833333 22.8583333,4.33333333 21.6666667,4.33333333 L18.2325,4.33333333 L16.25,2.16666667 L9.75,2.16666667 L9.75,2.16666667 Z M13,18.4166667 C10.01,18.4166667 7.58333333,15.99 7.58333333,13 C7.58333333,10.01 10.01,7.58333333 13,7.58333333 C15.99,7.58333333 18.4166667,10.01 18.4166667,13 C18.4166667,15.99 15.99,18.4166667 13,18.4166667 L13,18.4166667 Z" id="Shape" fill="#CB3433"></path>
+                            <polygon id="Shape" points="0 0 26 0 26 26 0 26"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
