@@ -111,7 +111,7 @@ export default function authReducer(state = initialState, action) {
   }
 }
 
-export function login(data, redirect = '/') {
+export function login({username, password}, redirect = '/') {
   return (dispatch, getState) => {
     const {auth} = getState();
 
@@ -123,12 +123,7 @@ export function login(data, redirect = '/') {
 
     let token; // Cache the token from the response
 
-    return axios.get('user/email_token', {
-        headers: {
-          identity: data.username,
-          password: data.password
-        }
-      })
+    return axios.get(`user/email_token?identity=${username}&password=${password}`)
       .then((res) => {
         token = res.data.auth_token;
 
