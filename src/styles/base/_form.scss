@@ -7,10 +7,15 @@
   border: 1px solid $color-gray;
   border-radius: $borderRadius-base;
   outline: 0;
-  transition: 0.1s border-color;
+  transition: 0.1s border-color background;
 
   &:focus {
     border-color: $color-blue;
+  }
+
+  &:disabled {
+    background: $color-grayLight;
+    cursor: not-allowed;
   }
 
   &.FormInput--large {

@@ -3,6 +3,12 @@ import ReactModal from 'react-modal';
 import cn from 'classnames';
 import StaticImg from 'app/components/StaticImg';
 
+// Remove RM's default styling
+ReactModal.defaultStyles = {
+  overlay: {},
+  content: {}
+};
+
 /**
  * @example Stateful modal
  * <Modal ref="modal" />
@@ -15,6 +21,9 @@ import StaticImg from 'app/components/StaticImg';
  * @example Stateless modal
  * <Modal open={this.state.open} onClose={this.handleClose} />
  * This is useful when we need to control the state of the modal
+ *
+ * @REFACTOR Instead of a stateless modal, we can
+ * put hooks (like onOpen, onClose)
  */
 export default class Modal extends Component {
   static propTypes = {

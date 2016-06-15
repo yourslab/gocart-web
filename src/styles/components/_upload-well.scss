@@ -5,6 +5,10 @@
   background: $color-grayLighter;
   border-radius: $borderRadius-base;
 
+  .UploadWell-input {
+    display: none;
+  }
+
   .UploadWell-item {
     position: relative;
     width: 100px;
