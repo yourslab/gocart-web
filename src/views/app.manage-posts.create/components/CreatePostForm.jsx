@@ -19,7 +19,8 @@ export default class CreatePostForm extends Component {
     ad_type: 1,
     mobile: '',
     location: '',
-    photos: []
+    photos: [],
+    tags: []
   };
 
   render() {
@@ -106,7 +107,14 @@ export default class CreatePostForm extends Component {
             </div>
 
             <div className="Grid-cell u-size6">
-              <UploadWell photos={this.state.photos} onChange={this.handleUpload} />
+              <div className="u-spacer-base">
+                <UploadWell photos={this.state.photos} onChange={this.handleUpload} />
+              </div>
+
+              <div className="FormGroup">
+                <label htmlFor="tags">Tags</label>
+                <TagTypeahead id="tags" value={this.state.tags} onChange={this.handleTags} />
+              </div>
             </div>
           </div>
         </form>
@@ -137,7 +145,10 @@ export default class CreatePostForm extends Component {
   }
 
   handleLocation = (location) => {
-    console.log(location);
     this.setState({ location });
+  }
+
+  handleTags = (tags) => {
+    this.setState({ tags });
   }
 }
