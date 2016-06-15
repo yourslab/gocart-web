@@ -131,7 +131,7 @@ export default class CreatePostForm extends Component {
     evt.preventDefault();
 
     const [latitude, longitude] = this.state.location.split(', ');
-    const tags = this.state.tags.join(',');
+    const tags = this.state.tags.split(',');
 
     this.props.onPost({
       ...this.state,
