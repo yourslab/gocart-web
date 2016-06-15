@@ -1,5 +1,10 @@
 .ReactModal__Body--open {
-  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.ReactModal__Body--open {
+  position: fixed;
+  width: 100%;
 }
 
 .ReactModal__Overlay {
@@ -21,7 +26,20 @@
     border-radius: $borderRadius-base;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, .14), 0px 4px 8px rgba(0, 0, 0, .28);
     z-index: $zIndex-modal;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: 0.3s all;
 	}
+
+  .ReactModal__Content--after-open {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .ReactModal__Content--before-close {
+    opacity: 0;
+    transform: scale(0.5);
+  }
 
   .ReactModal__Content--small {
     width: 35% !important;
