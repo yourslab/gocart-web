@@ -3,6 +3,8 @@ import linkState from 'react-link-state';
 import Switchbox from 'app/components/Switchbox';
 import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
+import InputLocation from 'app/components/InputLocation';
+import {AdTypeahead, TagTypeahead} from 'app/components/Typeahead';
 import PostPreview from 'app/components/PostPreview';
 import UploadWell from './UploadWell';
 
@@ -97,15 +99,8 @@ export default class CreatePostForm extends Component {
               </div>
 
               <div className="FormGroup">
-                <label htmlFor="ad_type">Location</label>
-                <div className="FormInputGroup">
-                  <input type="text" id="ad_type" className="FormInputGroup-input" />
-                  <div className="FormInputGroup-button">
-                    <button className="Btn Btn--info Btn--small">
-                      Set Current Location
-                    </button>
-                  </div>
-                </div>
+                <label htmlFor="location">Location</label>
+                <InputLocation id="location" value={this.state.location} onChange={this.handleLocation} />
               </div>
             </div>
 
@@ -134,5 +129,10 @@ export default class CreatePostForm extends Component {
 
   handlePreview = () => {
     this.refs.preview.open();
+  }
+
+  handleLocation = (location) => {
+    console.log(location);
+    this.setState({ location });
   }
 }

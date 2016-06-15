@@ -34,6 +34,7 @@
     "react-resolver": "^2.0.5",
     "react-router": "^2.4.0",
     "react-router-scroll": "^0.2.0",
+    "react-select": "^0.9.1",
     "react-skylight": "^0.4.0",
     "redux": "^3.0.4",
     "redux-thunk": "^1.0.0",
