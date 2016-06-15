@@ -20,7 +20,7 @@ export default class CreatePostForm extends Component {
     mobile: '',
     location: '',
     photos: [],
-    tags: []
+    tags: ''
   };
 
   render() {
@@ -129,7 +129,16 @@ export default class CreatePostForm extends Component {
 
   handle = (evt) => {
     evt.preventDefault();
-    this.props.onPost(this.state);
+
+    const [latitude, longitude] = this.state.location.split(', ');
+    const tags = this.state.tags.join(',');
+
+    this.props.onPost({
+      ...this.state,
+      latitude,
+      longitude,
+      tags,
+    });
   }
 
   handleUpload = (photos) => {
