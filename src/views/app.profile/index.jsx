@@ -14,13 +14,12 @@ import FollowingList from './components/FollowingList';
 
 class AppProfileView extends Component {
   state = {
-    feeds: [{}, {}, {}, {}],
     loading: false,
     error: false
   };
 
   render() {
-    const {auth, user} = this.props;
+    const {auth, user, posts} = this.props;
 
     return (
       <div>
@@ -116,9 +115,17 @@ class AppProfileView extends Component {
 
               <Infinite callback={this.handleRequest}>
                 <div className="Grid">
-                  {this.state.feeds.map((feed, i) =>
+                  {posts.map((post, i) =>
                     <div className="Grid-cell u-size6 u-spacer-base" key={i}>
-                      <ProductCard />
+                      {posts.length === i + 1 
+                        ? auth.id === user.id 
+                          ? <div className="BlankSlate">
+                              <StaticImg src="/icons/post_icon@1x.png" />
+                              <h1> Add Shelf </h1>
+                            </div>
+                          : null
+                        : <ProductCard />
+                      }
                     </div>
                   )}
                 </div>
@@ -156,7 +163,6 @@ class AppProfileView extends Component {
 
     setTimeout(() => {
       this.setState((state) => ({
-        feeds: [...state.feeds, {}, {}],
         loading: false
       }));
     }, 1500);
