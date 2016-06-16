@@ -21,7 +21,6 @@ export default class TagTypeahead extends Component {
 
     return <Select
       multi
-      allowCreate
       value={value}
       options={this.options}
       onChange={this.props.onChange}
