@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="88px" height="88px" viewBox="0 0 88 88" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>shopping_icon@svg</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="First-screen" transform="translate(-676.000000, -377.000000)" fill="#FFFFFF">
+            <g id="Overlay" filter="url(#filter-1)" transform="translate(470.000000, 275.000000)">
+                <g id="shopping_icon" transform="translate(225.000000, 119.000000)">
+                    <path d="M15,40 C12.25,40 10.025,42.25 10.025,45 C10.025,47.75 12.25,50 15,50 C17.75,50 20,47.75 20,45 C20,42.25 17.75,40 15,40 L15,40 Z M0,0 L0,5 L5,5 L14,23.975 L10.625,30.1 C10.225,30.8 10,31.625 10,32.5 C10,35.25 12.25,37.5 15,37.5 L45,37.5 L45,32.5 L16.05,32.5 C15.7,32.5 15.425,32.225 15.425,31.875 L15.5,31.575 L17.75,27.5 L36.375,27.5 C38.25,27.5 39.9,26.475 40.75,24.925 L49.7,8.7 C49.9,8.35 50,7.925 50,7.5 C50,6.125 48.875,5 47.5,5 L10.525,5 L8.175,0 L0,0 L0,0 Z M40,40 C37.25,40 35.025,42.25 35.025,45 C35.025,47.75 37.25,50 40,50 C42.75,50 45,47.75 45,45 C45,42.25 42.75,40 40,40 L40,40 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -7,10 +7,13 @@ import history from 'app/history';
 import isServerError from 'app/utils/isServerError';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
 import CreatePostForm from './components/CreatePostForm';
+import SuccessDialogue from './components/SuccessDialogue';
 
 class AppManagePostsCreateView extends Component {
   state = {
     loading: false,
+    success: false,
+    id: '',
     errors: {},
     message: ''
   };
@@ -23,8 +26,11 @@ class AppManagePostsCreateView extends Component {
         <CreatePostForm
           state={this.state}
           auth={this.props.auth}
-          onPreview={null}
           onPost={this.handlePost} />
+
+        <SuccessDialogue
+          id={this.state.id}
+          success={this.state.success} />
       </div>
     );
   }
@@ -42,13 +48,17 @@ class AppManagePostsCreateView extends Component {
 
     return axios.post('/post', data)
       .then((res) => {
-        this.setState({ loading: false });
-        history.push(`/post/${res.data.id}`)
+        this.setState({
+          loading: false,
+          success: true
+        });
+
         return res;
       })
       .catch((res) => {
         if ( isServerError(res.status) ) {
           this.setState({
+            id: res.data.id,
             loading: false,
             message: lang.errors.server
           })

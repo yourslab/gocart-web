@@ -7,6 +7,14 @@
     background: #ddd;
   }
 
+  .PortalWrapper-side--v1 {
+    background: url(#{$img-path}/bkgd_img1@1x.png);
+  }
+
+  .PortalWrapper-side--v2 {
+    background: url(#{$img-path}/bkgd_img2@1x.png);
+  }
+
   .PortalWrapper-body {
     display: flex;
     flex-direction: column;

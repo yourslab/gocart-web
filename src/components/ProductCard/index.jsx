@@ -1,5 +1,6 @@
 import React, {PropType} from 'react';
 import StaticImg from 'app/components/StaticImg';
+import RatingWidget from 'app/components/RatingWidget';
 
 const ProductCard = () =>
   <div className="ProductCard">
@@ -8,7 +9,8 @@ const ProductCard = () =>
         <img src="https://placeimg.com/48/48/people" className="ProductCard-avatar" />
 
         <div className="ProductCard-userPanelMeta">
-          <h4 className="Productcard-name">Mike Greene</h4>
+          <h4 className="ProductCard-name">Mike Greene</h4>
+          <RatingWidget />
         </div>
       </div>
 

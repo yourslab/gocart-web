@@ -3,6 +3,9 @@ import linkState from 'react-link-state';
 import Switchbox from 'app/components/Switchbox';
 import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
+import InputLocation from 'app/components/InputLocation';
+import {TagTypeahead} from 'app/components/Typeahead';
+import AdTypeSelect from 'app/components/AdTypeSelect';
 import PostPreview from 'app/components/PostPreview';
 import UploadWell from './UploadWell';
 
@@ -13,10 +16,11 @@ export default class CreatePostForm extends Component {
     price: '',
     price_enabled: true,
     category: '',
-    ad_type: '',
+    ad_type: 1,
     mobile: '',
     location: '',
-    photos: []
+    photos: [],
+    tags: ''
   };
 
   render() {
@@ -88,7 +92,7 @@ export default class CreatePostForm extends Component {
 
               <div className="FormGroup">
                 <label htmlFor="ad_type">Type of ad</label>
-                <InputError type="text" id="ad_type" className="FormInput" valueLink={linkState(this, 'ad_type')} error={state.errors.ad_type} />
+                <AdTypeSelect id="ad_type" className="FormInput" value={this.state.ad_type} onChange={this.handleAd} />
               </div>
 
               <div className="FormGroup">
@@ -97,20 +101,20 @@ export default class CreatePostForm extends Component {
               </div>
 
               <div className="FormGroup">
-                <label htmlFor="ad_type">Location</label>
-                <div className="FormInputGroup">
-                  <input type="text" id="ad_type" className="FormInputGroup-input" />
-                  <div className="FormInputGroup-button">
-                    <button className="Btn Btn--info Btn--small">
-                      Set Current Location
-                    </button>
-                  </div>
-                </div>
+                <label htmlFor="location">Location</label>
+                <InputLocation id="location" value={this.state.location} onChange={this.handleLocation} />
               </div>
             </div>
 
             <div className="Grid-cell u-size6">
-              <UploadWell photos={this.state.photos} onChange={this.handleUpload} />
+              <div className="u-spacer-base">
+                <UploadWell photos={this.state.photos} onChange={this.handleUpload} />
+              </div>
+
+              <div className="FormGroup">
+                <label htmlFor="tags">Tags</label>
+                <TagTypeahead id="tags" value={this.state.tags} onChange={this.handleTags} />
+              </div>
             </div>
           </div>
         </form>
@@ -125,7 +129,18 @@ export default class CreatePostForm extends Component {
 
   handle = (evt) => {
     evt.preventDefault();
-    this.props.onPost(this.state);
+
+    const [latitude, longitude] = this.state.location.split(', ');
+    const tags = this.state.tags.split(',');
+    const price = this.state.price_enabled ? this.state.price : 0;
+
+    this.props.onPost({
+      ...this.state,
+      price,
+      latitude,
+      longitude,
+      tags,
+    });
   }
 
   handleUpload = (photos) => {
@@ -134,5 +149,17 @@ export default class CreatePostForm extends Component {
 
   handlePreview = () => {
     this.refs.preview.open();
+  }
+
+  handleAd = (type) => {
+    this.setState({ ad_type: type });
+  }
+
+  handleLocation = (location) => {
+    this.setState({ location });
+  }
+
+  handleTags = (tags) => {
+    this.setState({ tags });
   }
 }

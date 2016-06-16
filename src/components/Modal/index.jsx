@@ -9,6 +9,8 @@ ReactModal.defaultStyles = {
   content: {}
 };
 
+// ReactModal.setAppElement('#main');
+
 /**
  * @example Stateful modal
  * <Modal ref="modal" />
@@ -53,6 +55,7 @@ export default class Modal extends Component {
 
     return (
       <ReactModal
+        closeTimeoutMS={300}
         isOpen={this.state.open}
         onRequestClose={close}
         className={cn({'ReactModal__Content--small': size === 'sm'}, {'ReactModal__Content--large': size === 'lg'})}>

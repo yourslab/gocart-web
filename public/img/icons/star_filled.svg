@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="16px" height="15px" viewBox="0 0 16 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>star_filled@svg</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Versioning" transform="translate(-405.000000, -2607.000000)">
+            <g id="Cards" transform="translate(237.000000, 2551.000000)">
+                <g id="Stars" transform="translate(113.000000, 55.000000)">
+                    <g id="star_filled" transform="translate(54.000000, 0.000000)">
+                        <g id="Icon-24px">
+                            <polygon id="Bounds" points="0 0 18 0 18 18 0 18"></polygon>
+                            <polygon id="Shape" fill="#F1C40F" points="9 12.9525 13.635 15.75 12.405 10.4775 16.5 6.93 11.1075 6.4725 9 1.5 6.8925 6.4725 1.5 6.93 5.595 10.4775 4.365 15.75"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
