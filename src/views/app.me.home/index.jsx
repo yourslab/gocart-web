@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import linkState from 'react-link-state';
+import axios from 'axios';
 import InputError from 'app/components/InputError';
+import ButtonLoader from 'app/components/ButtonLoader';
 
 export default class AppManagePostsCreateView extends Component {
   state = {
     loading: false,
-    messages: '', 
+    error: false,
+    messages: '',
     username: '',
     email: '',
     first_name: '',
@@ -41,9 +44,9 @@ export default class AppManagePostsCreateView extends Component {
             </div>
 
             <div className="SidebarContainer-panelHeadingSectionItem">
-              <button type="submit" className="Btn Btn--info">
-                {this.state.loading ? 'Loading...' : 'Save' }
-              </button>
+              <ButtonLoader className="Btn Btn--info" loading={this.state.loading}>
+                Save
+              </ButtonLoader>
             </div>
           </div>
         </div>
@@ -128,8 +131,7 @@ export default class AppManagePostsCreateView extends Component {
               <label htmlFor="bio">Bio</label>
               <InputError
                 error={this.state.messages}
-                className="FormInput"
-                type="text"
+                element={<textarea className="FormInput" />}
                 valueLink={linkState(this, 'bio')}
                 id="bio" />
             </div>
@@ -170,7 +172,6 @@ export default class AppManagePostsCreateView extends Component {
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-                    <input type="text" className="FormInput" placeholder="Street Name, Barangay" />
                     <InputError
                       error={this.state.messages}
                       className="FormInput"
@@ -190,7 +191,8 @@ export default class AppManagePostsCreateView extends Component {
                       placeholder="Town / City" />
                   </div>
 
-                  <div className="FormGroup FormGroup--narrow"><InputError
+                  <div className="FormGroup FormGroup--narrow">
+                  <InputError
                       error={this.state.messages}
                       className="FormInput"
                       type="text"
@@ -208,7 +210,6 @@ export default class AppManagePostsCreateView extends Component {
                   <div className="Grid">
                     <div className="Grid-cell u-size6">
                       <div className="FormGroup FormGroup--narrow">
-                        <input type="text" className="FormInput" placeholder="State" />
                         <InputError
                           error={this.state.messages}
                           className="FormInput"
@@ -276,12 +277,15 @@ export default class AppManagePostsCreateView extends Component {
       error: false
     });
 
+    axios.put('/user', this.state)
+      .then((res) => console.log(res))
+      .catch((res) => console.log(res));
+      
     setTimeout(() => {
-      this.setState({ loading: false })
+      this.setState({
+        loading: false,
+        error: false
+      })
     }, 1500);
-
-    // axios.put('/user', this.state)
-    //   .then((res) => res.data)
-    //   .catch((res) => res.errors);
   }
 }
