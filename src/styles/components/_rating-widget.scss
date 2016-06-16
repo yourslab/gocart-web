@@ -1,0 +1,7 @@
+.RatingWidget {
+  display: flex;
+
+  .RatingWidget-rating:not(:last-child) {
+    padding-right: 5px;
+  }
+}
