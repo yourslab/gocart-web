@@ -28,7 +28,12 @@
   }
 
   .SearchProductCard-tags {
+    display: flex;
     margin-bottom: 10px;
+  }
+
+  .SearchProductCard-tag {
+    margin-right: 5px;
   }
 
   .SearchProductCard-label {

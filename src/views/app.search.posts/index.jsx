@@ -34,7 +34,7 @@ class AppSearchPostsView extends Component {
     return (
       <Infinite callback={this.request}>
         <div className="Grid">
-          {feed.map((_, i) => <ProductCard key={i} />)}
+          {feed.map((product, i) => <ProductCard key={i} product={product} />)}
         </div>
       </Infinite>
     );
@@ -53,6 +53,7 @@ class AppSearchPostsView extends Component {
 
     const append = search === this.props.location.query.q;
     const offset = append ? this.state.offset : 0;
+
 
     const query = qs.stringify({
       start: offset,
