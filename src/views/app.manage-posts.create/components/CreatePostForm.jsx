@@ -12,7 +12,7 @@ import UploadWell from './UploadWell';
 export default class CreatePostForm extends Component {
   state = {
     title: '',
-    description: '',
+    desc: '',
     price: '',
     price_enabled: true,
     category: '',
@@ -66,7 +66,7 @@ export default class CreatePostForm extends Component {
 
               <div className="FormGroup">
                 <label htmlFor="description">Post Description</label>
-                <InputError element={<textarea id="description" className="FormInput" cols="5" valueLink={linkState(this, 'description')} />} error={state.errors.description} />
+                <InputError element={<textarea id="description" className="FormInput" cols="5" valueLink={linkState(this, 'desc')} />} error={state.errors.desc} />
               </div>
 
               <div className="FormGroup FormGroup--narrow">

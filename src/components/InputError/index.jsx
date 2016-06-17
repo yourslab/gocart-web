@@ -1,4 +1,4 @@
-import React, {createElement, PropTypes} from 'react';
+import React, {createElement, cloneElement, PropTypes} from 'react';
 import cn from 'classnames';
 
 /**
@@ -16,7 +16,9 @@ const InputError = ({className, error, element, ...props}) => {
           ...props,
           className: cn(className, { 'FormInput--danger': error != null })
         })
-        : element
+        : (error == null
+          ? element
+          : cloneElement(element, { className: `${element.props.className} FormInput--danger` }))
       }
       {error != null && <div className="FormGroup-message">{error}</div>}
     </div>
