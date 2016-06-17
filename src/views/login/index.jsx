@@ -70,6 +70,7 @@ class LoginView extends Component {
 
                 <div className="FormGroup FormGroup--narrow">
                   <ButtonLoader className="Btn Btn--facebook Btn--large Btn--block" type="button" onClick={this.props.actions.loginWithFacebook} loading={facebook.loading}>
+                    <StaticImg src="icons/facebook.svg" alt="Icon" className="Btn-icon" />
                     Sign In using Facebook
                   </ButtonLoader>
                 </div>
