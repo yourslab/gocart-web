@@ -86,6 +86,7 @@ class AppHomeView extends React.Component {
       ...state.filters,
       start: offset,
       end: offset + 19,
+      type: 1
     });
 
     return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)
