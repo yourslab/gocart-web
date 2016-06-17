@@ -95,10 +95,16 @@
 
   .ProductCard-description {
     margin-bottom: 10px;
+    min-height: 75px;
   }
 
   .ProductCard-tags {
+    display: flex;
     margin-bottom: 15px;
+  }
+
+  .ProductCard-tag {
+    margin-right: 5px;
   }
 
   .ProductCard-actions {

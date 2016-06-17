@@ -11,7 +11,7 @@ import Filters from './components/Filters';
 
 class AppHomeView extends React.Component {
   state = {
-    feed: [{}, {}, {}, {}],
+    feed: [],
     offset: 0,
     filters: {
       longtitude: 0,
