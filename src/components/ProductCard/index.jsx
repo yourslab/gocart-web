@@ -56,8 +56,8 @@ const ProductCard = ({product}) =>
 
         <div className="ProductCard-tags">
           {product.tags.map((tag, i) =>
-            <div className="ProductCard-tag">
-              <a href="#" className="TagBadge" key={i}>
+            <div className="ProductCard-tag" key={i}>
+              <a href="#" className="TagBadge">
                 {tag}
               </a>
             </div>
