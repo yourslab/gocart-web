@@ -14,7 +14,6 @@ export default class CreatePostForm extends Component {
     desc: '',
     price: '',
     price_enabled: true,
-    category: '',
     post_type: 1,
     mobile: '',
     location: '',
@@ -81,11 +80,6 @@ export default class CreatePostForm extends Component {
                 </div>
 
                 <InputError type="number" id="price" className="FormInput" valueLink={linkState(this, 'price')} error={state.errors.price} disabled={!this.state.price_enabled} />
-              </div>
-
-              <div className="FormGroup">
-                <label htmlFor="category">Category</label>
-                <InputError type="text" id="category" className="FormInput" valueLink={linkState(this, 'category_id')} error={state.errors.category_id} />
               </div>
 
               <div className="FormGroup">
