@@ -25,6 +25,10 @@ class AppHomeView extends React.Component {
     error: false
   };
 
+  componentDidMount() {
+    this.handleRequest();
+  }
+
   render() {
     const {feed, loading, filters} = this.state;
 
