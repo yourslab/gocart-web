@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
 import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import RatingWidget from 'app/components/RatingWidget';
@@ -72,9 +73,9 @@ const ProductCard = ({product}) =>
             GoBump
           </button>
 
-          <button className="Btn Btn--default Btn--borderless">
+          <Link to={`/products/${product.id}`} className="Btn Btn--default Btn--borderless">
             Comment
-          </button>
+          </Link>
         </div>
 
         <div>
