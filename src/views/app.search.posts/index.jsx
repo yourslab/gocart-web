@@ -4,8 +4,8 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import Infinite from 'app/components/Infinite';
-import StaticImg from 'app/components/StaticImg';
 import ProductCard from './components/ProductCard';
+import EmptyResults from './components/EmptyResults';
 
 class AppSearchPostsView extends Component {
   state = {
@@ -31,12 +31,20 @@ class AppSearchPostsView extends Component {
   render() {
     const {feed, loading} = this.state;
 
+    if ( !loading && !feed.length ) {
+      return <EmptyResults />;
+    }
+
     return (
-      <Infinite callback={this.request}>
-        <div className="Grid">
-          {feed.map((product, i) => <ProductCard key={i} product={product} />)}
-        </div>
-      </Infinite>
+      <div>
+        <Infinite callback={this.request}>
+          <div className="Grid">
+            {feed.map((product, i) => <ProductCard key={i} product={product} />)}
+          </div>
+        </Infinite>
+
+        {loading ? <div className="Spinner u-spacer-base" /> : null}
+      </div>
     );
   }
 
