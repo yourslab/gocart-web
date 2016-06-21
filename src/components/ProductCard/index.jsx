@@ -11,7 +11,7 @@ const ProductCard = ({product}) =>
 
         <div className="ProductCard-userPanelMeta">
           <h4 className="ProductCard-name">Mike Greene</h4>
-          <RatingWidget />
+          <RatingWidget score={product.avg_rating} />
         </div>
       </div>
 
@@ -53,16 +53,6 @@ const ProductCard = ({product}) =>
         <p className="ProductCard-description">
           {product.desc}
         </p>
-
-        <div className="ProductCard-tags">
-          {product.tags.map((tag, i) =>
-            <div className="ProductCard-tag" key={i}>
-              <a href="#" className="TagBadge">
-                {tag}
-              </a>
-            </div>
-          )}
-        </div>
 
         <div className="CommentMeta">
           <div>
