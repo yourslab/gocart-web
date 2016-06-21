@@ -7,7 +7,7 @@ import PhotoUpload from './PhotoUpload';
 
 export default class EditProfileForm extends Component {
 	state = {
-		photo: '',
+		prof_pick_link: '',
 		username: '',
 		email: '',
 		first_name: '',
@@ -42,7 +42,7 @@ export default class EditProfileForm extends Component {
 
         <div className="Grid">
           <div className="Grid-cell u-size6">
-           	<PhotoUpload photo={this.state.photo} onChange={this.handleUpload} />
+           	<PhotoUpload photo={this.state.prof_pick_link} onChange={this.handleUpload} />
 
             <div className="FormGroup">
               <label htmlFor="username">Username</label>
