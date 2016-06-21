@@ -242,6 +242,6 @@ export default class EditProfileForm extends Component {
 	}
 
 	handleUpload = (photo) => {
-		this.setState({ photo })
+		this.setState({ prof_pick_link: photo })
 	}
 }
