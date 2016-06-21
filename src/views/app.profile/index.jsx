@@ -5,21 +5,37 @@ import {connect} from 'react-redux';
 import {resolve} from 'react-resolver';
 import axios from 'axios';
 import flowRight from 'lodash/flowRight';
+import qs from 'qs';
 import Infinite from 'app/components/Infinite';
-import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
+import PostCard from './components/PostCard';
 import FollowersList from './components/FollowersList';
 import FollowingList from './components/FollowingList';
 
 class AppProfileView extends Component {
   state = {
+    posts: [],
+    offset: 0,
+    filters: {
+      longtitude: 0,
+      latitude: 0,
+      type: 0,
+      distance: 0,
+      rating: 0
+    },
+
     loading: false,
-    error: false
+    error: false,
   };
 
+  componentDidMount() {
+    this.handleRequest();
+  }
+
   render() {
-    const {auth, user, posts} = this.props;
+    const {auth, user} = this.props;
+    const {posts} = this.state;
 
     return (
       <div>
@@ -124,7 +140,7 @@ class AppProfileView extends Component {
                               <h1> Add Shelf </h1>
                             </div>
                           : null
-                        : <ProductCard />
+                        : <PostCard post={post} />
                       }
                     </div>
                   )}
@@ -151,7 +167,7 @@ class AppProfileView extends Component {
     );
   }
 
-  handleRequest = () => {
+  handleRequest = (offset = this.state.offset) => {
     if ( this.state.loading ) {
       return;
     }
@@ -161,11 +177,33 @@ class AppProfileView extends Component {
       error: false
     });
 
-    setTimeout(() => {
-      this.setState((state) => ({
-        loading: false
-      }));
-    }, 1500);
+    const {state, props} = this;
+
+    const query = qs.stringify({
+      ...state.filters,
+      start: offset,
+      end: offset + 19,
+      type: 1
+    });
+
+    return axios.get(`/user/${props.auth.id}/posts?${query}`)
+      .then((res) => {
+        this.setState({
+          posts: res.data,
+          loading: false,
+          offset: offset + 20
+        });
+
+        return res;
+      })
+      .catch((res) => {
+        this.setState({
+          loading: false,
+          error: true
+        });
+
+        return Promise.reject(res);
+      });
   }
 }
 
@@ -177,11 +215,6 @@ export default flowRight(
   resolve('user', (props) => { 
     return axios
       .get(`user/@${props.routeParams.user}`)
-      .then((res) => res.data);
-  }),
-  resolve('posts', (props) => {
-    return axios
-      .get(`/user/${props.user.id}/posts?start=0&end=20&latitude=14.599512&longitude=120.984219`)
       .then((res) => res.data);
   }),
   connect(mapState)
