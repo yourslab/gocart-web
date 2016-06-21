@@ -132,7 +132,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          action.payload.data
+          action.payload
         },
         update: {
           loading: false,
@@ -315,7 +315,7 @@ export function update(id, data) {
       .then((res) => {
         dispatch({
           type: AUTH_UPDATE_SUCCESS,
-          payload: { data }
+          payload: data
         })
 
         return res;
