@@ -14,11 +14,11 @@ export default class EditProfileForm extends Component {
 		middle_name: '',
 		last_name: '',
 		website: '',
-		bio: ''
+		about: ''
 	};
 
 	render() {
-		const {loading, errors} = this.props.state;
+		const {loading, error, errors} = this.props;
 
 		return (
 			<form onSubmit={this.handleSubmit}>
@@ -105,12 +105,12 @@ export default class EditProfileForm extends Component {
             </div>
 
             <div className="FormGroup">
-              <label htmlFor="bio">Bio</label>
+              <label htmlFor="bio">About</label>
               <InputError
-                error={errors.bio}
+                error={errors.about}
                 element={<textarea className="FormInput" />}
-                valueLink={linkState(this, 'bio')}
-                id="bio" />
+                valueLink={linkState(this, 'about')}
+                id="about" />
             </div>
           </div>
 

@@ -3,53 +3,43 @@ import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import axios from 'axios';
-import {updateUser} from 'app/modules/auth';
+import {update} from 'app/modules/auth';
 import EditProfileForm from './components/EditProfileForm';
 
 class AppManagePostsCreateView extends Component {
-  state = {
-    loading: false,
-    errors: {}
-  };
-
   render() {
+    const {auth, errors, error, loading} = this.props;
+    console.log(auth);
+    
     return (
       <div>
         <Helmet title="Profile Settings" />
 
         <EditProfileForm
-          auth={this.props.auth} 
-          state={this.state}
+          auth={auth} 
+          loading={loading}
+          error={error}
+          errors={errors}
           onPost={this.handlePost} />
       </div>
     );
   }
 
   handlePost = (data) => {
-    const {auth, updateUser} = this.props;
-    
-    if ( this.state.loading ) {
-      return;
-    }
+    const {auth, actions} = this.props;
 
-
-    this.setState({
-      loading: true,
-      error: false
-    });
-    
-    this.props.updateUser(auth.id, data);
-
-    this.setState({
-      loading: false
-    });
+    actions.update(auth.id, data);
   }
 }
 
 const mapState = state => ({
-  auth: state.auth.user
+  auth: state.auth.user,
+  loading: state.auth.update.loading,
+  error: state.auth.update.error,
+  errors: state.auth.update.errors
 });
 
-const mapActions = dispatch => bindActionCreators({ updateUser }, dispatch);
-
+const mapActions = (dispatch) => ({
+  actions: bindActionCreators({ update }, dispatch)
+})
 export default connect(mapState, mapActions)(AppManagePostsCreateView);
