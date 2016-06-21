@@ -14,6 +14,6 @@ export default merge({}, cookie, {
   },
 
   set(key, value, opts) {
-    return cookie.set(key, value, opts);
+    return cookie.set(key, JSON.stringify(value), opts);
   }
 });
