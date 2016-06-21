@@ -9,8 +9,7 @@ import EditProfileForm from './components/EditProfileForm';
 class AppManagePostsCreateView extends Component {
   render() {
     const {auth, errors, error, loading} = this.props;
-    console.log(auth);
-    
+
     return (
       <div>
         <Helmet title="Profile Settings" />
@@ -26,9 +25,7 @@ class AppManagePostsCreateView extends Component {
   }
 
   handlePost = (data) => {
-    const {auth, actions} = this.props;
-
-    actions.update(auth.id, data);
+    this.props.actions.update(data);
   }
 }
 

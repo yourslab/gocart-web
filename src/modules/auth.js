@@ -132,7 +132,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         user: {
           ...state.user,
-          action.payload
+          ...action.payload
         },
         update: {
           loading: false,
@@ -303,15 +303,17 @@ export function getData() {
   }
 }
 
-export function update(id, data) {
+export function update(data) {
   return (dispatch, getState) => {
     if ( getState().auth.update.loading ) {
       return;
     }
 
+    const auth = getState().auth;
+
     dispatch({ type: AUTH_UPDATE });
 
-    return axios.put(`/user/${id}`, data)
+    return axios.put(`/user/${auth.user.id}`, data)
       .then((res) => {
         dispatch({
           type: AUTH_UPDATE_SUCCESS,

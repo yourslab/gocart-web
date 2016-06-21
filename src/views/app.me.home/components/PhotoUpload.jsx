@@ -18,7 +18,7 @@ export default class PhotoUpload extends Component {
           </button>
 
           <div>
-            <button className="Btn Btn--info Btn--inverted Btn--small" type="button">
+            <button onClick={this.handleAdd} className="Btn Btn--info Btn--inverted Btn--small" type="button">
               Upload
             </button>
           </div>
@@ -32,10 +32,7 @@ export default class PhotoUpload extends Component {
   }
 
   handle = (evt) => {
-    map(evt.target.files, (file) => {
-      reader(file).then((evt) => {
-        this.props.onChange(evt.target.result);
-      });
-    });
+    return reader(evt.target.files[0])
+      .then((evt) => this.props.onChange(evt.target.result));
   }
 }
