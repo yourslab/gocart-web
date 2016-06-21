@@ -131,13 +131,10 @@ export function login({username, password}, redirect = '/') {
         // It's a good place. While we also need to override
         // the current token stored in the cookie before the request
         // takes place.
-        cookie.set(
-          config.auth.key,
-          JSON.stringify({
-            token: res.data.auth_token,
-            id: res.data.id
-          })
-        );
+        cookie.set(config.auth.key, {
+          token: res.data.auth_token,
+          id: res.data.id
+        });
 
         // We're using an axios interceptor which
         // includes the auth token from the cookie for us.
@@ -201,13 +198,10 @@ export function loginWithFacebook() {
           payload: res
         });
 
-        cookie.set(
-          config.auth.key,
-          JSON.stringify({
-            token: res.data.auth_token,
-            id: res.data.id
-          })
-        );
+        cookie.set(config.auth.key, {
+          token: res.data.auth_token,
+          id: res.data.id
+        });
 
         return res;
       })

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cookie from 'cookie-machine';
+import cookie from 'app/cookie';
 import config from 'app/config';
 
 axios.interceptors.request.use(function(request) {
