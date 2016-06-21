@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import getAdType from 'app/utils/getAdType';
+import getPostType from 'app/utils/getPostType';
 
-const types = getAdType();
+const types = getPostType();
 
-export default class AdTypeTypeahead extends Component {
+export default class PostTypeTypeahead extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired
   };

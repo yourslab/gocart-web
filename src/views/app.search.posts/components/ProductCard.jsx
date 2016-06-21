@@ -1,5 +1,5 @@
 import React from 'react';
-import getAdType from 'app/utils/getAdType';
+import getPostType from 'app/utils/getPostType';
 import formatCurrency from 'app/utils/formatCurrency';
 
 const ProductCard = ({product}) =>
@@ -10,7 +10,7 @@ const ProductCard = ({product}) =>
       </div>
 
       <div>
-        <h6 className="SearchProductCard-label">{getAdType(product.post_type)}</h6>
+        <h6 className="SearchProductCard-label">{getPostType(product.post_type)}</h6>
         <h4 className="SearchProductCard-title">{product.title}</h4>
         <h4 className="SearchProductCard-price">P {formatCurrency(product.price)}</h4>
       </div>

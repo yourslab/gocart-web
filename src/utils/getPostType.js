@@ -5,7 +5,7 @@ const types = [
   { id: 4, label: 'For Rent' }
 ]
 
-export default function getAdType(type) {
+export default function getPostType(type) {
   return type == null
     ? types
     : types.find((xtype) => xtype.id == type);
