@@ -4,7 +4,6 @@ import Switchbox from 'app/components/Switchbox';
 import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
 import InputLocation from 'app/components/InputLocation';
-import {TagTypeahead} from 'app/components/Typeahead';
 import AdTypeSelect from 'app/components/AdTypeSelect';
 import PostPreview from 'app/components/PostPreview';
 import UploadWell from './UploadWell';
@@ -19,8 +18,7 @@ export default class CreatePostForm extends Component {
     ad_type: 1,
     mobile: '',
     location: '',
-    photos: [],
-    tags: ''
+    photos: []
   };
 
   render() {
@@ -110,11 +108,6 @@ export default class CreatePostForm extends Component {
               <div className="u-spacer-base">
                 <UploadWell photos={this.state.photos} onChange={this.handleUpload} />
               </div>
-
-              <div className="FormGroup">
-                <label htmlFor="tags">Tags</label>
-                <TagTypeahead id="tags" value={this.state.tags} onChange={this.handleTags} />
-              </div>
             </div>
           </div>
         </form>
@@ -157,9 +150,5 @@ export default class CreatePostForm extends Component {
 
   handleLocation = (location) => {
     this.setState({ location });
-  }
-
-  handleTags = (tags) => {
-    this.setState({ tags });
   }
 }
