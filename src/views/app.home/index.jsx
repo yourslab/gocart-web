@@ -11,7 +11,7 @@ import Filters from './components/Filters';
 
 class AppHomeView extends React.Component {
   state = {
-    feed: [{}, {}, {}, {}],
+    feed: [],
     offset: 0,
     filters: {
       longtitude: 0,
@@ -24,6 +24,10 @@ class AppHomeView extends React.Component {
     loading: false,
     error: false
   };
+
+  componentDidMount() {
+    this.handleRequest();
+  }
 
   render() {
     const {feed, loading, filters} = this.state;
@@ -86,6 +90,7 @@ class AppHomeView extends React.Component {
       ...state.filters,
       start: offset,
       end: offset + 19,
+      type: 1
     });
 
     return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)

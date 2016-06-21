@@ -52,7 +52,7 @@ export default class PostPreview extends Component {
 
                     <div className="ProductCardFull-thumbnailOverlay">
                       <div className="ProductCardFull-thumbnailOverlaySection">
-                        <h1 className="ProductCardFull-thumbnailOverlaySectionItem">P {formatCurrency(product.price)}</h1>
+                        <h1 className="ProductCardFull-thumbnailOverlaySectionItem">P {product.price_enabled ? formatCurrency(product.price) : '0.00'}</h1>
                       </div>
 
                       <div className="ProductCardFull-thumbnailOverlaySection">

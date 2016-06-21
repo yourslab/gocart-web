@@ -3,8 +3,8 @@ import axios from 'axios';
 import {Link} from 'react-router';
 import lang from 'app/lang';
 import Infinite from 'app/components/Infinite';
-import StaticImg from 'app/components/StaticImg';
 import UserCard from './components/UserCard';
+import EmptyResults from './components/EmptyResults';
 
 export default class AppSearchUsersView extends Component {
   state = {
@@ -24,6 +24,10 @@ export default class AppSearchUsersView extends Component {
 
   render() {
     const {feed, loading} = this.state;
+
+    if ( !loading && !feed.length ) {
+      return <EmptyResults />;
+    }
 
     return (
       <div>

@@ -5,7 +5,7 @@ const UserCard = ({user}) =>
   <div className="Grid-cell u-size4 u-spacer-base">
     <Link to={`/@${user.username}`} className="SearchUserCard">
       <div>
-        <img src="https://placeimg.com/50/50/people" className="SearchUserCard-avatar" alt="Avatar" />
+        <img src={user.prof_pic_link} className="SearchUserCard-avatar" alt="Avatar" />
       </div>
 
       <div>

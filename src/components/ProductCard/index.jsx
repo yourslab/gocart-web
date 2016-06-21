@@ -1,8 +1,10 @@
-import React, {PropType} from 'react';
+import React, {PropTypes} from 'react';
+import {Link} from 'react-router';
+import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import RatingWidget from 'app/components/RatingWidget';
 
-const ProductCard = () =>
+const ProductCard = ({product}) =>
   <div className="ProductCard">
     <div className="ProductCard-userPanel">
       <div className="ProductCard-userPanelSection">
@@ -10,7 +12,7 @@ const ProductCard = () =>
 
         <div className="ProductCard-userPanelMeta">
           <h4 className="ProductCard-name">Mike Greene</h4>
-          <RatingWidget />
+          <RatingWidget score={product.avg_rating} />
         </div>
       </div>
 
@@ -27,7 +29,7 @@ const ProductCard = () =>
 
         <div className="ProductCard-thumbnailOverlay">
           <h1 className="ProductCard-pricing">
-            P 0.00
+            {formatCurrency(product.price)}
           </h1>
         </div>
       </div>
@@ -35,10 +37,10 @@ const ProductCard = () =>
       <div className="ProductCard-body">
         <div className="ProductCard-heading">
           <div>
-            <h4 className="ProductCard-title">Looking for</h4>
+            <h4 className="ProductCard-title">{product.title}</h4>
           </div>
 
-          <div className="ProductCard-headingSection">
+          {/*<div className="ProductCard-headingSection">
             <div className="ProductCard-headingSectionItem">
               <span className="ProductCard-meta">2 months</span>
             </div>
@@ -46,17 +48,12 @@ const ProductCard = () =>
             <div className="ProductCard-headingSectionItem">
               <span className="ProductCard-meta">0.5km</span>
             </div>
-          </div>
+          </div>*/}
         </div>
 
         <p className="ProductCard-description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt  ut labore et dolore magna aliqua.
+          {product.desc}
         </p>
-
-        <div className="ProductCard-tags">
-          <a href="#" className="TagBadge">Tags</a>
-        </div>
 
         <div className="CommentMeta">
           <div>
@@ -65,7 +62,7 @@ const ProductCard = () =>
           </div>
 
           <div>
-            <span className="CommentMeta-count">3 comments</span>
+            <span className="CommentMeta-count">{product.num_comments} comments</span>
           </div>
         </div>
       </div>
@@ -76,9 +73,9 @@ const ProductCard = () =>
             GoBump
           </button>
 
-          <button className="Btn Btn--default Btn--borderless">
+          <Link to={`/products/${product.id}`} className="Btn Btn--default Btn--borderless">
             Comment
-          </button>
+          </Link>
         </div>
 
         <div>
@@ -89,5 +86,9 @@ const ProductCard = () =>
       </div>
     </div>
   </div>
+
+ProductCard.propTypes = {
+  product: PropTypes.object.isRequired
+};
 
 export default ProductCard;

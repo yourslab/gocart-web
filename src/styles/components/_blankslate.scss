@@ -1,0 +1,14 @@
+.BlankSlate {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  text-align: center;
+
+  .BlankSlate-icon {
+    margin-bottom: 10px;
+  }
+
+  .BlankSlate-heading {
+    color: $color-grayDark;
+    font-weight: normal;
+  }
+}

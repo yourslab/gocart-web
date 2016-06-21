@@ -95,10 +95,19 @@
 
   .ProductCard-description {
     margin-bottom: 10px;
+    min-height: 75px;
   }
 
   .ProductCard-tags {
+    display: flex;
     margin-bottom: 15px;
+    // Rough estimate of the tag height.
+    // Also, assuming we have only 1 row of tags
+    min-height: 25px;
+  }
+
+  .ProductCard-tag {
+    margin-right: 5px;
   }
 
   .ProductCard-actions {
