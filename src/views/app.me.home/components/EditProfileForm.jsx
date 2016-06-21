@@ -5,7 +5,7 @@ import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
 import PhotoUpload from './PhotoUpload';
 
-export default class EditProfieForm extends Component {
+export default class EditProfileForm extends Component {
 	state = {
 		photo: '',
 		username: '',

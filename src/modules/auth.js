@@ -263,3 +263,38 @@ export function getData() {
       });
   }
 }
+
+export function updateUser(id, data) {
+  return (dispatch, getState) => {
+    const auth = cookie.get(config.auth.key);
+
+    if ( auth == null ) {
+      return;
+    }
+
+    return axios.put(`/user/${id}`, data)
+      .then((res) => {
+          dispatch({
+            payload: {
+              data: {
+                username: data.username,
+                first_name: data.first_name,
+                middle_name: data.middle_name,
+                last_name: data.last_name,
+                email: data.email,
+                bio: data.bio
+              }
+            }
+          });
+
+          return res;
+        })
+        .catch((res) => {
+          dispatch({
+            payload: res.data.errors
+          });
+
+          return Promise.reject(res);
+        })
+  }
+}
