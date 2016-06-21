@@ -130,7 +130,10 @@ export default function authReducer(state = initialState, action) {
     case AUTH_UPDATE_SUCCESS: 
       return {
         ...state,
-        user: action.payload.data,
+        user: {
+          ...state.user,
+          action.payload.data
+        },
         update: {
           loading: false,
           error: false,
