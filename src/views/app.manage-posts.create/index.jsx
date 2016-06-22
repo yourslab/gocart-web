@@ -46,7 +46,10 @@ class AppManagePostsCreateView extends Component {
       message: ''
     });
 
-    return axios.post('/post', data)
+    return axios.post('/post', {
+        ...data,
+        user_id: this.props.auth.id
+      })
       .then((res) => {
         this.setState({
           loading: false,
