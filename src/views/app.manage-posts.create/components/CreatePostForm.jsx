@@ -12,7 +12,7 @@ export default class CreatePostForm extends Component {
   state = {
     title: '',
     desc: '',
-    price: '',
+    price: 0.00,
     price_enabled: true,
     post_type: 1,
     mobile: '',
