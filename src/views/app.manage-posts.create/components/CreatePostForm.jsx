@@ -118,7 +118,7 @@ export default class CreatePostForm extends Component {
     evt.preventDefault();
 
     const [latitude, longitude] = this.state.location.split(', ');
-    const price = this.state.price_enabled ? this.state.price : 0;
+    const price = this.state.price_enabled ? parseFloat(this.state.price, 10) : 0;
 
     this.props.onPost({
       ...this.state,
