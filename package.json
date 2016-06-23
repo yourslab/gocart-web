@@ -10,6 +10,7 @@
     "watch:style": "npm run build:style && node-sass -w src/styles/style.scss -o public/dist",
     "post:style": "postcss -u autoprefixer --autoprefixer.browsers '> 5%' -u cssnano -o public/dist/style.css public/dist/style.css",
     "prod:style": "npm run build:style && npm run post:style",
+    "deploy": "npm run prod:style && npm run prod:script && node ./build/deploy",
     "start": "echo 'Please run a web-server to serve `public/` directory' && npm-run-all --parallel watch:script watch:style"
   },
   "dependencies": {
@@ -42,6 +43,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.3.3",
+    "aws-sdk": "^2.4.1",
     "babel": "^6.1.5",
     "babel-core": "^6.1.4",
     "babel-loader": "^6.1.0",
@@ -68,6 +70,7 @@
     "phantomjs": "^1.9.18",
     "postcss": "^5.0.19",
     "postcss-cli": "^2.5.1",
+    "readdir-recursive": "0.0.4",
     "redux-devtools": "^3.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
