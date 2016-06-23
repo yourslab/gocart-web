@@ -52,6 +52,7 @@ class AppView extends Component {
                     <a href="#" className="MainDrawerSidebar-link">Payments</a>
                     <a href="#" className="MainDrawerSidebar-link">Billing</a>
                     <a href="#" className="MainDrawerSidebar-link">Reports</a>
+                    <Link to="/logout" className="MainDrawerSidebar-link">Logout</Link>
                     <div className="MainDrawerSidebar-separator" />
                     <a href="#" className="MainDrawerSidebar-link">About Us</a>
                     <a href="#" className="MainDrawerSidebar-link">FAQs</a>
