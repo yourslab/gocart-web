@@ -3,23 +3,31 @@ import {Link} from 'react-router';
 import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import RatingWidget from 'app/components/RatingWidget';
+import UserFollowWidget from 'app/components/UserFollowWidget';
 
-const ProductCard = ({product}) =>
+const ProductCard = ({product, onFollow}) =>
   <div className="ProductCard">
     <div className="ProductCard-userPanel">
       <div className="ProductCard-userPanelSection">
-        <img src="https://placeimg.com/48/48/people" className="ProductCard-avatar" />
+        <Link to={`/@${product.username}`} className="ProductCard-avatarContainer">
+          <img src="https://placeimg.com/48/48/people" className="ProductCard-avatar" />
+        </Link>
 
         <div className="ProductCard-userPanelMeta">
-          <h4 className="ProductCard-name">Mike Greene</h4>
+          <h4 className="ProductCard-name">
+            <Link to={`/@${product.username}`} className="ProductCard-nameLink">
+              {product.name}
+            </Link>
+          </h4>
+
           <RatingWidget score={product.avg_rating} />
         </div>
       </div>
 
       <div className="ProductCard-userPanelSection">
-        <button type="button" className="PlainBtn">
-          <StaticImg src="icons/follow_icon@1x.png" alt="Follow" />
-        </button>
+        <UserFollowWidget
+          user={{ id: product.user_id, is_followed: product.is_followed }}
+          onFollow={onFollow} />
       </div>
     </div>
 

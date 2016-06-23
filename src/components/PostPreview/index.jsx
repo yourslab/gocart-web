@@ -80,7 +80,7 @@ export default class PostPreview extends Component {
                     </div>
 
                     <p className="ProductCardFull-description">
-                      {product.description || <em>Enter a description here...</em>}
+                      {product.desc || <em>Enter a description here...</em>}
                     </p>
 
                     <div className="ProductCardFull-tags">
