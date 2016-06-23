@@ -140,10 +140,10 @@ class AppProfileView extends Component {
                   )}
                   {auth.id === user.id
                     ? <div className="Grid-cell u-size6 u-spacer-base">
-                        <div className="BlankSlate">
-                            <StaticImg src="/icons/post_icon@1x.png" />
-                            <h1> Add Shelf </h1>
-                          </div>
+                        <Link to="/manage-posts/create" className="BlankSlate">
+                          <StaticImg src="/icons/post_icon@1x.png" />
+                          <h1> Add Shelf </h1>
+                        </Link>
                       </div>
                     : null
                   }
