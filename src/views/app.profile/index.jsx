@@ -187,7 +187,7 @@ class AppProfileView extends Component {
       type: 1
     });
 
-    return axios.get(`/user/${props.auth.id}/posts?${query}`)
+    return axios.get(`/user/${props.user.id}/posts?${query}`)
       .then((res) => {
         this.setState({
           posts: res.data,
