@@ -9,6 +9,7 @@ class Permission extends Component {
   };
 
   static auth = auth;
+
   static guest = guest;
 
   render() {
@@ -26,7 +27,7 @@ class Permission extends Component {
   }
 }
 
-const ConnectedPermission = connect(({auth}) => ({ auth })) (Permission);
+const ConnectedPermission = connect(({auth}) => ({ auth }))(Permission);
 
 export {
   ConnectedPermission as default,

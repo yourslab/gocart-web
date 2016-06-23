@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {login, loginWithFacebook} from 'app/modules/auth';
 import facebook from 'app/utils/facebook';
-import guest from 'app/components/Permission/guest';
+import {guest} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
 import ButtonLoader from 'app/components/ButtonLoader';
 

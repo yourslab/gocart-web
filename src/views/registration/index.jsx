@@ -4,10 +4,11 @@ import {Link} from 'react-router';
 import axios from 'axios';
 import history from 'app/history';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
+import {guest} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
 import RegistrationForm from './components/RegistrationForm';
 
-export default class RegistrationView extends Component {
+class RegistrationView extends Component {
   state = {
     loading: false,
     errors: false,
@@ -118,3 +119,5 @@ export default class RegistrationView extends Component {
       });
   }
 }
+
+export default guest(RegistrationView);

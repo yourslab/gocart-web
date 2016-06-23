@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import cn from 'classnames';
+import flowRight from 'lodash/flowRight';
 import linkState from 'react-link-state';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {GatewayProvider, GatewayDest} from 'react-gateway';
 import defer from 'app/utils/defer';
 import history from 'app/history';
+import {auth} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
 import Permission from 'app/components/Permission';
 
@@ -270,4 +272,8 @@ class AppView extends Component {
 }
 
 const mapState = ({auth}) => ({ user: auth.user });
-export default connect(mapState)(AppView);
+
+export default flowRight(
+  auth,
+  connect(mapState)
+)(AppView);
