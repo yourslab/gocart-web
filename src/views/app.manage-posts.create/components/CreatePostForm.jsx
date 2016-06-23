@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import linkState from 'react-link-state';
+import {Link} from 'react-router';
 import Switchbox from 'app/components/Switchbox';
 import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
@@ -39,11 +40,9 @@ export default class CreatePostForm extends Component {
               </div>
 
               <div className="SidebarContainer-panelHeadingSectionItem">
-                <a href="#" className="Btn Btn--plain Btn--default">Cancel</a>
-              </div>
-
-              <div className="SidebarContainer-panelHeadingSectionItem">
-                <a href="#" className="Btn Btn--inverted Btn--info">Save as draft</a>
+                <Link to="/manage-posts" className="Btn Btn--plain Btn--default">
+                  Cancel
+                </Link>
               </div>
 
               <div className="SidebarContainer-panelHeadingSectionItem">
