@@ -121,6 +121,7 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         update: {
+          ...state.update,
           loading: true,
           error: false,
           errors: {}
@@ -135,6 +136,7 @@ export default function authReducer(state = initialState, action) {
           ...action.payload
         },
         update: {
+          ...state.update,
           loading: false,
           error: false,
           errors: {}
@@ -145,6 +147,7 @@ export default function authReducer(state = initialState, action) {
       return {
         ...state,
         update: {
+          ...state.update,
           loading: false,
           error: true,
           errors: action.payload.errors
@@ -305,12 +308,11 @@ export function getData() {
 
 export function update(data) {
   return (dispatch, getState) => {
-    if ( getState().auth.update.loading ) {
+    const {auth} = getState();
+    
+    if ( auth.update.loading ) {
       return;
     }
-
-    const auth = getState().auth;
-
     dispatch({ type: AUTH_UPDATE });
 
     return axios.put(`/user/${auth.user.id}`, data)
