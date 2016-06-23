@@ -52,7 +52,9 @@ class AppHomeView extends React.Component {
             <div className="Grid">
               {feed.map((product, i) =>
                 <div className="Grid-cell u-size6 u-spacer-large" key={i}>
-                  <ProductCard product={product} />
+                  <ProductCard
+                    product={product}
+                    onFollow={this.handleFollow} />
                 </div>
               )}
             </div>
@@ -66,6 +68,25 @@ class AppHomeView extends React.Component {
           onFilter={this.handleFilter} />
       </div>
     );
+  }
+
+  // @TODO: Discuss with the team with possible scenarios
+  // we'll cover in case user tries to unfollow a user
+  // in his feed. It's also possible that there will be no bugs
+  // as long as "unfollow" only removes newer posts of that user
+  // to the auth's feed.
+  // @see https://trello.com/c/1UFlbWMW/21-as-a-user-i-should-be-able-to-see-the-feed
+  handleFollow = (id) => {
+    this.setState((state) => ({
+      feed: state.map((product) => product.user_id === id
+        ? {
+          ...product,
+          // This property is not included in the feed property.
+          // But, we'll use the API's property naming convention
+          // for consistency among the other features/pages.
+          is_followed: !product.is_followed
+        } : product)
+    }));
   }
 
   handleFilter = (filters) => {
@@ -96,7 +117,12 @@ class AppHomeView extends React.Component {
     return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)
       .then((res) => {
         this.setState({
-          feed: res.data,
+          feed: res.data.map((product) => ({
+            ...product,
+            // @TODO: Remove based on discussion over
+            // https://trello.com/c/1UFlbWMW/21-as-a-user-i-should-be-able-to-see-the-feed
+            is_followed: true
+          })),
           loading: false,
           offset: offset + 20
         });
