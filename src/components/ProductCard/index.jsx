@@ -8,10 +8,17 @@ const ProductCard = ({product}) =>
   <div className="ProductCard">
     <div className="ProductCard-userPanel">
       <div className="ProductCard-userPanelSection">
-        <img src="https://placeimg.com/48/48/people" className="ProductCard-avatar" />
+        <Link to={`/@${product.username}`} className="ProductCard-avatarContainer">
+          <img src="https://placeimg.com/48/48/people" className="ProductCard-avatar" />
+        </Link>
 
         <div className="ProductCard-userPanelMeta">
-          <h4 className="ProductCard-name">{product.name}</h4>
+          <h4 className="ProductCard-name">
+            <Link to={`/@${product.username}`} className="ProductCard-nameLink">
+              {product.name}
+            </Link>
+          </h4>
+
           <RatingWidget score={product.avg_rating} />
         </div>
       </div>
