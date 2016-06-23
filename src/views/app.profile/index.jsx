@@ -133,17 +133,18 @@ class AppProfileView extends Component {
                 <div className="Grid">
                   {posts.map((post, i) =>
                     <div className="Grid-cell u-size6 u-spacer-base" key={i}>
-                      {posts.length === i + 1 
-                        ? auth.id === user.id 
-                          ? <div className="BlankSlate">
-                              <StaticImg src="/icons/post_icon@1x.png" />
-                              <h1> Add Shelf </h1>
-                            </div>
-                          : null
-                        : <PostCard post={post} />
-                      }
+                      <PostCard post={post} />
                     </div>
                   )}
+                  {auth.id === user.id
+                    ? <div className="Grid-cell u-size6 u-spacer-base">
+                        <div className="BlankSlate">
+                            <StaticImg src="/icons/post_icon@1x.png" />
+                            <h1> Add Shelf </h1>
+                          </div>
+                      </div>
+                    : null
+                  }
                 </div>
               </Infinite>
 
