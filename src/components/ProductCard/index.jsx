@@ -11,7 +11,7 @@ const ProductCard = ({product}) =>
         <img src="https://placeimg.com/48/48/people" className="ProductCard-avatar" />
 
         <div className="ProductCard-userPanelMeta">
-          <h4 className="ProductCard-name">Mike Greene</h4>
+          <h4 className="ProductCard-name">{product.name}</h4>
           <RatingWidget score={product.avg_rating} />
         </div>
       </div>
