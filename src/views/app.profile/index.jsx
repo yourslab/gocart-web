@@ -6,6 +6,7 @@ import {resolve} from 'react-resolver';
 import axios from 'axios';
 import flowRight from 'lodash/flowRight';
 import qs from 'qs';
+import formatValidationErrors from 'app/utils/formatValidationErrors';
 import Infinite from 'app/components/Infinite';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
@@ -27,6 +28,7 @@ class AppProfileView extends Component {
 
     loading: false,
     error: false,
+    errors: {}
   };
 
   componentDidMount() {
@@ -36,6 +38,7 @@ class AppProfileView extends Component {
   render() {
     const {auth, user} = this.props;
     const {posts} = this.state;
+    console.log(this.state.errors);
 
     return (
       <div>
@@ -200,7 +203,8 @@ class AppProfileView extends Component {
       .catch((res) => {
         this.setState({
           loading: false,
-          error: true
+          error: true,
+          errors: formatValidationErrors(res.data.errors)
         });
 
         return Promise.reject(res);
