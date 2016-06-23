@@ -313,6 +313,7 @@ export function update(data) {
     if ( auth.update.loading ) {
       return;
     }
+    
     dispatch({ type: AUTH_UPDATE });
 
     return axios.put(`/user/${auth.user.id}`, data)

@@ -8,17 +8,12 @@ import PhotoUpload from './PhotoUpload';
 export default class EditProfileForm extends Component {
 	state = {
 		prof_pic_link: '',
-		username: '',
-		email: '',
-		first_name: '',
-		middle_name: '',
-		last_name: '',
-		website: '',
-		about: ''
+		name: this.props.auth.name,
+		about: this.props.auth.about
 	};
 
 	render() {
-		const {loading, error, errors} = this.props;
+		const {loading, error, errors, auth} = this.props;
 
 		return (
 			<form onSubmit={this.handleSubmit}>
@@ -45,71 +40,20 @@ export default class EditProfileForm extends Component {
            	<PhotoUpload photo={this.state.prof_pic_link} onChange={this.handleUpload} />
 
             <div className="FormGroup">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="name">Name</label>
               <InputError
-                error={errors.username}
+                error={errors.name}
                 className="FormInput"
                 type="text"
-                valueLink={linkState(this, 'username')}
-                id="username" />
+                valueLink={linkState(this, 'name')}
+                id="name" />
             </div>
 
             <div className="FormGroup">
-              <label htmlFor="email">Email Address</label>
-              <InputError
-                error={errors.email}
-                className="FormInput"
-                type="email"
-                valueLink={linkState(this, 'email')}
-                id="email" />
-            </div>
-
-            <div className="FormGroup">
-              <label htmlFor="first_name">First Name</label>
-              <InputError
-                error={errors.first_name}
-                className="FormInput"
-                type="text"
-                valueLink={linkState(this, 'first_name')}
-                id="first_name" />
-            </div>
-
-            <div className="FormGroup">
-              <label htmlFor="middle_name">Middle Name</label>
-              <InputError
-                error={errors.middle_name}
-                className="FormInput"
-                type="text"
-                valueLink={linkState(this, 'middle_name')}
-                id="middle_name" />
-            </div>
-
-            <div className="FormGroup">
-              <label htmlFor="last_name">Last Name</label>
-              <InputError
-                error={errors.last_name}
-                className="FormInput"
-                type="text"
-                valueLink={linkState(this, 'last_name')}
-                id="last_name" />
-            </div>
-
-            <div className="FormGroup">
-              <label htmlFor="website">Website</label>
-              <InputError
-                error={errors.website}
-                className="FormInput"
-                type="text"
-                valueLink={linkState(this, 'website')}
-                id="website" />
-            </div>
-
-            <div className="FormGroup">
-              <label htmlFor="bio">About</label>
+              <label htmlFor="about">About</label>
               <InputError
                 error={errors.about}
-                element={<textarea className="FormInput" />}
-                valueLink={linkState(this, 'about')}
+                element={<textarea className="FormInput" valueLink={linkState(this, 'about')} />}
                 id="about" />
             </div>
           </div>
@@ -237,7 +181,6 @@ export default class EditProfileForm extends Component {
 
 	handleSubmit = (evt) => {
 		evt.preventDefault();
-
 		this.props.onPost(this.state);
 	}
 
