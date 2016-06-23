@@ -38,7 +38,6 @@ class AppProfileView extends Component {
   render() {
     const {auth, user} = this.props;
     const {posts} = this.state;
-    console.log(this.state.errors);
 
     return (
       <div>
