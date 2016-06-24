@@ -2,12 +2,13 @@ import React from 'react';
 import {Link} from 'react-router';
 import getPostType from 'app/utils/getPostType';
 import formatCurrency from 'app/utils/formatCurrency';
+import S3Image from 'app/components/S3Image';
 
 const ProductCard = ({product}) =>
   <div className="Grid-cell u-size4 u-spacer-base">
     <Link to={`/products/${product.id}`} className="SearchProductCard">
       <div className="SearchProductCard-thumbnail">
-        <img src={product.photo_list[0]} className="SearchProductCard-thumbnailImage" alt="Thumbnail" />
+        <S3Image src={product.photo_list[0]} username={product.username} className="SearchProductCard-thumbnailImage" alt="Thumbnail" />
       </div>
 
       <div>
