@@ -33,7 +33,7 @@ class UserFollowWidget extends Component {
     return (
       <button type="button" className="PlainBtn" onClick={this.handle}>
         {this.props.user.is_followed
-          ? <StaticImg src="icons/follow_icon@1x.png" alt="Unfollow" />
+          ? <StaticImg src="icons/unfollow.svg" alt="Unfollow" />
           : <StaticImg src="icons/follow_icon@1x.png" alt="Follow" />}
       </button>
     );
