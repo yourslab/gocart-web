@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import moment from 'moment';
 import linkState from 'react-link-state';
 import Modal from 'app/components/Modal';
 import PostTypeSelect from 'app/components/PostTypeSelect';
@@ -34,8 +35,10 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-date">
-                <option>More than a week ago</option>
+              <select className="FormInput" id="headers-filters-date" valueLink={linkState(this, 'date')}>
+                <option>No date specified</option>
+                <option value={moment().subtract(1, 'weeks').format('MM-DD-YYYY')}  >A week ago</option>
+                <option value={moment().subtract(1, 'months').format('MM-DD-YYYY')}>A month ago</option>
               </select>
             </div>
           </div>

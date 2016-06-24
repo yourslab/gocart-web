@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import axios from 'axios';
 import qs from 'qs';
+import moment from 'moment';
 import Helmet from 'react-helmet';
 import {Gateway} from 'react-gateway';
 import {connect} from 'react-redux';
@@ -18,7 +19,9 @@ class AppHomeView extends React.Component {
       latitude: 0,
       type: 0,
       distance: 0,
-      rating: 0
+      rating: 0,
+      date: '',
+      post_type: 0,
     },
 
     loading: false,
@@ -51,7 +54,7 @@ class AppHomeView extends React.Component {
           <Infinite callback={this.handleRequest}>
             <div className="Grid">
               {feed.map((product, i) =>
-                <div className="Grid-cell u-size6 u-spacer-large" key={i}>
+                <div className="Grid-cell u-size6 u-spacer-large" key={product.id}>
                   <ProductCard
                     product={product}
                     onFollow={this.handleFollow} />
@@ -106,9 +109,16 @@ class AppHomeView extends React.Component {
     });
 
     const {state, props} = this;
+    const {date, ...filters} = state.filters;
+
+    const dateFilter = String(date).length ? {
+      from_date: moment(date, 'MM-DD-YYYY').unix(),
+      to_date: moment().unix()
+    } : {};
 
     const query = qs.stringify({
-      ...state.filters,
+      ...filters,
+      ...dateFilter,
       start: offset,
       end: offset + 19,
       type: 1
@@ -116,11 +126,13 @@ class AppHomeView extends React.Component {
 
     return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)
       .then((res) => {
-        this.setState({
-          feed: res.data,
+        this.setState((state) => ({
+          feed: offset === 0
+            ? res.data
+            : [...state.feed, ...res.data],
           loading: false,
           offset: offset + 20
-        });
+        }));
 
         return res;
       })
