@@ -73,12 +73,6 @@ class AppHomeView extends React.Component {
     );
   }
 
-  // @TODO: Discuss with the team with possible scenarios
-  // we'll cover in case user tries to unfollow a user
-  // in his feed. It's also possible that there will be no bugs
-  // as long as "unfollow" only removes newer posts of that user
-  // to the auth's feed.
-  // @see https://trello.com/c/1UFlbWMW/21-as-a-user-i-should-be-able-to-see-the-feed
   handleFollow = (id) => {
     this.setState((state) => ({
       feed: state.feed.map((product) => product.user_id === id
