@@ -93,14 +93,19 @@ export default class CreatePostForm extends Component {
 
               <div className="FormGroup">
                 <label htmlFor="location">Location</label>
-                <InputLocation id="location" value={this.state.location} onChange={this.handleLocation} />
+                <InputError
+                  element={<InputLocation id="location" value={this.state.location} onChange={this.handleLocation} />}
+                  error={state.errors.latitude || state.errors.longtitude}
+                  classNameModifier="FormInputGroup--danger" />
               </div>
             </div>
 
             <div className="Grid-cell u-size6">
-              <div className="u-spacer-base">
+              <div className="u-spacer-small">
                 <UploadWell photos={this.state.photos} onChange={this.handleUpload} />
               </div>
+
+              {state.errors.photos ? <div className="InfoDetails InfoDetails--danger u-spacer-base">{state.errors.photos}</div> : null}
             </div>
           </div>
         </form>

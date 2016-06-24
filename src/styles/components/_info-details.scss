@@ -1,0 +1,8 @@
+.InfoDetails {
+  color: $color-gray;
+  font-size: $fontSize-small;
+
+  &.InfoDetails--danger {
+    color: $color-red;
+  }
+}
