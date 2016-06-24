@@ -62,8 +62,8 @@ class UserFollowWidget extends Component {
 
   request(data) {
     return this.props.user.is_followed
-      ? axios.delete('/user/follow', { data })
-      : axios.post('/user/follow', data);
+      ? axios.delete('/user/follow/', { data })
+      : axios.post('/user/follow/', data);
   }
 }
 

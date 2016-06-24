@@ -81,12 +81,9 @@ class AppHomeView extends React.Component {
   // @see https://trello.com/c/1UFlbWMW/21-as-a-user-i-should-be-able-to-see-the-feed
   handleFollow = (id) => {
     this.setState((state) => ({
-      feed: state.map((product) => product.user_id === id
+      feed: state.feed.map((product) => product.user_id === id
         ? {
           ...product,
-          // This property is not included in the feed property.
-          // But, we'll use the API's property naming convention
-          // for consistency among the other features/pages.
           is_followed: !product.is_followed
         } : product)
     }));
