@@ -52,6 +52,7 @@ class AppManagePostsCreateView extends Component {
       })
       .then((res) => {
         this.setState({
+          id: res.data.id,
           loading: false,
           success: true
         });
