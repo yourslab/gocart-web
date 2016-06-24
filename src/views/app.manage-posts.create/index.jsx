@@ -12,7 +12,7 @@ import SuccessDialogue from './components/SuccessDialogue';
 class AppManagePostsCreateView extends Component {
   state = {
     loading: false,
-    success: false,
+    success: true,
     id: '',
     errors: {},
     message: ''
