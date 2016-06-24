@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+var fs = require('fs');
+var readdir = require('readdir-recursive');
+var AWS = require('aws-sdk');
+var s3 = new AWS.S3({ region: 'ap-southeast-1' });
+
+var bucket = process.env.S3_BUCKET || 'gocart.ph';
+
+(function() {
+  readdir.file('./public', function(file) {
+    if ( /(DS_Store|Thumbs\.db|\.git)/.test(file) ) {
+      return;
+    }
+
+    s3.putObject({
+      Bucket: bucket,
+      Key: file.substr(7),
+      Body: fs.readFileSync(file),
+      ContentType: mime(file),
+      ACL: 'public-read'
+    }, function(err, data) {
+      if ( err ) {
+        console.error(' error    : ' + err);
+      } else {
+        console.error(' uploaded : ' + file);
+      }
+    });
+  });
+})();
+
+function mime(filename) {
+  var fn = filename.toLowerCase();
+
+  if (fn.indexOf('.html') >= 0) return 'text/html';
+  if (fn.indexOf('.css') >= 0) return 'text/css';
+  if (fn.indexOf('.json') >= 0) return 'application/json';
+  if (fn.indexOf('.js') >= 0) return 'application/x-javascript';
+  if (fn.indexOf('.png') >= 0) return 'image/png';
+  if (fn.indexOf('.jpg') >= 0) return 'image/jpg';
+  if (fn.indexOf('.svg') >= 0) return 'image/svg+xml';
+
+  return 'application/octet-stream';
+}

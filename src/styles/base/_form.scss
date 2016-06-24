@@ -46,14 +46,12 @@ textarea.FormInput {
     margin-bottom: $spacer-large;
   }
 
-  label,
-  .FormGroup-message {
+  label {
     line-height: 2;
   }
 
-  .FormGroup-message {
-    color: $color-red;
-    font-size: $fontSize-small;
+  .FormGroup-info {
+    margin-top: 5px;
   }
 }
 
@@ -65,10 +63,15 @@ textarea.FormInput {
   height: $formSize-base;
   border: 1px solid $color-gray;
   border-radius: $borderRadius-base;
+  transition: 0.1s border-color background;
 
   &.FormInputGroup--backdrop {
     border: 0;
     box-shadow: $backdrop-base;
+  }
+
+  &.FormInputGroup--danger {
+    border-color: $color-red;
   }
 
   &:hover .FormInputGroup-addon {

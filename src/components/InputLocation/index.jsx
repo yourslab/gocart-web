@@ -7,7 +7,7 @@ export default class InputLocation extends Component {
   };
 
   render() {
-    const {type, className, ...props} = this.props;
+    const {type, className, onChange, ...props} = this.props;
 
     return (
       <div className="FormInputGroup">

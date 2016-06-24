@@ -11,7 +11,10 @@ export default {
   // Configuration for assets and paths
   //
   assets: {
-    images: process.env.ASSET_IMAGE_PATH || '/img'
+    images: process.env.ASSET_IMAGE_PATH || '/img',
+
+    // S3 Base URL
+    s3: 'https://s3-ap-southeast-1.amazonaws.com/gocartphotos'
   },
 
   // ==============================

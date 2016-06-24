@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import isMatch from 'lodash/isMatch';
+import moment from 'moment';
 import linkState from 'react-link-state';
 import Modal from 'app/components/Modal';
+import PostTypeSelect from 'app/components/PostTypeSelect';
 
 export default class Filters extends Component {
   state = {
     distance: this.props.filters.distance,
-    type: this.props.filters.type,
+    post_type: this.props.filters.type,
     date: this.props.filters.date,
     price: this.props.filters.price,
     rating: this.props.filters.rating,
@@ -24,10 +25,7 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-sale" valueLink={linkState(this, 'type')}>
-                <option value="0">No type</option>
-                <option value="1">For sale</option>
-              </select>
+              <PostTypeSelect value={this.state.post_type} onChange={this.handleType} className="FormInput" />
             </div>
           </div>
 
@@ -37,8 +35,10 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-date">
-                <option>More than a week ago</option>
+              <select className="FormInput" id="headers-filters-date" valueLink={linkState(this, 'date')}>
+                <option value="">No date specified</option>
+                <option value={moment().subtract(1, 'weeks').format('MM-DD-YYYY')}  >A week ago</option>
+                <option value={moment().subtract(1, 'months').format('MM-DD-YYYY')}>A month ago</option>
               </select>
             </div>
           </div>
@@ -94,5 +94,9 @@ export default class Filters extends Component {
   done = () => {
     this.props.onFilter(this.state);
     this.setState({ open: false });
+  }
+
+  handleType = (value) => {
+    this.setState({ post_type: value });
   }
 }

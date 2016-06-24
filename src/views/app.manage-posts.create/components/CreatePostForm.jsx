@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import linkState from 'react-link-state';
+import {Link} from 'react-router';
+import removeBase64Prefix from 'app/utils/removeBase64Prefix';
 import Switchbox from 'app/components/Switchbox';
 import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
@@ -39,11 +41,9 @@ export default class CreatePostForm extends Component {
               </div>
 
               <div className="SidebarContainer-panelHeadingSectionItem">
-                <a href="#" className="Btn Btn--plain Btn--default">Cancel</a>
-              </div>
-
-              <div className="SidebarContainer-panelHeadingSectionItem">
-                <a href="#" className="Btn Btn--inverted Btn--info">Save as draft</a>
+                <Link to="/manage-posts" className="Btn Btn--plain Btn--default">
+                  Cancel
+                </Link>
               </div>
 
               <div className="SidebarContainer-panelHeadingSectionItem">
@@ -94,14 +94,19 @@ export default class CreatePostForm extends Component {
 
               <div className="FormGroup">
                 <label htmlFor="location">Location</label>
-                <InputLocation id="location" value={this.state.location} onChange={this.handleLocation} />
+                <InputError
+                  element={<InputLocation id="location" value={this.state.location} onChange={this.handleLocation} />}
+                  error={state.errors.latitude || state.errors.longtitude}
+                  classNameModifier="FormInputGroup--danger" />
               </div>
             </div>
 
             <div className="Grid-cell u-size6">
-              <div className="u-spacer-base">
+              <div className="u-spacer-small">
                 <UploadWell photos={this.state.photos} onChange={this.handleUpload} />
               </div>
+
+              {state.errors.photos ? <div className="InfoDetails InfoDetails--danger u-spacer-base">{state.errors.photos}</div> : null}
             </div>
           </div>
         </form>
@@ -119,9 +124,11 @@ export default class CreatePostForm extends Component {
 
     const [latitude, longitude] = this.state.location.split(', ');
     const price = this.state.price_enabled ? parseFloat(this.state.price, 10) : 0;
+    const photos = this.state.photos.map(removeBase64Prefix);
 
     this.props.onPost({
       ...this.state,
+      photos,
       price,
       latitude,
       longitude
