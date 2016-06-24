@@ -117,12 +117,7 @@ class AppHomeView extends React.Component {
     return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)
       .then((res) => {
         this.setState({
-          feed: res.data.map((product) => ({
-            ...product,
-            // @TODO: Remove based on discussion over
-            // https://trello.com/c/1UFlbWMW/21-as-a-user-i-should-be-able-to-see-the-feed
-            is_followed: true
-          })),
+          feed: res.data,
           loading: false,
           offset: offset + 20
         });
