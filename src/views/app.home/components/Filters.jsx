@@ -36,7 +36,7 @@ export default class Filters extends Component {
 
             <div className="FormListGroup-input">
               <select className="FormInput" id="headers-filters-date" valueLink={linkState(this, 'date')}>
-                <option>No date specified</option>
+                <option value="">No date specified</option>
                 <option value={moment().subtract(1, 'weeks').format('MM-DD-YYYY')}  >A week ago</option>
                 <option value={moment().subtract(1, 'months').format('MM-DD-YYYY')}>A month ago</option>
               </select>

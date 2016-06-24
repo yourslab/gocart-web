@@ -110,8 +110,8 @@ class AppHomeView extends React.Component {
 
     const {state, props} = this;
     const {date, ...filters} = state.filters;
-
-    const dateFilter = String(date).length ? {
+    console.log(date);
+    const dateFilter = date.length ? {
       from_date: moment(date, 'MM-DD-YYYY').unix(),
       to_date: moment().unix()
     } : {};
