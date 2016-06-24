@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import linkState from 'react-link-state';
 import {Link} from 'react-router';
+import removeBase64Prefix from 'app/utils/removeBase64Prefix';
 import Switchbox from 'app/components/Switchbox';
 import InputError from 'app/components/InputError';
 import ButtonLoader from 'app/components/ButtonLoader';
@@ -123,9 +124,11 @@ export default class CreatePostForm extends Component {
 
     const [latitude, longitude] = this.state.location.split(', ');
     const price = this.state.price_enabled ? parseFloat(this.state.price, 10) : 0;
+    const photos = this.state.photos.map(removeBase64Prefix);
 
     this.props.onPost({
       ...this.state,
+      photos,
       price,
       latitude,
       longitude
