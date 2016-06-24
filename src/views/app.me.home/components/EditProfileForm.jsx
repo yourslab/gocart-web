@@ -7,7 +7,7 @@ import PhotoUpload from './PhotoUpload';
 
 export default class EditProfileForm extends Component {
 	state = {
-		prof_pic_link: '',
+		prof_pic_link: this.props.auth.prof_pic_link,
 		name: this.props.auth.name,
 		about: this.props.auth.about
 	};

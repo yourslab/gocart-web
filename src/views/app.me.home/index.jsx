@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import axios from 'axios';
 import {update} from 'app/modules/auth';
+import removeBase64Prefix from 'app/utils/removeBase64Prefix';
 import EditProfileForm from './components/EditProfileForm';
 
 class AppManagePostsCreateView extends Component {
@@ -25,7 +26,13 @@ class AppManagePostsCreateView extends Component {
   }
 
   handlePost = (data) => {
-    this.props.actions.update(data);
+    const prof_pic_link = removeBase64Prefix(data.prof_pic_link);
+
+    this.props.actions.update({
+      prof_pic_link,
+      name: data.name,
+      about: data.about
+    });
   }
 }
 

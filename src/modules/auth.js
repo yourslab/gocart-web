@@ -315,6 +315,7 @@ export function update(data) {
     }
     
     dispatch({ type: AUTH_UPDATE });
+    console.log(data);
 
     return axios.put(`/user/${auth.user.id}`, data)
       .then((res) => {
