@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import isMatch from 'lodash/isMatch';
 import linkState from 'react-link-state';
 import Modal from 'app/components/Modal';
+import PostTypeSelect from 'app/components/PostTypeSelect';
 
 export default class Filters extends Component {
   state = {
     distance: this.props.filters.distance,
-    type: this.props.filters.type,
+    post_type: this.props.filters.type,
     date: this.props.filters.date,
     price: this.props.filters.price,
     rating: this.props.filters.rating,
@@ -24,10 +24,7 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-sale" valueLink={linkState(this, 'type')}>
-                <option value="0">No type</option>
-                <option value="1">For sale</option>
-              </select>
+              <PostTypeSelect value={this.state.post_type} onChange={this.handleType} className="FormInput" />
             </div>
           </div>
 
@@ -94,5 +91,9 @@ export default class Filters extends Component {
   done = () => {
     this.props.onFilter(this.state);
     this.setState({ open: false });
+  }
+
+  handleType = (value) => {
+    this.setState({ post_type: value });
   }
 }
