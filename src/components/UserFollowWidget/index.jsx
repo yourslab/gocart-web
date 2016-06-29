@@ -6,6 +6,11 @@ import StaticImg from 'app/components/StaticImg';
 /**
  * A reusable "follow" widget intended
  * for use with ProductCard.
+ *
+ * @todo Fix data not syncing: We can fix this
+ * by putting the loading to the consuming component
+ * instead of here (in short: remove loading state;
+ * make it into a prop)
  */
 class UserFollowWidget extends Component {
   static propTypes = {
@@ -22,19 +27,25 @@ class UserFollowWidget extends Component {
   };
 
   state = {
-    loading: false
+    loading: false,
+    hovered: false
   };
 
   render() {
-    if ( this.state.loading ) {
-      return null;
+    const {loading, hovered} = this.state;
+
+    if ( loading ) {
+      return <div className="Spinner" />;
     }
 
     return (
-      <button type="button" className="PlainBtn" onClick={this.handle}>
+      <button type="button" className="PlainBtn"
+        onMouseOver={this.handleHover}
+        onMouseOut={this.handleOut}
+        onClick={this.handle}>
         {this.props.user.is_followed
-          ? <StaticImg src="icons/unfollow.svg" alt="Unfollow" />
-          : <StaticImg src="icons/follow_icon@1x.png" alt="Follow" />}
+          ? <StaticImg src={`icons/${hovered ? 'unfollow.svg' : 'followed.svg'}`} alt="Unfollow" title="Unfollow" />
+          : <StaticImg src={`icons/${hovered ? 'follow_add.svg' : 'follow_icon@1x.png'}`} alt="Follow" title="Follow" />}
       </button>
     );
   }
@@ -42,16 +53,15 @@ class UserFollowWidget extends Component {
   handle = () => {
     this.setState({ loading: true });
 
-    const {user} = this.props;
-    const method = user.is_followed ? 'delete' : 'post';
+    const {user, auth} = this.props;
 
     return this.request({
-        to_user: this.props.user.id,
-        from_user: this.props.auth.id
+        to_user: user.id,
+        from_user: auth.id
       })
       .then((res) => {
         this.setState({ loading: false });
-        this.props.onFollow(this.props.user.id);
+        this.props.onFollow(user.id);
         return res;
       })
       .catch((res) => {
@@ -64,6 +74,14 @@ class UserFollowWidget extends Component {
     return this.props.user.is_followed
       ? axios.delete('/user/follow/', { data })
       : axios.post('/user/follow/', data);
+  }
+
+  handleHover = () => {
+    this.setState({ hovered: true });
+  }
+
+  handleOut = () => {
+    this.setState({ hovered: false });
   }
 }
 

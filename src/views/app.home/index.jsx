@@ -18,10 +18,10 @@ class AppHomeView extends React.Component {
       longtitude: 0,
       latitude: 0,
       type: 0,
-      distance: 0,
-      rating: 0,
+      // distance: 0,
+      // rating: 0,
       date: '',
-      post_type: 0,
+      // post_type: 0,
     },
 
     loading: false,
