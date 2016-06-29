@@ -1,8 +1,10 @@
 import React, {PropType} from 'react';
+import {Link} from 'react-router';
+import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import Switchbox from 'app/components/Switchbox';
 
-const ProductCard = () =>
+const ProductCard = ({product}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
     <div className="ProductCard">
       <div className="ProductCard-inner">
@@ -11,7 +13,7 @@ const ProductCard = () =>
 
           <div className="ProductCard-thumbnailOverlay">
             <h1 className="ProductCard-pricing">
-              P 0.00
+              P {formatCurrency(product.price)}
             </h1>
           </div>
         </div>
@@ -19,42 +21,33 @@ const ProductCard = () =>
         <div className="ProductCard-body">
           <div className="ProductCard-heading">
             <div>
-              <h4 className="ProductCard-title">Looking for</h4>
+              <h4 className="ProductCard-title">{product.title}</h4>
             </div>
           </div>
 
           <p className="ProductCard-description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt  ut labore et dolore magna aliqua.
+            {product.desc}
           </p>
 
           <div className="CommentMeta">
             <div>
-              <a href="#" className="CommentMeta-highlight">Mary Ann Smithson</a>&nbsp;
-              and <a href="#" className="CommentMeta-highlight">20 bumped this</a>
+              <a href="#" className="CommentMeta-highlight">{product.num_likes} bumped this</a>
             </div>
 
             <div>
-              <span className="CommentMeta-count">3 comments</span>
+              <span className="CommentMeta-count">{product.num_comments} comments</span>
             </div>
           </div>
         </div>
 
         <div className="ProductCard-actions">
           <div className="ProductCard-actionsSection">
-            <Switchbox />
-            &nbsp; Activate
+            <Link to={`/manage-posts/${product.id}/edit`} className="Btn Btn--small Btn--primary">
+              Edit
+            </Link>
           </div>
 
           <div className="ProductCard-actionsSection">
-            <a href="#" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless">
-              Edit
-            </a>
-
-            <a href="#" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless">
-              Archive
-            </a>
-
             <a href="#" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless">
               Delete
             </a>
