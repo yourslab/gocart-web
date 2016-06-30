@@ -306,7 +306,7 @@ export function getData() {
   }
 }
 
-export function update(data) {
+export function update(data, username) {
   return (dispatch, getState) => {
     const {auth} = getState();
     
@@ -315,13 +315,15 @@ export function update(data) {
     }
     
     dispatch({ type: AUTH_UPDATE });
-    
+
     return axios.put(`/user/${auth.user.id}`, data)
       .then((res) => {
         dispatch({
           type: AUTH_UPDATE_SUCCESS,
           payload: data
         })
+
+        history.push(`/@${username}`)
 
         return res;
       })
