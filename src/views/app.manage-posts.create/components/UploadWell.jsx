@@ -27,7 +27,7 @@ export default class UploadWell extends Component {
           <div className="UploadWell-item" key={i}>
             <img src={photo} className="UploadWell-itemThumbnail" />
 
-            <button type="button" className="UploadWell-itemRemove" onClick={this.handleRemove(i)}>
+            <button type="button" className="UploadWell-itemRemove" onClick={this.handleRemove(i)} title="Remove Photo">
               &times;
             </button>
           </div>
@@ -37,7 +37,7 @@ export default class UploadWell extends Component {
           <div className="UploadWell-item" key={i}>
             <div className="UploadWell-itemOverlay">
               <div>
-                <button type="button" className="PlainBtn" onClick={this.handleAdd}>
+                <button type="button" className="PlainBtn" onClick={this.handleAdd} title="New Photo">
                   <StaticImg src="icons/uploadplus.svg" alt="+" />
                 </button>
               </div>

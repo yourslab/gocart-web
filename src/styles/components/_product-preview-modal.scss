@@ -6,7 +6,7 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   overflow-y: scroll;
-  z-index: $zIndex-backdrop;
+  z-index: $zIndex-previewModal;
 
   .ProductPreviewModal-body {
     position: relative;

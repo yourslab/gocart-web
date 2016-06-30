@@ -4,7 +4,7 @@ import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import Switchbox from 'app/components/Switchbox';
 
-const ProductCard = ({product}) =>
+const ProductCard = ({product, onEdit}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
     <div className="ProductCard">
       <div className="ProductCard-inner">
@@ -42,9 +42,9 @@ const ProductCard = ({product}) =>
 
         <div className="ProductCard-actions">
           <div className="ProductCard-actionsSection">
-            <Link to={`/manage-posts/${product.id}/edit`} className="Btn Btn--small Btn--primary">
+            <button type="button" className="Btn Btn--small Btn--primary" onClick={() => onEdit(product.id)}>
               Edit
-            </Link>
+            </button>
           </div>
 
           <div className="ProductCard-actionsSection">

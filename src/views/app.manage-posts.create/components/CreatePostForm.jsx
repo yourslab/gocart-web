@@ -18,7 +18,8 @@ export default class CreatePostForm extends Component {
     price_enabled: true,
     post_type: 1,
     mobile: '',
-    location: '',
+    latitude: 0,
+    longitude: 0,
     photos: []
   };
 
@@ -95,8 +96,8 @@ export default class CreatePostForm extends Component {
               <div className="FormGroup">
                 <label htmlFor="location">Location</label>
                 <InputError
-                  element={<InputLocation id="location" value={this.state.location} onChange={this.handleLocation} />}
-                  error={state.errors.latitude || state.errors.longtitude}
+                  element={<InputLocation id="location" coordinates={{ latitude: this.state.latitude, longitude: this.state.longitude }} onChange={this.handleLocation} />}
+                  error={state.errors.latitude || state.errors.longitude}
                   classNameModifier="FormInputGroup--danger" />
               </div>
             </div>
@@ -122,16 +123,12 @@ export default class CreatePostForm extends Component {
   handle = (evt) => {
     evt.preventDefault();
 
-    const [latitude, longitude] = this.state.location.split(', ');
-    const price = this.state.price_enabled ? parseFloat(this.state.price, 10) : 0;
-    const photos = this.state.photos.map(removeBase64Prefix);
+    const {photos, price, price_enabled, ...state} = this.state;
 
     this.props.onPost({
       ...this.state,
-      photos,
-      price,
-      latitude,
-      longitude
+      photos: photos.map(removeBase64Prefix),
+      price: price_enabled ? parseFloat(price, 10) : 0
     });
   }
 
@@ -147,7 +144,7 @@ export default class CreatePostForm extends Component {
     this.setState({ post_type: type });
   }
 
-  handleLocation = (location) => {
-    this.setState({ location });
+  handleLocation = ({longitude, latitude}) => {
+    this.setState({ longitude, latitude });
   }
 }

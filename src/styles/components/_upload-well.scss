@@ -16,6 +16,12 @@
     background: $color-white;
     border-radius: $borderRadius-base;
     box-shadow: $backdrop-small;
+    opacity: 1;
+    transition: 0.25s opacity;
+  }
+
+  .UploadWell-item--uploading {
+    opacity: 0.5;
   }
 
   .UploadWell-item:hover .UploadWell-itemOverlay {
@@ -24,7 +30,8 @@
   }
 
   .UploadWell-itemThumbnail,
-  .UploadWell-itemOverlay {
+  .UploadWell-itemOverlay,
+  .UploadWell-itemRemoveOverlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -43,6 +50,13 @@
     transition: 0.2s all;
     opacity: 0;
     transform: translateY(-15px);
+  }
+
+  // Custom overlay specifically for `remove`
+  .UploadWell-itemRemoveOverlay {
+    background: $color-black;
+    border-radius: $borderRadius-base;
+    opacity: 0.5;
   }
 
   .UploadWell-itemRemove {

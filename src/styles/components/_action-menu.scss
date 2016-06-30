@@ -2,13 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $color-gray;
 
   .ActionMenu-section {
     display: flex;
     align-items: center;
   }
 
-  .ActionMenu-section:not(:last-child) {
+  .ActionMenu-sectionItem:not(:last-child) {
     margin-right: 10px;
   }
 }

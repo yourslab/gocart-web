@@ -3,7 +3,6 @@ import axios from 'axios';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import lang from 'app/lang';
-import history from 'app/history';
 import isServerError from 'app/utils/isServerError';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
 import CreatePostForm from './components/CreatePostForm';
@@ -62,7 +61,6 @@ class AppManagePostsCreateView extends Component {
       .catch((res) => {
         if ( isServerError(res.status) ) {
           this.setState({
-            id: res.data.id,
             loading: false,
             message: lang.errors.server
           })
