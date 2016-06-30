@@ -20,8 +20,7 @@ export default class EditPostForm extends Component {
     post_type: 1,
     mobile: '',
     latitude: 0,
-    longitude: 0,
-    photos: []
+    longitude: 0
   };
 
   componentWillReceiveProps(nextProps) {
@@ -152,9 +151,7 @@ export default class EditPostForm extends Component {
   handle = (evt) => {
     evt.preventDefault();
 
-    // Remove `photos` from payload since
-    // it has its own separate end-point
-    const {photos, price, price_enabled, ...state} = this.state;
+    const {price, price_enabled, ...state} = this.state;
 
     this.props.onUpdate({
       ...state,

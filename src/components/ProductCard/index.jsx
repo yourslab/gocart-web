@@ -2,7 +2,8 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
-import S3Image from 'app/components/S3Image';
+import UserImg from 'app/components/UserImg';
+import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 
@@ -11,7 +12,7 @@ const ProductCard = ({product, onFollow}) =>
     <div className="ProductCard-userPanel">
       <div className="ProductCard-userPanelSection">
         <Link to={`/@${product.username}`} className="ProductCard-avatarContainer">
-          <S3Image src={product.prof_pic_link} username={product.username} className="ProductCard-avatar" />
+          <UserImg src={product.prof_pic_link} username={product.username} className="ProductCard-avatar" />
         </Link>
 
         <div className="ProductCard-userPanelMeta">
@@ -34,7 +35,7 @@ const ProductCard = ({product, onFollow}) =>
 
     <div className="ProductCard-inner">
       <div className="ProductCard-thumbnail">
-        <S3Image src={product.photo_list[0]} username={product.username} className="ProductCard-thumbnailImage" />
+        <ProductImg src={product.photo_list[0]} id={product.user_id} className="ProductCard-thumbnailImage" />
 
         <div className="ProductCard-thumbnailOverlay">
           <h1 className="ProductCard-pricing">

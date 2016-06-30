@@ -1,12 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router';
-import S3Image from 'app/components/S3Image';
+import UserImg from 'app/components/UserImg';
 
 const UserCard = ({user}) =>
   <div className="Grid-cell u-size4 u-spacer-base">
     <Link to={`/@${user.username}`} className="SearchUserCard">
       <div>
-        <S3Image src={user.prof_pic_link} username={user.username} className="SearchUserCard-avatar" alt="Avatar" />
+        <UserImg src={user.prof_pic_link} username={user.username} className="SearchUserCard-avatar" alt="Avatar" />
       </div>
 
       <div>

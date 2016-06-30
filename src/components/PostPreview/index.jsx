@@ -4,7 +4,10 @@ import removeClass from 'dom-helpers/class/removeClass';
 import {Gateway} from 'react-gateway';
 import ClickOutside from 'react-click-outside';
 import formatCurrency from 'app/utils/formatCurrency';
+import getProductPhotos from 'app/utils/getProductPhotos';
 import StaticImg from 'app/components/StaticImg';
+import UserImg from 'app/components/UserImg';
+import ProductImg from 'app/components/ProductImg';
 
 /**
  * @REFACTOR Make a very plain modal component (all it does
@@ -33,6 +36,7 @@ export default class PostPreview extends Component {
 
   render() {
     const {auth, product} = this.props;
+    console.log(getProductPhotos(product));
 
     return this.state.open ? (
       <Gateway into="global">
@@ -48,7 +52,7 @@ export default class PostPreview extends Component {
 
                 <div className="ProductCardFull">
                   <div className="ProductCardFull-thumbnail">
-                    <img src={product.photos[0] || ''} className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
+                    <ProductImg src={getProductPhotos(product)[0]} id={product.id} className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
 
                     <div className="ProductCardFull-thumbnailOverlay">
                       <div className="ProductCardFull-thumbnailOverlaySection">
@@ -66,7 +70,7 @@ export default class PostPreview extends Component {
                     <div className="ProductCardFull-panelCanopy">
                       <div className="ProductCardFull-panelCanopySection">
                         <div className="ProductCardFull-panelCanopySectionItem">
-                          <img src={auth.profile_pic_link || 'https://placeimg.com/120/100/any'} className="ProductCardFull-avatar" alt="Thumbnail" />
+                          <UserImg src={auth.prof_pic_link} username={auth.username} className="ProductCardFull-avatar" alt="Thumbnail" />
                         </div>
 
                         <div className="ProductCardFull-panelCanopySectionItem">
