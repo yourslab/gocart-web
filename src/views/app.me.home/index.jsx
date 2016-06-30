@@ -26,10 +26,8 @@ class AppManagePostsCreateView extends Component {
   }
 
   handlePost = (data) => {
-    const prof_pic_link = removeBase64Prefix(data.prof_pic_link);
-
     this.props.actions.update({
-      prof_pic_link,
+      prof_pic_link: removeBase64Prefix(data.prof_pic_link),
       name: data.name,
       about: data.about
     });
