@@ -2,9 +2,8 @@ import React, {PropType} from 'react';
 import {Link} from 'react-router';
 import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
-import Switchbox from 'app/components/Switchbox';
 
-const ProductCard = ({product, onEdit}) =>
+const ProductCard = ({product, onEdit, onDelete}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
     <div className="ProductCard">
       <div className="ProductCard-inner">
@@ -48,9 +47,9 @@ const ProductCard = ({product, onEdit}) =>
           </div>
 
           <div className="ProductCard-actionsSection">
-            <a href="#" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless">
+            <button type="button" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless" onClick={() => onDelete(product.id)}>
               Delete
-            </a>
+            </button>
           </div>
         </div>
       </div>

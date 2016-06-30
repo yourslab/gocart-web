@@ -59,7 +59,7 @@ export default class Modal extends Component {
         isOpen={this.state.open}
         onRequestClose={close}
         className={cn({'ReactModal__Content--small': size === 'sm'}, {'ReactModal__Content--large': size === 'lg'})}
-        style={!isNaN(size) ? { content: { width: size } } : null}>
+        style={!isNaN(size) ? { content: { width: size } } : {}}>
         <div className="ReactModal__closeButton">
           <button onClick={close} className="PlainBtn">
             <StaticImg src="icons/close_white@1x.png" />
