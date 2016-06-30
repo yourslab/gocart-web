@@ -25,17 +25,18 @@ export default class Infinite extends Component {
   // If the container is window, this is set to window.
   // Otherwise, set to the container element.
   get scroller() {
-    // return this.props.container
-    //   ? this.refs.
-    //   : window;
-    return window;
+    return this.props.container
+      ? this.refs.container
+      : window;
   }
 
   // The container.
   // If the container is window, this is set to body.
   // Otherwise, set to the container element.
   get container() {
-    return document.querySelector('html, body');
+    return this.props.container 
+      ? this.refs.container 
+      : document.querySelector('html, body');
   }
 
   componentDidMount() {
@@ -47,7 +48,15 @@ export default class Infinite extends Component {
   }
 
   render() {
-    return <div ref="container">{this.props.children}</div>;
+    const {children, ...props, offset, disabled, container} = this.props;
+    return <div 
+      ref="container"
+      offset={offset}
+      disabled={disabled}
+      container={container} 
+      {...props}>
+        {children}
+      </div>;
   }
 
   handle = () => {

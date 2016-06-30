@@ -5,6 +5,7 @@ import lang from 'app/lang';
 import config from 'app/config';
 import facebook from 'app/utils/facebook';
 import isServerError from 'app/utils/isServerError';
+import formatValidationErrors from 'app/utils/formatValidationErrors';
 
 const LOGOUT = 'authentication:logout';
 const AUTHENTICATE = 'authentication:start';
@@ -14,6 +15,9 @@ const AUTH_GET_DATA = 'user:get';
 const FACEBOOK_AUTHENTICATE = 'authentication:facebook';
 const FACEBOOK_AUTHENTICATE_SUCCESS = 'authentication:facebook-success';
 const FACEBOOK_AUTHENTICATE_ERROR = 'authentication:facebook-error';
+const AUTH_UPDATE = 'authentication:update';
+const AUTH_UPDATE_SUCCESS = 'authentication:update-success';
+const AUTH_UPDATE_ERROR = 'authentication:update-error';
 
 const initialState = {
   user: {},
@@ -27,6 +31,13 @@ const initialState = {
   facebook: {
     loading: false,
     message: '',
+  }, 
+
+  update: {
+    loading: false,
+    message: '',
+    error: false,
+    errors: {}
   }
 };
 
@@ -105,6 +116,43 @@ export default function authReducer(state = initialState, action) {
         token: action.payload.token,
         user: action.payload.data
       };
+
+    case AUTH_UPDATE:
+      return {
+        ...state,
+        update: {
+          ...state.update,
+          loading: true,
+          error: false,
+          errors: {}
+        }
+      };
+
+    case AUTH_UPDATE_SUCCESS: 
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          ...action.payload
+        },
+        update: {
+          ...state.update,
+          loading: false,
+          error: false,
+          errors: {}
+        }
+      }
+
+    case AUTH_UPDATE_ERROR:
+      return {
+        ...state,
+        update: {
+          ...state.update,
+          loading: false,
+          error: true,
+          errors: action.payload.errors
+        }
+      }
 
     default:
       return state;
@@ -254,6 +302,39 @@ export function getData() {
         });
 
         return res;
+      });
+  }
+}
+
+export function update(data) {
+  return (dispatch, getState) => {
+    const {auth} = getState();
+    
+    if ( auth.update.loading ) {
+      return;
+    }
+    
+    dispatch({ type: AUTH_UPDATE });
+    console.log(data);
+
+    return axios.put(`/user/${auth.user.id}`, data)
+      .then((res) => {
+        dispatch({
+          type: AUTH_UPDATE_SUCCESS,
+          payload: data
+        })
+
+        return res;
+      })
+      .catch((res) => {
+        dispatch({
+          type: AUTH_UPDATE_ERROR,
+          payload: {
+            errors: formatValidationErrors(res.data.errors)
+          }
+        })
+
+        return Promise.reject(res);
       });
   }
 }

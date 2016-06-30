@@ -14,6 +14,11 @@
 		font-size: 32px;
 	}
 
+	.UserListGroup-body {
+		overflow-y: scroll;
+		height: 250px;
+	}
+
 	.UserListGroup-item {
 		display: flex;
 		align-items: center;
@@ -22,6 +27,7 @@
 		padding: 10px;
 		margin-left: auto;
 		margin-right: auto;
+		margin-bottom: 5px;
 		border-bottom: 1px solid $color-gray;
 	}
 
@@ -29,6 +35,7 @@
 		width: 50px;
 		height: 50px;
 		border-radius: 50%;
+		margin-right: 10px;
 	}
 
 	.UserListGroup-details {
