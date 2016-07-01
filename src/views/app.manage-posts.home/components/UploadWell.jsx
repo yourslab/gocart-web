@@ -32,7 +32,6 @@ export default class UploadWell extends Component {
   render() {
     const {id, photos} = this.props;
     const {removing, uploading} = this.state;
-    console.log(photos);
 
     return (
       <div className="UploadWell">
