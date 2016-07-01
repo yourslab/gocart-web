@@ -18,6 +18,7 @@ class AppHomeView extends React.Component {
       // longtitude: 0,
       // latitude: 0,
       post_type: '',
+      price: [0, 100000],
       // distance: 0,
       // rating: 0,
       date: ''
@@ -84,7 +85,7 @@ class AppHomeView extends React.Component {
 
   handleFilter = (filters) => {
     this.setState({ filters }, () => {
-      this.handleRequest(0, filters)
+      this.handleRequest(0);
     });
   }
 
@@ -99,7 +100,7 @@ class AppHomeView extends React.Component {
     });
 
     const {state, props} = this;
-    const {date, post_type, ...filters} = state.filters;
+    const {date, post_type, price, ...filters} = state.filters;
 
     const dateFilter = date.length ? {
       from_date: moment(date, 'MM-DD-YYYY').unix(),
@@ -112,6 +113,8 @@ class AppHomeView extends React.Component {
       ...filters,
       ...dateFilter,
       ...typeFilter,
+      from_price: price[0],
+      to_price: price[1],
       start: offset,
       end: offset + 19,
       type: 1

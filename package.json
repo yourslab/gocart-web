@@ -25,6 +25,7 @@
     "moment": "^2.13.0",
     "node-sass": "^3.4.2",
     "numeral": "^1.5.3",
+    "rc-slider": "^3.7.3",
     "react": "^0.14.2",
     "react-click-outside": "github:tj/react-click-outside",
     "react-dom": "^0.14.2",

@@ -3,6 +3,7 @@ import moment from 'moment';
 import linkState from 'react-link-state';
 import Modal from 'app/components/Modal';
 import PostTypeSelect from 'app/components/PostTypeSelect';
+import RangeSlider from 'rc-slider';
 
 export default class Filters extends Component {
   state = {
@@ -49,9 +50,13 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-price" valueLink={linkState(this, 'price')}>
-                <option>No price</option>
-              </select>
+              <RangeSlider
+                range
+                min={0}
+                max={100000}
+                allowCross={false}
+                defaultValue={this.state.price}
+                onAfterChange={this.handlePrice} />
             </div>
           </div>
 
@@ -99,5 +104,9 @@ export default class Filters extends Component {
 
   handleType = (value) => {
     this.setState({ post_type: value });
+  }
+
+  handlePrice = (value) => {
+    this.setState({ price: value });
   }
 }
