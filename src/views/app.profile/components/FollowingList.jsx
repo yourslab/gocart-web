@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import axios from 'axios';
+import qs from 'qs';
+import formatValidationErrors from 'app/utils/formatValidationErrors';
 import Infinite from 'app/components/Infinite';
 
 export default class FollowingList extends Component {
 	state = {
-		following: [{}, {}, {}, {}, {}, {}],
+		following: [],
 		loading: false,
-		error: false
+		error: false,
+    offset: 0
 	};
+
+  componentDidMount() {
+    this.handleRequest();
+  }
 
 	render() {
 		return (
@@ -16,8 +24,8 @@ export default class FollowingList extends Component {
 		 			<h1> Following </h1>
 		 		</div>
 
-		 		<Infinite 
-	 				callback={this.handleRequest} 
+		 		<Infinite
+	 				callback={this.handleRequest}
 	 				className="UserListGroup-body"
 	 				container>
 	 				{this.state.following.map((user, i) =>
@@ -44,21 +52,44 @@ export default class FollowingList extends Component {
 		);
 	}
 
-	handleRequest = () => {
+	handleRequest = (offset = this.state.offset) => {
     if ( this.state.loading ) {
       return;
     }
+
+    const {auth, user} = this.props;
 
     this.setState({
       loading: true,
       error: false
     });
 
-    setTimeout(() => {
-      this.setState((state) => ({
-        following: [...state.following, {}, {}],
-        loading: false
-      }));
-    }, 1500);
+    const query = qs.stringify({
+      to_id: user.id,
+      start: offset,
+      end: offset + 5
+    });
+
+    return axios.get(`/user/${auth.id}/following/?${query}`)
+      .then((res) => {
+        this.setState({
+          following: res.data,
+          loading: false,
+          error: false,
+          offset: offset + 5
+        });
+
+        return res;
+      })
+      .catch((res) => {
+        this.setState({
+          loading: false,
+          error: true,
+          errors: formatValidationErrors(res.data.errors)
+        });
+
+        return Promise.reject(res);
+      });
+
   }
 }

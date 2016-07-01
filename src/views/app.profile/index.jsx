@@ -61,11 +61,11 @@ class AppProfileView extends Component {
                 </div>
 
                 <div>
-                  {user.id === auth.id 
+                  {user.id === auth.id
                     ? <Link to="/me" className="Btn Btn--clean">
                       Edit Profile
                       </Link>
-                    : null 
+                    : null
                   }
                 </div>
               </div>
@@ -75,23 +75,23 @@ class AppProfileView extends Component {
               <div className="ProfilePanel-canopy">
                 <div className="ProfilePanel-canopySection">
                   <div className="ProfilePanel-canopySectionItem">
-                    <button 
-                      onClick={() => this.refs.followers.open()} 
+                    <button
+                      onClick={() => this.refs.followers.open()}
                       className="Btn Btn--primary Btn--inverted Btn--borderless">
                       {user.num_followers} Followers
                     </button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button 
-                      onClick={() => this.refs.following.open()} 
+                    <button
+                      onClick={() => this.refs.following.open()}
                       className="Btn Btn--primary Btn--inverted Btn--borderless">
                       {user.num_following} Following
                     </button>
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button 
+                    <button
                       className="Btn Btn--primary Btn--inverted Btn--borderless">
                       {user.num_reviews} Reviews
                     </button>
@@ -158,13 +158,13 @@ class AppProfileView extends Component {
         <Modal
           ref="followers"
           size="sm">
-          <FollowersList onClose={() => this.refs.followers.close()} />
+          <FollowersList auth={auth} user={user} onClose={() => this.refs.followers.close()} />
         </Modal>
 
         <Modal
           ref="following"
           size="sm">
-          <FollowingList onClose={() => this.refs.following.close()} />
+          <FollowingList auth={auth} user={user} onClose={() => this.refs.following.close()} />
         </Modal>
       </div>
     );
@@ -216,7 +216,7 @@ const mapState = state => ({
 });
 
 export default flowRight(
-  resolve('user', (props) => { 
+  resolve('user', (props) => {
     return axios
       .get(`user/@${props.routeParams.user}`)
       .then((res) => res.data);
