@@ -65,7 +65,7 @@ export default class FollowersList extends Component {
     });
 
     const query = qs.stringify({
-      to_id: user.id,
+      to_id: user.id === auth.id ? '' : user.id,
       start: offset,
       end: offset + 5
     });
