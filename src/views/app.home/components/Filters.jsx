@@ -6,7 +6,7 @@ import PostTypeSelect from 'app/components/PostTypeSelect';
 
 export default class Filters extends Component {
   state = {
-    distance: this.props.filters.distance,
+    // distance: this.props.filters.distance,
     post_type: this.props.filters.type,
     date: this.props.filters.date,
     price: this.props.filters.price,
@@ -37,7 +37,7 @@ export default class Filters extends Component {
             <div className="FormListGroup-input">
               <select className="FormInput" id="headers-filters-date" valueLink={linkState(this, 'date')}>
                 <option value="">No date specified</option>
-                <option value={moment().subtract(1, 'weeks').format('MM-DD-YYYY')}  >A week ago</option>
+                <option value={moment().subtract(1, 'weeks').format('MM-DD-YYYY')}>A week ago</option>
                 <option value={moment().subtract(1, 'months').format('MM-DD-YYYY')}>A month ago</option>
               </select>
             </div>
@@ -92,7 +92,8 @@ export default class Filters extends Component {
   }
 
   done = () => {
-    this.props.onFilter(this.state);
+    const {open, ...filters} = this.state;
+    this.props.onFilter(filters);
     this.setState({ open: false });
   }
 
