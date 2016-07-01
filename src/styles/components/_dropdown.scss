@@ -1,0 +1,22 @@
+.Dropdown {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: $color-white;
+  border: 1px solid $color-gray;
+  border-radius: $borderRadius-base;
+  box-shadow: $backdrop-base;
+
+  .Dropdown-link {
+    @include linkNoUnderscore;
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: $color-black;
+    background: $color-white;
+    transition: 0.15s background;
+  }
+
+  .Dropdown-link:hover {
+    background: $color-gray;
+  }
+}

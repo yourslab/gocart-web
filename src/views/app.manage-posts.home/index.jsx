@@ -8,6 +8,7 @@ import formatValidationErrors from 'app/utils/formatValidationErrors';
 import Infinite from 'app/components/Infinite';
 import ProductCard from './components/ProductCard';
 import EditPostForm from './components/EditPostForm';
+import DeletePostForm from './components/DeletePostForm';
 
 class AppManagePostsHomeView extends Component {
   state = {
@@ -29,7 +30,8 @@ class AppManagePostsHomeView extends Component {
     del: {
       id: 0,
       loading: false,
-      message: ''
+      message: '',
+      prompt: false
     }
   };
 
@@ -39,7 +41,7 @@ class AppManagePostsHomeView extends Component {
 
   render() {
     const {auth} = this.props;
-    const {feed, update} = this.state;
+    const {del, feed, update} = this.state;
 
     return (
       <div>
@@ -61,7 +63,8 @@ class AppManagePostsHomeView extends Component {
               <ProductCard
                 product={product}
                 onEdit={this.handleEdit}
-                key={i} />
+                onDelete={this.handleOpenDeletePrompt}
+                key={product.id} />
             )}
           </div>
         </Infinite>
@@ -75,6 +78,12 @@ class AppManagePostsHomeView extends Component {
         onCancelEdit={this.handleCancelEdit}
         onUpdate={this.handleUpdate}
         onUpload={this.handleUpload} />
+
+      <DeletePostForm
+        state={del}
+        id={del.id}
+        onCloseDeletePrompt={this.handleCloseDeletePrompt}
+        onDelete={this.handleDelete} />
       </div>
     );
   }
@@ -199,6 +208,69 @@ class AppManagePostsHomeView extends Component {
         }
 
         return Promise.reject(res);
+      });
+  }
+
+  handleOpenDeletePrompt = (id) => {
+    this.setState(({del}) => ({
+      del: {
+        ...del,
+        id,
+        prompt: true
+      }
+    }));
+  }
+
+  handleCloseDeletePrompt = () => {
+    this.setState(({del}) => ({
+      del: {
+        ...del,
+        id: 0,
+        prompt: false
+      }
+    }));
+  }
+
+  handleDelete = () => {
+    if ( this.state.del.loading ) {
+      return;
+    }
+
+    this.setState(({del}) => ({
+      del: {
+        ...del,
+        message: '',
+        loading: true
+      }
+    }));
+
+    const {id} = this.state.del;
+
+    return axios.delete(`/post/${id}`)
+      .then((res) => {
+        this.setState((state) => ({
+          feed: {
+            ...state.feed,
+            data: state.feed.data.filter((product) => product.id !== id),
+            offset: state.offset - 1
+          },
+
+          del: {
+            ...state.del,
+            id: 0,
+            prompt: false,
+            loading: false
+          }
+        }));
+      })
+      .catch((res) => {
+        this.setState(({del}) => ({
+          del: {
+            ...del,
+            loading: false,
+            message: lang.errors.server
+          }
+        }));
       });
   }
 
