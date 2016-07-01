@@ -66,14 +66,13 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-rating" valueLink={linkState(this, 'rating')}>
-                <option value="0">No rating</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+              <RangeSlider
+                range
+                min={0}
+                max={5}
+                allowCross={false}
+                defaultValue={this.state.rating}
+                onAfterChange={this.handleRating} />
             </div>
           </div>
         </div>
@@ -107,6 +106,10 @@ export default class Filters extends Component {
   }
 
   handlePrice = (value) => {
+    this.setState({ price: value });
+  }
+
+  handleRating = (value) => {
     this.setState({ price: value });
   }
 }
