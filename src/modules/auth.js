@@ -323,7 +323,7 @@ export function update(data, username) {
           payload: data
         })
 
-        history.push(`/@${username}`)
+        history.push(`/@${username}`);
 
         return res;
       })
