@@ -17,11 +17,10 @@ class AppHomeView extends React.Component {
     filters: {
       // longtitude: 0,
       // latitude: 0,
-      post_type: 0,
+      post_type: '',
       // distance: 0,
       // rating: 0,
-      date: 0,
-      // post_type: 0,
+      date: ''
     },
 
     loading: false,
@@ -107,11 +106,12 @@ class AppHomeView extends React.Component {
       to_date: moment().unix()
     } : {};
 
-    const typeFilter = post_type !== 0 ? { post_type } : {};
+    const typeFilter = post_type.length ? { post_type } : {};
 
     const query = qs.stringify({
       ...filters,
       ...dateFilter,
+      ...typeFilter,
       start: offset,
       end: offset + 19,
       type: 1

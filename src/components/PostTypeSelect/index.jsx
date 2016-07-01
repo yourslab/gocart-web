@@ -11,6 +11,8 @@ export default class PostTypeTypeahead extends Component {
   render() {
     return (
       <select {...this.props} onChange={this.handle}>
+        <option value="">Select post type</option>
+
         {types.map((type, i) =>
           <option value={type.id} key={i}>
             {type.label}

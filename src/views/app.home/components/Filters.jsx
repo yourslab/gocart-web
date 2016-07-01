@@ -7,7 +7,7 @@ import PostTypeSelect from 'app/components/PostTypeSelect';
 export default class Filters extends Component {
   state = {
     // distance: this.props.filters.distance,
-    post_type: this.props.filters.type,
+    post_type: this.props.filters.post_type,
     date: this.props.filters.date,
     price: this.props.filters.price,
     rating: this.props.filters.rating,
