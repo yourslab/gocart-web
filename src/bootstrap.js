@@ -18,5 +18,5 @@ if ( process.env.NODE_ENV !== 'production' ) {
   };
 }
 
-require('axios-base-url')(config.api);
+import './utils/axios/interceptors/base';
 import './utils/axios/interceptors/auth';
