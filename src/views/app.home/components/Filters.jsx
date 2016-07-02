@@ -111,6 +111,6 @@ export default class Filters extends Component {
   }
 
   handleRating = (value) => {
-    this.setState({ price: value });
+    this.setState({ rating: value });
   }
 }
