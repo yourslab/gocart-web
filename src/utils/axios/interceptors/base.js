@@ -7,7 +7,6 @@ import config from 'app/config';
 axios.interceptors.request.use(function (request) {
   if ( !isAbsoluteURL(request.url) ) {
     request.url = `${trimEnd(config.api, '/')}/${trimStart(request.url, '/')}`;
-    console.log(request.url);
   }
 
   return request;
