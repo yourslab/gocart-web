@@ -3,11 +3,12 @@ import moment from 'moment';
 import linkState from 'react-link-state';
 import Modal from 'app/components/Modal';
 import PostTypeSelect from 'app/components/PostTypeSelect';
+import RangeSlider from 'rc-slider';
 
 export default class Filters extends Component {
   state = {
-    distance: this.props.filters.distance,
-    post_type: this.props.filters.type,
+    // distance: this.props.filters.distance,
+    post_type: this.props.filters.post_type,
     date: this.props.filters.date,
     price: this.props.filters.price,
     rating: this.props.filters.rating,
@@ -37,7 +38,7 @@ export default class Filters extends Component {
             <div className="FormListGroup-input">
               <select className="FormInput" id="headers-filters-date" valueLink={linkState(this, 'date')}>
                 <option value="">No date specified</option>
-                <option value={moment().subtract(1, 'weeks').format('MM-DD-YYYY')}  >A week ago</option>
+                <option value={moment().subtract(1, 'weeks').format('MM-DD-YYYY')}>A week ago</option>
                 <option value={moment().subtract(1, 'months').format('MM-DD-YYYY')}>A month ago</option>
               </select>
             </div>
@@ -49,9 +50,13 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-price" valueLink={linkState(this, 'price')}>
-                <option>No price</option>
-              </select>
+              <RangeSlider
+                range
+                min={0}
+                max={100000}
+                allowCross={false}
+                defaultValue={this.state.price}
+                onAfterChange={this.handlePrice} />
             </div>
           </div>
 
@@ -61,14 +66,14 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <select className="FormInput" id="headers-filters-rating" valueLink={linkState(this, 'rating')}>
-                <option value="0">No rating</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+              <RangeSlider
+                range
+                min={0}
+                max={5}
+                marks={{ 0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
+                allowCross={false}
+                defaultValue={this.state.rating}
+                onAfterChange={this.handleRating} />
             </div>
           </div>
         </div>
@@ -92,11 +97,20 @@ export default class Filters extends Component {
   }
 
   done = () => {
-    this.props.onFilter(this.state);
+    const {open, ...filters} = this.state;
+    this.props.onFilter(filters);
     this.setState({ open: false });
   }
 
   handleType = (value) => {
     this.setState({ post_type: value });
+  }
+
+  handlePrice = (value) => {
+    this.setState({ price: value });
+  }
+
+  handleRating = (value) => {
+    this.setState({ rating: value });
   }
 }

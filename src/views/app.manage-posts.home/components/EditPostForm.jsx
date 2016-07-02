@@ -40,10 +40,6 @@ export default class EditPostForm extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.refs.modal.close();
-  }
-
   render() {
     const {auth, product, state, onCancelEdit} = this.props;
 

@@ -16,10 +16,6 @@ export default class DeletePostForm extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.refs.modal.close();
-  }
-
   render() {
     const {id, state, onDelete, onCloseDeletePrompt} = this.props;
 
