@@ -70,6 +70,7 @@ export default class Filters extends Component {
                 range
                 min={0}
                 max={5}
+                marks={{ 0: '0', 1: '1', 2: '2', 3: '3', 4: '4', 5: '5' }}
                 allowCross={false}
                 defaultValue={this.state.rating}
                 onAfterChange={this.handleRating} />

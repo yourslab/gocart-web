@@ -208,7 +208,7 @@
   position: absolute;
   left: -9999px;
   top: -9999px;
-  z-index: 4;
+  z-index: $zIndex-rcTooltip;
   visibility: visible;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
