@@ -22,7 +22,7 @@ export default class EditProfileForm extends Component {
 
           <div className="SidebarContainer-panelHeadingSection">
             <div className="SidebarContainer-panelHeadingSectionItem">
-              <Link to="/@srph" className="Btn Btn--default">
+              <Link to={`/@${auth.username}`} className="Btn Btn--default">
                 Cancel
               </Link>
             </div>
@@ -83,38 +83,38 @@ export default class EditProfileForm extends Component {
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-                  	<input 
-                  		type="text" 
+                  	<input
+                  		type="text"
                   		id="subdivision"
-                  		className="FormInput" 
-                  		placeholder="Unit No., Building / Subdivision" 
+                  		className="FormInput"
+                  		placeholder="Unit No., Building / Subdivision"
                   		disabled />
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-                  	<input 
-                  		type="text" 
+                  	<input
+                  		type="text"
                   		id="barangay"
-                  		className="FormInput" 
-                  		placeholder="Street Name, Barangay" 
+                  		className="FormInput"
+                  		placeholder="Street Name, Barangay"
                   		disabled />
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-                  	<input 
-                  		type="text" 
+                  	<input
+                  		type="text"
                   		id="city"
-                  		className="FormInput" 
-                  		placeholder="Town / City" 
+                  		className="FormInput"
+                  		placeholder="Town / City"
                   		disabled />
                   </div>
 
                   <div className="FormGroup FormGroup--narrow">
-	                  <input 
-                  		type="text" 
+	                  <input
+                  		type="text"
                   		id="province"
-                  		className="FormInput" 
-                  		placeholder="Province" 
+                  		className="FormInput"
+                  		placeholder="Province"
                   		disabled />
                   </div>
 
@@ -131,7 +131,7 @@ export default class EditProfileForm extends Component {
                       		type="text"
                       		className="FormInput"
                       		id="state"
-                      		placeholder="State" 
+                      		placeholder="State"
                       		disabled />
                       </div>
                     </div>
@@ -142,7 +142,7 @@ export default class EditProfileForm extends Component {
                       		type="text"
                       		className="FormInput"
                       		id="subdivision"
-                      		placeholder="Subdivision" 
+                      		placeholder="Subdivision"
                       		disabled />
                       </div>
                     </div>
@@ -153,7 +153,7 @@ export default class EditProfileForm extends Component {
                   		type="text"
                   		className="FormInput"
                   		id="landmark"
-                  		placeholder="Landmark(s)" 
+                  		placeholder="Landmark(s)"
                   		disabled />
                   </div>
 
@@ -161,7 +161,7 @@ export default class EditProfileForm extends Component {
                     <label>
                     	<input
                     		type="checkbox"
-                    		id="default_address" 
+                    		id="default_address"
                     		disabled />
                       &nbsp; Make this default address
                     </label>
