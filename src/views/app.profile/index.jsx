@@ -61,7 +61,7 @@ class AppProfileView extends Component {
                 </div>
 
                 <div>
-                  {user.id === auth.id
+                  {auth.id === user.id
                     ? <Link to="/me" className="Btn Btn--clean">
                       Edit Profile
                       </Link>
@@ -98,37 +98,21 @@ class AppProfileView extends Component {
                   </div>
                 </div>
 
-                <div className="ProfilePanel-canopySection">
-                  <div className="ProfilePanel-canopySectionItem">
-                    <button className="Btn Btn--primary Btn--inverted">
-                      Chat
-                    </button>
-                  </div>
+                {auth.id === user.id
+                  ? null
+                  : <div className="ProfilePanel-canopySection">
+                      <div className="ProfilePanel-canopySectionItem">
+                        <button className="Btn Btn--primary Btn--inverted">
+                          Chat
+                        </button>
+                      </div>
 
-                  <div className="ProfilePanel-canopySectionItem">
-                    <button className="Btn Btn--success">
-                      Follow
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="ProfilePanel-bodyHeading">
-                <div>
-                  <h1 className="ProfilePanel-bodyHeadingTitle">My Cart</h1>
-                </div>
-
-                <div>
-                  <div className="Tab Tab--info">
-                    <a href="#" className="Tab-item">New</a>
-                    <a href="#" className="Tab-item">Popular</a>
-                    <a href="#" className="Tab-item">Active</a>
-                    <a href="#" className="Tab-item Tab-item--active">Active</a>
-                    <a href="#" className="Tab-item">Inactive</a>
-                    <a href="#" className="Tab-item">Expired</a>
-                    <a href="#" className="Tab-item">Sold</a>
-                  </div>
-                </div>
+                      <div className="ProfilePanel-canopySectionItem">
+                        <button className="Btn Btn--success">
+                          Follow
+                        </button>
+                      </div>
+                    </div>}
               </div>
 
               <Infinite callback={this.handleRequest}>
@@ -142,7 +126,7 @@ class AppProfileView extends Component {
                     ? <div className="Grid-cell u-size6 u-spacer-base">
                         <Link to="/manage-posts/create" className="BlankSlate">
                           <StaticImg src="/icons/post_icon@1x.png" />
-                          <h1> Add Shelf </h1>
+                          <h1> Add Post </h1>
                         </Link>
                       </div>
                     : null

@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import axios from 'axios';
 import qs from 'qs';
-import formatValidationErrors from 'app/utils/formatValidationErrors';
+import lang from 'app/lang';
+import isServerError from 'app/utils/isServerError';
 import Infinite from 'app/components/Infinite';
 
 export default class FollowersList extends Component {
@@ -10,6 +11,7 @@ export default class FollowersList extends Component {
 		followers: [],
 		loading: false,
 		error: false,
+    message: '',
     offset: 0
 	};
 
@@ -18,6 +20,7 @@ export default class FollowersList extends Component {
   }
 
 	render() {
+    console.log(this.state.message);
 		return (
 			<div className="UserListGroup">
 		 		<div className="UserListGroup-heading">
@@ -32,7 +35,7 @@ export default class FollowersList extends Component {
 	 					<div className="UserListGroup-item" key={i}>
 			 				<img className="UserListGroup-image" src="https://placeimg.com/50/50/people" />
 			 				<div className="UserListGroup-details">
-			 					<h5 className="UserListGroup-name"> John Doe </h5>
+			 					<h5 className="UserListGroup-name"> {user.name} </h5>
 			 					<h6 className="UserListGroup-followers"> 6969 followers </h6>
 			 				</div>
 			 				<div className="UserListGroup-actions">
@@ -53,11 +56,11 @@ export default class FollowersList extends Component {
 	}
 
 	handleRequest = (offset = this.state.offset) => {
-    if ( this.state.loading ) {
+    const {state, props} = this;
+
+    if ( state.loading && !state.errors ) {
       return;
     }
-
-    const {auth, user} = this.props;
 
     this.setState({
       loading: true,
@@ -65,15 +68,17 @@ export default class FollowersList extends Component {
     });
 
     const query = qs.stringify({
-      to_id: user.id === auth.id ? '' : user.id,
+      to_id: props.user.id === props.auth.id ? '' : props.user.id,
       start: offset,
       end: offset + 5
     });
 
-    return axios.get(`/user/${auth.id}/followers/?${query}`)
+    return axios.get(`/user/${props.auth.id}/followers/?${query}`)
       .then((res) => {
         this.setState({
-          followers: res.data,
+          followers: offset === 0
+            ? res.data
+            : [...state.followers, ...res.data],
           loading: false,
           error: false,
           offset: offset + 5
@@ -82,11 +87,17 @@ export default class FollowersList extends Component {
         return res;
       })
       .catch((res) => {
-        this.setState({
-          loading: false,
-          error: true,
-          errors: formatValidationErrors(res.data.errors)
-        });
+        if ( isServerError ) {
+          this.setState({
+            loading: false,
+            message: lang.errors.server
+          });
+        } else {
+          this.setState({
+            loading: false,
+            message: res.data.status == 404 ? 'Last Page' : ''
+          });
+        }
 
         return Promise.reject(res);
       });

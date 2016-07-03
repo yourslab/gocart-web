@@ -32,7 +32,7 @@ export default class FollowingList extends Component {
 	 					<div className="UserListGroup-item" key={i}>
 			 				<img className="UserListGroup-image" src="https://placeimg.com/50/50/people" />
 			 				<div className="UserListGroup-details">
-			 					<h5 className="UserListGroup-name"> John Doe </h5>
+			 					<h5 className="UserListGroup-name"> {user.name} </h5>
 			 					<h6 className="UserListGroup-followers"> 6969 followers </h6>
 			 				</div>
 			 				<div className="UserListGroup-actions">
@@ -53,11 +53,11 @@ export default class FollowingList extends Component {
 	}
 
 	handleRequest = (offset = this.state.offset) => {
-    if ( this.state.loading ) {
+    const {state, props} = this;
+
+    if ( state.loading ) {
       return;
     }
-
-    const {auth, user} = this.props;
 
     this.setState({
       loading: true,
@@ -65,15 +65,17 @@ export default class FollowingList extends Component {
     });
 
     const query = qs.stringify({
-      to_id: user.id === auth.id ? '' : user.id,
+      to_id: props.user.id === props.auth.id ? '' : props.user.id,
       start: offset,
       end: offset + 5
     });
 
-    return axios.get(`/user/${auth.id}/following/?${query}`)
+    return axios.get(`/user/${props.auth.id}/following/?${query}`)
       .then((res) => {
         this.setState({
-          following: res.data,
+          following: offset === 0
+            ? res.data
+            : [...state.following, ...res.data],
           loading: false,
           error: false,
           offset: offset + 5
@@ -87,6 +89,7 @@ export default class FollowingList extends Component {
           error: true,
           errors: formatValidationErrors(res.data.errors)
         });
+        console.log(res);
 
         return Promise.reject(res);
       });
