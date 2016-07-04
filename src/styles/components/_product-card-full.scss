@@ -65,6 +65,7 @@
 
   .ProductCardFull-panelCanopyNameLink {
     @include linkNoUnderscore;
+    color: $color-black;
   }
 
   .ProductCardFull-avatar {
