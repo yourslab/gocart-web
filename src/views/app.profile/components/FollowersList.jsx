@@ -6,13 +6,14 @@ import lang from 'app/lang';
 import isServerError from 'app/utils/isServerError';
 import Infinite from 'app/components/Infinite';
 import UserFollowWidget from 'app/components/UserFollowWidget';
+import UserImg from 'app/components/UserImg';
 
 export default class FollowersList extends Component {
 	state = {
 		followers: [],
 		loading: false,
 		error: false,
-    message: '',
+    last: false,
     offset: 0
 	};
 
@@ -21,7 +22,6 @@ export default class FollowersList extends Component {
   }
 
 	render() {
-    console.log(this.state.followers);
 		return (
 			<div className="UserListGroup">
 		 		<div className="UserListGroup-heading">
@@ -34,13 +34,17 @@ export default class FollowersList extends Component {
 	 				container>
 	 				{this.state.followers.map((user, i) =>
 	 					<div className="UserListGroup-item" key={i}>
-			 				<img className="UserListGroup-image" src="https://placeimg.com/50/50/people" />
-			 				<div className="UserListGroup-details">
+			 				<UserImg src={user.prof_pic_link} username={user.username} className="UserListGroup-image" alt={`${user.username}'s Avatar`} />
+
+              <div className="UserListGroup-details">
 			 					<h5 className="UserListGroup-name"> {user.name} </h5>
 			 					<h6 className="UserListGroup-followers"> 6969 followers </h6>
 			 				</div>
+
 			 				<div className="UserListGroup-actions">
-			 					<button className="Btn Btn--info Btn--inverted"> Follow </button>
+                <UserFollowWidget
+                  user={{ id: user.id, is_followed: user.is_followed }}
+                  onFollow={this.handleFollow} />
 			 				</div>
 				 		</div>
 	 				)}
@@ -59,7 +63,7 @@ export default class FollowersList extends Component {
 	handleRequest = (offset = this.state.offset) => {
     const {state, props} = this;
 
-    if ( state.loading && !state.errors ) {
+    if ( state.loading || state.last ) {
       return;
     }
 
@@ -69,7 +73,7 @@ export default class FollowersList extends Component {
     });
 
     const query = qs.stringify({
-      to_id: props.user.id === props.auth.id ? '' : props.auth.id,
+      viewer_id: props.auth.id,
       start: offset === 0 ? offset : offset + 1,
       end: offset + 5
     });
@@ -96,7 +100,7 @@ export default class FollowersList extends Component {
         } else {
           this.setState({
             loading: false,
-            message: res.data.status == 404 ? 'Last Page' : ''
+            last: res.data.status == 404 ? true : false
           });
         }
 
@@ -104,7 +108,14 @@ export default class FollowersList extends Component {
       });
   }
 
-  handleFollow = () => {
-
+  handleFollow = (id) => {
+    this.setState((state) => ({
+      followers: state.followers.map((user) => user.id === id
+        ? {
+          ...user,
+          is_followed: !user.is_followed
+        } : user
+      )
+    }));
   }
 }

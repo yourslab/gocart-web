@@ -1,38 +1,45 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
-import ViewablePasswordInput from 'app/components/ViewablePasswordInput';
+import {connect} from 'react-redux';
+import axios from 'axios';
+import PasswordForm from './components/PasswordForm';
 
-export default class AppMePasswordView extends Component {
+class AppMePasswordView extends Component {
+  state = {
+    loading: false,
+    error: false,
+    message: ''
+  };
+
   render() {
     return (
       <div>
         <Helmet title="Change Password" />
 
-        <div className="SidebarContainer-panelHeading">
-          <div className="SidebarContainer-panelHeadingSection">
-            <div className="SidebarContainer-panelHeadingSectionItem">
-              <h1>Change Password</h1>
-            </div>
-          </div>
-        </div>
-
-        <div className="u-size4">
-          <div className="FormGroup">
-            <label htmlFor="password">Old Password</label>
-            <input type="password" id="password" className="FormInput" />
-          </div>
-
-          <div className="FormGroup">
-            <label htmlFor="new_password">New Password</label>
-            <ViewablePasswordInput id="new_password" />
-          </div>
-
-          <div className="FormGroup">
-            <label htmlFor="new_password_confirmation">Confirm New Password</label>
-            <ViewablePasswordInput id="new_password_confirmation" />
-          </div>
-        </div>
+        <PasswordForm
+          auth={this.props.auth}
+          loading={this.state.loading}
+          error={this.state.error}
+          message={this.state.message}
+          onPost={this.handlePost} />
       </div>
     );
   }
+
+  handlePost = (data) => {
+    if ( this.state.loading ) {
+      return;
+    }
+
+    this.setState({
+      loading: false,
+      error: false
+    });
+  }
 }
+
+const mapState = (state) => ({
+  auth: state.auth.user
+});
+
+export default connect(mapState)(AppMePasswordView);
