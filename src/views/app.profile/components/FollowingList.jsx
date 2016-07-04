@@ -66,7 +66,7 @@ export default class FollowingList extends Component {
 
     const query = qs.stringify({
       to_id: props.user.id === props.auth.id ? '' : props.user.id,
-      start: offset,
+      start: offset === 0 ? offset : offset + 1,
       end: offset + 5
     });
 

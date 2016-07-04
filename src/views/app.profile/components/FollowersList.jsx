@@ -20,7 +20,6 @@ export default class FollowersList extends Component {
   }
 
 	render() {
-    console.log(this.state.message);
 		return (
 			<div className="UserListGroup">
 		 		<div className="UserListGroup-heading">
@@ -69,7 +68,7 @@ export default class FollowersList extends Component {
 
     const query = qs.stringify({
       to_id: props.user.id === props.auth.id ? '' : props.user.id,
-      start: offset,
+      start: offset === 0 ? offset : offset + 1,
       end: offset + 5
     });
 
