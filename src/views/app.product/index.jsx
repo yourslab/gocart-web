@@ -246,9 +246,9 @@ class AppProductView extends Component {
 }
 
 export default flowRight(
-  resolve('product', (props) =>
-    axios.get(`/post/${props.routeParams.id}`)
-      .then((res) => res.data)),
+  connect((state) => ({ auth: state.auth.user })),
 
-  connect((state) => ({ auth: state.auth.user }))
+  resolve('product', (props) =>
+    axios.get(`/post/${props.routeParams.id}?viewer_id=${props.auth.id}`)
+      .then((res) => res.data))
 )(AppProductView);
