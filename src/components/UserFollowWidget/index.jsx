@@ -35,7 +35,9 @@ class UserFollowWidget extends Component {
     const {loading, hovered} = this.state;
 
     if ( loading ) {
-      return <div className="Spinner" />;
+      return <div className="Spinner"
+        onMouseOver={this.handleHover}
+        onMouseOut={this.handleOut} />;
     }
 
     return (
