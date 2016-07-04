@@ -1,0 +1,13 @@
+.BlankSlate {
+	@include linkNoUnderscore;
+	display: block;
+	padding: 150px 100px;
+	background: $color-white;
+	border: 2px solid $color-blue;
+	text-align: center;
+
+	.BlankSlate-heading {
+		color: $color-blue;
+		font-weight: normal;
+	}
+}
