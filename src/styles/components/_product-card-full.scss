@@ -59,6 +59,14 @@
     border-bottom: 1px solid $color-gray;
   }
 
+  .ProductCardFull-panelCanopyName {
+    margin-bottom: 0;
+  }
+
+  .ProductCardFull-panelCanopyNameLink {
+    @include linkNoUnderscore;
+  }
+
   .ProductCardFull-avatar {
     display: block;
     margin-right: 10px;
@@ -86,10 +94,6 @@
   }
 
   .ProductCardFull-description {
-    margin-bottom: 20px;
-  }
-
-  .ProductCardFull-tags {
     margin-bottom: 20px;
   }
 

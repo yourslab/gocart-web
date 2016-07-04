@@ -31,7 +31,7 @@ export default (
       </Route>
 
       <Route path="@:user" component={AppProfileView} />
-      <Route path="/products/:slug" component={AppProductView} />
+      <Route path="/products/:id" component={AppProductView} />
 
       <Route path="manage-posts" component={AppManagePostsView}>
         <IndexRoute component={AppManagePostsHomeView} />
