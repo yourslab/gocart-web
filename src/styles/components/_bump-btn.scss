@@ -1,0 +1,19 @@
+// @TODO: Rename or re-implement as reusable.
+// No time right now, nor do we have any other use-case
+// for the styling.
+.BumpBtn {
+  @include linkNoUnderscore;
+  display: inline-block;
+  padding: 0;
+  height: auto;
+  line-height: 1;
+  font-size: $fontSize-base;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  outline: 0;
+
+  &, &:hover {
+    color: $color-blue;
+  }
+}

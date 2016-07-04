@@ -10,6 +10,7 @@ import formatCurrency from 'app/utils/formatCurrency';
 import UserImg from 'app/components/UserImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
+import BumpButton from 'app/components/BumpButton';
 
 class AppProductView extends Component {
   state = {
@@ -90,6 +91,10 @@ class AppProductView extends Component {
             <p className="ProductCardFull-description">
               {product.description}
             </p>
+
+            <BumpButton
+              product={{ id: product.id, is_liked: product.is_liked }}
+              onBump={this.handleBump} />
 
             <div className="ProductCardFull-commentInfo">
               <div className="CommentMeta">
@@ -241,6 +246,15 @@ class AppProductView extends Component {
       product: {
         ...state.product,
         is_followed: !state.product.is_followed
+      }
+    }));
+  }
+
+  handleBump = () => {
+    this.setState((state) => ({
+      product: {
+        ...state.product,
+        is_liked: !state.product.is_liked
       }
     }));
   }

@@ -40,6 +40,9 @@
 
   &.Btn--borderless {
     // @REFACTOR: Remove !important
+    // Undoable atm because it is overwritten
+    // by the mixin variants. There's a workaround
+    // but no time!
     border-color: transparent !important;
   }
 
@@ -50,6 +53,11 @@
   &.Btn--default {
     @include buttonAltVariant(transparent, $color-blue);
     background: $color-white;
+  }
+
+  // @REFACTOR: YOLO
+  &.Btn--default.Btn--disabled {
+    @include buttonAltVariant(transparent, $color-gray);
   }
 
   &.Btn--info {
@@ -99,6 +107,12 @@
   &.Btn--block {
     display: block;
     width: 100%;
+  }
+
+  // Removes the left and right padding
+  &.Btn--noPadding {
+    padding-left: 0;
+    padding-right: 0;
   }
 
   &.Btn--large {
