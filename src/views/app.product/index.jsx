@@ -103,7 +103,7 @@ class AppProductView extends Component {
               </div>
             </div>
 
-            {product.num_comments !== comment.data.length && product.num_comments > 0
+            {product.num_comments !== comment.data.length && product.num_comments > 0 && (comment.data.length > 0 && !product.loading)
               ? <button type="button" className="ProductCardFull-commentLoadMore">
                 View {product.num_comments - comment.data.length} more comments
               </button> : null}
