@@ -158,7 +158,8 @@ class AppProductView extends Component {
           comment: {
             ...state.comment,
             data: res.data,
-            offset: offset + 20
+            offset: offset + 20,
+            loading: false
           }
         }));
 
