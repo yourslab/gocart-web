@@ -1,3 +1,6 @@
+// Removes all default styling for button
+// to make it appear like a normal text
+// @TODO: Make a mixin for `PlainBtn`
 .PlainBtn {
   @include linkNoUnderscore;
   display: inline-block;

@@ -104,9 +104,9 @@ class AppProductView extends Component {
             </div>
 
             {product.num_comments !== comment.data.length && product.num_comments > 0
-              ? <a href="#" className="ProductCardFull-commentLoadMore">
+              ? <button type="button" className="ProductCardFull-commentLoadMore">
                 View {product.num_comments - comment.data.length} more comments
-              </a> : null}
+              </button> : null}
 
             <form onSubmit={this.handleComment}>
               <div className="CommentWidget">

@@ -109,7 +109,16 @@
 
   .ProductCardFull-commentLoadMore {
     @include linkNoUnderscore;
-    display: block;
+    display: inline-block;
     margin-bottom: 10px;
+    padding: 0;
+    height: auto;
+    line-height: 1;
+    font-size: $fontSize-base;
+    text-align: center;
+    background: transparent;
+    color: $color-blue;
+    border: 0;
+    outline: 0;
   }
 }
