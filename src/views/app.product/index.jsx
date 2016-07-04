@@ -10,6 +10,7 @@ import formatCurrency from 'app/utils/formatCurrency';
 import UserImg from 'app/components/UserImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
+import BumpButton from 'app/components/BumpButton';
 
 class AppProductView extends Component {
   state = {
@@ -66,11 +67,11 @@ class AppProductView extends Component {
                 </div>
 
                 <div className="ProductCardFull-panelCanopySectionItem">
-                  <h2 className="ProductCardFull-panelCanopyName">
+                  <h3 className="ProductCardFull-panelCanopyName">
                     <Link to={`/@${product.username}`} className="ProductCardFull-panelCanopyNameLink">
                       {product.username}
                     </Link>
-                  </h2>
+                  </h3>
 
                   <RatingWidget score={product.avg_rating} />
                 </div>
@@ -91,6 +92,10 @@ class AppProductView extends Component {
               {product.description}
             </p>
 
+            <BumpButton
+              product={{ id: product.id, is_liked: product.is_liked }}
+              onBump={this.handleBump} />
+
             <div className="ProductCardFull-commentInfo">
               <div className="CommentMeta">
                 <div>
@@ -103,7 +108,7 @@ class AppProductView extends Component {
               </div>
             </div>
 
-            {product.num_comments !== comment.data.length && product.num_comments > 0
+            {product.num_comments !== comment.data.length && product.num_comments > 0 && (comment.data.length > 0 && !product.loading)
               ? <button type="button" className="ProductCardFull-commentLoadMore">
                 View {product.num_comments - comment.data.length} more comments
               </button> : null}
@@ -158,7 +163,8 @@ class AppProductView extends Component {
           comment: {
             ...state.comment,
             data: res.data,
-            offset: offset + 20
+            offset: offset + 20,
+            loading: false
           }
         }));
 
@@ -243,12 +249,21 @@ class AppProductView extends Component {
       }
     }));
   }
+
+  handleBump = () => {
+    this.setState((state) => ({
+      product: {
+        ...state.product,
+        is_liked: !state.product.is_liked
+      }
+    }));
+  }
 }
 
 export default flowRight(
-  resolve('product', (props) =>
-    axios.get(`/post/${props.routeParams.id}`)
-      .then((res) => res.data)),
+  connect((state) => ({ auth: state.auth.user })),
 
-  connect((state) => ({ auth: state.auth.user }))
+  resolve('product', (props) =>
+    axios.get(`/post/${props.routeParams.id}?viewer_id=${props.auth.id}`)
+      .then((res) => res.data))
 )(AppProductView);
