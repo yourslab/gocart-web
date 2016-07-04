@@ -5,6 +5,7 @@ import qs from 'qs';
 import lang from 'app/lang';
 import isServerError from 'app/utils/isServerError';
 import Infinite from 'app/components/Infinite';
+import UserFollowWidget from 'app/components/UserFollowWidget';
 
 export default class FollowersList extends Component {
 	state = {
@@ -20,6 +21,7 @@ export default class FollowersList extends Component {
   }
 
 	render() {
+    console.log(this.state.followers);
 		return (
 			<div className="UserListGroup">
 		 		<div className="UserListGroup-heading">
@@ -67,12 +69,12 @@ export default class FollowersList extends Component {
     });
 
     const query = qs.stringify({
-      to_id: props.user.id === props.auth.id ? '' : props.user.id,
+      to_id: props.user.id === props.auth.id ? '' : props.auth.id,
       start: offset === 0 ? offset : offset + 1,
       end: offset + 5
     });
 
-    return axios.get(`/user/${props.auth.id}/followers/?${query}`)
+    return axios.get(`/user/${props.user.id}/followers/?${query}`)
       .then((res) => {
         this.setState({
           followers: offset === 0
@@ -100,5 +102,9 @@ export default class FollowersList extends Component {
 
         return Promise.reject(res);
       });
+  }
+
+  handleFollow = () => {
+
   }
 }

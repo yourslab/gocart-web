@@ -65,12 +65,12 @@ export default class FollowingList extends Component {
     });
 
     const query = qs.stringify({
-      to_id: props.user.id === props.auth.id ? '' : props.user.id,
+      to_id: props.user.id === props.auth.id ? '' : props.auth.id,
       start: offset === 0 ? offset : offset + 1,
       end: offset + 5
     });
 
-    return axios.get(`/user/${props.auth.id}/following/?${query}`)
+    return axios.get(`/user/${props.user.id}/following/?${query}`)
       .then((res) => {
         this.setState({
           following: offset === 0
