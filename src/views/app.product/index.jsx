@@ -66,11 +66,11 @@ class AppProductView extends Component {
                 </div>
 
                 <div className="ProductCardFull-panelCanopySectionItem">
-                  <h2 className="ProductCardFull-panelCanopyName">
+                  <h3 className="ProductCardFull-panelCanopyName">
                     <Link to={`/@${product.username}`} className="ProductCardFull-panelCanopyNameLink">
                       {product.username}
                     </Link>
-                  </h2>
+                  </h3>
 
                   <RatingWidget score={product.avg_rating} />
                 </div>
