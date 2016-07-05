@@ -35,6 +35,14 @@
     color: $color-red;
   }
 
+  .Messenger-conversationLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background: $color-grayLight;
+  }
+
   .Messenger-conversation {
     @include linkNoUnderscore;
     display: flex;
@@ -59,13 +67,21 @@
 
   .Messenger-conversationInfo {
     margin-bottom: 0;
+    // Required for `textEllipsis` to work
+    // for `Messenger-conversationName` and
+    // `Messenger-conversationSummary`
+    overflow: hidden;
+  }
+
+  .Messenger-conversationName,
+  .Messenger-conversationSummary {
+    @include textEllipsis;
+    display: block; // @NOTE: `textEllipsis` sets `display` to `inline-block`
   }
 
   .Messenger-conversationName {
     margin-bottom: 0;
   }
-
-  .Messenger-conversationSummary {}
 
   .Messenger-panel {
     width: 100%;
