@@ -9,7 +9,7 @@ import InputError from 'app/components/InputError';
 export default class PasswordForm extends Component {
   state = {
     old_password: '',
-    new_password: '',
+    password: '',
     new_password_confirmation: ''
   };
 
@@ -29,7 +29,7 @@ export default class PasswordForm extends Component {
             </div>
 
             <div className="SidebarContainer-panelHeadingSectionItem">
-              <ButtonLoader className="Btn Btn--info">
+              <ButtonLoader className="Btn Btn--info" loading={loading}>
                 Save
               </ButtonLoader>
             </div>

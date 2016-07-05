@@ -40,38 +40,38 @@ class AppMePasswordView extends Component {
       error: false
     });
 
-    if ( data.new_password_confirmation !== data.new_password ) {
+    if ( data.new_password_confirmation !== data.password ) {
       this.setState({
         errors: {
           new_password_confirmation: 'Your password does not match'
         }
       });
-    } else {
-      return axios.put(`/user/${this.props.auth.id}`, data)
-        .then((res) => {
-          this.setState({
-            loading: true,
-          });
-
-          history.push(`/@${this.props.auth.username}`);
-
-          return res;
-        })
-        .catch((res) => {
-          if ( isServerError(res.status) ) {
-            this.setState({
-              loading: false,
-              message: lang.errors.server
-            });
-          } else {
-            this.setState({
-              loading: false,
-              errors: res.data.errors,
-              message: lang.errors.input
-            });
-          }
-        })
     }
+
+    return axios.put(`/user/${this.props.auth.id}`, data)
+      .then((res) => {
+        this.setState({
+          loading: true,
+        });
+
+        history.push(`/@${this.props.auth.username}`);
+
+        return res;
+      })
+      .catch((res) => {
+        if ( isServerError(res.status) ) {
+          this.setState({
+            loading: false,
+            message: lang.errors.server
+          });
+        } else {
+          this.setState({
+            loading: false,
+            errors: res.data.errors,
+            message: lang.errors.input
+          });
+        }
+      });
   }
 }
 
