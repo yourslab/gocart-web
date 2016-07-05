@@ -30,7 +30,7 @@ class AppManagePostsCreateView extends Component {
       prof_pic_link: removeBase64Prefix(data.prof_pic_link),
       name: data.name,
       about: data.about
-    }, this.props.auth.username);
+    });
   }
 }
 
