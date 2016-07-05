@@ -92,7 +92,7 @@ export default class FollowersList extends Component {
         return res;
       })
       .catch((res) => {
-        if ( isServerError ) {
+        if ( isServerError(res.status) ) {
           this.setState({
             loading: false,
             message: lang.errors.server
@@ -100,7 +100,7 @@ export default class FollowersList extends Component {
         } else {
           this.setState({
             loading: false,
-            last: res.data.status == 404 ? true : false
+            last: res.data.status == 404 > res.data.status == 404 ? true : false
           });
         }
 
