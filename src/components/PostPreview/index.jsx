@@ -73,7 +73,7 @@ export default class PostPreview extends Component {
                         </div>
 
                         <div className="ProductCardFull-panelCanopySectionItem">
-                          <h2 className="ProductCardFull-panelCanopyName">{auth.username}</h2>
+                          <h2 className="ProductCardFull-panelCanopyName">{auth.name}</h2>
                         </div>
                       </div>
                     </div>

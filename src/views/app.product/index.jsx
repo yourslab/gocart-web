@@ -70,7 +70,7 @@ class AppProductView extends Component {
                 <div className="ProductCardFull-panelCanopySectionItem">
                   <h3 className="ProductCardFull-panelCanopyName">
                     <Link to={`/@${product.username}`} className="ProductCardFull-panelCanopyNameLink">
-                      {product.username}
+                      {product.name}
                     </Link>
                   </h3>
 
