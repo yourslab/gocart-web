@@ -28,9 +28,12 @@ class BumpButton extends Component {
     return (
       <button
         type="button"
-        className={cn('Btn Btn--default', { 'Btn--disabled': !is_liked })}
+        className={cn('Btn Btn--default Btn--noPadding', { 'Btn--disabled': !is_liked })}
         onClick={this.handle}>
-        <StaticImg src={`icons/${is_liked ? 'bump_icon' : 'bump_disabled_icon'}.svg`} />
+        <span className="Btn-icon">
+          <StaticImg src={`icons/${is_liked ? 'bump_icon' : 'bump_disabled_icon'}.svg`} />
+        </span>
+
         {is_liked ? 'Bump' : 'Unbump'}
       </button>
     );
@@ -53,7 +56,7 @@ class BumpButton extends Component {
     return request
       .then((res) => {
         this.setState({ loading: false });
-        this.props.onBump(this.state.product.id);
+        this.props.onBump(this.props.product.id);
         return res;
       })
       .catch((res) => {

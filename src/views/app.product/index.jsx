@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {resolve} from 'react-resolver';
 import formatCurrency from 'app/utils/formatCurrency';
 import UserImg from 'app/components/UserImg';
+import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import BumpButton from 'app/components/BumpButton';
@@ -45,7 +46,7 @@ class AppProductView extends Component {
 
         <div className="ProductCardFull">
           <div className="ProductCardFull-thumbnail">
-            <img className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
+            <ProductImg src={product.photo_list[0]} id={product.id} className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
 
             <div className="ProductCardFull-thumbnailOverlay">
               <div className="ProductCardFull-thumbnailOverlaySection">
@@ -69,7 +70,7 @@ class AppProductView extends Component {
                 <div className="ProductCardFull-panelCanopySectionItem">
                   <h3 className="ProductCardFull-panelCanopyName">
                     <Link to={`/@${product.username}`} className="ProductCardFull-panelCanopyNameLink">
-                      {product.username}
+                      {product.name}
                     </Link>
                   </h3>
 
@@ -115,6 +116,7 @@ class AppProductView extends Component {
 
             <form onSubmit={this.handleComment}>
               <div className="CommentWidget">
+                {}
                 {comment.data.length ? <div className="CommentWidget-inner" ref="comment">
                   {comment.data.map((comment) =>
                     <div className="CommentWidget-item" key={`comment-${comment.id}`}>
@@ -124,7 +126,7 @@ class AppProductView extends Component {
                       </p>
                     </div>
                   )}
-                </div> : null}
+                </div> : <h4 className="CommentWidget-empty">Be the first one to comment</h4>}
 
                 <div className="CommentWidget-form">
                   <input type="text" className="CommentWidget-input" placeholder="What do you have in mind?" valueLink={linkState(this, 'post.input')} />
@@ -251,10 +253,11 @@ class AppProductView extends Component {
   }
 
   handleBump = () => {
-    this.setState((state) => ({
+    this.setState(({product}) => ({
       product: {
-        ...state.product,
-        is_liked: !state.product.is_liked
+        ...product,
+        is_liked: !product.is_liked,
+        num_likes: product.num_likes + (product.is_liked ? -1 : 1)
       }
     }));
   }
@@ -267,3 +270,5 @@ export default flowRight(
     axios.get(`/post/${props.routeParams.id}?viewer_id=${props.auth.id}`)
       .then((res) => res.data))
 )(AppProductView);
+
+

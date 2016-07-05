@@ -1,0 +1,89 @@
+.Messenger {
+  display: flex;
+  height: 600px;
+  box-shadow: $backdrop-base;
+
+  .Messenger-sidebar {
+    flex-shrink: 0;
+    width: 300px;
+  }
+
+  .Messenger-conversationWrapper {
+    height: 540px; // Messenger.height - Messenger-sidebar.height
+    overflow-y: scroll;
+  }
+
+  .Messenger-sidebarCanopy,
+  .Messenger-conversation {
+    background: $color-grayLight;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent;
+    border-right-color: $color-gray;
+    border-bottom-color: $color-gray
+  }
+
+  .Messenger-sidebarCanopy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+  }
+
+  .Messenger-sidebarCanopyText {
+    margin-bottom: 0;
+    color: $color-red;
+  }
+
+  .Messenger-conversationLoader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background: $color-grayLight;
+  }
+
+  .Messenger-conversation {
+    @include linkNoUnderscore;
+    display: flex;
+    align-items: center;
+    padding: 25px 15px;
+    color: $color-black;
+  }
+
+  .Messenger-conversation--active {
+    background: $color-white;
+    border-right-color: transparent;
+  }
+
+  .Messenger-conversationAvatar {
+    flex-shrink: 0;
+    display: block;
+    margin-right: 10px;
+    height: 52px;
+    width: 52px;
+    border-radius: 50%;
+  }
+
+  .Messenger-conversationInfo {
+    margin-bottom: 0;
+    // Required for `textEllipsis` to work
+    // for `Messenger-conversationName` and
+    // `Messenger-conversationSummary`
+    overflow: hidden;
+  }
+
+  .Messenger-conversationName,
+  .Messenger-conversationSummary {
+    @include textEllipsis;
+    display: block; // @NOTE: `textEllipsis` sets `display` to `inline-block`
+  }
+
+  .Messenger-conversationName {
+    margin-bottom: 0;
+  }
+
+  .Messenger-panel {
+    width: 100%;
+  }
+}

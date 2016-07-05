@@ -13,6 +13,7 @@ import AppManagePostsHomeView from './views/app.manage-posts.home';
 import AppManagePostsCreateView from './views/app.manage-posts.create';
 import AppManagePostsArchivedView from './views/app.manage-posts.archived';
 import AppMeView from './views/app.me';
+import AppMessagesView from './views/app.messages';
 import AppMeHomeView from './views/app.me.home';
 import AppMePasswordView from './views/app.me.password';
 import AppMePrivacyView from './views/app.me.privacy';
@@ -44,6 +45,8 @@ export default (
         <Route path="password" component={AppMePasswordView} />
         <Route path="privacy" component={AppMePrivacyView} />
       </Route>
+
+      <Route path="messages" components={AppMessagesView} />
     </Route>
 
     <Route path="login" component={LoginView} />

@@ -36,7 +36,6 @@ export default class PostPreview extends Component {
 
   render() {
     const {auth, product} = this.props;
-    console.log(getProductPhotos(product));
 
     return this.state.open ? (
       <Gateway into="global">
@@ -74,7 +73,7 @@ export default class PostPreview extends Component {
                         </div>
 
                         <div className="ProductCardFull-panelCanopySectionItem">
-                          <h2 className="ProductCardFull-panelCanopyName">{auth.username}</h2>
+                          <h2 className="ProductCardFull-panelCanopyName">{auth.name}</h2>
                         </div>
                       </div>
                     </div>
@@ -86,10 +85,6 @@ export default class PostPreview extends Component {
                     <p className="ProductCardFull-description">
                       {product.desc || <em>Enter a description here...</em>}
                     </p>
-
-                    <div className="ProductCardFull-tags">
-                      <a href="#" className="TagBadge">Tags</a>
-                    </div>
 
                     <div className="ProductCardFull-commentInfo">
                       <div className="CommentMeta">

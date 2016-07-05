@@ -2,13 +2,14 @@ import React, {PropType} from 'react';
 import {Link} from 'react-router';
 import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
+import ProductImg from 'app/components/ProductImg';
 
 const ProductCard = ({product, onEdit, onDelete}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
     <div className="ProductCard">
       <div className="ProductCard-inner">
         <div className="ProductCard-thumbnail">
-          <img src="https://placeimg.com/500/280/tech" className="ProductCard-thumbnailImage" />
+          <ProductImg src={product.photo_list[0]} id={product.id} className="ProductCard-thumbnailImage" />
 
           <div className="ProductCard-thumbnailOverlay">
             <h1 className="ProductCard-pricing">

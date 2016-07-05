@@ -36,6 +36,11 @@
     display: flex;
   }
 
+  // Since these are also being used as headings
+  .ProductCardFull-thumbnailOverlaySectionItem {
+    margin-bottom: 0;
+  }
+
   .ProductCardFull-thumbnailOverlaySectionItem:not(:last-child) {
     margin-right: 20px;
   }
