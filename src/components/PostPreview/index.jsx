@@ -36,7 +36,6 @@ export default class PostPreview extends Component {
 
   render() {
     const {auth, product} = this.props;
-    console.log(getProductPhotos(product));
 
     return this.state.open ? (
       <Gateway into="global">

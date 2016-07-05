@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import {resolve} from 'react-resolver';
 import formatCurrency from 'app/utils/formatCurrency';
 import UserImg from 'app/components/UserImg';
+import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import BumpButton from 'app/components/BumpButton';
@@ -45,7 +46,7 @@ class AppProductView extends Component {
 
         <div className="ProductCardFull">
           <div className="ProductCardFull-thumbnail">
-            <img className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
+            <ProductImg src={product.photo_list[0]} id={product.id} className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
 
             <div className="ProductCardFull-thumbnailOverlay">
               <div className="ProductCardFull-thumbnailOverlaySection">
