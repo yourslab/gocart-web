@@ -251,10 +251,11 @@ class AppProductView extends Component {
   }
 
   handleBump = () => {
-    this.setState((state) => ({
+    this.setState(({product}) => ({
       product: {
-        ...state.product,
-        is_liked: !state.product.is_liked
+        ...product,
+        is_liked: !product.is_liked,
+        num_likes: product.num_likes + (product.is_liked ? -1 : 1)
       }
     }));
   }
@@ -267,3 +268,5 @@ export default flowRight(
     axios.get(`/post/${props.routeParams.id}?viewer_id=${props.auth.id}`)
       .then((res) => res.data))
 )(AppProductView);
+
+
