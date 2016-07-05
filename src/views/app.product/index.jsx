@@ -116,6 +116,7 @@ class AppProductView extends Component {
 
             <form onSubmit={this.handleComment}>
               <div className="CommentWidget">
+                {}
                 {comment.data.length ? <div className="CommentWidget-inner" ref="comment">
                   {comment.data.map((comment) =>
                     <div className="CommentWidget-item" key={`comment-${comment.id}`}>
@@ -125,7 +126,7 @@ class AppProductView extends Component {
                       </p>
                     </div>
                   )}
-                </div> : null}
+                </div> : <h4 className="CommentWidget-empty">Be the first one to comment</h4>}
 
                 <div className="CommentWidget-form">
                   <input type="text" className="CommentWidget-input" placeholder="What do you have in mind?" valueLink={linkState(this, 'post.input')} />
