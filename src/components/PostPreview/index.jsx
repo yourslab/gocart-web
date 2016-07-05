@@ -86,10 +86,6 @@ export default class PostPreview extends Component {
                       {product.desc || <em>Enter a description here...</em>}
                     </p>
 
-                    <div className="ProductCardFull-tags">
-                      <a href="#" className="TagBadge">Tags</a>
-                    </div>
-
                     <div className="ProductCardFull-commentInfo">
                       <div className="CommentMeta">
                         <div>
