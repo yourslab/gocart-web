@@ -34,13 +34,13 @@ class AppMessagesView extends Component {
               </div>
 
               <Infinite callback={this.handleRequest} className="Messenger-conversationWrapper">
-                {data.map((message, i) =>
-                  <Link to={`/messages/${message.to_user}`} className="Messenger-conversation" activeClassName="Messenger-conversation--active" key={`message-${i}`}>
-                    <UserImg src={message.prof_pic_link} username={message.username} className="Messenger-conversationAvatar" />
+                {data.map((conversation, i) =>
+                  <Link to={`/messages/${conversation.to_user}`} className="Messenger-conversation" activeClassName="Messenger-conversation--active" key={`message-${conversation.id}`}>
+                    <UserImg src={conversation.prof_pic_link} username={conversation.username} className="Messenger-conversationAvatar" />
 
                     <div className="Messenger-conversationInfo">
-                      <h4 className="Messenger-conversationName">{message.name}</h4>
-                      <div className="Messenger-conversationSummary">{message.message}</div>
+                      <h4 className="Messenger-conversationName">{conversation.name}</h4>
+                      <div className="Messenger-conversationSummary">{conversation.message}</div>
                     </div>
                   </Link>
                 )}
