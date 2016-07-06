@@ -134,11 +134,6 @@ class AppMessagesHomeView extends Component {
 
     return axios.get(`/user/${auth.id}/messages/${routeParams.id}?start=${offset}&end=${offset + 19}`)
       .then((res) => {
-        // We'll `reverse` data order ourselves
-        // because the API doesn't return any
-        // other order other than "by recent".
-        const data = res.data.reverse();
-
         // We'll place this here instead of before the request
         // so we have less chances for a "flickr".
         const $messenger = findDOMNode(this.refs.messenger);
@@ -148,13 +143,12 @@ class AppMessagesHomeView extends Component {
         this.setState(({conversation}) => ({
           conversation: {
             ...conversation,
-            // If a "last-page" errors occurs when
-            // we view another message, we'll set the old
+            // 1. If we view another message, we'll set the old
             // data array with the response data. Otherwise,
             // we'll append to existing data.
             data: offset === 0
-              ? data
-              : [...data, ...conversation.data],
+              ? res.data
+              : [...conversation.data, ...res.data],
             loading: false,
             offset: offset + 20
           }
@@ -212,7 +206,7 @@ class AppMessagesHomeView extends Component {
         this.setState(({conversation, message}) => ({
           conversation: {
             ...conversation,
-            data: [...conversation.data, res.data],
+            data: [res.data, ...conversation.data],
             loading: false,
             offset: conversation.offset + 1
           },
