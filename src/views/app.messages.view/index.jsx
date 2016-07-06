@@ -7,6 +7,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import lang from 'app/lang';
 import scrollToBottom from 'app/utils/scrollToBottom';
+import ButtonLoader from 'app/components/ButtonLoader';
 
 class AppMessagesHomeView extends Component {
   state = {
@@ -38,8 +39,8 @@ class AppMessagesHomeView extends Component {
   }
 
   render() {
-    const {data, loading} = this.state.conversation;
-    const user = data[0] || {};
+    const {conversation, message} = this.state;
+    const user = conversation.data[0] || {};
 
     return (
       <div className="Messenger-panelInner">
@@ -54,7 +55,7 @@ class AppMessagesHomeView extends Component {
         </div>
 
         <div className="Messenger-messageWrapper" ref="messenger">
-          {data.map((message) => {
+          {conversation.data.map((message) => {
             const timestamp = moment(message.timestamp);
 
             return (
@@ -87,9 +88,15 @@ class AppMessagesHomeView extends Component {
               placeholder="Write a reply..." />
 
             <div className="Messenger-chatboxActions">
-              <button className="Btn Btn--primary Btn--small">
-                Send
-              </button>
+              <div>
+                {message.loading ? <div className="Spinner" /> : null}
+              </div>
+
+              <div>
+                <ButtonLoader loading={message.loading} className="Btn Btn--primary Btn--small">
+                  Send
+                </ButtonLoader>
+              </div>
             </div>
           </form>
         </div>

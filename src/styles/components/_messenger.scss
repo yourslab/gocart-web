@@ -178,6 +178,8 @@
   }
 
   .Messenger-chatboxActions {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
