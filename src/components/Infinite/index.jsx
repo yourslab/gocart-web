@@ -52,15 +52,14 @@ export default class Infinite extends Component {
   }
 
   render() {
-    const {children, ...props, offset, disabled, container} = this.props;
+    const {children, offset, disabled, container, ...props} = this.props;
     return <div
       ref="container"
-      offset={offset}
       disabled={disabled}
       container={container}
       {...props}>
-        {children}
-      </div>;
+      {children}
+    </div>;
   }
 
   handle = () => {
