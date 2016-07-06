@@ -48,6 +48,7 @@ class AppMessagesHomeView extends Component {
   }
 
   render() {
+    const {auth} = this.props;
     const {conversation, message} = this.state;
     const user = conversation.data[0] || {};
 
@@ -66,14 +67,15 @@ class AppMessagesHomeView extends Component {
         <Infinite reverse container callback={this.handleRequest} className="Messenger-messageWrapper" ref="messenger">
           {conversation.data.map((message) => {
             const timestamp = moment(message.timestamp);
+            const user = message.from_user === auth.id ? auth : message;
 
             return (
               <div className="Messenger-message" key={`message-${message.id}`}>
-                <UserImg src={message.prof_pic_link} username={message.username} className="Messenger-messageAvatar" />
+                <UserImg src={user.prof_pic_link} username={user.username} className="Messenger-messageAvatar" />
 
                 <div className="Messenger-messageInfo">
                   <h4 className="Messenger-messageUser">
-                    {message.name}
+                    {user.name}
                   </h4>
 
                   <p className="Messenger-messageText">
