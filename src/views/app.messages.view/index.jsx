@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {findDOMNode} from 'react-dom';
 import axios from 'axios';
 import moment from 'moment';
 import linkState from 'react-link-state';
@@ -7,6 +8,7 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import lang from 'app/lang';
 import scrollToBottom from 'app/utils/scrollToBottom';
+import Infinite from 'app/components/Infinite';
 import ButtonLoader from 'app/components/ButtonLoader';
 
 class AppMessagesHomeView extends Component {
@@ -25,6 +27,12 @@ class AppMessagesHomeView extends Component {
       input: ''
     }
   };
+
+  // Keep track of last scroll before updating the data.
+  // So, we can retain our last scroll.
+  // @REFACTOR: Make an abstraction:
+  // `const last = scroll(node); last.store(); last.restore()`
+  last = 0;
 
   componentDidMount() {
     this.handleRequest();
@@ -54,7 +62,7 @@ class AppMessagesHomeView extends Component {
           </Link>
         </div>
 
-        <div className="Messenger-messageWrapper" ref="messenger">
+        <Infinite reverse container callback={this.handleRequest} className="Messenger-messageWrapper" ref="messenger">
           {conversation.data.map((message) => {
             const timestamp = moment(message.timestamp);
 
@@ -78,7 +86,7 @@ class AppMessagesHomeView extends Component {
               </div>
             );
           })}
-        </div>
+        </Infinite>
 
         <div className="Messenger-chatboxContainer">
           <form onSubmit={this.handleSendMessage}>
@@ -123,6 +131,17 @@ class AppMessagesHomeView extends Component {
 
     return axios.get(`/user/${auth.id}/messages/${routeParams.id}?start=${offset}&end=${offset + 19}`)
       .then((res) => {
+        // We'll `reverse` data order ourselves
+        // because the API doesn't return any
+        // other order other than "by recent".
+        const data = res.data.reverse();
+
+        // We'll place this here instead of before the request
+        // so we have less chances for a "flickr".
+        const $messenger = findDOMNode(this.refs.messenger);
+        // We'll take the last scroll from bottom
+        this.last = $messenger.scrollHeight - $messenger.scrollTop;
+
         this.setState(({conversation}) => ({
           conversation: {
             ...conversation,
@@ -131,17 +150,16 @@ class AppMessagesHomeView extends Component {
             // data array with the response data. Otherwise,
             // we'll append to existing data.
             data: offset === 0
-              ? res.data
-              // We'll `reverse` data order ourselves
-              // because the API doesn't return any
-              // other order other than "by recent".
-              : [res.data.reverse(), ...conversation],
+              ? data
+              : [...data, ...conversation.data],
             loading: false,
             offset: offset + 20
           }
         }), () => {
           if ( offset === 0 ) {
-            scrollToBottom(this.refs.messenger);
+            scrollToBottom($messenger);
+          } else {
+            $messenger.scrollTop = $messenger.scrollHeight - this.last;
           }
         });
 
@@ -202,7 +220,7 @@ class AppMessagesHomeView extends Component {
             loading: false
           }
         }), () => {
-          scrollToBottom(this.refs.messenger);
+          scrollToBottom(findDOMNode(this.refs.messenger));
         });
 
         return res;
