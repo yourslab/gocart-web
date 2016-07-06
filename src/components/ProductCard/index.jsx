@@ -35,7 +35,7 @@ const ProductCard = ({product, onFollow}) =>
 
     <div className="ProductCard-inner">
       <div className="ProductCard-thumbnail">
-        <ProductImg src={product.photo_list[0]} id={product.user_id} className="ProductCard-thumbnailImage" />
+        <ProductImg src={product.photo_list[0]} id={product.id} className="ProductCard-thumbnailImage" />
 
         <div className="ProductCard-thumbnailOverlay">
           <h1 className="ProductCard-pricing">
