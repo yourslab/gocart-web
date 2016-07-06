@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import {findDOMNode} from 'react-dom';
 import axios from 'axios';
 import moment from 'moment';
+import flowRight from 'lodash/flowRight';
 import linkState from 'react-link-state';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import {resolve} from 'react-resolver';
 import lang from 'app/lang';
 import scrollToBottom from 'app/utils/scrollToBottom';
 import Infinite from 'app/components/Infinite';
@@ -14,7 +16,7 @@ import ButtonLoader from 'app/components/ButtonLoader';
 
 class AppMessagesHomeView extends Component {
   state = {
-    conversation: {
+    message: {
       data: [],
       offset: 0,
       loading: false,
@@ -22,7 +24,7 @@ class AppMessagesHomeView extends Component {
       error: ''
     },
 
-    message: {
+    send: {
       loading: false,
       error: '',
       input: ''
@@ -44,30 +46,29 @@ class AppMessagesHomeView extends Component {
       return;
     }
 
-    this.handleRequest(0);
+    this.handleRequest(nextProps.routeParams.id);
   }
 
   render() {
-    const {auth} = this.props;
-    const {conversation, message} = this.state;
-    const user = conversation.data[0] || {};
+    const {auth, conversation} = this.props;
+    const {message, send} = this.state;
 
     return (
       <div className="Messenger-panelInner">
-        <Helmet title={user.name || 'Message'} />
+        <Helmet title={conversation.name || 'Message'} />
 
         <div className="Messenger-panelCanopy">
-          <Link to={`/@${user.username}`} className="Messenger-panelCanopyHeading">
+          <Link to={`/@${conversation.username}`} className="Messenger-panelCanopyHeading">
             <h2 className="Messenger-panelCanopyHeadingText">
-              {user.name}
+              {conversation.name}
             </h2>
           </Link>
         </div>
 
         <Infinite reverse container callback={this.handleRequest} className="Messenger-messageWrapper" ref="messenger">
-          {conversation.data.map((message) => {
+          {message.data.map((message) => {
             const timestamp = moment(message.time_sent);
-            const user = message.from_user === auth.id ? auth : message;
+            const user = message.from_user === auth.id ? auth : conversation;
 
             return (
               <div className="Messenger-message" key={`message-${message.id}`}>
@@ -94,17 +95,17 @@ class AppMessagesHomeView extends Component {
         <div className="Messenger-chatboxContainer">
           <form onSubmit={this.handleSendMessage}>
             <textarea
-              valueLink={linkState(this, 'message.input')}
+              valueLink={linkState(this, 'send.input')}
               className="Messenger-chatbox"
               placeholder="Write a reply..." />
 
             <div className="Messenger-chatboxActions">
               <div>
-                {message.loading ? <div className="Spinner" /> : null}
+                {send.loading ? <div className="Spinner" /> : null}
               </div>
 
               <div>
-                <ButtonLoader loading={message.loading} className="Btn Btn--primary Btn--small">
+                <ButtonLoader loading={send.loading} className="Btn Btn--primary Btn--small">
                   Send
                 </ButtonLoader>
               </div>
@@ -115,24 +116,28 @@ class AppMessagesHomeView extends Component {
     );
   }
 
-  handleRequest = (offset = this.state.conversation.offset) => {
-    const {loading, last} = this.state.conversation;
+  handleRequest = (id = this.props.routeParams.id) => {
+    const {loading, last} = this.state.message;
 
     if ( loading || last ) {
       return;
     }
 
-    this.setState(({conversation}) => ({
-      conversation: {
-        ...conversation,
+    this.setState(({message}) => ({
+      message: {
+        ...message,
         loading: true,
         error: ''
       }
     }));
 
-    const {auth, routeParams} = this.props;
+    const offset = id === this.props.routeParams.id
+      ? this.state.message.offset
+      : 0;
 
-    return axios.get(`/user/${auth.id}/messages/${routeParams.id}?start=${offset}&end=${offset + 19}`)
+    const {auth} = this.props;
+
+    return axios.get(`/user/${auth.id}/messages/${id}?start=${offset}&end=${offset + 19}`)
       .then((res) => {
         // We'll place this here instead of before the request
         // so we have less chances for a "flickr".
@@ -140,15 +145,15 @@ class AppMessagesHomeView extends Component {
         // We'll take the last scroll from bottom
         this.last = $messenger.scrollHeight - $messenger.scrollTop;
 
-        this.setState(({conversation}) => ({
-          conversation: {
-            ...conversation,
+        this.setState(({message}) => ({
+          message: {
+            ...message,
             // 1. If we view another message, we'll set the old
             // data array with the response data. Otherwise,
             // we'll append to existing data.
             data: offset === 0
               ? res.data
-              : [...conversation.data, ...res.data],
+              : [...message.data, ...res.data],
             loading: false,
             offset: offset + 20
           }
@@ -163,12 +168,12 @@ class AppMessagesHomeView extends Component {
         return res;
       })
       .catch((res) => {
-        this.setState(({conversation}) => ({
-          conversation: {
-            ...conversation,
+        this.setState(({message}) => ({
+          message: {
+            ...message,
             // If a "last-page" errors occurs when
             // we view another message, we'll empty the data.
-            data: offset === 0 ? [] : conversation.data,
+            data: offset === 0 ? [] : message.data,
             loading: false,
             error: lang.errors.server
           }
@@ -181,15 +186,15 @@ class AppMessagesHomeView extends Component {
   handleSendMessage = (evt) => {
     evt.preventDefault();
 
-    const {loading, input} = this.state.message;
+    const {loading, input} = this.state.send;
 
     if ( loading || !input.length ) {
       return;
     }
 
-    this.setState(({message}) => ({
-      message: {
-        ...message,
+    this.setState(({send}) => ({
+      send: {
+        ...send,
         loading: true,
         error: ''
       }
@@ -203,16 +208,16 @@ class AppMessagesHomeView extends Component {
         message: input
       })
       .then((res) => {
-        this.setState(({conversation, message}) => ({
-          conversation: {
-            ...conversation,
-            data: [res.data, ...conversation.data],
-            loading: false,
-            offset: conversation.offset + 1
-          },
-
+        this.setState(({message, send}) => ({
           message: {
             ...message,
+            data: [res.data, ...message.data],
+            loading: false,
+            offset: message.offset + 1
+          },
+
+          send: {
+            ...send,
             input: '',
             loading: false
           }
@@ -220,12 +225,15 @@ class AppMessagesHomeView extends Component {
           scrollToBottom(findDOMNode(this.refs.messenger));
         });
 
+        // Update conversation from `app.messages` parent route
+        this.props.onUpdateConversation(routeParams.id, res.data);
+
         return res;
       })
       .catch((res) => {
-        this.setState(({message}) => ({
-          message: {
-            ...message,
+        this.setState(({send}) => ({
+          send: {
+            ...send,
             loading: false,
             error: lang.errors.server
           }
@@ -236,4 +244,10 @@ class AppMessagesHomeView extends Component {
   }
 }
 
-export default connect(({auth}) => ({ auth: auth.user }))(AppMessagesHomeView);
+export default flowRight(
+  connect(({auth}) => ({ auth: auth.user })),
+
+  resolve('conversation', (props) =>
+    axios.get(`/user/${props.auth.id}/conversations?to_id=${props.routeParams.id}`)
+      .then((res) => res.data[0]))
+)(AppMessagesHomeView);

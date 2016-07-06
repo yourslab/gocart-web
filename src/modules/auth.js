@@ -31,7 +31,7 @@ const initialState = {
   facebook: {
     loading: false,
     message: '',
-  }, 
+  },
 
   update: {
     loading: false,
@@ -128,7 +128,7 @@ export default function authReducer(state = initialState, action) {
         }
       };
 
-    case AUTH_UPDATE_SUCCESS: 
+    case AUTH_UPDATE_SUCCESS:
       return {
         ...state,
         user: {
@@ -306,14 +306,14 @@ export function getData() {
   }
 }
 
-export function update(data, username) {
+export function update(data) {
   return (dispatch, getState) => {
     const {auth} = getState();
-    
+
     if ( auth.update.loading ) {
       return;
     }
-    
+
     dispatch({ type: AUTH_UPDATE });
 
     return axios.put(`/user/${auth.user.id}`, data)
@@ -323,7 +323,7 @@ export function update(data, username) {
           payload: data
         })
 
-        history.push(`/@${username}`);
+        history.push(`/@${auth.user.username}`);
 
         return res;
       })
