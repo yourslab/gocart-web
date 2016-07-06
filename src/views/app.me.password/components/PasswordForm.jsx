@@ -48,10 +48,10 @@ export default class PasswordForm extends Component {
           </div>
 
           <div className="FormGroup">
-            <label htmlFor="new_password">New Password</label>
+            <label htmlFor="password">New Password</label>
             <InputError
-              element={<ViewablePasswordInput id="new_password" valueLink={linkState(this, 'new_password')} />}
-              error={message.new_password} />
+              element={<ViewablePasswordInput id="password" valueLink={linkState(this, 'password')} />}
+              error={message.password} />
           </div>
 
           <div className="FormGroup">
