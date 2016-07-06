@@ -74,8 +74,8 @@ export default class FollowersList extends Component {
 
     const query = qs.stringify({
       viewer_id: props.auth.id,
-      start: offset === 0 ? offset : offset + 1,
-      end: offset + 5
+      start: offset,
+      end: offset + 19
     });
 
     return axios.get(`/user/${props.user.id}/followers/?${query}`)
@@ -86,7 +86,7 @@ export default class FollowersList extends Component {
             : [...state.followers, ...res.data],
           loading: false,
           error: false,
-          offset: offset + 5
+          offset: offset + 20
         });
 
         return res;
