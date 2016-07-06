@@ -34,16 +34,25 @@ class AppMessagesView extends Component {
               </div>
 
               <Infinite callback={this.handleRequest} className="Messenger-conversationWrapper">
-                {data.map((conversation, i) =>
-                  <Link to={`/messages/${conversation.to_user}`} className="Messenger-conversation" activeClassName="Messenger-conversation--active" key={`message-${conversation.id}`}>
-                    <UserImg src={conversation.prof_pic_link} username={conversation.username} className="Messenger-conversationAvatar" />
+                {data.map((conversation, i) => {
+                  // User ID
+                  // Since `from_user` and to_user` switches depending on the last sender,
+                  // we'll check if `from_id` is the same as the auth user's id.
+                  const id = this.props.auth.id === conversation.from_user
+                    ? conversation.to_user
+                    : conversation.from_user;
 
-                    <div className="Messenger-conversationInfo">
-                      <h4 className="Messenger-conversationName">{conversation.name}</h4>
-                      <div className="Messenger-conversationSummary">{conversation.message}</div>
-                    </div>
-                  </Link>
-                )}
+                  return (
+                    <Link to={`/messages/${id}`} className="Messenger-conversation" activeClassName="Messenger-conversation--active" key={`message-${conversation.id}`}>
+                      <UserImg src={conversation.prof_pic_link} username={conversation.username} className="Messenger-conversationAvatar" />
+
+                      <div className="Messenger-conversationInfo">
+                        <h4 className="Messenger-conversationName">{conversation.name}</h4>
+                        <div className="Messenger-conversationSummary">{conversation.message}</div>
+                      </div>
+                    </Link>
+                  );
+                })}
 
                 {loading ? <div className="Messenger-conversationLoader">
                   <div className="Spinner" />
