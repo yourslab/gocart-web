@@ -6,6 +6,8 @@ import {resolve} from 'react-resolver';
 import axios from 'axios';
 import flowRight from 'lodash/flowRight';
 import qs from 'qs';
+import lang from 'app/lang';
+import isServerError from 'app/utils/isServerError';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
 import Infinite from 'app/components/Infinite';
 import StaticImg from 'app/components/StaticImg';
@@ -27,8 +29,7 @@ class AppProfileView extends Component {
     },
 
     loading: false,
-    error: false,
-    errors: {}
+    error: ''
   };
 
   componentDidMount() {
@@ -184,11 +185,12 @@ class AppProfileView extends Component {
         return res;
       })
       .catch((res) => {
-        this.setState({
-          loading: false,
-          error: true,
-          errors: formatValidationErrors(res.data.errors)
-        });
+        if ( isServerError(res.status) ) {
+          this.setState({
+            loading: false,
+            error: lang.errors.server
+          });
+        }
 
         return Promise.reject(res);
       });
