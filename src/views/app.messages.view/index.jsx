@@ -46,7 +46,7 @@ class AppMessagesHomeView extends Component {
       return;
     }
 
-    this.handleRequest(0);
+    this.handleRequest(nextProps.routeParams.id);
   }
 
   render() {
@@ -68,7 +68,7 @@ class AppMessagesHomeView extends Component {
         <Infinite reverse container callback={this.handleRequest} className="Messenger-messageWrapper" ref="messenger">
           {message.data.map((message) => {
             const timestamp = moment(message.time_sent);
-            const user = message.from_user === auth.id ? auth : message;
+            const user = message.from_user === auth.id ? auth : conversation;
 
             return (
               <div className="Messenger-message" key={`message-${message.id}`}>
@@ -116,7 +116,7 @@ class AppMessagesHomeView extends Component {
     );
   }
 
-  handleRequest = (offset = this.state.message.offset) => {
+  handleRequest = (id = this.props.routeParams.id) => {
     const {loading, last} = this.state.message;
 
     if ( loading || last ) {
@@ -131,9 +131,13 @@ class AppMessagesHomeView extends Component {
       }
     }));
 
-    const {auth, routeParams} = this.props;
+    const offset = id === this.props.routeParams.id
+      ? this.state.message.offset
+      : 0;
 
-    return axios.get(`/user/${auth.id}/messages/${routeParams.id}?start=${offset}&end=${offset + 19}`)
+    const {auth} = this.props;
+
+    return axios.get(`/user/${auth.id}/messages/${id}?start=${offset}&end=${offset + 19}`)
       .then((res) => {
         // We'll place this here instead of before the request
         // so we have less chances for a "flickr".
