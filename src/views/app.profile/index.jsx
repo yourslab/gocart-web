@@ -190,6 +190,11 @@ class AppProfileView extends Component {
             loading: false,
             error: lang.errors.server
           });
+        } else {
+          this.setState({
+            loading: false,
+            last: res.data.status == 404 > res.data.status == 404 ? true : false
+          });
         }
 
         return Promise.reject(res);
