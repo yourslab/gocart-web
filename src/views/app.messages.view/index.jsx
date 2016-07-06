@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import lang from 'app/lang';
 import scrollToBottom from 'app/utils/scrollToBottom';
 import Infinite from 'app/components/Infinite';
+import UserImg from 'app/components/UserImg';
 import ButtonLoader from 'app/components/ButtonLoader';
 
 class AppMessagesHomeView extends Component {
@@ -68,7 +69,7 @@ class AppMessagesHomeView extends Component {
 
             return (
               <div className="Messenger-message" key={`message-${message.id}`}>
-                <img src="https://placeimg.com/40/40/any" className="Messenger-messageAvatar" />
+                <UserImg src={message.prof_pic_link} username={message.username} className="Messenger-messageAvatar" />
 
                 <div className="Messenger-messageInfo">
                   <h4 className="Messenger-messageUser">
