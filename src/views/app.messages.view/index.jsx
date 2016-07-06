@@ -67,7 +67,7 @@ class AppMessagesHomeView extends Component {
 
         <Infinite reverse container callback={this.handleRequest} className="Messenger-messageWrapper" ref="messenger">
           {message.data.map((message) => {
-            const timestamp = moment(message.time_sent);
+            const timestamp = moment.unix(message.time_sent);
             const user = message.from_user === auth.id ? auth : conversation;
 
             return (
