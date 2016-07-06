@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {cloneElement, Component} from 'react';
 import cn from 'classnames';
 import axios from 'axios';
 import {Link} from 'react-router';
@@ -52,7 +52,9 @@ class AppMessagesView extends Component {
             </div>
 
             <div className="Messenger-panel">
-              {this.props.children}
+              {cloneElement(this.props.children, {
+                onUpdateConversation: this.handleUpdateConversation
+              })}
             </div>
           </div>
         </div>
@@ -96,6 +98,21 @@ class AppMessagesView extends Component {
         }
         return Promise.reject(res);
       })
+  }
+
+  handleUpdateConversation = (id, data) => {
+    this.setState(    {
+      // We'll use a `double-equals` here to simplify
+      // code for the user. Since the id is most
+      // likely coming from `routeParams`, which makes
+      // it a string by default.
+      data: this.state.data.map((conversation) => conversation.to_user == id
+        ? {
+          ...conversation,
+          message: data.message,
+          time_sent: data.time_sent
+        } : conversation)
+    });
   }
 }
 

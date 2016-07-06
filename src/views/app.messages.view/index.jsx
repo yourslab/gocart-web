@@ -220,6 +220,9 @@ class AppMessagesHomeView extends Component {
           scrollToBottom(findDOMNode(this.refs.messenger));
         });
 
+        // Update conversation from `app.messages` parent route
+        this.props.onUpdateConversation(routeParams.id, res.data);
+
         return res;
       })
       .catch((res) => {
