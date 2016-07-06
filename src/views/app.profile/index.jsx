@@ -147,7 +147,6 @@ class AppProfileView extends Component {
           ref="followers"
           size="sm">
           <FollowersList
-            onUpdateFollowing={this.handleUpdateFollowing}
             auth={auth}
             user={user}
             onClose={() => this.refs.followers.close()} />
