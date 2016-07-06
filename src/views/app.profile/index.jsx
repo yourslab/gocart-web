@@ -29,6 +29,7 @@ class AppProfileView extends Component {
     },
 
     loading: false,
+    last: false,
     error: ''
   };
 
