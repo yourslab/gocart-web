@@ -85,5 +85,106 @@
 
   .Messenger-panel {
     width: 100%;
+    background: $color-white;
+  }
+
+  .Messenger-panelInner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    // Hide the "overflowing" chatbox container shadow
+    overflow: hidden;
+  }
+
+  .Messenger-panelCanopy {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 60px;
+    border-bottom: 1px solid $color-grayLight;
+  }
+
+  .Messenger-panelCanopyHeading {
+    @include linkNoUnderscore;
+    color: $color-red;
+  }
+
+  .Messenger-panelCanopyHeadingText {
+    margin-bottom: 0;
+  }
+
+
+  .Messenger-messageWrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  .Messenger-message {
+    display: flex;
+    flex-shrink: 0;
+    // height: 100%;
+    padding: 20px 10px;
+  }
+
+  .Messenger-messageAvatar {
+    display: block;
+    flex-shrink: 0;
+    margin-right: 15px;
+    margin-top: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+  }
+
+  .Messenger-messageInfo {
+    width: 100%;
+    margin-right: 20px;
+  }
+
+  .Messenger-messageUser {
+    margin-bottom: 0;
+  }
+
+  .Messenger-messageText {
+    margin-bottom: 0;
+    line-height: 1.4;
+    word-break: break-all;
+  }
+
+  .Messenger-messageMeta {
+    flex-shrink: 0;
+    color: $color-gray;
+    width: 175px;
+    text-align: right;
+  }
+
+  .Messenger-chatboxContainer {
+    flex-shrink: 0;
+    padding: 10px;
+    background: $color-grayLight;
+    // @REFACTOR: Turn into a mixin or something
+    box-shadow: 0 -1px 5px $color-backdrop;
+  }
+
+  .Messenger-chatbox {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 100px;
+    width: 100%;
+    border: 0;
+    resize: none;
+    outline: 0;
+  }
+
+  .Messenger-chatboxActions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }

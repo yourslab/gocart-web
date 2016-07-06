@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import cn from 'classnames';
 import axios from 'axios';
-import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import lang from 'app/lang';
@@ -27,8 +26,6 @@ class AppMessagesView extends Component {
 
     return (
       <div>
-        <Helmet title="Messages" />
-
         <div className="Container">
           <div className="Messenger">
             <div className="Messenger-sidebar">
@@ -54,7 +51,9 @@ class AppMessagesView extends Component {
               </Infinite>
             </div>
 
-            <div className="Messenger-panel"></div>
+            <div className="Messenger-panel">
+              {this.props.children}
+            </div>
           </div>
         </div>
       </div>
