@@ -146,13 +146,21 @@ class AppProfileView extends Component {
         <Modal
           ref="followers"
           size="sm">
-          <FollowersList auth={auth} user={user} onClose={() => this.refs.followers.close()} />
+          <FollowersList
+            onUpdateFollowing={this.handleUpdateFollowing}
+            auth={auth}
+            user={user}
+            onClose={() => this.refs.followers.close()} />
         </Modal>
 
         <Modal
           ref="following"
           size="sm">
-          <FollowingList auth={auth} user={user} onClose={() => this.refs.following.close()} />
+          <FollowingList
+            onUpdateFollowing={this.handleUpdateFollowing}
+            auth={auth}
+            user={user}
+            onClose={() => this.refs.following.close()} />
         </Modal>
       </div>
     );
@@ -209,6 +217,15 @@ class AppProfileView extends Component {
       user: {
         ...state.user,
         is_followed: !user.is_followed
+      }
+    }));
+  }
+
+  handleUpdateFollowing = (num_following) => {
+    this.setState((state) => ({
+      user: {
+        ...state.user,
+        num_following
       }
     }));
   }

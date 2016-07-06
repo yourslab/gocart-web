@@ -116,5 +116,9 @@ export default class FollowingList extends Component {
         } : user
       )
     }));
+
+    const following = this.state.following.filter((user) => !user.is_followed);
+
+    this.props.onUpdateFollowing(following.length);
   }
 }
