@@ -31,7 +31,7 @@ const PostCard = ({ post }) =>
 
         <div className="CommentMeta">
           <div>
-            <a href="#" className="CommentMeta-highlight"> {post.num_likes} bumped this. </a>
+            <a href="#" className="CommentMeta-highlight">{post.num_likes} bumped this</a>
           </div>
 
           <div>
