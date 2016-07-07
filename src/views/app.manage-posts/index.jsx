@@ -9,7 +9,7 @@ export default class AppManagePostsView extends Component {
           <div className="Sidebar">
             <IndexLink to="/manage-posts" className="Sidebar-item" activeClassName="Sidebar-item--active">Manage Posts</IndexLink>
             <Link to="/manage-posts/create" className="Sidebar-item" activeClassName="Sidebar-item--active">Create Post</Link>
-            <Link to="/manage-posts/archived" className="Sidebar-item" activeClassName="Sidebar-item--active">Archived Posts</Link>
+            {/*<Link to="/manage-posts/archived" className="Sidebar-item" activeClassName="Sidebar-item--active">Archived Posts</Link>*/}
           </div>
 
           <div className="SidebarContainer-panel">
