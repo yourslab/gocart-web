@@ -7,12 +7,14 @@ import {connect} from 'react-redux';
 import {GatewayProvider, GatewayDest} from 'react-gateway';
 import axios from 'axios';
 import qs from 'qs';
+import moment from 'moment';
 import lang from 'app/lang';
 import isServerError from 'app/utils/isServerError';
 import defer from 'app/utils/defer';
 import history from 'app/history';
 import {auth} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
+import UserImg from 'app/components/UserImg';
 import Permission from 'app/components/Permission';
 
 class AppView extends Component {
@@ -41,7 +43,7 @@ class AppView extends Component {
   }
 
   render() {
-    const {left, right} = this.state;
+    const {left, right, notifications, loading} = this.state;
     const {user} = this.props;
 
     return (
@@ -90,48 +92,32 @@ class AppView extends Component {
                         </button>
                       </div>
 
-                      {this.state.loading
+                      {loading
                         ? <div className="Spinner" />
                         : <div className="MainDrawerNotification">
-                          <div className="MainDrawerNotification-heading">
-                            <h4>Notifications</h4>
-                          </div>
-
-                          <div className="MainDrawerNotification-item MainDrawerNotification-item--unseen">
-                            <div className="MainDrawerNotification-itemHeading">
-                              <div className="MainDrawerNotification-itemAvatar">
-                                <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
-                              </div>
-
-                              <div>
-                                <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
-                                <h6 className="MainDrawerNotification-itemTime"><small>5 mins ago</small></h6>
-                              </div>
+                            <div className="MainDrawerNotification-heading">
+                              <h4>Notifications</h4>
                             </div>
+                            {notifications.map((notif, i) =>
+                              <div key={i} className={cn('MainDrawerNotification-item', { 'MainDrawerNotification-item--unseen': notif.has_been_read })}>
+                                <div className="MainDrawerNotification-itemHeading">
+                                  <div className="MainDrawerNotification-itemAvatar">
+                                    <UserImg src={notif.prof_pic_link} username={notif.username} className="MainDrawerNotification-itemAvatarImage" alt={`${notif.username}'s Avatar`} />
+                                  </div>
 
-                            <div className="MainDrawerNotification-itemBody">
-                              <h6 className="MainDrawerNotification-itemAction">Posted a comment</h6>
-                              <h6 className="MainDrawerNotification-itemDetails">Lorem ipsum dolor sit amet...</h6>
-                            </div>
-                          </div>
+                                  <div>
+                                    <h6 className="MainDrawerNotification-itemName"> {notif.name} </h6>
+                                    <h6 className="MainDrawerNotification-itemTime"> {moment.unix(notif.time_created).fromNow()} </h6>
+                                  </div>
 
-                          <div className="MainDrawerNotification-item">
-                            <div className="MainDrawerNotification-itemHeading">
-                              <div className="MainDrawerNotification-itemAvatar">
-                                <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
+                                </div>
+
+                                <div className="MainDrawerNotification-itemBody">
+                                  <h6 className="MainDrawerNotification-itemAction">Posted a comment</h6>
+                                  <h6 className="MainDrawerNotification-itemDetails">Lorem ipsum dolor sit amet...</h6>
+                                </div>
                               </div>
-
-                              <div>
-                                <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
-                                <small className="MainDrawerNotification-itemTime">5 mins ago</small>
-                              </div>
-                            </div>
-
-                            <div className="MainDrawerNotification-itemBody">
-                              <h6 className="MainDrawerNotification-itemAction">Bumped your post</h6>
-                              <img src="https://placeimg.com/120/60/any" className="MainDrawerNotification-itemThumbnail" alt="Thumbnail" />
-                            </div>
-                          </div>
+                            )}
                         </div>}
                     </div>
 
@@ -295,7 +281,7 @@ class AppView extends Component {
         } else {
           this.setState({
             loading: false,
-            last: res.data.status == 404 > res.data.status == 404 ? true : false
+            last: res.status == 404 > res.status == 404 ? true : false
           });
         }
 
