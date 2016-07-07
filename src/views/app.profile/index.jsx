@@ -212,11 +212,12 @@ class AppProfileView extends Component {
       });
   }
 
-  handleFollow = (id) => {
+  handleFollow = () => {
     this.setState((state) => ({
       user: {
         ...state.user,
-        is_followed: !state.user.is_followed
+        is_followed: !state.user.is_followed,
+        num_followers: state.user.num_followers + (!state.user.is_followed ? 1 : -1)
       }
     }));
   }
