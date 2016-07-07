@@ -1,0 +1,30 @@
+.InfoWell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100px;
+  background: $color-grayLight;
+  border: 1px solid $color-gray;
+  border-radius: $borderRadius-base;
+
+  .InfoWell-section {
+    padding: 5px 30px;
+    width: 100%;
+  }
+
+  .InfoWell-section:not(:last-child) {
+    border-right: 1px solid $color-gray;
+  }
+
+  .InfoWell-sectionHeading {
+    color: $color-grayDark;
+    font-weight: 400;
+    margin-bottom: 10px
+  }
+
+  .InfoWell-sectionText {
+    margin-bottom: 0;
+  }
+}
