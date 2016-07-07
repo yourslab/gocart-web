@@ -5,6 +5,7 @@ import moment from 'moment';
 import Helmet from 'react-helmet';
 import {Gateway} from 'react-gateway';
 import {connect} from 'react-redux';
+import isServerError from 'app/utils/isServerError';
 import Infinite from 'app/components/Infinite';
 import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
@@ -14,6 +15,7 @@ class AppHomeView extends React.Component {
   state = {
     feed: [],
     offset: 0,
+    last: false,
     filters: {
       // longtitude: 0,
       // latitude: 0,
@@ -90,7 +92,7 @@ class AppHomeView extends React.Component {
   }
 
   handleRequest = (offset = this.state.offset) => {
-    if ( this.state.loading ) {
+    if ( this.state.loading || (this.state.last && offset !== 0)  ) {
       return;
     }
 
@@ -135,10 +137,23 @@ class AppHomeView extends React.Component {
         return res;
       })
       .catch((res) => {
-        this.setState({
-          loading: false,
-          error: true
-        });
+        if ( isServerError(res.status) ) {
+          this.setState({
+            loading: false,
+            error: true
+          });
+        } else if (offset === 0) {
+          this.setState({
+            feed: [],
+            last: true,
+            loading: false
+          });
+        } else {
+          this.setState({
+            loading: false,
+            last: true
+          });
+        }
 
         return Promise.reject(res);
       });
