@@ -158,8 +158,8 @@ export default class AppProfileRatingsView extends Component {
             ...state.ratings,
             data: [{
               ...res.data,
-              username: this.props.user.username,
-              prof_pic_link: this.props.user.prof_pic_link
+              username: this.props.auth.username,
+              prof_pic_link: this.props.auth.prof_pic_link
             }, ...state.ratings.data]
           },
 
