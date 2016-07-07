@@ -107,9 +107,9 @@ class AppProfileView extends Component {
                   ? null
                   : <div className="ProfilePanel-canopySection">
                       <div className="ProfilePanel-canopySectionItem">
-                        <button className="Btn Btn--primary Btn--inverted">
+                        <Link to={`/messages/${user.id}`} className="Btn Btn--primary Btn--inverted">
                           Chat
-                        </button>
+                        </Link>
                       </div>
 
                       <div className="ProfilePanel-canopySectionItem">
