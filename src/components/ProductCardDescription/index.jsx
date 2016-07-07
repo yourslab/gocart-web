@@ -7,7 +7,7 @@ const ProductCardDescription = ({description, id}) =>
     ? <span>{description}</span>
     : (
       <span>
-
+        {trimEnd(description.substr(0, 150))}...
         <Link to={`/products/${id}`}>Read More</Link>
       </span>
     );
