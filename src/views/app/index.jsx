@@ -43,7 +43,6 @@ class AppView extends Component {
   render() {
     const {left, right} = this.state;
     const {user} = this.props;
-    console.log(this.state.notifications);
 
     return (
       <GatewayProvider>
