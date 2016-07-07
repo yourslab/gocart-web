@@ -92,11 +92,13 @@ class RegistrationView extends Component {
     // so we're imitating the backend's response
     // to manually produce a validation error.
     if ( data.password !== data.password_confirmation ) {
-      return this.setState({
+      this.setState({
         errors: {
-          password_confirmation: ['This field must match the password field.']
+          password_confirmation: lang.errors.password
         }
       });
+
+      return;
     }
 
     this.setState({

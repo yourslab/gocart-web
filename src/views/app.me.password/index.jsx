@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {connect} from 'react-redux';
 import axios from 'axios';
-import history from 'app/history';
 import lang from 'app/lang';
+import history from 'app/history';
 import isServerError from 'app/utils/isServerError';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
 import PasswordForm from './components/PasswordForm';
@@ -38,7 +38,7 @@ class AppMePasswordView extends Component {
     if ( data.password !== data.password_confirmation ) {
       this.setState({
         errors: {
-          password_confirmation: 'Your password does not match.'
+          password_confirmation: lang.errors.password
         }
       });
 
@@ -47,6 +47,7 @@ class AppMePasswordView extends Component {
 
     this.setState({
       loading: true,
+      errors: {},
       message: ''
     });
 
