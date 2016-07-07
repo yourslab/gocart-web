@@ -103,21 +103,21 @@ class AppProfileView extends Component {
                   </div>
                 </div>
 
-                {auth.id === user.id
-                  ? null
-                  : <div className="ProfilePanel-canopySection">
-                      <div className="ProfilePanel-canopySectionItem">
+                  <div className="ProfilePanel-canopySection">
+                    {auth.id === user.id
+                      ? null
+                      : <div className="ProfilePanel-canopySectionItem">
                         <Link to={`/messages/${user.id}`} className="Btn Btn--primary Btn--inverted">
                           Chat
                         </Link>
-                      </div>
+                      </div>}
 
                       <div className="ProfilePanel-canopySectionItem">
                         <UserFollowWidget
                           user={{ id: user.id, is_followed: user.is_followed }}
                           onFollow={this.handleFollow} />
                       </div>
-                    </div>}
+                    </div>
               </div>
 
               <Infinite callback={this.handleRequest}>
