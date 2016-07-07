@@ -38,7 +38,7 @@ export default class FollowersList extends Component {
 
               <div className="UserListGroup-details">
 			 					<h5 className="UserListGroup-name"> {user.name} </h5>
-			 					<h6 className="UserListGroup-followers"> 6969 followers </h6>
+			 					<h6 className="UserListGroup-followers">{user.num_followers} followers </h6>
 			 				</div>
 
 			 				<div className="UserListGroup-actions">

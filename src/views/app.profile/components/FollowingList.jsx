@@ -37,7 +37,7 @@ export default class FollowingList extends Component {
 			 				<UserImg src={user.prof_pic_link} username={user.username} className="UserListGroup-image" alt={`${user.username}'s Avatar`} />
 			 				<div className="UserListGroup-details">
 			 					<h5 className="UserListGroup-name"> {user.name} </h5>
-			 					<h6 className="UserListGroup-followers"> 6969 followers </h6>
+			 					<h6 className="UserListGroup-followers">{user.num_followers} followers </h6>
 			 				</div>
 			 				<div className="UserListGroup-actions">
 			 					<UserFollowWidget
