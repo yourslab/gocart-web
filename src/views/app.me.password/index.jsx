@@ -5,12 +5,12 @@ import axios from 'axios';
 import history from 'app/history';
 import lang from 'app/lang';
 import isServerError from 'app/utils/isServerError';
+import formatValidationErrors from 'app/utils/formatValidationErrors';
 import PasswordForm from './components/PasswordForm';
 
 class AppMePasswordView extends Component {
   state = {
     loading: false,
-    error: false,
     errors: {},
     message: ''
   };
@@ -23,7 +23,7 @@ class AppMePasswordView extends Component {
         <PasswordForm
           auth={this.props.auth}
           loading={this.state.loading}
-          error={this.state.error}
+          errors={this.state.errors}
           message={this.state.message}
           onPost={this.handlePost} />
       </div>
@@ -35,18 +35,20 @@ class AppMePasswordView extends Component {
       return;
     }
 
-    this.setState({
-      loading: true,
-      error: false
-    });
-
-    if ( data.new_password_confirmation !== data.password ) {
+    if ( data.password !== data.password_confirmation ) {
       this.setState({
         errors: {
-          new_password_confirmation: 'Your password does not match'
+          password_confirmation: 'Your password does not match.'
         }
       });
+
+      return;
     }
+
+    this.setState({
+      loading: true,
+      message: ''
+    });
 
     return axios.put(`/user/${this.props.auth.id}`, data)
       .then((res) => {
@@ -67,7 +69,7 @@ class AppMePasswordView extends Component {
         } else {
           this.setState({
             loading: false,
-            errors: res.data.errors,
+            errors: formatValidationErrors(res.data.errors),
             message: lang.errors.input
           });
         }

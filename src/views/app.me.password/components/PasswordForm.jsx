@@ -10,11 +10,11 @@ export default class PasswordForm extends Component {
   state = {
     old_password: '',
     password: '',
-    new_password_confirmation: ''
+    password_confirmation: ''
   };
 
   render() {
-    const {auth, loading, error, message} = this.props;
+    const {auth, loading, error, errors, message} = this.props;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -43,22 +43,22 @@ export default class PasswordForm extends Component {
               type="password"
               id="password"
               className="FormInput"
-              error={message.old_password}
-              valueLink={linkState(this, 'password')} />
+              error={errors.old_password}
+              valueLink={linkState(this, 'old_password')} />
           </div>
 
           <div className="FormGroup">
             <label htmlFor="password">New Password</label>
             <InputError
               element={<ViewablePasswordInput id="password" valueLink={linkState(this, 'password')} />}
-              error={message.password} />
+              error={errors.password} />
           </div>
 
           <div className="FormGroup">
-            <label htmlFor="new_password_confirmation">Confirm New Password</label>
+            <label htmlFor="password_confirmation">Confirm New Password</label>
             <InputError
-              element={<ViewablePasswordInput id="new_password_confirmation" valueLink={linkState(this, 'new_password_confirmation')} />}
-              error={message.new_password_confirmation} />
+              element={<ViewablePasswordInput id="password_confirmation" valueLink={linkState(this, 'password_confirmation')} />}
+              error={errors.password_confirmation} />
           </div>
         </div>
       </form>
