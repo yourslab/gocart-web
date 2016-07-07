@@ -1,10 +1,29 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import qs from 'qs';
 import Helmet from 'react-helmet';
+import isServerError from 'app/utils/isServerError';
+import Infinite from 'app/components/Infinite';
 import RatingWidget from 'app/components/RatingWidget';
+import RatingCard from './components/RatingCard';
 
 export default class AppProfileRatingsView extends Component {
+  state = {
+    ratings: [],
+    offset: 0,
+    loading: false,
+    last: false,
+    error: ''
+  };
+
+  componentDidMount() {
+    this.handleRequest();
+  }
+
   render() {
+    // Coming from `app.profile` route
     const {user} = this.props;
+    const {ratings, loading} = this.state;
 
     return (
       <div>
@@ -28,32 +47,61 @@ export default class AppProfileRatingsView extends Component {
           </div>
         </div>
 
-        <div className="Grid">
-          <div className="Grid-cell u-size6 u-spacer-base">
-            <div className="RatingCard">
-              <div className="RatingCard-heading">
-                <img className="RatingCard-avatar" src="https://placeimg.com/48/48/any" />
-
-                <div className="RatingCard-info">
-                  <h4 className="RatingCard-name">Alma Hamilton</h4>
-                  <RatingWidget score={3} />
-                </div>
-
-                <div className="RatingCard-meta">
-                  <small>06/22/2016</small>
-                </div>
-              </div>
-
-              <p className="RatingCard-text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-            </div>
+        <Infinite callback={this.handleRequest}>
+          <div className="Grid">
+            {ratings.map((rating) =>
+              <RatingCard rating={rating} key={`rating-${rating.id}`} />
+            )}
           </div>
-        </div>
+        </Infinite>
 
-        <div className="Spinne" />
+        {loading ? <div className="Spinner" /> : null}
       </div>
     );
+  }
+
+  handleRequest = (offset = this.state.offset) => {
+    if ( this.state.loading || this.state.last ) {
+      return;
+    }
+
+    this.setState({
+      loading: true,
+      error: ''
+    });
+
+    const {state, props} = this;
+
+    const query = qs.stringify({
+      start: offset,
+      end: offset + 19,
+      type: 1
+    });
+
+    return axios.get(`/user/${props.user.id}/ratings?${query}`)
+      .then((res) => {
+        this.setState((state) => ({
+          ratings: [...state.ratings, ...res.data],
+          loading: false,
+          offset: offset + 20
+        }));
+
+        return res;
+      })
+      .catch((res) => {
+        if ( isServerError(res.status) ) {
+          this.setState({
+            loading: false,
+            error: lang.errors.server
+          });
+        } else {
+          this.setState({
+            loading: false,
+            last: true
+          });
+        }
+
+        return Promise.reject(res);
+      });
   }
 }
