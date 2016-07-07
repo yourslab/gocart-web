@@ -189,7 +189,7 @@ class AppView extends Component {
                       <StaticImg src="icons/notif_red@1x.png" alt="Drawer Icon" />
                     </button>
 
-                    <div className="MainHeader-notificationBadge">12</div>
+                    <div className="MainHeader-notificationBadge">{user.num_notifs}</div>
                   </div>
                 </Permission>
               </div>
