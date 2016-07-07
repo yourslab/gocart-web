@@ -187,7 +187,13 @@ class AppProfileView extends Component {
     return axios.get(`/user/${props.user.id}/posts?${query}`)
       .then((res) => {
         this.setState({
-          posts: res.data,
+          posts: res.data.map((user) => ({
+            ...user,
+            // The API doesn't include it.
+            // Safe to assume since it's a `following` list.
+            is_followed: true
+          })),
+
           loading: false,
           offset: offset + 20
         });
@@ -220,11 +226,11 @@ class AppProfileView extends Component {
     }));
   }
 
-  handleUpdateFollowing = (num_following) => {
+  handleUpdateFollowing = (flag) => {
     this.setState((state) => ({
       user: {
         ...state.user,
-        num_following
+        num_following: state.user.num_following + (flag ? 1 : -1)
       }
     }));
   }
