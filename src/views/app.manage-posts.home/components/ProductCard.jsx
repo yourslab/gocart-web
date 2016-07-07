@@ -3,6 +3,7 @@ import {Link} from 'react-router';
 import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import ProductImg from 'app/components/ProductImg';
+import ProductCardDescription from 'app/components/ProductCardDescription';
 
 const ProductCard = ({product, onEdit, onDelete}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
@@ -26,7 +27,9 @@ const ProductCard = ({product, onEdit, onDelete}) =>
           </div>
 
           <p className="ProductCard-description">
-            {product.desc}
+            <ProductCardDescription
+              description={product.desc}
+              id={product.id} />
           </p>
 
           <div className="CommentMeta">

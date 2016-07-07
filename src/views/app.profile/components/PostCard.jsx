@@ -4,6 +4,8 @@ import numeral from 'numeral';
 import StaticImg from 'app/components/StaticImg';
 import Switchbox from 'app/components/Switchbox';
 import ProductImg from 'app/components/ProductImg';
+import ProductCardDescription from 'app/components/ProductCardDescription';
+
 
 const PostCard = ({post}) =>
   <div className="ProductCard">
@@ -26,8 +28,9 @@ const PostCard = ({post}) =>
         </div>
 
         <p className="ProductCard-description">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt  ut labore et dolore magna aliqua.
+          <ProductCardDescription
+            description={post.desc}
+            id={post.id} />
         </p>
 
         <div className="CommentMeta">

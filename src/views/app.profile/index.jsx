@@ -209,7 +209,7 @@ class AppProfileView extends Component {
         } else {
           this.setState({
             loading: false,
-            last: res.data.status == 404 > res.data.status == 404 ? true : false
+            last: true
           });
         }
 

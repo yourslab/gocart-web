@@ -87,6 +87,7 @@
 
   .ProductCard-headingSection {
     display: flex;
+    width: 100%;
   }
 
   .ProductCard-headingSectionItem:not(:last-child) {
@@ -94,6 +95,7 @@
   }
 
   .ProductCard-title {
+    @include textEllipsis;
     margin-bottom: 0;
     color: $color-red;
   }
@@ -104,7 +106,7 @@
 
   .ProductCard-description {
     margin-bottom: 10px;
-    min-height: 75px;
+    height: 75px;
   }
 
   .ProductCard-tags {

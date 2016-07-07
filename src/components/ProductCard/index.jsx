@@ -6,6 +6,7 @@ import UserImg from 'app/components/UserImg';
 import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
+import ProductCardDescription from 'app/components/ProductCardDescription';
 
 const ProductCard = ({product, onFollow}) =>
   <div className="ProductCard">
@@ -46,7 +47,7 @@ const ProductCard = ({product, onFollow}) =>
 
       <div className="ProductCard-body">
         <div className="ProductCard-heading">
-          <div>
+          <div className="ProductCard-headingSection">
             <h4 className="ProductCard-title">{product.title}</h4>
           </div>
 
@@ -62,7 +63,9 @@ const ProductCard = ({product, onFollow}) =>
         </div>
 
         <p className="ProductCard-description">
-          {product.desc}
+          <ProductCardDescription
+            description={product.desc}
+            id={product.id} />
         </p>
 
         <div className="CommentMeta">
