@@ -110,18 +110,28 @@ class AppMessagesView extends Component {
   }
 
   handleUpdateConversation = (id, data) => {
-    this.setState(    {
-      // We'll use a `double-equals` here to simplify
-      // code for the user. Since the id is most
-      // likely coming from `routeParams`, which makes
-      // it a string by default.
-      data: this.state.data.map((conversation) => conversation.to_user == id
-        ? {
-          ...conversation,
-          message: data.message,
-          time_sent: data.time_sent
-        } : conversation)
-    });
+    // We'll use a `double-equals` here to simplify
+    // code for the user. Since the id is most
+    // likely coming from `routeParams`, which makes
+    // it a string by default.
+    //
+    // @TODO: Since conversation data is now available,
+    // refactor `app.messages.view` so that that
+    //  we can use strict-equals here (`===`)
+    const conversations = this.state.data;
+    const conversation = conversations.find((conversation) => conversation.to_user == id);
+
+    if ( conversation ) {
+      this.setState({
+        data: [{
+            ...conversation,
+            message: data.message,
+            time_sent: data.time_sent
+          },
+          ...conversations.filter((conversation) => conversation.to_user != id)
+        ]
+      });
+    }
   }
 }
 
