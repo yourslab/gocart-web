@@ -171,6 +171,8 @@ export default class AppProfileRatingsView extends Component {
         return res;
       })
       .catch((res) => {
+        console.log(res);
+
         if ( isServerError(res.status) ) {
           this.setState(({rate}) => ({
             rate: {

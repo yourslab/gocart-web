@@ -110,7 +110,8 @@ class AppProfileView extends Component {
 
               {cloneElement(children, {
                 auth,
-                user
+                user,
+                onReview: this.handleReview
               })}
             </div>
           </div>
