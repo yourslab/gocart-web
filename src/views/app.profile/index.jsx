@@ -12,12 +12,14 @@ import formatValidationErrors from 'app/utils/formatValidationErrors';
 import Infinite from 'app/components/Infinite';
 import StaticImg from 'app/components/StaticImg';
 import Modal from 'app/components/Modal';
+import UserFollowWidget from 'app/components/UserFollowWidget';
 import PostCard from './components/PostCard';
 import FollowersList from './components/FollowersList';
 import FollowingList from './components/FollowingList';
 
 class AppProfileView extends Component {
   state = {
+    user: this.props.user,
     posts: [],
     offset: 0,
     filters: {
@@ -38,8 +40,8 @@ class AppProfileView extends Component {
   }
 
   render() {
-    const {auth, user} = this.props;
-    const {posts} = this.state;
+    const {auth} = this.props;
+    const {posts, user} = this.state;
 
     return (
       <div>
@@ -110,9 +112,9 @@ class AppProfileView extends Component {
                       </div>
 
                       <div className="ProfilePanel-canopySectionItem">
-                        <button className="Btn Btn--success">
-                          Follow
-                        </button>
+                        <UserFollowWidget
+                          user={{ id: user.id, is_followed: user.is_followed }}
+                          onFollow={this.handleFollow} />
                       </div>
                     </div>}
               </div>
@@ -144,13 +146,20 @@ class AppProfileView extends Component {
         <Modal
           ref="followers"
           size="sm">
-          <FollowersList auth={auth} user={user} onClose={() => this.refs.followers.close()} />
+          <FollowersList
+            auth={auth}
+            user={user}
+            onClose={() => this.refs.followers.close()} />
         </Modal>
 
         <Modal
           ref="following"
           size="sm">
-          <FollowingList auth={auth} user={user} onClose={() => this.refs.following.close()} />
+          <FollowingList
+            onUpdateFollowing={this.handleUpdateFollowing}
+            auth={auth}
+            user={user}
+            onClose={() => this.refs.following.close()} />
         </Modal>
       </div>
     );
@@ -201,6 +210,24 @@ class AppProfileView extends Component {
         return Promise.reject(res);
       });
   }
+
+  handleFollow = (id) => {
+    this.setState((state) => ({
+      user: {
+        ...state.user,
+        is_followed: !user.is_followed
+      }
+    }));
+  }
+
+  handleUpdateFollowing = (num_following) => {
+    this.setState((state) => ({
+      user: {
+        ...state.user,
+        num_following
+      }
+    }));
+  }
 }
 
 const mapState = state => ({
@@ -208,10 +235,9 @@ const mapState = state => ({
 });
 
 export default flowRight(
-  resolve('user', (props) => {
-    return axios
-      .get(`user/@${props.routeParams.user}`)
-      .then((res) => res.data);
-  }),
-  connect(mapState)
+  connect((state) => ({ auth: state.auth.user })),
+
+  resolve('user', (props) =>
+    axios.get(`/user/@${props.routeParams.user}?viewer_id=${props.auth.id}`)
+      .then((res) => res.data))
 )(AppProfileView);
