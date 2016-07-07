@@ -11,6 +11,7 @@ import isServerError from 'app/utils/isServerError';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
 import Infinite from 'app/components/Infinite';
 import StaticImg from 'app/components/StaticImg';
+import UserImg from 'app/components/UserImg';
 import Modal from 'app/components/Modal';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import PostCard from './components/PostCard';
@@ -55,7 +56,7 @@ class AppProfileView extends Component {
               <div className="ProfilePanel-coverOverlay">
                 <div>
                   <div className="ProfilePanel-coverOverlayInfo">
-                    <img src="https://placeimg.com/150/150/any" className="ProfilePanel-avatar" alt="Avatar" />
+                    <UserImg src={user.prof_pic_link} username={user.username} className="ProfilePanel-avatar" alt="Avatar" />
 
                     <div>
                       <h1 className="ProfilePanel-name">{user.name}</h1>
