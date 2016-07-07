@@ -12,6 +12,7 @@ import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import BumpButton from 'app/components/BumpButton';
+import ProductCardDescription from 'app/components/ProductCardDescription';
 
 class AppProductView extends Component {
   state = {
@@ -90,7 +91,9 @@ class AppProductView extends Component {
             </div>
 
             <p className="ProductCardFull-description">
-              {product.description}
+              <ProductCardDescription
+                description={product.desc}
+                id={product.id} />
             </p>
 
             <BumpButton
