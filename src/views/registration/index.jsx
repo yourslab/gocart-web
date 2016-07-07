@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import axios from 'axios';
+import lang from 'app/lang';
 import history from 'app/history';
+import isServerError from 'app/utils/isServerError';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
 import {guest} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
@@ -11,11 +13,13 @@ import RegistrationForm from './components/RegistrationForm';
 class RegistrationView extends Component {
   state = {
     loading: false,
-    errors: false,
+    errors: {},
     message: ''
   };
 
   render() {
+    const {loading, errors, message} = this.state;
+
     return (
       <div className="PortalWrapper">
         <Helmet title="Sign Up" />
@@ -37,9 +41,11 @@ class RegistrationView extends Component {
             <hr className="PortalWrapper-separator" />
 
             <div className="PortalWrapper-content">
+              {message.length ? <div className="Alert Alert--danger u-spacer-base">{message}</div> : null}
+
               <RegistrationForm
-                loading={this.state.loading}
-                errors={this.state.errors}
+                loading={loading}
+                errors={errors}
                 onRegister={this.handleRegister} />
             </div>
 
@@ -95,10 +101,14 @@ class RegistrationView extends Component {
 
     this.setState({
       loading: true,
-      errors: {}
+      errors: {},
+      message: ''
     });
 
-    return axios.post('/user', data)
+    return axios.post('/user', {
+        ...data,
+        user_type: 1
+      })
       .then((res) => {
         this.setState({
           errors: {},
@@ -110,10 +120,18 @@ class RegistrationView extends Component {
         return res;
       })
       .catch((res) => {
-        this.setState({
-          loading: false,
-          errors: formatValidationErrors(res.data.errors),
-        });
+        if ( isServerError(res.status) ) {
+          this.setState({
+            loading: false,
+            message: lang.errors.server
+          });
+        } else {
+          this.setState({
+            loading: false,
+            errors: formatValidationErrors(res.data.errors),
+            message: lang.errors.input
+          });
+        }
 
         return Promise.reject(res);
       });
