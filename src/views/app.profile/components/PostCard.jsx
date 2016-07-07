@@ -3,12 +3,13 @@ import {Link} from 'react-router';
 import numeral from 'numeral';
 import StaticImg from 'app/components/StaticImg';
 import Switchbox from 'app/components/Switchbox';
+import ProductImg from 'app/components/ProductImg';
 
-const PostCard = ({ post }) =>
+const PostCard = ({post}) =>
   <div className="ProductCard">
     <div className="ProductCard-inner">
       <div className="ProductCard-thumbnail">
-        <img src="https://placeimg.com/500/280/tech" className="ProductCard-thumbnailImage" />
+        <ProductImg src={post.photo_list[0]} id={post.id} className="ProductCard-thumbnailImage" />
 
         <div className="ProductCard-thumbnailOverlay">
           <h1 className="ProductCard-pricing">
