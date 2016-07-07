@@ -110,7 +110,7 @@ export default class FollowersList extends Component {
 
   handleFollow = (id) => {
     this.setState((state) => ({
-      followers: state.followers.map((user) => user.id === id
+      followers: state.followers.map((user) => user.from_user === id
         ? {
           ...user,
           is_followed: !user.is_followed
