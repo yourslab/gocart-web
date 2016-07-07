@@ -56,7 +56,7 @@ export default class AppProfileRatingsView extends Component {
               No. of reviews
             </h5>
 
-            <h3 className="InfoWell-sectionText">28 reviews</h3>
+            <h3 className="InfoWell-sectionText">{user.num_reviews} reviews</h3>
           </div>
         </div>
 
