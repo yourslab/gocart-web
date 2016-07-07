@@ -93,8 +93,9 @@ class RegistrationView extends Component {
     // to manually produce a validation error.
     if ( data.password !== data.password_confirmation ) {
       this.setState({
+        message: lang.errors.input,
         errors: {
-          password_confirmation: lang.errors.password
+          password_confirmation: lang.errors.password,
         }
       });
 
