@@ -9,6 +9,7 @@ import StaticImg from 'app/components/StaticImg';
 import UserImg from 'app/components/UserImg';
 import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
+import ProductCardDescription from 'app/components/ProductCardDescription';
 
 /**
  * @REFACTOR Make a very plain modal component (all it does
@@ -97,7 +98,11 @@ export default class PostPreview extends Component {
                     </div>
 
                     <p className="ProductCardFull-description">
-                      {product.desc || <em>Enter a description here...</em>}
+                      {product.desc.length
+                        ? <ProductCardDescription
+                            description={product.desc}
+                            id={product.id} />
+                        : <em>Enter a description here...</em>}
                     </p>
 
                     <div className="ProductCardFull-commentInfo">
