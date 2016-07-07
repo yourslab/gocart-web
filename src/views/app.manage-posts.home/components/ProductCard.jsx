@@ -21,7 +21,7 @@ const ProductCard = ({product, onEdit, onDelete}) =>
 
         <div className="ProductCard-body">
           <div className="ProductCard-heading">
-            <div>
+            <div className="ProductCard-headingSection">
               <h4 className="ProductCard-title">{product.title}</h4>
             </div>
           </div>
