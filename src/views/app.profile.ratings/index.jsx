@@ -165,7 +165,7 @@ export default class AppProfileRatingsView extends Component {
           }
         }));
 
-        this.refs.rating.close();
+        this.refs.rating.success();
         // Update user review count
 
         return res;

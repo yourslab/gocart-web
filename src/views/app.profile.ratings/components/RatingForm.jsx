@@ -77,4 +77,15 @@ export default class RatingForm extends Component {
   close = () => {
     this.refs.modal.close();
   }
+
+  // @REFACTOR: Right now, this is a hack. What we want to happen
+  // is to reset form when it closes. This is easiest so far.`
+  success = () => {
+    this.setState({
+      rating_num: 0,
+      rating_text: ''
+    });
+
+    this.close();
+  }
 }
