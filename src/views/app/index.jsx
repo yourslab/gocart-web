@@ -5,6 +5,10 @@ import linkState from 'react-link-state';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {GatewayProvider, GatewayDest} from 'react-gateway';
+import axios from 'axios';
+import qs from 'qs';
+import lang from 'app/lang';
+import isServerError from 'app/utils/isServerError';
 import defer from 'app/utils/defer';
 import history from 'app/history';
 import {auth} from 'app/components/Permission';
@@ -15,7 +19,13 @@ class AppView extends Component {
   state = {
     left: false,
     right: false,
-    search: ''
+    search: '',
+
+    notifications: [],
+    loading: false,
+    last: false,
+    error: '',
+    offset: 0
   };
 
   componentDidMount() {
@@ -26,9 +36,14 @@ class AppView extends Component {
     window.removeEventListener('keydown', this.handleEscapeKeydown);
   }
 
+  componentWillReceiveProps() {
+    this.handleToggleRightDrawer();
+  }
+
   render() {
     const {left, right} = this.state;
     const {user} = this.props;
+    console.log(this.state.notifications);
 
     return (
       <GatewayProvider>
@@ -69,55 +84,57 @@ class AppView extends Component {
             <Permission rule="auth">
               <div className={cn('MainWrapper-drawer MainWrapper-drawer--right', { 'MainWrapper-drawer--active': right })}>
                 <div className="MainDrawer">
-                  <div className="MainDrawer-body">
-                    <div className="MainDrawer-close">
-                      <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
-                        <StaticImg src="icons/close_black@1x.png" alt="Close" />
-                      </button>
+                    <div className="MainDrawer-body">
+                      <div className="MainDrawer-close">
+                        <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
+                          <StaticImg src="icons/close_black@1x.png" alt="Close" />
+                        </button>
+                      </div>
+
+                      {this.state.loading
+                        ? <div className="Spinner" />
+                        : <div className="MainDrawerNotification">
+                          <div className="MainDrawerNotification-heading">
+                            <h4>Notifications</h4>
+                          </div>
+
+                          <div className="MainDrawerNotification-item MainDrawerNotification-item--unseen">
+                            <div className="MainDrawerNotification-itemHeading">
+                              <div className="MainDrawerNotification-itemAvatar">
+                                <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
+                              </div>
+
+                              <div>
+                                <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
+                                <h6 className="MainDrawerNotification-itemTime"><small>5 mins ago</small></h6>
+                              </div>
+                            </div>
+
+                            <div className="MainDrawerNotification-itemBody">
+                              <h6 className="MainDrawerNotification-itemAction">Posted a comment</h6>
+                              <h6 className="MainDrawerNotification-itemDetails">Lorem ipsum dolor sit amet...</h6>
+                            </div>
+                          </div>
+
+                          <div className="MainDrawerNotification-item">
+                            <div className="MainDrawerNotification-itemHeading">
+                              <div className="MainDrawerNotification-itemAvatar">
+                                <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
+                              </div>
+
+                              <div>
+                                <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
+                                <small className="MainDrawerNotification-itemTime">5 mins ago</small>
+                              </div>
+                            </div>
+
+                            <div className="MainDrawerNotification-itemBody">
+                              <h6 className="MainDrawerNotification-itemAction">Bumped your post</h6>
+                              <img src="https://placeimg.com/120/60/any" className="MainDrawerNotification-itemThumbnail" alt="Thumbnail" />
+                            </div>
+                          </div>
+                        </div>}
                     </div>
-
-                    <div className="MainDrawerNotification">
-                      <div className="MainDrawerNotification-heading">
-                        <h4>Notifications</h4>
-                      </div>
-
-                      <div className="MainDrawerNotification-item MainDrawerNotification-item--unseen">
-                        <div className="MainDrawerNotification-itemHeading">
-                          <div className="MainDrawerNotification-itemAvatar">
-                            <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
-                          </div>
-
-                          <div>
-                            <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
-                            <h6 className="MainDrawerNotification-itemTime"><small>5 mins ago</small></h6>
-                          </div>
-                        </div>
-
-                        <div className="MainDrawerNotification-itemBody">
-                          <h6 className="MainDrawerNotification-itemAction">Posted a comment</h6>
-                          <h6 className="MainDrawerNotification-itemDetails">Lorem ipsum dolor sit amet...</h6>
-                        </div>
-                      </div>
-
-                      <div className="MainDrawerNotification-item">
-                        <div className="MainDrawerNotification-itemHeading">
-                          <div className="MainDrawerNotification-itemAvatar">
-                            <img src="https://placeimg.com/40/40/any" className="MainDrawerNotification-itemAvatarImage" alt="Avatar" />
-                          </div>
-
-                          <div>
-                            <h6 className="MainDrawerNotification-itemName">Aaron Hughes</h6>
-                            <small className="MainDrawerNotification-itemTime">5 mins ago</small>
-                          </div>
-                        </div>
-
-                        <div className="MainDrawerNotification-itemBody">
-                          <h6 className="MainDrawerNotification-itemAction">Bumped your post</h6>
-                          <img src="https://placeimg.com/120/60/any" className="MainDrawerNotification-itemThumbnail" alt="Thumbnail" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
                   <div className="MainDrawer-logoSection">
                     <StaticImg src="logo-gray.svg" alt="Logo" className="MainDrawer-logo" />
@@ -243,6 +260,49 @@ class AppView extends Component {
 
   handleToggleRightDrawer = () => {
     this.setState((state) => ({ right: !state.right }));
+
+
+    const {state} = this;
+
+    if ( !state.right ) {
+
+      const query = qs.stringify({
+        start: state.offset,
+        end: state.offset + 19
+      });
+
+      this.setState({
+        loading: true
+      });
+
+      return axios.get(`/user/${this.props.user.id}/notifications?${query}`)
+        .then((res) => {
+          this.setState({
+            notifications: state.offset === 0
+              ? res.data
+              : [ ...state.notifications, ...res.data],
+            loading: false,
+            offset: state.offset + 20
+          });
+
+          return res;
+        })
+        .catch((res) => {
+        if ( isServerError(res.status) ) {
+          this.setState({
+            loading: false,
+            message: lang.errors.server
+          });
+        } else {
+          this.setState({
+            loading: false,
+            last: res.data.status == 404 > res.data.status == 404 ? true : false
+          });
+        }
+
+        return Promise.reject(res);
+      });
+    }
   }
 
   handleInput = (evt) => {
