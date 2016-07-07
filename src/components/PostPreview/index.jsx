@@ -19,7 +19,17 @@ import ProductImg from 'app/components/ProductImg';
 export default class PostPreview extends Component {
   static propTypes = {
     product: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    // Whether the post already exists or not
+    // Used for the post images.
+    existing: PropTypes.bool
+  };
+
+  static defaultProps = {
+    // Because we'd only need to update
+    // the on in post.create page. Otherwise,
+    // we'll need to update a lot of pages.
+    existing: true
   };
 
   state = {
@@ -35,7 +45,7 @@ export default class PostPreview extends Component {
   }
 
   render() {
-    const {auth, product} = this.props;
+    const {auth, existing, product} = this.props;
 
     return this.state.open ? (
       <Gateway into="global">
@@ -51,7 +61,9 @@ export default class PostPreview extends Component {
 
                 <div className="ProductCardFull">
                   <div className="ProductCardFull-thumbnail">
-                    <ProductImg src={getProductPhotos(product)[0]} id={product.id} className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
+                    {existing
+                      ? <ProductImg src={product.photo_list[0]} id={product.id} className="ProductCardFull-thumbnailImage" alt="Thumbnail" />
+                      : <img src={product.photos[0]} className="ProductCardFull-thumbnailImage" />}
 
                     <div className="ProductCardFull-thumbnailOverlay">
                       <div className="ProductCardFull-thumbnailOverlaySection">

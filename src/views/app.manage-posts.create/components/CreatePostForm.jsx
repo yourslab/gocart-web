@@ -113,6 +113,7 @@ export default class CreatePostForm extends Component {
         </form>
 
         <PostPreview
+          existing={false}
           ref="preview"
           product={this.state}
           auth={auth} />
