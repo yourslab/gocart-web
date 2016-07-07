@@ -22,8 +22,8 @@ const PostCard = ({post}) =>
 
       <div className="ProductCard-body">
         <div className="ProductCard-heading">
-          <div>
-            <h4 className="ProductCard-title">Looking for</h4>
+          <div className="ProductCard-headingSection">
+            <h4 className="ProductCard-title">{product.title}</h4>
           </div>
         </div>
 
