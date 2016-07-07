@@ -2,10 +2,8 @@ import React, {PropType} from 'react';
 import {Link} from 'react-router';
 import numeral from 'numeral';
 import StaticImg from 'app/components/StaticImg';
-import Switchbox from 'app/components/Switchbox';
 import ProductImg from 'app/components/ProductImg';
 import ProductCardDescription from 'app/components/ProductCardDescription';
-
 
 const PostCard = ({post}) =>
   <div className="ProductCard">
@@ -23,7 +21,7 @@ const PostCard = ({post}) =>
       <div className="ProductCard-body">
         <div className="ProductCard-heading">
           <div className="ProductCard-headingSection">
-            <h4 className="ProductCard-title">{product.title}</h4>
+            <h4 className="ProductCard-title">{post.title}</h4>
           </div>
         </div>
 

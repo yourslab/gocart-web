@@ -43,7 +43,7 @@ export default class FollowersList extends Component {
 
 			 				<div className="UserListGroup-actions">
                 <UserFollowWidget
-                  user={{ id: user.id, is_followed: user.is_followed }}
+                  user={{ id: user.to_user, is_followed: user.is_followed }}
                   onFollow={this.handleFollow} />
 			 				</div>
 				 		</div>
