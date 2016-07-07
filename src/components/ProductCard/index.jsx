@@ -88,11 +88,11 @@ const ProductCard = ({product, onFollow}) =>
           </Link>
         </div>
 
-        <div>
+        {/*<div>
           <button className="Btn Btn--primary">
             Add to Cart
           </button>
-        </div>
+        </div>*/}
       </div>
     </div>
   </div>
