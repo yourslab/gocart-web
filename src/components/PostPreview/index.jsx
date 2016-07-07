@@ -8,6 +8,7 @@ import getProductPhotos from 'app/utils/getProductPhotos';
 import StaticImg from 'app/components/StaticImg';
 import UserImg from 'app/components/UserImg';
 import ProductImg from 'app/components/ProductImg';
+import RatingWidget from 'app/components/RatingWidget';
 
 /**
  * @REFACTOR Make a very plain modal component (all it does
@@ -86,6 +87,7 @@ export default class PostPreview extends Component {
 
                         <div className="ProductCardFull-panelCanopySectionItem">
                           <h2 className="ProductCardFull-panelCanopyName">{auth.name}</h2>
+                          <RatingWidget score={auth.avg_rating} />
                         </div>
                       </div>
                     </div>
