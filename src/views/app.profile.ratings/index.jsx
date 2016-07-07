@@ -156,7 +156,11 @@ export default class AppProfileRatingsView extends Component {
         this.setState((state) => ({
           ratings: {
             ...state.ratings,
-            data: [res.data, ...state.ratings.data]
+            data: [{
+              ...res.data,
+              username: this.props.user.username,
+              prof_pic_link: this.props.user.prof_pic_link
+            }, ...state.ratings.data]
           },
 
           rate: {
