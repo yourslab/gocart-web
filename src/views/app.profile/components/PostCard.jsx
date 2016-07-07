@@ -1,4 +1,5 @@
 import React, {PropType} from 'react';
+import {Link} from 'react-router';
 import numeral from 'numeral';
 import StaticImg from 'app/components/StaticImg';
 import Switchbox from 'app/components/Switchbox';
@@ -30,34 +31,24 @@ const PostCard = ({ post }) =>
 
         <div className="CommentMeta">
           <div>
-            <a href="#" className="CommentMeta-highlight">Mary Ann Smithson</a>&nbsp;
-            and <a href="#" className="CommentMeta-highlight">20 bumped this</a>
+            <a href="#" className="CommentMeta-highlight"> {post.num_likes} bumped this. </a>
           </div>
 
           <div>
-            <span className="CommentMeta-count">3 comments</span>
+            <span className="CommentMeta-count"> {post.num_comments} comments </span>
           </div>
         </div>
       </div>
 
       <div className="ProductCard-actions">
-        <div className="ProductCard-actionsSection">
-          <Switchbox />
-          &nbsp; Activate
-        </div>
+        <div>
+          <Link to={`/products/${post.id}`} className="Btn Btn--default Btn--borderless">
+            GoBump
+          </Link>
 
-        <div className="ProductCard-actionsSection">
-          <a href="#" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless">
-            Edit
-          </a>
-
-          <a href="#" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless">
-            Archive
-          </a>
-
-          <a href="#" className="Btn Btn--small Btn--primary Btn--inverted Btn--borderless">
-            Delete
-          </a>
+          <Link to={`/products/${post.id}`} className="Btn Btn--default Btn--borderless">
+            Comment
+          </Link>
         </div>
       </div>
     </div>
