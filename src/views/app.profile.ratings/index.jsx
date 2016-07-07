@@ -33,7 +33,7 @@ export default class AppProfileRatingsView extends Component {
 
   render() {
     // Coming from `app.profile` route
-    const {user} = this.props;
+    const {auth, user} = this.props;
     const {ratings, rate} = this.state;
 
     return (
@@ -46,7 +46,7 @@ export default class AppProfileRatingsView extends Component {
               Overall Rating
             </h5>
 
-            <button className="PlainBtn" onClick={() => this.refs.rating.open()}>
+            <button className="PlainBtn" onClick={() => auth.id !== user.id && this.refs.rating.open()}>
               <RatingWidget score={user.avg_rating} />
             </button>
           </div>
