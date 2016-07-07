@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {cloneElement, Component} from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
@@ -7,42 +7,21 @@ import axios from 'axios';
 import flowRight from 'lodash/flowRight';
 import qs from 'qs';
 import lang from 'app/lang';
-import isServerError from 'app/utils/isServerError';
-import formatValidationErrors from 'app/utils/formatValidationErrors';
-import Infinite from 'app/components/Infinite';
 import StaticImg from 'app/components/StaticImg';
 import UserImg from 'app/components/UserImg';
 import Modal from 'app/components/Modal';
 import UserFollowWidget from 'app/components/UserFollowWidget';
-import PostCard from './components/PostCard';
 import FollowersList from './components/FollowersList';
 import FollowingList from './components/FollowingList';
 
 class AppProfileView extends Component {
   state = {
-    user: this.props.user,
-    posts: [],
-    offset: 0,
-    filters: {
-      longtitude: 0,
-      latitude: 0,
-      type: 0,
-      distance: 0,
-      rating: 0
-    },
-
-    loading: false,
-    last: false,
-    error: ''
+    user: this.props.user
   };
 
-  componentDidMount() {
-    this.handleRequest();
-  }
-
   render() {
-    const {auth} = this.props;
-    const {posts, user} = this.state;
+    const {auth, children} = this.props;
+    const {user} = this.state;
 
     return (
       <div>
@@ -96,10 +75,11 @@ class AppProfileView extends Component {
                   </div>
 
                   <div className="ProfilePanel-canopySectionItem">
-                    <button
+                    <Link
+                      to={`/@${user.username}/ratings`}
                       className="Btn Btn--primary Btn--inverted Btn--borderless">
                       {user.num_reviews} Reviews
-                    </button>
+                    </Link>
                   </div>
                 </div>
 
@@ -120,26 +100,10 @@ class AppProfileView extends Component {
                     </div>
               </div>
 
-              <Infinite callback={this.handleRequest}>
-                <div className="Grid">
-                  {posts.map((post, i) =>
-                    <div className="Grid-cell u-size6 u-spacer-base" key={i}>
-                      <PostCard post={post} />
-                    </div>
-                  )}
-                  {auth.id === user.id
-                    ? <div className="Grid-cell u-size6 u-spacer-base">
-                        <Link to="/manage-posts/create" className="BlankSlate">
-                          <StaticImg src="/icons/post_icon@1x.png" />
-                          <h1> Add Post </h1>
-                        </Link>
-                      </div>
-                    : null
-                  }
-                </div>
-              </Infinite>
-
-              {this.state.loading ? <div className="Spinner u-spacer-large" /> : null }
+              {cloneElement(children, {
+                auth,
+                user
+              })}
             </div>
           </div>
         </div>
@@ -166,52 +130,6 @@ class AppProfileView extends Component {
     );
   }
 
-  handleRequest = (offset = this.state.offset) => {
-    if ( this.state.loading ) {
-      return;
-    }
-
-    this.setState({
-      loading: true,
-      error: false
-    });
-
-    const {state, props} = this;
-
-    const query = qs.stringify({
-      ...state.filters,
-      start: offset,
-      end: offset + 19,
-      type: 1
-    });
-
-    return axios.get(`/user/${props.user.id}/posts?${query}`)
-      .then((res) => {
-        this.setState({
-          posts: res.data,
-          loading: false,
-          offset: offset + 20
-        });
-
-        return res;
-      })
-      .catch((res) => {
-        if ( isServerError(res.status) ) {
-          this.setState({
-            loading: false,
-            error: lang.errors.server
-          });
-        } else {
-          this.setState({
-            loading: false,
-            last: true
-          });
-        }
-
-        return Promise.reject(res);
-      });
-  }
-
   handleFollow = () => {
     this.setState((state) => ({
       user: {
@@ -235,10 +153,6 @@ class AppProfileView extends Component {
     }
   }
 }
-
-const mapState = state => ({
-  auth: state.auth.user
-});
 
 export default flowRight(
   connect((state) => ({ auth: state.auth.user })),
