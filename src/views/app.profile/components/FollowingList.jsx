@@ -59,9 +59,9 @@ export default class FollowingList extends Component {
 	}
 
 	handleRequest = (offset = this.state.offset) => {
-    const {state, props} = this;
+    const {loading, last} = this.state;
 
-    if ( state.loading || state.last ) {
+    if ( loading || last ) {
       return;
     }
 
@@ -70,22 +70,23 @@ export default class FollowingList extends Component {
       error: false
     });
 
+    const {auth, user} = this.props;
+
     const query = qs.stringify({
-      viewer_id: props.auth.id,
+      viewer_id: auth.id,
       start: offset,
       end: offset + 19
     });
 
-    return axios.get(`/user/${props.user.id}/following/?${query}`)
+    return axios.get(`/user/${user.id}/following/?${query}`)
       .then((res) => {
-        this.setState({
+        this.setState((state) => ({
           following: offset === 0
             ? res.data
             : [...state.following, ...res.data],
           loading: false,
-          error: false,
           offset: offset + 20
-        });
+        }));
 
         return res;
       })

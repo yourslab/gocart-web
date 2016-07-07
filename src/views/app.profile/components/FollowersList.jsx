@@ -42,10 +42,10 @@ export default class FollowersList extends Component {
 			 				</div>
 
 			 				<div className="UserListGroup-actions">
-                {user.to_user === props.auth.id
+                {user.from_user === this.props.auth.id
                   ? null
                   : <UserFollowWidget
-                    user={{ id: user.to_user, is_followed: user.is_followed }}
+                    user={{ id: user.from_user, is_followed: user.is_followed }}
                     onFollow={this.handleFollow} />}
 			 				</div>
 				 		</div>
@@ -102,7 +102,7 @@ export default class FollowersList extends Component {
         } else {
           this.setState({
             loading: false,
-            last: res.data.status == 404 > res.data.status == 404 ? true : false
+            last: res.data.status == 404
           });
         }
 
