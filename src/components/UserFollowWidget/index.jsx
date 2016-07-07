@@ -11,8 +11,6 @@ import StaticImg from 'app/components/StaticImg';
  * by putting the loading to the consuming component
  * instead of here (in short: remove loading state;
  * make it into a prop)
- *
- * @todo Hide component if user === auth
  */
 class UserFollowWidget extends Component {
   static propTypes = {
