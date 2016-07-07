@@ -160,6 +160,16 @@ class AppProfileView extends Component {
       }));
     }
   }
+
+  handleReview = (avg) => {
+    this.setState((state) => ({
+      user: {
+        ...state.user,
+        num_reviews: state.user.num_reviews + 1,
+        avg_rating: avg
+      }
+    }));
+  }
 }
 
 export default flowRight(
