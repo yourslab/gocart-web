@@ -70,8 +70,7 @@ const ProductCard = ({product, onFollow}) =>
 
         <div className="CommentMeta">
           <div>
-            <a href="#" className="CommentMeta-highlight">Mary Ann Smithson</a>&nbsp;
-            and <a href="#" className="CommentMeta-highlight">20 bumped this</a>
+            <a href="#" className="CommentMeta-highlight">{product.num_likes} bumped this</a>
           </div>
 
           <div>
