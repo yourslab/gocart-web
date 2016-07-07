@@ -216,7 +216,7 @@ class AppProfileView extends Component {
     this.setState((state) => ({
       user: {
         ...state.user,
-        is_followed: !user.is_followed
+        is_followed: !state.user.is_followed
       }
     }));
   }
