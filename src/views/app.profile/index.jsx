@@ -59,6 +59,14 @@ class AppProfileView extends Component {
               <div className="ProfilePanel-canopy">
                 <div className="ProfilePanel-canopySection">
                   <div className="ProfilePanel-canopySectionItem">
+                    <Link
+                      to={`/@${user.username}`}
+                      className="Btn Btn--primary Btn--inverted Btn--borderless">
+                      {user.num_posts} Posts
+                    </Link>
+                  </div>
+
+                  <div className="ProfilePanel-canopySectionItem">
                     <button
                       onClick={() => this.refs.followers.open()}
                       className="Btn Btn--primary Btn--inverted Btn--borderless">
