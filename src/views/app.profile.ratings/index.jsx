@@ -2,18 +2,29 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import Helmet from 'react-helmet';
+import lang from 'app/lang';
 import isServerError from 'app/utils/isServerError';
+import formatValidationErrors from 'app/utils/formatValidationErrors';
 import Infinite from 'app/components/Infinite';
 import RatingWidget from 'app/components/RatingWidget';
 import RatingCard from './components/RatingCard';
+import RatingForm from './components/RatingForm';
 
 export default class AppProfileRatingsView extends Component {
   state = {
-    ratings: [],
-    offset: 0,
-    loading: false,
-    last: false,
-    error: ''
+    ratings: {
+      data: [],
+      offset: 0,
+      loading: false,
+      last: false,
+      error: ''
+    },
+
+    rate: {
+      loading: false,
+      errors: {},
+      message: ''
+    }
   };
 
   componentDidMount() {
@@ -23,7 +34,7 @@ export default class AppProfileRatingsView extends Component {
   render() {
     // Coming from `app.profile` route
     const {user} = this.props;
-    const {ratings, loading} = this.state;
+    const {ratings, rate} = this.state;
 
     return (
       <div>
@@ -35,7 +46,9 @@ export default class AppProfileRatingsView extends Component {
               Overall Rating
             </h5>
 
-            <RatingWidget score={user.avg_rating} />
+            <button className="PlainBtn" onClick={() => this.refs.rating.open()}>
+              <RatingWidget score={user.avg_rating} />
+            </button>
           </div>
 
           <div className="InfoWell-section">
@@ -49,28 +62,34 @@ export default class AppProfileRatingsView extends Component {
 
         <Infinite callback={this.handleRequest}>
           <div className="Grid">
-            {ratings.map((rating) =>
+            {ratings.data.map((rating) =>
               <RatingCard rating={rating} key={`rating-${rating.id}`} />
             )}
           </div>
         </Infinite>
 
-        {loading ? <div className="Spinner" /> : null}
+        {ratings.loading ? <div className="Spinner" /> : null}
+
+        <RatingForm
+          ref="rating"
+          state={rate}
+          onRate={this.handleRate} />
       </div>
     );
   }
 
-  handleRequest = (offset = this.state.offset) => {
-    if ( this.state.loading || this.state.last ) {
+  handleRequest = (offset = this.state.ratings.offset) => {
+    if ( this.state.ratings.loading || this.state.ratings.last ) {
       return;
     }
 
-    this.setState({
-      loading: true,
-      error: ''
-    });
-
-    const {state, props} = this;
+    this.setState(({ratings}) => ({
+      ratings: {
+        ...ratings,
+        loading: true,
+        error: ''
+      }
+    }));
 
     const query = qs.stringify({
       start: offset,
@@ -78,27 +97,97 @@ export default class AppProfileRatingsView extends Component {
       type: 1
     });
 
-    return axios.get(`/user/${props.user.id}/ratings?${query}`)
+    return axios.get(`/user/${this.props.user.id}/ratings?${query}`)
       .then((res) => {
-        this.setState((state) => ({
-          ratings: [...state.ratings, ...res.data],
-          loading: false,
-          offset: offset + 20
+        this.setState(({ratings}) => ({
+          ratings: {
+            ...ratings,
+            data: [...ratings.data, ...res.data],
+            loading: false,
+            offset: offset + 20
+          }
         }));
 
         return res;
       })
       .catch((res) => {
         if ( isServerError(res.status) ) {
-          this.setState({
-            loading: false,
-            error: lang.errors.server
-          });
+          this.setState(({ratings}) => ({
+            ratings: {
+              ...ratings,
+              loading: false,
+              error: lang.errors.server
+            }
+          }));
         } else {
-          this.setState({
-            loading: false,
-            last: true
-          });
+          this.setState(({ratings}) => ({
+            ratings: {
+              ...ratings,
+              loading: false,
+              last: true
+            }
+          }));
+        }
+
+        return Promise.reject(res);
+      });
+  }
+
+  handleRate = (data) => {
+    if ( this.state.rate.loading ) {
+      return;
+    }
+
+    this.setState(({rate}) => ({
+      rate: {
+        ...rate,
+        loading: true,
+        errors: {},
+        message: ''
+      }
+    }));
+
+    return axios.post(`/user/ratings`, {
+        ...data,
+        to_user: this.props.user.id,
+        from_user: this.props.auth.id
+      })
+      .then((res) => {
+        this.setState((state) => ({
+          ratings: {
+            ...state.ratings,
+            data: [res.data, ...state.ratings.data]
+          },
+
+          rate: {
+            ...state.rate,
+            loading: false
+          }
+        }));
+
+        this.refs.rating.close();
+        // Update user review count
+
+        return res;
+      })
+      .catch((res) => {
+        if ( isServerError(res.status) ) {
+          this.setState(({rate}) => ({
+            rate: {
+              ...rate,
+              loading: false,
+              message: lang.errors.server
+            }
+          }));
+        } else {
+          this.setState(({rate}) => ({
+            rate: {
+              ...rate,
+              loading: false,
+              errors: formatValidationErrors(res.data.errors),
+              message: lang.errors.input
+            }
+          }));
         }
 
         return Promise.reject(res);

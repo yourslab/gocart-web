@@ -16,6 +16,7 @@
 .u-spacer-base { margin-bottom: $spacer-base; }
 .u-spacer-large { margin-bottom: $spacer-large; }
 
+.u-text-primary { color: $color-red; }
 .u-text-info { color: $color-blue; }
 .u-text-muted { color: $color-grayDark; }
 .u-text-center { text-align: center; }
@@ -36,4 +37,9 @@
 .u-centerBlock {
   margin-left: auto;
   margin-right: auto;
+}
+
+// http://stackoverflow.com/a/5235160/2698227
+.u-unresizableTextarea {
+  resize: none;
 }
