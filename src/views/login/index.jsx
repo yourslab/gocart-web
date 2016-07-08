@@ -39,9 +39,9 @@ class LoginView extends Component {
                 <StaticImg src="logo-red.svg" alt="Logo" />
               </div>
 
-              <a href="#" className="Btn Btn--primary Btn--large Btn--block">
+              {/*<a href="#" className="Btn Btn--primary Btn--large Btn--block">
                 Explore GoCart
-              </a>
+              </a>*/}
             </div>
 
             <hr className="PortalWrapper-separator" />
