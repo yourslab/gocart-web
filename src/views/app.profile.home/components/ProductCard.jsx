@@ -4,6 +4,7 @@ import numeral from 'numeral';
 import StaticImg from 'app/components/StaticImg';
 import ProductImg from 'app/components/ProductImg';
 import ProductCardDescription from 'app/components/ProductCardDescription';
+import ProductBumpInfo from 'app/components/ProductBumpInfo';
 
 const ProductCard = ({product}) =>
   <div className="Grid-cell u-size6 u-spacer-base">

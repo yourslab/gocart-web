@@ -7,6 +7,7 @@ import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import ProductCardDescription from 'app/components/ProductCardDescription';
+import ProductBumpInfo from 'app/components/ProductBumpInfo';
 
 const ProductCard = ({product, onFollow}) =>
   <div className="ProductCard">
@@ -75,7 +76,7 @@ const ProductCard = ({product, onFollow}) =>
         <div className="CommentMeta">
           <div>
             <Link to={`/products/${product.id}`} className="CommentMeta-highlight">
-              {product.num_likes} bumped this
+              <ProductBumpInfo product={product} />
             </Link>
           </div>
 
