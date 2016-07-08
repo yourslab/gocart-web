@@ -1,4 +1,5 @@
-.SearchProductCard {
+  .SearchProductCard {
+  @include linkNoUnderscore;
   display: flex;
   padding: 15px;
   height: 145px;
@@ -40,5 +41,6 @@
 
   .SearchProductCard-price {
     margin-bottom: 0;
+    color: $color-black;
   }
 }
