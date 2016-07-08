@@ -97,6 +97,10 @@
   .ProductCard-title {
     @include textEllipsis;
     margin-bottom: 0;
+  }
+
+  .ProductCard-titleLink {
+    @include linkNoUnderscore;
     color: $color-red;
   }
 

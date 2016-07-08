@@ -22,7 +22,11 @@ const ProductCard = ({product}) =>
         <div className="ProductCard-body">
           <div className="ProductCard-heading">
             <div className="ProductCard-headingSection">
-              <h4 className="ProductCard-title">{product.title}</h4>
+              <h4 className="ProductCard-title">
+                <Link to={`/products/${product.id}`} className="ProductCard-titleLink">
+                  {product.title}
+                </Link>
+              </h4>
             </div>
           </div>
 
@@ -34,11 +38,15 @@ const ProductCard = ({product}) =>
 
           <div className="CommentMeta">
             <div>
-              <a href="#" className="CommentMeta-highlight">{product.num_likes} bumped this</a>
+              <Link to={`/products/${product.id}`} className="CommentMeta-highlight">
+                {product.num_likes} bumped this
+              </Link>
             </div>
 
             <div>
-              <span className="CommentMeta-count"> {product.num_comments} comments </span>
+              <Link to={`/products/${product.id}`} className="CommentMeta-count">
+                {product.num_comments} comments
+              </Link>
             </div>
           </div>
         </div>
