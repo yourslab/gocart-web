@@ -8,5 +8,5 @@ const types = [
 export default function getPostType(type) {
   return type == null
     ? types
-    : types.find((xtype) => xtype.id == type);
+    : types.find((xtype) => xtype.id == type).label;
 }

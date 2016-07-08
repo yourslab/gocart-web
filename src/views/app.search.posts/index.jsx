@@ -39,7 +39,9 @@ class AppSearchPostsView extends Component {
       <div>
         <Infinite callback={this.request}>
           <div className="Grid">
-            {feed.map((product, i) => <ProductCard key={i} product={product} />)}
+            {feed.map((product, i) =>
+              <ProductCard key={i} product={product} />
+            )}
           </div>
         </Infinite>
 
@@ -62,7 +64,6 @@ class AppSearchPostsView extends Component {
     const append = search === this.props.location.query.q;
     const offset = append ? this.state.offset : 0;
 
-
     const query = qs.stringify({
       start: offset,
       end: offset + 19,
@@ -73,7 +74,7 @@ class AppSearchPostsView extends Component {
     return axios.get(`/user/${this.props.auth.id}/feed/posts?${query}`)
       .then((res) => {
         this.setState((state) => ({
-          feed: append ? [...state.feed, res.data] : res.data,
+          feed: append ? [...state.feed, ...res.data] : res.data,
           loading: false,
           offset: offset + 20
         }));
@@ -90,7 +91,6 @@ class AppSearchPostsView extends Component {
       });
   }
 }
-
 
 const mapState = ({auth}) => ({ auth: auth.user });
 export default connect(mapState)(AppSearchPostsView);
