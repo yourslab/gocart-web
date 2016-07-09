@@ -10,7 +10,7 @@ const ProductCard = ({product, onEdit, onDelete}) =>
     <div className="ProductCard">
       <div className="ProductCard-inner">
         <div className="ProductCard-thumbnail">
-          <ProductImg src={product.photo_list[0]} id={product.id} className="ProductCard-thumbnailImage" />
+          <ProductImg src={`${product.photo_list[0]}_thumb`} id={product.id} className="ProductCard-thumbnailImage" />
 
           <div className="ProductCard-thumbnailOverlay">
             <h1 className="ProductCard-pricing">
