@@ -135,4 +135,8 @@
     display: flex;
     align-items: center;
   }
+
+  .ProductCard-actionsSectionItem:not(:last-child) {
+    margin-right: 15px;
+  }
 }

@@ -5,6 +5,8 @@ import StaticImg from 'app/components/StaticImg';
 import ProductImg from 'app/components/ProductImg';
 import ProductCardDescription from 'app/components/ProductCardDescription';
 import ProductBumpInfo from 'app/components/ProductBumpInfo';
+import ProductBumpLink from 'app/components/ProductBumpLink';
+import ProductCommentLink from 'app/components/ProductCommentLink';
 
 const ProductCard = ({product}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
@@ -53,14 +55,14 @@ const ProductCard = ({product}) =>
         </div>
 
         <div className="ProductCard-actions">
-          <div>
-            <Link to={`/products/${product.id}`} className="Btn Btn--default Btn--borderless">
-              GoBump
-            </Link>
+          <div className="ProductCard-actionsSection">
+            <div className="ProductCard-actionsSectionItem">
+              <ProductBumpLink id={product.id} />
+            </div>
 
-            <Link to={`/products/${product.id}`} className="Btn Btn--default Btn--borderless">
-              Comment
-            </Link>
+            <div className="ProductCard-actionsSectionItem">
+              <ProductCommentLink id={product.id} />
+            </div>
           </div>
         </div>
       </div>

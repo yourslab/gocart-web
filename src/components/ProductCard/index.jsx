@@ -8,6 +8,8 @@ import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import ProductCardDescription from 'app/components/ProductCardDescription';
 import ProductBumpInfo from 'app/components/ProductBumpInfo';
+import ProductBumpLink from 'app/components/ProductBumpLink';
+import ProductCommentLink from 'app/components/ProductCommentLink';
 
 const ProductCard = ({product, onFollow}) =>
   <div className="ProductCard">
@@ -89,14 +91,14 @@ const ProductCard = ({product, onFollow}) =>
       </div>
 
       <div className="ProductCard-actions">
-        <div>
-          <button className="Btn Btn--default Btn--borderless">
-            GoBump
-          </button>
+        <div className="ProductCard-actionsSection">
+          <div className="ProductCard-actionsSectionItem">
+            <ProductBumpLink id={product.id} />
+          </div>
 
-          <Link to={`/products/${product.id}`} className="Btn Btn--default Btn--borderless">
-            Comment
-          </Link>
+          <div className="ProductCard-actionsSectionItem">
+            <ProductCommentLink id={product.id} />
+          </div>
         </div>
 
         {/*<div>
