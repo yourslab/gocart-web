@@ -5,6 +5,7 @@ import linkState from 'react-link-state';
 import flowRight from 'lodash/flowRight';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+import config from 'app/config';
 import {login, loginWithFacebook} from 'app/modules/auth';
 import facebook from 'app/utils/facebook';
 import {guest} from 'app/components/Permission';
@@ -69,7 +70,7 @@ class LoginView extends Component {
                 </p>
 
                 <div className="FormGroup FormGroup--narrow">
-                  <ButtonLoader className="Btn Btn--facebook Btn--large Btn--block" type="button" onClick={this.props.actions.loginWithFacebook} loading={facebook.loading}>
+                  <ButtonLoader className="Btn Btn--facebook Btn--large Btn--block" type="button" onClick={this.handleFacebook} loading={facebook.loading}>
                     <StaticImg src="icons/facebook.svg" alt="Icon" className="Btn-icon" />
                     Sign In using Facebook
                   </ButtonLoader>
@@ -112,7 +113,11 @@ class LoginView extends Component {
 
   handle = (evt) => {
     evt.preventDefault();
-    this.props.actions.login(this.state);
+    this.props.actions.login(this.state, this.props.location.query[config.routing.redirectKey]);
+  }
+
+  handleFacebook = () => {
+    this.props.actions.loginWithFacebook(this.props.location.query[config.routing.redirectKey]);
   }
 }
 

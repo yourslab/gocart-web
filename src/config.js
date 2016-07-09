@@ -35,5 +35,12 @@ export default {
 
   facebook: {
     appId: '548682991936531'
+  },
+
+  routing: {
+    // The query parameter key used when
+    // redirecting an unauthorized user
+    // e.g., ?redirect=/yolowing
+    redirectKey: 'redirect'
   }
 };
