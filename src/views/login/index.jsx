@@ -30,7 +30,7 @@ class LoginView extends Component {
       <div className="PortalWrapper">
         <Helmet title="Sign In" />
 
-        <div className="PortalWrapper-side PortalWrapper-side--v1" />
+        <div className="PortalWrapper-side" />
 
         <div className="PortalWrapper-body">
           <div>

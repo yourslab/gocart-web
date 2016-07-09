@@ -4,16 +4,22 @@
 
   .PortalWrapper-side {
     width: 50%;
-    background: #ddd;
+    background: url(#{$img-path}/portal-bg.png);
+    background-size: cover;
+    background-position: center center;
+    background-color: #ddd;
   }
 
-  .PortalWrapper-side--v1 {
-    background: url(#{$img-path}/bkgd_img1@1x.png);
-  }
+  // These are old background images.
+  // Keeping it here in-case we need to have
+  // different bg for both login and registration
+  // .PortalWrapper-side--v1 {
+  //   background: url(#{$img-path}/bkgd_img1@1x.png);
+  // }
 
-  .PortalWrapper-side--v2 {
-    background: url(#{$img-path}/bkgd_img2@1x.png);
-  }
+  // .PortalWrapper-side--v2 {
+  //   background: url(#{$img-path}/bkgd_img2@1x.png);
+  // }
 
   .PortalWrapper-body {
     display: flex;

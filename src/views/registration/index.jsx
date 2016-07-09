@@ -24,7 +24,7 @@ class RegistrationView extends Component {
       <div className="PortalWrapper">
         <Helmet title="Sign Up" />
 
-        <div className="PortalWrapper-side PortalWrapper-side--v2" />
+        <div className="PortalWrapper-side" />
 
         <div className="PortalWrapper-body">
           <div>
