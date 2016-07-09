@@ -103,7 +103,9 @@ class AppManagePostsHomeView extends Component {
       }
     }));
 
-    return axios.get(`/user/${this.props.auth.id}/posts?start=${offset}&end=${offset + 19}`)
+    const {id} = this.props.auth;
+
+    return axios.get(`/user/${id}/posts?start=${offset}&end=${offset + 19}&viewer_id=${id}`)
       .then((res) => {
         this.setState(({feed}) => ({
           feed: {

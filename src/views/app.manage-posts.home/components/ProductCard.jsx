@@ -4,6 +4,7 @@ import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import ProductImg from 'app/components/ProductImg';
 import ProductCardDescription from 'app/components/ProductCardDescription';
+import ProductBumpInfo from 'app/components/ProductBumpInfo';
 
 const ProductCard = ({product, onEdit, onDelete}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
@@ -22,7 +23,11 @@ const ProductCard = ({product, onEdit, onDelete}) =>
         <div className="ProductCard-body">
           <div className="ProductCard-heading">
             <div className="ProductCard-headingSection">
-              <h4 className="ProductCard-title">{product.title}</h4>
+              <h4 className="ProductCard-title">
+                <Link to={`/products/${product.id}`} className="ProductCard-titleLink">
+                  {product.title}
+                </Link>
+              </h4>
             </div>
           </div>
 
@@ -34,11 +39,15 @@ const ProductCard = ({product, onEdit, onDelete}) =>
 
           <div className="CommentMeta">
             <div>
-              <a href="#" className="CommentMeta-highlight">{product.num_likes} bumped this</a>
+              <Link to={`/products/${product.id}`} className="CommentMeta-highlight">
+                <ProductBumpInfo product={product} />
+              </Link>
             </div>
 
             <div>
-              <span className="CommentMeta-count">{product.num_comments} comments</span>
+              <Link to={`/products/${product.id}`} className="CommentMeta-count">
+                {product.num_comments} comments
+              </Link>
             </div>
           </div>
         </div>
