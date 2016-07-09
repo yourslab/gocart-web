@@ -66,7 +66,7 @@ const facebook = {
     return new Promise((resolve, reject) => {
       FB.api(
         '/me',
-        {fields: 'first_name, last_name'},
+        {fields: 'first_name, last_name, user_friends'},
         (response) => response.error ? reject(response) : resolve(response)
       );
     });
