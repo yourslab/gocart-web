@@ -45,20 +45,14 @@ class AppView extends Component {
                   </div>
 
                   <div className="MainDrawerSidebar">
-                    <a href="#" className="MainDrawerSidebar-link MainDrawerSidebar-link--active">Discover</a>
                     <Link to="/manage-posts/create" className="MainDrawerSidebar-link">Create a post</Link>
                     <div className="MainDrawerSidebar-separator" />
                     <Permission rule="auth"><Link to={`/@${user.username}`} className="MainDrawerSidebar-link">My Profile</Link></Permission>
                     <Link to="/messages" className="MainDrawerSidebar-link">My Messages</Link>
-                    <a href="#" className="MainDrawerSidebar-link">My Cart</a>
-                    <a href="#" className="MainDrawerSidebar-link">Payments</a>
-                    <a href="#" className="MainDrawerSidebar-link">Billing</a>
-                    <a href="#" className="MainDrawerSidebar-link">Reports</a>
                     <Link to="/logout" className="MainDrawerSidebar-link">Logout</Link>
                     <div className="MainDrawerSidebar-separator" />
-                    <a href="#" className="MainDrawerSidebar-link">About Us</a>
-                    <a href="#" className="MainDrawerSidebar-link">FAQs</a>
-                    <a href="#" className="MainDrawerSidebar-link">Help & Support</a>
+                    <a href="//about.gocart.ph" className="MainDrawerSidebar-link" target="_blank">About Us</a>
+                    <a href="//about.gocart.ph/support.html" className="MainDrawerSidebar-link" target="_blank">Help & Support</a>
                   </div>
                 </div>
 
