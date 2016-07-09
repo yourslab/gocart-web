@@ -7,8 +7,8 @@ import {Gateway} from 'react-gateway';
 import {connect} from 'react-redux';
 import isServerError from 'app/utils/isServerError';
 import Infinite from 'app/components/Infinite';
-import ProductCard from 'app/components/ProductCard';
 import StaticImg from 'app/components/StaticImg';
+import ProductCard from './components/ProductCard';
 import Filters from './components/Filters';
 
 class AppHomeView extends React.Component {
