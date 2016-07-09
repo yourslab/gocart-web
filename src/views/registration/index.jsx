@@ -71,7 +71,7 @@ class RegistrationView extends Component {
 
                 <div className="Footer-section">
                   <span className="Footer-text">
-                    &copy; 2015 GoCart, Philippines.
+                    &copy; 2016 GoCart, Philippines.
                   </span>
                 </div>
               </div>
