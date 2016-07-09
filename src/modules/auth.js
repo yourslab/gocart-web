@@ -218,7 +218,7 @@ export function login({username, password}, redirect = '/') {
   }
 }
 
-export function loginWithFacebook() {
+export function loginWithFacebook(redirect = '/') {
   return (dispatch, getState) => {
     if ( getState().auth.facebook.loading ) {
       return;
@@ -250,6 +250,8 @@ export function loginWithFacebook() {
           token: res.data.auth_token,
           id: res.data.id
         });
+
+        history.push(redirect);
 
         return res;
       })
