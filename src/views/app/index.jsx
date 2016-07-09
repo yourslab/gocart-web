@@ -48,6 +48,7 @@ class AppView extends Component {
                     <Link to="/manage-posts/create" className="MainDrawerSidebar-link">Create a post</Link>
                     <div className="MainDrawerSidebar-separator" />
                     <Permission rule="auth"><Link to={`/@${user.username}`} className="MainDrawerSidebar-link">My Profile</Link></Permission>
+                    <Link to="/messages" className="MainDrawerSidebar-link">My Messages</Link>
                     <a href="#" className="MainDrawerSidebar-link">My Cart</a>
                     <a href="#" className="MainDrawerSidebar-link">Payments</a>
                     <a href="#" className="MainDrawerSidebar-link">Billing</a>
