@@ -34,12 +34,14 @@ export default class FollowersList extends Component {
 	 				container>
 	 				{this.state.followers.map((user, i) =>
 	 					<div className="UserListGroup-item" key={i}>
-			 				<UserImg src={user.prof_pic_link} username={user.username} className="UserListGroup-image" alt={`${user.username}'s Avatar`} />
+              <Link to={`/@${user.username}`} className="UserListGroup-itemLink">
+  			 				<UserImg src={user.prof_pic_link} username={user.username} className="UserListGroup-image" alt={`${user.username}'s Avatar`} />
 
-              <div className="UserListGroup-details">
-			 					<h5 className="UserListGroup-name"> {user.name} </h5>
-			 					<h6 className="UserListGroup-followers">{user.num_followers} followers </h6>
-			 				</div>
+                <div className="UserListGroup-details">
+  			 					<h5 className="UserListGroup-name"> {user.name} </h5>
+  			 					<h6 className="UserListGroup-followers">{user.num_followers} followers </h6>
+  			 				</div>
+              </Link>
 
 			 				<div className="UserListGroup-actions">
                 <UserFollowWidget
@@ -49,7 +51,13 @@ export default class FollowersList extends Component {
 				 		</div>
 	 				)}
 	 			</Infinite>
-	 			{this.state.loading ? <div className="Spinner" /> : null }
+
+
+	 			{this.state.loading
+          ? <div className="UserListGroup-loader">
+              <div className="Spinner" />
+            </div>
+          : null}
 
 		 		<div className="UserListGroup-footer">
 		 			<button onClick={this.props.onClose} className="Btn Btn--info Btn--block">

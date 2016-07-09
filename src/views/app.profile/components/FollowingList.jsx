@@ -34,11 +34,15 @@ export default class FollowingList extends Component {
 	 				container>
 	 				{this.state.following.map((user, i) =>
 	 					<div className="UserListGroup-item" key={i}>
-			 				<UserImg src={user.prof_pic_link} username={user.username} className="UserListGroup-image" alt={`${user.username}'s Avatar`} />
-			 				<div className="UserListGroup-details">
-			 					<h5 className="UserListGroup-name"> {user.name} </h5>
-			 					<h6 className="UserListGroup-followers">{user.num_followers} followers </h6>
-			 				</div>
+              <Link to={`/@${user.username}`} className="UserListGroup-itemLink">
+  			 				<UserImg src={user.prof_pic_link} username={user.username} className="UserListGroup-image" alt={`${user.username}'s Avatar`} />
+
+  			 				<div className="UserListGroup-details">
+  			 					<h5 className="UserListGroup-name"> {user.name} </h5>
+  			 					<h6 className="UserListGroup-followers">{user.num_followers} followers </h6>
+  			 				</div>
+              </Link>
+
 			 				<div className="UserListGroup-actions">
 			 					<UserFollowWidget
                   user={{ id: user.to_user, is_followed: user.is_followed }}
@@ -47,7 +51,12 @@ export default class FollowingList extends Component {
 				 		</div>
 	 				)}
 	 			</Infinite>
-	 			{this.state.loading ? <div className="Spinner" /> : null }
+
+        {this.state.loading
+          ? <div className="UserListGroup-loader">
+              <div className="Spinner" />
+            </div>
+          : null}
 
 		 		<div className="UserListGroup-footer">
 		 			<button onClick={this.props.onClose} className="Btn Btn--info Btn--block">
