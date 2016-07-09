@@ -51,7 +51,7 @@ class UserFollowWidget extends Component {
         onClick={this.handle}>
         {this.props.user.is_followed
           ? <StaticImg src={`icons/${hovered ? 'unfollow.svg' : 'followed.svg'}`} alt="Unfollow" title="Unfollow" />
-          : <StaticImg src={`icons/${hovered ? 'follow_add.svg' : 'follow_icon@1x.png'}`} alt="Follow" title="Follow" />}
+          : <StaticImg src={`icons/${hovered ? 'follow_hover.svg' : 'follow.svg'}`} alt="Follow" title="Follow" />}
       </button>
     );
   }
