@@ -28,7 +28,8 @@ class AppView extends Component {
 
   render() {
     const {left, right} = this.state;
-    const {user} = this.props;
+    const {user, location} = this.props;
+    const {pathname, query} = location;
 
     return (
       <GatewayProvider>
@@ -145,16 +146,22 @@ class AppView extends Component {
                       </div>
 
                       <div className="MainHeader-sectionItem">
-                        <Link to="/" className="MainHeader-link MainHeader-link--active">Popular</Link>
+                        <Link to="/" className={cn('MainHeader-link', { 'MainHeader-link--active': pathname === '/' && query.relevance !== 'following' && query.relevance !== 'nearby' })}>
+                          Popular
+                        </Link>
                       </div>
 
                       <div className="MainHeader-sectionItem">
-                        <Link to="/" className="MainHeader-link">Recent</Link>
+                        <Link to={{ pathname: '/', query: { relevance: 'following' } }} className={cn('MainHeader-link', { 'MainHeader-link--active': pathname === '/' && query.relevance === 'following' })}>
+                          Following
+                        </Link>
                       </div>
 
-                      <div className="MainHeader-sectionItem">
-                        <Link to="/" className="MainHeader-link">Nearby</Link>
-                      </div>
+                      {/*<div className="MainHeader-sectionItem">
+                        <Link to={{ pathname: '/', query: { relevance: 'nearby' } }} className={cn('MainHeader-link', { 'MainHeader-link--active': pathname === '/' && query.relevance === 'nearby' })}>
+                          Nearby
+                        </Link>
+                      </div>*/}
 
                       <GatewayDest name="header-separator" className="MainHeader-sectionItem" />
                       <GatewayDest name="header-filters" className="MainHeader-sectionItem" />

@@ -30,6 +30,18 @@ class AppHomeView extends React.Component {
     error: false
   };
 
+  componentWillReceiveProps(nextProps) {
+    if ( this.props.location.query.relevance === nextProps.location.query.relevance ) {
+      return;
+    }
+
+    // We're doing a string "fall-back" because
+    // handleRequest sets `query.relevance` to the the old (old in this method)
+    // relevance (`this.props.location.query.relevance`).
+    // The `relevance` property is undefined for `popular` tab (the default tab).
+    this.handleRequest(0, nextProps.location.query.relevance || '');
+  }
+
   componentDidMount() {
     this.handleRequest();
   }
@@ -86,12 +98,14 @@ class AppHomeView extends React.Component {
   }
 
   handleFilter = (filters) => {
+    // @TODO: Batch updating of `filters`
+    // by setting it on `handleRequest` itself.
     this.setState({ filters }, () => {
       this.handleRequest(0);
     });
   }
 
-  handleRequest = (offset = this.state.offset) => {
+  handleRequest = (offset = this.state.offset, relevance = this.props.location.query.relevance) => {
     if ( this.state.loading || (this.state.last && offset !== 0)  ) {
       return;
     }
@@ -109,6 +123,7 @@ class AppHomeView extends React.Component {
       to_date: moment().unix()
     } : {};
 
+    // `post_type` filter
     const typeFilter = post_type.length ? { post_type } : {};
 
     const query = qs.stringify({
@@ -121,7 +136,13 @@ class AppHomeView extends React.Component {
       to_rating: rating[1],
       start: offset,
       end: offset + 19,
-      type: 1
+      // @REFACTOR: Make a convenience method
+      // Following: 1
+      // Popular: 5
+      // Nearby: 0
+      type: relevance === 'following'
+        ? 1
+        : (relevance === 'nearby' ? 0 : 5)
     });
 
     return axios.get(`/user/${props.auth.id}/feed/posts?${query}`)
