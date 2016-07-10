@@ -35,6 +35,8 @@ class AppProductView extends Component {
     if ( this.state.product.num_comments > 0 ) {
       this.handleGetComments();
     }
+
+    this.refs.comment.focus();
   }
 
   render() {
@@ -129,7 +131,7 @@ class AppProductView extends Component {
                 </div> : <h4 className="CommentWidget-empty">Be the first one to comment</h4>}
 
                 <div className="CommentWidget-form">
-                  <input type="text" className="CommentWidget-input" placeholder="What do you have in mind?" valueLink={linkState(this, 'post.input')} />
+                  <input ref="comment" type="text" className="CommentWidget-input" placeholder="What do you have in mind?" valueLink={linkState(this, 'post.input')} />
 
                   <div>
                     <button className="Btn Btn--default Btn--borderless">
