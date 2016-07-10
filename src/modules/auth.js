@@ -15,6 +15,11 @@ const AUTH_GET_DATA = 'user:get';
 const FACEBOOK_AUTHENTICATE = 'authentication:facebook';
 const FACEBOOK_AUTHENTICATE_SUCCESS = 'authentication:facebook-success';
 const FACEBOOK_AUTHENTICATE_ERROR = 'authentication:facebook-error';
+const FACEBOOK_AUTHENTICATE_CANCEL = 'authentication:facebook-error';
+const FACEBOOK_NEW = 'authentication:facebook-new';
+const FACEBOOK_NEW_REQUEST = 'authentication:facebook-new-request';
+const FACEBOOK_NEW_SUCCESS = 'authentication:facebook-new-success';
+const FACEBOOK_NEW_ERROR = 'authentication:facebook-new-error';
 const AUTH_UPDATE = 'authentication:update';
 const AUTH_UPDATE_SUCCESS = 'authentication:update-success';
 const AUTH_UPDATE_ERROR = 'authentication:update-error';
@@ -30,6 +35,13 @@ const initialState = {
 
   facebook: {
     loading: false,
+    message: '',
+  },
+
+  ['facebook.register']: {
+    active: false,
+    loading: false,
+    errors: {},
     message: '',
   },
 
@@ -85,8 +97,9 @@ export default function authReducer(state = initialState, action) {
     case FACEBOOK_AUTHENTICATE_SUCCESS:
       return {
         ...state,
+
         facebook: {
-          ...state.authentication,
+          ...state.facebook,
           loading: false
         },
 
@@ -94,12 +107,76 @@ export default function authReducer(state = initialState, action) {
         token: action.payload.token
       };
 
+
     case FACEBOOK_AUTHENTICATE_ERROR:
       return {
         ...state,
+
         facebook: {
+          ...state.facebook,
           loading: false,
           message: action.payload
+        }
+      };
+
+    // When the user "cancels" his login
+    case FACEBOOK_AUTHENTICATE_CANCEL:
+      return {
+        ...state,
+
+        facebook: {
+          ...state.facebook,
+          loading: false
+        }
+      };
+
+    case FACEBOOK_NEW:
+      return {
+        ...state,
+
+        facebook: {
+          ...state.facebook,
+          loading: false
+        },
+
+        ['facebook.register']: {
+          ...state['facebook.register'],
+          active: true
+        }
+      };
+
+    case FACEBOOK_NEW_REQUEST:
+      return {
+        ...state,
+
+        ['facebook.register']: {
+          ...state['facebook.register'],
+          loading: true,
+          errors: {},
+          message: ''
+        }
+      };
+
+    case FACEBOOK_NEW_SUCCESS:
+      return {
+        ...state,
+
+        ['facebook.register']: {
+          ...state['facebook.register'],
+          active: false,
+          loading: false
+        }
+      };
+
+    case FACEBOOK_NEW_ERROR:
+      return {
+        ...state,
+
+        ['facebook.register']: {
+          ...state['facebook.register'],
+          loading: false,
+          errors: action.payload.errors,
+          message: action.payload.message
         }
       };
 
@@ -131,10 +208,12 @@ export default function authReducer(state = initialState, action) {
     case AUTH_UPDATE_SUCCESS:
       return {
         ...state,
+
         user: {
           ...state.user,
           ...action.payload
         },
+
         update: {
           ...state.update,
           loading: false,
@@ -233,24 +312,81 @@ export function loginWithFacebook(redirect = '/') {
 
     dispatch({ type: FACEBOOK_AUTHENTICATE });
 
+    // 1. Login with FB
+    // 2. Fetch FB Data
+    // 3. Check if user exists
+    // 3.1 If user exists, authenticate
+    // 3.2 Otherwise, show username input
+    //     (by of course, set state to "non-existing")
     return facebook.login()
       .then(facebook.fetch)
-      .then((res) => axios.post('user', {
-        username: res.id,
-        fb_token: facebook.token(),
-        user_type: 0
-      }))
-      // @TODO: Handle the case where a user with the
-      // email/username is already registered (but not
-      // with facebook login)
-      .catch(
-        (res) => axios.get(`user/fb_token/${facebook.token()}`),
-        (res) => axios.get(`user/fb_token/${facebook.token()}`)
-      )
+      .then((res) => {
+        return axios.get(`user/fb_token/${facebook.token()}`)
+      })
+      .catch((res) => {
+        if ( isServerError(res.status) ) {
+          dispatch({
+            type: FACEBOOK_AUTHENTICATE_ERROR,
+            payload: lang.errors.server
+          });
+        // A 404: Indicating that the facebook
+        // account doesn't have an account with
+        // our applicationyet.
+        } else if ( res.status === 404 ) {
+          dispatch({ type: FACEBOOK_NEW });
+        // Catch for when `facebook.login` fails;
+        // when the user "cancels" his login.
+        // It responds with: { authResponse: undefined, status: undefined }
+        } else {
+          dispatch({
+            type: FACEBOOK_AUTHENTICATE_CANCEL,
+            payload: lang.errors.server
+          });
+        }
+
+        return Promise.reject(res);
+      })
       .then((res) => {
         dispatch({
           type: FACEBOOK_AUTHENTICATE_SUCCESS,
-          payload: res
+          payload: res.data
+        });
+
+        cookie.set(config.auth.key, {
+          token: res.data.auth_token,
+          id: res.data.id
+        });
+
+        history.push(redirect);
+
+        return res;
+      });
+  }
+}
+
+// In `loginWithFacebook`, if the user doesn't exist
+// yet, we ask for his username. This action
+// registers that user with the input username
+export function registerWithFacebook(username, redirect = '/') {
+  return (dispatch, getState) => {
+    if ( getState().auth['facebook.register'].loading ) {
+      return;
+    }
+
+    dispatch({ type: FACEBOOK_NEW_REQUEST });
+
+    return axios.post('user', {
+        username,
+        fb_token: facebook.token(),
+        user_type: 0
+      })
+      .then((res) => {
+        dispatch({
+          type: FACEBOOK_NEW_SUCCESS,
+          payload: {
+            token: res.data.auth_token,
+            user: res.data
+          }
         });
 
         cookie.set(config.auth.key, {
@@ -264,9 +400,15 @@ export function loginWithFacebook(redirect = '/') {
       })
       .catch((res) => {
         dispatch({
-          type: FACEBOOK_AUTHENTICATE_ERROR,
-          // @TODO: Add error message
-          payload: ''
+          type: FACEBOOK_NEW_ERROR,
+          payload: isServerError(res.status)
+            ? {
+              message: lang.errors.server,
+              errors: {}
+            } : {
+              message: lang.errors.input,
+              errors: res.data.errors
+            }
         });
 
         return Promise.reject(res);

@@ -1,23 +1,19 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
 import {Link} from 'react-router';
-import linkState from 'react-link-state';
 import flowRight from 'lodash/flowRight';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import config from 'app/config';
-import {login, loginWithFacebook} from 'app/modules/auth';
+import {login, loginWithFacebook, registerWithFacebook} from 'app/modules/auth';
 import facebook from 'app/utils/facebook';
 import {guest} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
 import ButtonLoader from 'app/components/ButtonLoader';
+import LoginForm from './components/LoginForm';
+import FacebookRegistrationForm from './components/FacebookRegistrationForm';
 
 class LoginView extends Component {
-  state = {
-    username: '',
-    password: ''
-  };
-
   componentDidMount() {
     // @REFACTOR: Make a high-level abstraction for the
     // FB Login (Make a wrapper component).
@@ -25,7 +21,7 @@ class LoginView extends Component {
   }
 
   render() {
-    const {authentication, facebook} = this.props;
+    const {authentication, facebook, register} = this.props;
 
     return (
       <div className="PortalWrapper">
@@ -48,41 +44,26 @@ class LoginView extends Component {
             <hr className="PortalWrapper-separator" />
 
             <div className="PortalWrapper-content">
-              <form onSubmit={this.handle} formNoValidate>
-                {authentication.message
-                  ? <div className="Alert Alert--danger u-spacer-base">
-                    {/* @REFACTOR: We need a better way to handle activation errors haha */}
-                    {authentication.message === 'Your account is not yet activated'
-                      ? <span>Your account is not yet activated. You may request for the activation link <Link to="/pin-request">here</Link>.</span>
-                      : authentication.message}
+              {register.active
+                ? <FacebookRegistrationForm
+                  state={register}
+                  onRegister={this.handleRegister} />
+                : <div>
+                  <LoginForm
+                    state={authentication}
+                    onLogin={this.handleLogin} />
+
+                  <p className="u-text-muted u-text-center">
+                    or
+                  </p>
+
+                  <div className="FormGroup FormGroup--narrow">
+                    <ButtonLoader className="Btn Btn--facebook Btn--large Btn--block" type="button" onClick={this.handleFacebook} loading={facebook.loading}>
+                      <StaticImg src="icons/facebook.svg" alt="Icon" className="Btn-icon" />
+                      Sign In using Facebook
+                    </ButtonLoader>
                   </div>
-                  : null}
-
-                <div className="FormGroup FormGroup--narrow">
-                  <input type="text" className="FormInput FormInput--large" placeholder="Email Address" valueLink={linkState(this, 'username')} />
-                </div>
-
-                <div className="FormGroup FormGroup--narrow">
-                  <input type="password" className="FormInput FormInput--large" placeholder="Password" valueLink={linkState(this, 'password')} />
-                </div>
-
-                <div className="FormGroup FormGroup--narrow">
-                  <ButtonLoader className="Btn Btn--success Btn--large Btn--block" loading={authentication.loading}>
-                    Login
-                  </ButtonLoader>
-                </div>
-
-                <p className="u-text-muted u-text-center">
-                  or
-                </p>
-
-                <div className="FormGroup FormGroup--narrow">
-                  <ButtonLoader className="Btn Btn--facebook Btn--large Btn--block" type="button" onClick={this.handleFacebook} loading={facebook.loading}>
-                    <StaticImg src="icons/facebook.svg" alt="Icon" className="Btn-icon" />
-                    Sign In using Facebook
-                  </ButtonLoader>
-                </div>
-              </form>
+                </div>}
             </div>
 
             <hr className="PortalWrapper-separator" />
@@ -118,25 +99,34 @@ class LoginView extends Component {
     );
   }
 
-  handle = (evt) => {
-    evt.preventDefault();
-    this.props.actions.login(this.state, this.props.location.query[config.routing.redirectKey]);
+  handleLogin = (credentials) => {
+    const redirect = this.props.location.query[config.routing.redirectKey];
+    this.props.actions.login(credentials, redirect);
   }
 
   handleFacebook = () => {
-    this.props.actions.loginWithFacebook(this.props.location.query[config.routing.redirectKey]);
+    this.props.actions.loginWithFacebook(
+      this.props.location.query[config.routing.redirectKey]
+    );
+  }
+
+  handleRegister = (username) => {
+    const redirect = this.props.location.query[config.routing.redirectKey];
+    this.props.actions.registerWithFacebook(username,redirect);
   }
 }
 
 const mapState = ({auth}) => ({
   authentication: auth.authentication,
-  facebook: auth.facebook
+  facebook: auth.facebook,
+  register: auth['facebook.register']
 });
 
 const mapActions = (dispatch) => ({
   actions: bindActionCreators({
     login,
-    loginWithFacebook
+    loginWithFacebook,
+    registerWithFacebook
   }, dispatch)
 });
 
