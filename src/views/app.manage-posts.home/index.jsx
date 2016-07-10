@@ -141,7 +141,6 @@ class AppManagePostsHomeView extends Component {
             feed: {
               ...feed,
               loading: false,
-              message: lang.errors.server,
               last: true
             }
           }));
