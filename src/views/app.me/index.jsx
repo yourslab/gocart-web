@@ -9,10 +9,10 @@ export default class AppMeView extends Component {
           <div className="Sidebar">
             <IndexLink to="/me" className="Sidebar-item" activeClassName="Sidebar-item--active">Profile</IndexLink>
             <Link to="/me/password" className="Sidebar-item" activeClassName="Sidebar-item--active">Change Password</Link>
-            <a href="#" className="Sidebar-item">Billing</a>
+            {/*<a href="#" className="Sidebar-item">Billing</a>
             <a href="#" className="Sidebar-item">Orders</a>
             <Link to="/me/settings" className="Sidebar-item" activeClassName="Sidebar-item--active">Privacy</Link>
-            <a href="#" className="Sidebar-item">Settings</a>
+            <a href="#" className="Sidebar-item">Settings</a>*/}
           </div>
 
           <div className="SidebarContainer-panel">

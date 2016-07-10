@@ -58,7 +58,7 @@ export default class EditProfileForm extends Component {
             </div>
           </div>
 
-          <div className="Grid-cell u-size6">
+          {/*<div className="Grid-cell u-size6">
             <div className="ListGroup">
               <h6 className="ListGroup-heading">Address</h6>
 
@@ -173,7 +173,7 @@ export default class EditProfileForm extends Component {
             <button className="Btn Btn--default">
               Add another address
             </button>
-          </div>
+          </div>*/}
         </div>
 			</form>
 		);
