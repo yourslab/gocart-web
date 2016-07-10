@@ -4,12 +4,13 @@ import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import lang from 'app/lang';
 import isServerError from 'app/utils/isServerError';
+import {guest} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
 import PinActivating from './components/PinActivating';
 import PinSuccess from './components/PinSuccess';
 import PinError from './components/PinError';
 
-export default class PinView extends Component {
+class PinView extends Component {
   state = {
     loading: false,
     success: false,
@@ -120,3 +121,5 @@ export default class PinView extends Component {
       });
   }
 }
+
+export default guest(PinView);
