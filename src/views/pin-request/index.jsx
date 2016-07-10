@@ -100,7 +100,7 @@ class PinRequestView extends Component {
       message: ''
     });
 
-    return axios.get(`/pin/${username}`)
+    return axios.get(`/pin/${username}?activation_link=true`)
       .then((res) => {
         this.setState({
           loading: false,

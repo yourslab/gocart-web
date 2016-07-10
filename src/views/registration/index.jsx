@@ -113,7 +113,8 @@ class RegistrationView extends Component {
 
     return axios.post('/user', {
         ...data,
-        user_type: 1
+        user_type: 1,
+        activation_link: true
       })
       .then((res) => {
         this.setState({
