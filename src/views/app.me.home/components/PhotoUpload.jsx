@@ -11,9 +11,9 @@ export default class PhotoUpload extends Component {
 
         <div className="AvatarUploadWidget-inner">
           <button type="button" className="PlainBtn" onClick={this.handleAdd}>
-            {this.props.photo.length
+            {this.props.photo && this.props.photo.length
               ? <img src={this.props.photo} className="AvatarUploadWidget-avatar" alt="Avatar" />
-              : <StaticImg src="icons/gocartlogo_red_small@1x.png" className="AvatarUploadWidget-avatar" alt="Avatar" />
+              : <StaticImg src="avatar.svg" className="AvatarUploadWidget-avatar" alt="Avatar" />
             }
           </button>
 
