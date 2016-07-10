@@ -208,9 +208,16 @@ export function login({username, password}, redirect = '/') {
       .catch((res) => {
         dispatch({
           type: AUTHENTICATE_ERROR,
+          // We have 3 kinds of error here:
+          // Server Error, Invalid Account Error,
+          // and Credentials Error
           payload: isServerError(res.status)
             ? lang.errors.server
-            : lang.errors.authentication
+            : (res.data.errors.length
+              // Error for inactive accounts
+              // "Your account is not yet activated"
+              ? res.data.errors[0].description
+              : lang.errors.authentication)
         });
 
         return Promise.reject(res);

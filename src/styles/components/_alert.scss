@@ -1,5 +1,5 @@
 .Alert {
-  padding: 5px;
+  padding: 5px 10px;
   font-size: $fontSize-small;
   color: $color-white;
   background: $color-grayDark;
@@ -8,5 +8,13 @@
 
   &.Alert--danger {
     background: #d93824;
+  }
+
+  // We're using anchor directly because
+  // Our alert doesn't have any element other
+  // than text and, rarely, text links (a)
+  a {
+    color: $color-white;
+    font-weight: bold;
   }
 }

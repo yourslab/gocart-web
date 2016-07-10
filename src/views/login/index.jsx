@@ -49,7 +49,14 @@ class LoginView extends Component {
 
             <div className="PortalWrapper-content">
               <form onSubmit={this.handle} formNoValidate>
-                {authentication.message ? <div className="Alert Alert--danger u-spacer-base">{authentication.message}</div> : null}
+                {authentication.message
+                  ? <div className="Alert Alert--danger u-spacer-base">
+                    {/* @REFACTOR: We need a better way to handle activation errors haha */}
+                    {authentication.message === 'Your account is not yet activated'
+                      ? <span>Your account is not yet activated. You may request for the activation link <Link to="/pin-resend">here</Link>.</span>
+                      : authentication.message}
+                  </div>
+                  : null}
 
                 <div className="FormGroup FormGroup--narrow">
                   <input type="text" className="FormInput FormInput--large" placeholder="Email Address" valueLink={linkState(this, 'username')} />
