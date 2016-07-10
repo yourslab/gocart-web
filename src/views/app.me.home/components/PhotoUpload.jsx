@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import map from 'lodash/map';
 import reader from 'app/utils/filereader';
-import StaticImg from 'app/components/StaticImg';
 import UserImg from 'app/components/UserImg';
 
 export default class PhotoUpload extends Component {
@@ -12,10 +11,7 @@ export default class PhotoUpload extends Component {
 
         <div className="AvatarUploadWidget-inner">
           <button type="button" className="PlainBtn" onClick={this.handleAdd}>
-            {this.props.photo && this.props.photo.length
-              ? <UserImg src={this.props.photo} username={this.props.username} className="AvatarUploadWidget-avatar" alt={`${this.props.username}'s Avatar`} />
-              : <StaticImg src="avatar.svg" className="AvatarUploadWidget-avatar" alt="Avatar" />
-            }
+            <UserImg src={this.props.photo} username={this.props.username} className="AvatarUploadWidget-avatar" alt={`${this.props.username}'s Avatar`} />
           </button>
 
           <div>
