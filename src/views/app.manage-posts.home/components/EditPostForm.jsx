@@ -18,7 +18,6 @@ export default class EditPostForm extends Component {
     price: 0.00,
     price_enabled: true,
     post_type: 1,
-    mobile: '',
     latitude: 0,
     longitude: 0
   };
@@ -106,11 +105,6 @@ export default class EditPostForm extends Component {
                 <div className="FormGroup">
                   <label htmlFor="post_type">Type of ad</label>
                   <PostTypeSelect id="post_type" className="FormInput" value={this.state.post_type} onChange={this.handleType} />
-                </div>
-
-                <div className="FormGroup">
-                  <label htmlFor="mobile">Mobile Number</label>
-                  <InputError type="text" id="mobile" className="FormInput" valueLink={linkState(this, 'mobile')} error={state.errors.mobile} />
                 </div>
 
                 <div className="FormGroup">
