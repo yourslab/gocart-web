@@ -24,8 +24,8 @@ export default {
     title: 'Gocart',
 
     meta: {
-      description: '',
-      keywords: ''
+      siteline: 'Social Media Meets E-commerce',
+      description: 'Gocart is a social buy-and-sell platform that provides a carefully curated feed for you',
     }
   },
 
