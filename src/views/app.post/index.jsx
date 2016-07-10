@@ -110,7 +110,7 @@ class AppProductView extends Component {
             </div>
 
             {product.num_comments !== comment.data.length && product.num_comments > 0 && (comment.data.length > 0 && !product.loading)
-              ? <button type="button" className="ProductCardFull-commentLoadMore">
+              ? <button type="button" className="ProductCardFull-commentLoadMore" onClick={this.handleGetComments}>
                 View {product.num_comments - comment.data.length} more comments
               </button> : null}
 
@@ -161,10 +161,10 @@ class AppProductView extends Component {
 
     return axios.get(`/post/${this.props.routeParams.id}/comments?start=${offset}&end=${offset + 19}`)
       .then((res) => {
-        this.setState((state) => ({
+        this.setState(({comment}) => ({
           comment: {
-            ...state.comment,
-            data: res.data,
+            ...comment,
+            data: [...comment.data, ...res.data],
             offset: offset + 20,
             loading: false
           }
