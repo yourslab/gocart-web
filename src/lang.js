@@ -3,6 +3,7 @@ export default {
     server: 'There seems to be an issue with the servers.',
     input: 'Oops, there seems to be an issue with your input.',
     authentication: 'The username/password was invalid.',
-    password: 'This field must match the password field.'
+    password: 'This field must match the password field.',
+    activation: 'The activation link appears to be broken. Are you sure this is a valid link from your email?'
   }
 }
