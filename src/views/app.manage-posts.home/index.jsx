@@ -47,7 +47,7 @@ class AppManagePostsHomeView extends Component {
       <div>
         <Helmet title="Manage Posts" />
 
-        <div className="SidebarContainer-panelHeading">
+        {/*<div className="SidebarContainer-panelHeading">
           <div />
 
           <div className="SidebarContainer-panelHeadingSection">
@@ -55,7 +55,7 @@ class AppManagePostsHomeView extends Component {
               <a href="#" className="Btn Btn--primary Btn--inverted Btn--borderless">Delete All</a>
             </div>
           </div>
-        </div>
+        </div>*/}
 
         <Infinite callback={this.handleRequest}>
           <div className="Grid">
