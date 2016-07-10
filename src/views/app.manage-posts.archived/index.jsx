@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Helmet from 'react-helmet';
-import ProductCard from 'app/components/ProductCard';
-import Switchbox from 'app/components/Switchbox';
+// import ProductCard from 'app/components/ProductCard';
+// import Switchbox from 'app/components/Switchbox';
 
 export default class AppManagePostsArchivedView extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class AppManagePostsArchivedView extends Component {
       <div>
         <Helmet title="Archived Posts" />
 
-        <div className="SidebarContainer-panelHeading">
+        {/*<div className="SidebarContainer-panelHeading">
           <div className="SidebarContainer-panelHeadingSection" />
 
           <div className="SidebarContainer-panelHeadingSection">
@@ -88,7 +88,7 @@ export default class AppManagePostsArchivedView extends Component {
               </div>
             </div>
           )}
-        </div>
+        </div>*/}
       </div>
     );
   }
