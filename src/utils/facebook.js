@@ -20,7 +20,7 @@ const facebook = {
           appId: config.facebook.appId,
           cookie: true,
           xfbml: true,
-          version: 'v2.3'
+          version: 'v2.6'
         });
 
         resolve();
