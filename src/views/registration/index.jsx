@@ -3,22 +3,23 @@ import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import axios from 'axios';
 import lang from 'app/lang';
-import history from 'app/history';
 import isServerError from 'app/utils/isServerError';
 import formatValidationErrors from 'app/utils/formatValidationErrors';
 import {guest} from 'app/components/Permission';
 import StaticImg from 'app/components/StaticImg';
 import RegistrationForm from './components/RegistrationForm';
+import Success from './components/Success';
 
 class RegistrationView extends Component {
   state = {
     loading: false,
     errors: {},
-    message: ''
+    message: '',
+    success: false
   };
 
   render() {
-    const {loading, errors, message} = this.state;
+    const {loading, errors, message, success} = this.state;
 
     return (
       <div className="PortalWrapper">
@@ -43,10 +44,12 @@ class RegistrationView extends Component {
             <div className="PortalWrapper-content">
               {message.length ? <div className="Alert Alert--danger u-spacer-base">{message}</div> : null}
 
-              <RegistrationForm
-                loading={loading}
-                errors={errors}
-                onRegister={this.handleRegister} />
+              {success
+                ? <Success />
+                : <RegistrationForm
+                  loading={loading}
+                  errors={errors}
+                  onRegister={this.handleRegister} />}
             </div>
 
             <hr className="PortalWrapper-separator" />
@@ -116,9 +119,8 @@ class RegistrationView extends Component {
         this.setState({
           errors: {},
           loading: false,
+          success: true
         });
-
-        history.push('/');
 
         return res;
       })
