@@ -17,7 +17,7 @@ export default class SuccessDialogue extends Component {
           </h3>
 
           <div className="u-spacer-base">
-            <Link to={`/products/${this.props.id}`} className="Btn Btn--info Btn--inverted Btn--borderless">
+            <Link to={`/posts/${this.props.id}`} className="Btn Btn--info Btn--inverted Btn--borderless">
               See it live!
             </Link>
           </div>

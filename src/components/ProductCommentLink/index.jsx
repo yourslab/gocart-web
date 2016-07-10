@@ -11,7 +11,7 @@ import StaticImg from 'app/components/StaticImg';
  */
 const ProductCommentLink = ({id}) =>
   <Link
-    to={`/products/${id}`}
+    to={`/posts/${id}`}
     className="Btn Btn--default Btn--noPadding">
     {/*<span className="Btn-icon">
       <StaticImg src="icons/chat_icon@1x.png" />

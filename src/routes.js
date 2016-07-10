@@ -9,7 +9,7 @@ import AppSearchUsersView from './views/app.search.users';
 import AppProfileView from './views/app.profile';
 import AppProfileHomeView from './views/app.profile.home';
 import AppProfileRatingsView from './views/app.profile.ratings';
-import AppProductView from './views/app.product';
+import AppPostView from './views/app.post';
 import AppManagePostsView from './views/app.manage-posts';
 import AppManagePostsHomeView from './views/app.manage-posts.home';
 import AppManagePostsCreateView from './views/app.manage-posts.create';
@@ -40,7 +40,7 @@ export default (
         <Route path="ratings" component={AppProfileRatingsView} />
       </Route>
 
-      <Route path="/products/:id" component={AppProductView} />
+      <Route path="/posts/:id" component={AppPostView} />
 
       <Route path="manage-posts" component={AppManagePostsView}>
         <IndexRoute component={AppManagePostsHomeView} />

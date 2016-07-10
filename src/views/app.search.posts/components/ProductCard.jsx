@@ -6,7 +6,7 @@ import ProductImg from 'app/components/ProductImg';
 
 const ProductCard = ({product}) =>
   <div className="Grid-cell u-size4 u-spacer-base">
-    <Link to={`/products/${product.id}`} className="SearchProductCard">
+    <Link to={`/posts/${product.id}`} className="SearchProductCard">
       <div className="SearchProductCard-thumbnail">1
         <ProductImg src={product.photo_list[0]} id={product.id} className="SearchProductCard-thumbnailImage" alt="Thumbnail" />
       </div>

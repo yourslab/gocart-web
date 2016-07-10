@@ -26,7 +26,7 @@ const ProductCard = ({product}) =>
           <div className="ProductCard-heading">
             <div className="ProductCard-headingSection">
               <h4 className="ProductCard-title">
-                <Link to={`/products/${product.id}`} className="ProductCard-titleLink">
+                <Link to={`/posts/${product.id}`} className="ProductCard-titleLink">
                   {product.title}
                 </Link>
               </h4>
@@ -41,13 +41,13 @@ const ProductCard = ({product}) =>
 
           <div className="CommentMeta">
             <div>
-              <Link to={`/products/${product.id}`} className="CommentMeta-highlight">
+              <Link to={`/posts/${product.id}`} className="CommentMeta-highlight">
                 {product.num_likes} bumped this
               </Link>
             </div>
 
             <div>
-              <Link to={`/products/${product.id}`} className="CommentMeta-count">
+              <Link to={`/posts/${product.id}`} className="CommentMeta-count">
                 {product.num_comments} comments
               </Link>
             </div>
