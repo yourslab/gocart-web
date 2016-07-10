@@ -17,15 +17,8 @@ class Root extends React.Component {
     return (
       <div>
         <Helmet
-          defaultTitle={`${config.app.title} | ${config.app.meta.siteline} (Dev Mode)`}
-          titleTemplate={`%s - ${config.app.title} | ${config.app.meta.siteline} (Dev Mode)`}
-          meta={[
-            { property: 'og:image', content: '//about.gocart.ph/images/og_image.png' },
-            { property: 'og:title', content: config.app.meta.siteline },
-            { property: 'og:site_name', content: 'gocart.ph' },
-            { property: 'og:description', content: config.app.meta.description },
-            { name: 'description', content: config.app.meta.description },
-          ]} />
+          defaultTitle={`${config.app.title} (Dev Mode)`}
+          titleTemplate={`%s - ${config.app.title} (Dev Mode)`} />
 
         <Provider store={this.props.store}>
           <div>

@@ -21,12 +21,7 @@ export default {
   // App-related configuration
   // ==============================
   app: {
-    title: 'Gocart',
-
-    meta: {
-      siteline: 'Social Media Meets E-commerce',
-      description: 'Gocart is a social buy-and-sell platform that provides a carefully curated feed for you',
-    }
+    title: 'Gocart | Social Media Meets E-commerce'
   },
 
   auth: {
