@@ -68,7 +68,8 @@ class AppHomeView extends React.Component {
                 <div className="Grid-cell u-size6 u-spacer-large" key={product.id}>
                   <ProductCard
                     product={product}
-                    onFollow={this.handleFollow} />
+                    onFollow={this.handleFollow}
+                    onBump={this.handleBump} />
                 </div>
               )}
             </div>
@@ -90,6 +91,17 @@ class AppHomeView extends React.Component {
         ? {
           ...product,
           is_followed: !product.is_followed
+        } : product)
+    }));
+  }
+
+  handleBump = (id) => {
+    this.setState((state) => ({
+      feed: state.feed.map((product) => product.id === id
+        ? {
+          ...product,
+          is_liked: !product.is_liked,
+          num_likes: product.num_likes + (product.is_liked ? -1 : 1)
         } : product)
     }));
   }

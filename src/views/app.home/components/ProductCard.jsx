@@ -8,10 +8,10 @@ import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import ProductCardDescription from 'app/components/ProductCardDescription';
 import ProductBumpInfo from 'app/components/ProductBumpInfo';
-import ProductBumpLink from 'app/components/ProductBumpLink';
+import BumpButton from 'app/components/BumpButton';
 import ProductCommentLink from 'app/components/ProductCommentLink';
 
-const ProductCard = ({product, onFollow}) =>
+const ProductCard = ({product, onFollow, onBump}) =>
   <div className="ProductCard">
     <div className="ProductCard-userPanel">
       <div className="ProductCard-userPanelSection">
@@ -93,7 +93,9 @@ const ProductCard = ({product, onFollow}) =>
       <div className="ProductCard-actions">
         <div className="ProductCard-actionsSection">
           <div className="ProductCard-actionsSectionItem">
-            <ProductBumpLink id={product.id} />
+            <BumpButton
+              product={{ id: product.id, is_liked: product.is_liked }}
+              onBump={onBump} />
           </div>
 
           <div className="ProductCard-actionsSectionItem">
@@ -109,9 +111,5 @@ const ProductCard = ({product, onFollow}) =>
       </div>
     </div>
   </div>
-
-ProductCard.propTypes = {
-  product: PropTypes.object.isRequired
-};
 
 export default ProductCard;

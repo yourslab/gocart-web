@@ -5,10 +5,10 @@ import StaticImg from 'app/components/StaticImg';
 import ProductImg from 'app/components/ProductImg';
 import ProductCardDescription from 'app/components/ProductCardDescription';
 import ProductBumpInfo from 'app/components/ProductBumpInfo';
-import ProductBumpLink from 'app/components/ProductBumpLink';
+import BumpButton from 'app/components/BumpButton';
 import ProductCommentLink from 'app/components/ProductCommentLink';
 
-const ProductCard = ({product}) =>
+const ProductCard = ({product, onBump}) =>
   <div className="Grid-cell u-size6 u-spacer-base">
     <div className="ProductCard">
       <div className="ProductCard-inner">
@@ -57,7 +57,9 @@ const ProductCard = ({product}) =>
         <div className="ProductCard-actions">
           <div className="ProductCard-actionsSection">
             <div className="ProductCard-actionsSectionItem">
-              <ProductBumpLink id={product.id} />
+              <BumpButton
+                product={{ id: product.id, is_liked: product.is_liked }}
+                onBump={onBump} />
             </div>
 
             <div className="ProductCard-actionsSectionItem">

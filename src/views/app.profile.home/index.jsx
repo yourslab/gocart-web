@@ -34,7 +34,10 @@ class AppProfileHomeView extends Component {
         <Infinite callback={this.handleRequest}>
           <div className="Grid">
             {products.map((product, i) =>
-              <ProductCard product={product} key={`product-${i}`} />
+              <ProductCard
+                key={`product-${i}`}
+                product={product}
+                onBump={this.handleBump}  />
             )}
 
             {auth.id === user.id
@@ -53,6 +56,17 @@ class AppProfileHomeView extends Component {
     );
   }
 
+  handleBump = (id) => {
+    this.setState(({products}) => ({
+      products: products.map((product) => product.id === id
+        ? {
+          ...product,
+          is_liked: !product.is_liked,
+          num_likes: product.num_likes + (product.is_liked ? -1 : 1)
+        } : product)
+    }));
+  }
+
   handleRequest = (offset = this.state.offset) => {
     if ( this.state.loading || this.state.last ) {
       return;
@@ -68,7 +82,8 @@ class AppProfileHomeView extends Component {
     const query = qs.stringify({
       start: offset,
       end: offset + 19,
-      type: 1
+      type: 1,
+      viewer_id: props.auth.id
     });
 
     return axios.get(`/user/${props.user.id}/posts?${query}`)
