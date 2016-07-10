@@ -16,7 +16,7 @@ class Root extends React.Component {
     return (
       <div>
         <Helmet
-          defaultTitle={`${config.app.title}`}
+          defaultTitle={config.app.title}
           titleTemplate={`%s - ${config.app.title}`} />
 
         <Provider store={this.props.store}>
