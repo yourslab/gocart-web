@@ -37,7 +37,7 @@ export default class EditProfileForm extends Component {
 
         <div className="Grid">
           <div className="Grid-cell u-size6">
-           	<PhotoUpload photo={this.state.prof_pic_link} onChange={this.handleUpload} />
+           	<PhotoUpload photo={this.state.prof_pic_link} username={auth.username} onChange={this.handleUpload} />
 
             <div className="FormGroup">
               <label htmlFor="name">Name</label>
