@@ -4,6 +4,7 @@ export default {
     input: 'Oops, there seems to be an issue with your input.',
     authentication: 'The username/password was invalid.',
     password: 'This field must match the password field.',
-    activation: 'The activation link appears to be broken. Are you sure this is a valid link from your email?'
+    activation: 'The activation link appears to be broken. Are you sure this is a valid link from your email?',
+    required: 'This field is required.'
   }
 }

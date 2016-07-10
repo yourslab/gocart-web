@@ -25,6 +25,7 @@ import LoginView from './views/login';
 import LogoutView from './views/logout';
 import RegistrationView from './views/registration';
 import PinView from './views/pin';
+import PinRequestView from './views/pin-request';
 
 export default (
   <Route path="/" component={MainView}>
@@ -65,5 +66,6 @@ export default (
     <Route path="logout" component={LogoutView} />
     <Route path="registration" component={RegistrationView} />
     <Route path="pin" component={PinView} />
+    <Route path="pin-request" component={PinRequestView} />
   </Route>
 );

@@ -53,7 +53,7 @@ class LoginView extends Component {
                   ? <div className="Alert Alert--danger u-spacer-base">
                     {/* @REFACTOR: We need a better way to handle activation errors haha */}
                     {authentication.message === 'Your account is not yet activated'
-                      ? <span>Your account is not yet activated. You may request for the activation link <Link to="/pin-resend">here</Link>.</span>
+                      ? <span>Your account is not yet activated. You may request for the activation link <Link to="/pin-request">here</Link>.</span>
                       : authentication.message}
                   </div>
                   : null}
