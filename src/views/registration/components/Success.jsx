@@ -8,9 +8,13 @@ const Success = () =>
 
     <h1>Awesome!</h1>
 
-    <h4 className="u-text-muted">
+    <h4 className="u-text-muted u-headerNormal">
       You signed up successfully, but one last step &mdash; please check your email to verify your account.
     </h4>
+
+    <Link to="/login" className="Btn Btn--info">
+      Go Back
+    </Link>
   </div>
 
 export default Success;
