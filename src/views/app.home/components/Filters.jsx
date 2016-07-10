@@ -26,7 +26,11 @@ export default class Filters extends Component {
             </div>
 
             <div className="FormListGroup-input">
-              <PostTypeSelect value={this.state.post_type} onChange={this.handleType} className="FormInput" />
+              <PostTypeSelect
+                value={this.state.post_type}
+                onChange={this.handleType}
+                placeholder="All"
+                className="FormInput" />
             </div>
           </div>
 

@@ -5,13 +5,20 @@ const types = getPostType();
 
 export default class PostTypeTypeahead extends Component {
   static propTypes = {
+    placeholder: PropTypes.string,
     onChange: PropTypes.func.isRequired
   };
 
+  static defaultProps = {
+    placeholder: 'Select post type'
+  };
+
   render() {
+    const {placeholder, onChange, ...props} = this.props;
+
     return (
-      <select {...this.props} onChange={this.handle}>
-        <option value="">Select post type</option>
+      <select onChange={this.handle} {...props}>
+        <option value="">{placeholder}</option>
 
         {types.map((type, i) =>
           <option value={type.id} key={i}>
