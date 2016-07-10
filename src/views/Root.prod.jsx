@@ -16,7 +16,8 @@ class Root extends React.Component {
     return (
       <div>
         <Helmet
-          titleTemplate={`%s - ${config.app.title} | ${config.app.siteline}`}
+          defaultTitle={`${config.app.title} | ${config.app.meta.siteline}`}
+          titleTemplate={`%s - ${config.app.title} | ${config.app.meta.siteline}`}
           meta={[
             { property: 'og:image', content: '//about.gocart.ph/images/og_image.png' },
             { property: 'og:title', content: config.app.meta.siteline },

@@ -2,7 +2,6 @@ import React, {PropTypes} from 'react';
 import axios from 'axios';
 import qs from 'qs';
 import moment from 'moment';
-import Helmet from 'react-helmet';
 import {Gateway} from 'react-gateway';
 import {connect} from 'react-redux';
 import isServerError from 'app/utils/isServerError';
@@ -51,8 +50,6 @@ class AppHomeView extends React.Component {
 
     return (
       <div className="Container">
-        <Helmet title="Home" />
-
         <Gateway into="header-separator">
           <div className="MainHeader-separator" />
         </Gateway>
