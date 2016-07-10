@@ -57,11 +57,15 @@ class LoginView extends Component {
                     or
                   </p>
 
-                  <div className="FormGroup FormGroup--narrow">
+                  <div className="FormGroup">
                     <ButtonLoader className="Btn Btn--facebook Btn--large Btn--block" type="button" onClick={this.handleFacebook} loading={facebook.loading}>
                       <StaticImg src="icons/facebook.svg" alt="Icon" className="Btn-icon" />
                       Sign In using Facebook
                     </ButtonLoader>
+                  </div>
+
+                  <div className="u-text-center">
+                    <Link to="/pin-request" className="PortalWrapper-contentFooterLink"> Resend Email Verification </Link>
                   </div>
                 </div>
               }
