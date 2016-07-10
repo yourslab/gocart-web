@@ -63,7 +63,8 @@ class LoginView extends Component {
                       Sign In using Facebook
                     </ButtonLoader>
                   </div>
-                </div>}
+                </div>
+              }
             </div>
 
             <hr className="PortalWrapper-separator" />
@@ -77,13 +78,10 @@ class LoginView extends Component {
             <div className="ContainerFluid">
               <div className="Footer-inner">
                 <div className="Footer-section">
-                  <a href="#" className="Footer-link">About Us</a>
-                  <a href="#" className="Footer-link">Support</a>
-                  <a href="#" className="Footer-link">Blog</a>
-                  <a href="#" className="Footer-link">Press</a>
-                  <a href="#" className="Footer-link">Jobs</a>
-                  <a href="#" className="Footer-link">Privacy</a>
-                  <a href="#" className="Footer-link">Terms</a>
+                  <a href="//about.gocart.ph" className="Footer-link">About Us</a>
+                  <a href="//about.gocart.ph/support.html" className="Footer-link">Support</a>
+                  <a href="//about.gocart.ph/privacy.html" className="Footer-link">Privacy</a>
+                  <a href="//about.gocart.ph/terms.html" className="Footer-link">Terms</a>
                 </div>
 
                 <div className="Footer-section">
