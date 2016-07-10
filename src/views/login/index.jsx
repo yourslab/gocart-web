@@ -59,7 +59,7 @@ class LoginView extends Component {
                   : null}
 
                 <div className="FormGroup FormGroup--narrow">
-                  <input type="text" className="FormInput FormInput--large" placeholder="Username" valueLink={linkState(this, 'username')} />
+                  <input type="text" className="FormInput FormInput--large" placeholder="Email or Username" valueLink={linkState(this, 'username')} />
                 </div>
 
                 <div className="FormGroup FormGroup--narrow">
