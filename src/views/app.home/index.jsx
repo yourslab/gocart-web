@@ -121,7 +121,8 @@ class AppHomeView extends React.Component {
 
     this.setState({
       loading: true,
-      error: false
+      error: false,
+      last: false
     });
 
     const {state, props} = this;
