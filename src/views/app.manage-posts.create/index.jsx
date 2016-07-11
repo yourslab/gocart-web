@@ -25,13 +25,27 @@ class AppManagePostsCreateView extends Component {
         <CreatePostForm
           state={this.state}
           auth={this.props.auth}
-          onPost={this.handlePost} />
+          onPost={this.handlePost}
+          onGeoError={this.handleGeoError} />
 
         <SuccessDialogue
           id={this.state.id}
           success={this.state.success} />
       </div>
     );
+  }
+
+  handleGeoError = (error) => {
+    this.setState(({update}) => ({
+      update: {
+        ...update,
+        // @NOTE: It doesn't really matter whether it's latitude
+        // or longitude haha. Checkout `EditPostForm` to know
+        // what I'm talking about. We just want to display the error.
+        errors: { latitude: error },
+        message: lang.errors.input,
+      }
+    }));
   }
 
   handlePost = (data) => {

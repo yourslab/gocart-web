@@ -77,7 +77,8 @@ class AppManagePostsHomeView extends Component {
         auth={auth}
         onCancelEdit={this.handleCancelEdit}
         onUpdate={this.handleUpdate}
-        onUpload={this.handleUpload} />
+        onUpload={this.handleUpload}
+        onGeoError={this.handleGeoError} />
 
       <DeletePostForm
         state={del}
@@ -86,6 +87,19 @@ class AppManagePostsHomeView extends Component {
         onDelete={this.handleDelete} />
       </div>
     );
+  }
+
+  handleGeoError = (error) => {
+    this.setState(({update}) => ({
+      update: {
+        ...update,
+        // @NOTE: It doesn't really matter whether it's latitude
+        // or longitude haha. Checkout `EditPostForm` to know
+        // what I'm talking about. We just want to display the error.
+        errors: { latitude: error },
+        message: lang.errors.input,
+      }
+    }));
   }
 
   handleRequest = () => {

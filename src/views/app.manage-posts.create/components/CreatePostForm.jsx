@@ -90,7 +90,11 @@ export default class CreatePostForm extends Component {
               <div className="FormGroup">
                 <label htmlFor="location">Location</label>
                 <InputError
-                  element={<InputLocation id="location" coordinates={{ latitude: this.state.latitude, longitude: this.state.longitude }} onChange={this.handleLocation} />}
+                  element={<InputLocation
+                    id="location"
+                    coordinates={{ latitude: this.state.latitude, longitude: this.state.longitude }}
+                    onChange={this.handleLocation}
+                    onError={this.props.onGeoError} />}
                   error={state.errors.latitude || state.errors.longitude}
                   classNameModifier="FormInputGroup--danger" />
               </div>

@@ -32,6 +32,11 @@ export default {
     appId: '548682991936531'
   },
 
+  google: {
+    // @TODO: Put it up as an environment config, lol
+    appKey: 'AIzaSyDrMbB6t3WJmzBR5OwpcINIKraSHt5hjS4'
+  },
+
   routing: {
     // The query parameter key used when
     // redirecting an unauthorized user
