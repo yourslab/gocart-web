@@ -19,6 +19,18 @@ class AppProfileView extends Component {
     user: this.props.user
   };
 
+  // @TODO: If possible, make an abstraction that does this for us.
+  // Set initial state to props; on update, set state to nextProps.
+  componentWillReceiveProps(nextProps) {
+    if ( this.props.routeParams.user === nextProps.routeParams.user ) {
+      return;
+    }
+
+    this.setState({ user: nextProps.user });
+    this.refs.following.close();
+    this.refs.followers.close();
+  }
+
   render() {
     const {auth, children} = this.props;
     const {user} = this.state;
@@ -176,7 +188,10 @@ class AppProfileView extends Component {
 export default flowRight(
   connect((state) => ({ auth: state.auth.user })),
 
-  resolve('user', (props) =>
-    axios.get(`/user/@${props.routeParams.user}?viewer_id=${props.auth.id}`)
-      .then((res) => res.data))
+  resolve('user', (props) => {
+    console.log(props);
+
+    return axios.get(`/user/@${props.routeParams.user}?viewer_id=${props.auth.id}`)
+      .then((res) => res.data)
+  })
 )(AppProfileView);

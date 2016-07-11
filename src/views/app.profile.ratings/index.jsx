@@ -10,6 +10,9 @@ import RatingWidget from 'app/components/RatingWidget';
 import RatingCard from './components/RatingCard';
 import RatingForm from './components/RatingForm';
 
+// @NOTE: If you're looking on putting links to any of the user
+// here towards directly their rating page, also implement the fix
+// for: https://github.com/yourslab/gocart-web/issues/24
 export default class AppProfileRatingsView extends Component {
   state = {
     ratings: {

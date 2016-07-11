@@ -22,6 +22,17 @@ class AppProfileHomeView extends Component {
     this.handleRequest();
   }
 
+  // Handle route change.
+  // @TODO: If possible, make an abstraction that does this for us.
+  // Set initial state to props; on update, set state to nextProps.
+  componentWillReceiveProps(nextProps) {
+    if ( this.props.user === nextProps.user ) {
+      return;
+    }
+
+    this.handleRequest(nextProps.user);
+  }
+
   render() {
     // Both come from `app.profile` route.
     const {auth, user} = this.props;
@@ -67,29 +78,34 @@ class AppProfileHomeView extends Component {
     }));
   }
 
-  handleRequest = (offset = this.state.offset) => {
-    if ( this.state.loading || this.state.last ) {
+  handleRequest = (user = this.props.user) => {
+    const offset = user === this.props.user ? this.state.offset : 0;
+
+    if ( this.state.loading || (offset !== 0 && this.state.last) ) {
       return;
     }
 
-    this.setState({
+    this.setState((state) => ({
       loading: true,
-      error: ''
-    });
-
-    const {state, props} = this;
+      error: '',
+      // On route change, remove all products.
+      // Offset becomes 0 on route change.
+      products: offset === 0 ? [] : state.products
+    }));
 
     const query = qs.stringify({
       start: offset,
       end: offset + 19,
       type: 1,
-      viewer_id: props.auth.id
+      viewer_id: this.props.auth.id
     });
 
-    return axios.get(`/user/${props.user.id}/posts?${query}`)
+    return axios.get(`/user/${user.id}/posts?${query}`)
       .then((res) => {
         this.setState((state) => ({
-          products: [...state.products, ...res.data],
+          products: offset === 0
+            ? res.data
+            : [...state.products, ...res.data],
           loading: false,
           offset: offset + 20
         }));
