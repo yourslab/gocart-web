@@ -29,7 +29,7 @@ export default class SuccessDialogue extends Component {
           </div>
         </div>
 
-        <div className="Grid">
+        {/*<div className="Grid">
           <div className="Grid-cell u-size6">
             <a href="#">
               <StaticImg
@@ -47,7 +47,7 @@ export default class SuccessDialogue extends Component {
                 className="ProductPostSuccessBanner" />
             </a>
           </div>
-        </div>
+        </div>*/}
       </Modal>
     );
   }
