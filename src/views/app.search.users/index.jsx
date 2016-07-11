@@ -18,8 +18,12 @@ export default class AppSearchUsersView extends Component {
     this.request();
   }
 
-  componentWillReceiveProps(props) {
-    this.request(0);
+  componentWillReceiveProps(nextProps) {
+    if ( this.props.location.query.q === nextProps.location.query.q ) {
+      return;
+    }
+
+    this.request(nextProps.location.query.q);
   }
 
   render() {
@@ -42,7 +46,7 @@ export default class AppSearchUsersView extends Component {
     );
   }
 
-  request = (offset = this.state.offset) => {
+  request = (search = this.props.location.query.q) => {
     if ( this.state.loading ) {
       return;
     }
@@ -52,12 +56,14 @@ export default class AppSearchUsersView extends Component {
       message: ''
     });
 
-    const query = this.props.location.query.q;
+    const offset = search === this.props.location.query.q ? this.state.offset : 0;
 
-    return axios.get(`/user/search/${query}?start=${offset}&end=${offset + 19}`)
+    return axios.get(`/user/search/${search}?start=${offset}&end=${offset + 19}`)
       .then((res) => {
         this.setState({
-          feed: [...this.state.feed, ...res.data],
+          feed: offset === 0
+            ? res.data
+            : [...this.state.feed, ...res.data],
           offset: offset + 20,
           loading: false
         });
