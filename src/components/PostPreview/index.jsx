@@ -3,6 +3,7 @@ import addClass from 'dom-helpers/class/addClass';
 import removeClass from 'dom-helpers/class/removeClass';
 import {Gateway} from 'react-gateway';
 import ClickOutside from 'react-click-outside';
+import getPostType from 'app/utils/getPostType';
 import formatCurrency from 'app/utils/formatCurrency';
 import getProductPhotos from 'app/utils/getProductPhotos';
 import StaticImg from 'app/components/StaticImg';
@@ -94,8 +95,19 @@ export default class PostPreview extends Component {
                     </div>
 
                     <div className="ProductCardFull-panelHeading">
-                      <div><h5 className="ProductCardFull-name">{product.title || <em>Untitled</em>}</h5></div>
+                      {/* @NOTE: We'll handle an int post_type
+                      and string post_type; former coming from API, and
+                      the latter coming from PostTypeSelect; It doesn't `parse` values
+                      to int yet. We can update it to do so, but it can be
+                      a huge breaking change, especially to the feed. */}
+                      <div><small>{product.post_type || product.post_type.length
+                        ? getPostType(product.post_type)
+                        : <em>Select post type</em>}</small></div>
                     </div>
+
+                    <h5 className="ProductCardFull-name">
+                      {product.title || <em>Untitled</em>}
+                    </h5>
 
                     <p className="ProductCardFull-description">
                       {product.desc.length

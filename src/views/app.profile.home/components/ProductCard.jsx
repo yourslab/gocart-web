@@ -1,6 +1,7 @@
 import React, {PropType} from 'react';
 import {Link} from 'react-router';
 import numeral from 'numeral';
+import getPostType from 'app/utils/getPostType';
 import StaticImg from 'app/components/StaticImg';
 import ProductImg from 'app/components/ProductImg';
 import ProductCardDescription from 'app/components/ProductCardDescription';
@@ -25,13 +26,17 @@ const ProductCard = ({product, onBump}) =>
         <div className="ProductCard-body">
           <div className="ProductCard-heading">
             <div className="ProductCard-headingSection">
-              <h4 className="ProductCard-title">
-                <Link to={`/posts/${product.id}`} className="ProductCard-titleLink">
-                  {product.title}
-                </Link>
-              </h4>
+              <small className="ProductCard-type">
+                {getPostType(product.post_type)}
+              </small>
             </div>
           </div>
+
+          <h4 className="ProductCard-title">
+            <Link to={`/posts/${product.id}`} className="ProductCard-titleLink">
+              {product.title}
+            </Link>
+          </h4>
 
           <p className="ProductCard-description">
             <ProductCardDescription

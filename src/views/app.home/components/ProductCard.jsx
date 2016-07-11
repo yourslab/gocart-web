@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
+import getPostType from 'app/utils/getPostType';
 import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import UserImg from 'app/components/UserImg';
@@ -51,11 +52,9 @@ const ProductCard = ({product, onFollow, onBump}) =>
       <div className="ProductCard-body">
         <div className="ProductCard-heading">
           <div className="ProductCard-headingSection">
-            <h4 className="ProductCard-title">
-              <Link to={`/posts/${product.id}`} className="ProductCard-titleLink">
-                {product.title}
-              </Link>
-            </h4>
+            <small className="ProductCard-type">
+              {getPostType(product.post_type)}
+            </small>
           </div>
 
           {/*<div className="ProductCard-headingSection">
@@ -68,6 +67,12 @@ const ProductCard = ({product, onFollow, onBump}) =>
             </div>
           </div>*/}
         </div>
+
+        <h4 className="ProductCard-title">
+          <Link to={`/posts/${product.id}`} className="ProductCard-titleLink">
+            {product.title}
+          </Link>
+        </h4>
 
         <p className="ProductCard-description">
           <ProductCardDescription

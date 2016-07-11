@@ -135,6 +135,8 @@ export default class CreatePostForm extends Component {
     this.setState({ photos });
   }
 
+  // We're putting it in a method because it's safer;
+  // `refs` doesn't exist on first render.
   handlePreview = () => {
     this.refs.preview.open();
   }

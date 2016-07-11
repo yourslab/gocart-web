@@ -6,6 +6,7 @@ import Helmet from 'react-helmet';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {resolve} from 'react-resolver';
+import getPostType from 'app/utils/getPostType';
 import formatCurrency from 'app/utils/formatCurrency';
 import UserImg from 'app/components/UserImg';
 import ProductImg from 'app/components/ProductImg';
@@ -88,8 +89,12 @@ class AppProductView extends Component {
             </div>
 
             <div className="ProductCardFull-panelHeading">
-              <div><h5 className="ProductCardFull-name">{product.title}</h5></div>
+              <div><small>{getPostType(product.post_type)}</small></div>
             </div>
+
+            <h5 className="ProductCardFull-name">
+              {product.title}
+            </h5>
 
             <p className="ProductCardFull-description">
               {product.desc}
