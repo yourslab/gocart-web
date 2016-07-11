@@ -3,6 +3,7 @@ import qs from 'qs';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
+import isServerError from 'app/utils/isServerError';
 import Infinite from 'app/components/Infinite';
 import ProductCard from './components/ProductCard';
 import EmptyResults from './components/EmptyResults';
@@ -13,6 +14,7 @@ class AppSearchPostsView extends Component {
     offset: 0,
     loading: false,
     error: false,
+    last: false,
     message: ''
   };
 
@@ -51,30 +53,32 @@ class AppSearchPostsView extends Component {
   }
 
   request = (search = this.props.location.query.q) => {
-    if ( this.state.loading ) {
+    const offset = search === this.props.location.query.q ? this.state.offset : 0;
+
+    if ( this.state.loading || (offset !== 0 && this.state.last) ) {
       return;
     }
 
     this.setState({
       loading: true,
       error: false,
-      message: ''
+      message: '',
+      last: false
     });
-
-    const append = search === this.props.location.query.q;
-    const offset = append ? this.state.offset : 0;
 
     const query = qs.stringify({
       start: offset,
       end: offset + 19,
       type: 3,
-      search_string: search
+      search_string: search,
     });
 
     return axios.get(`/user/${this.props.auth.id}/feed/posts?${query}`)
       .then((res) => {
         this.setState((state) => ({
-          feed: append ? [...state.feed, ...res.data] : res.data,
+          feed: offset === 0
+            ? res.data
+            : [...state.feed, ...res.data],
           loading: false,
           offset: offset + 20
         }));
@@ -82,10 +86,20 @@ class AppSearchPostsView extends Component {
         return res;
       })
       .catch((res) => {
-        this.setState({
-          loading: false,
-          error: true
-        });
+        if ( isServerError(res.status) ) {
+          this.setState({
+            loading: false,
+            error: true
+          });
+        } else {
+          this.setState((state) => ({
+            // If we there are 0 results for the
+            // new query, empty the array.
+            feed: offset === 0 ? [] : state.feed,
+            loading: false,
+            last: true
+          }));
+        }
 
         return Promise.reject(res);
       });

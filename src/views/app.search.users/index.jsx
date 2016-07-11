@@ -57,7 +57,8 @@ export default class AppSearchUsersView extends Component {
 
     this.setState({
       loading: true,
-      message: ''
+      message: '',
+      last: false
     });
 
     return axios.get(`/user/search/${search}?start=${offset}&end=${offset + 19}`)
