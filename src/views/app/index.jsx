@@ -183,7 +183,7 @@ class AppView extends Component {
                   </div>
                 </div>
 
-                <Permission rule="auth">
+                {/*<Permission rule="auth">
                   <div className="MainHeader-sidebar MainHeader-sidebar--right">
                     <button className="PlainBtn" type="button" onClick={this.handleToggleRightDrawer}>
                       <StaticImg src="icons/notif_red@1x.png" alt="Drawer Icon" />
@@ -191,7 +191,7 @@ class AppView extends Component {
 
                     <div className="MainHeader-notificationBadge">12</div>
                   </div>
-                </Permission>
+                </Permission>*/}
               </div>
 
               <div className="MainWrapper-content">
