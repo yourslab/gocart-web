@@ -173,17 +173,16 @@ class AppHomeView extends React.Component {
             loading: false,
             error: true
           });
-        } else if (offset === 0) {
-          this.setState({
-            feed: [],
-            last: true,
-            loading: false
-          });
+        // Handle when we hit the "last page"
         } else {
-          this.setState({
+          this.setState((state) => ({
+            // If it's a new query or filter, and
+            // we immediately hit the "last page",
+            // remove the items in the list.
+            feed: offset === 0 ? [] : state.feed,
             loading: false,
             last: true
-          });
+          }));
         }
 
         return Promise.reject(res);
