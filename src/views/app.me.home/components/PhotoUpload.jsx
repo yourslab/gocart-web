@@ -4,6 +4,10 @@ import reader from 'app/utils/filereader';
 import UserImg from 'app/components/UserImg';
 
 export default class PhotoUpload extends Component {
+  state = {
+    uploaded: false
+  };
+
 	render() {
    return (
 			<div className="AvatarUploadWidget u-spacer-base">
@@ -11,7 +15,10 @@ export default class PhotoUpload extends Component {
 
         <div className="AvatarUploadWidget-inner">
           <button type="button" className="PlainBtn" onClick={this.handleAdd}>
-            <UserImg src={this.props.photo} username={this.props.username} className="AvatarUploadWidget-avatar" alt={`${this.props.username}'s Avatar`} />
+            { this.state.uploaded
+              ? <img src={this.props.photo} className="AvatarUploadWidget-avatar" alt={`${this.props.username}'s Avatar`} />
+              : <UserImg src={this.props.photo} username={this.props.username} className="AvatarUploadWidget-avatar" alt={`${this.props.username}'s Avatar`} />
+            }
           </button>
 
           <div>
@@ -29,6 +36,8 @@ export default class PhotoUpload extends Component {
   }
 
   handle = (evt) => {
+    this.setState({ uploaded: true });
+
     return reader(evt.target.files[0])
       .then((evt) => this.props.onChange(evt.target.result));
   }
