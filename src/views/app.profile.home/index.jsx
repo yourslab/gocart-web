@@ -90,7 +90,8 @@ class AppProfileHomeView extends Component {
       error: '',
       // On route change, remove all products.
       // Offset becomes 0 on route change.
-      products: offset === 0 ? [] : state.products
+      products: offset === 0 ? [] : state.products,
+      last: false
     }));
 
     const query = qs.stringify({
