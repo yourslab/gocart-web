@@ -16,7 +16,8 @@ class AppManagePostsHomeView extends Component {
       data: [],
       offset: 0,
       loading: false,
-      message: ''
+      message: '',
+      last: false
     },
 
     update: {
@@ -59,13 +60,21 @@ class AppManagePostsHomeView extends Component {
 
         <Infinite callback={this.handleRequest}>
           <div className="Grid">
-            {feed.data.map((product, i) =>
-              <ProductCard
-                product={product}
-                onEdit={this.handleEdit}
-                onDelete={this.handleOpenDeletePrompt}
-                key={product.id} />
-            )}
+            { feed.last && !feed.data.length
+              ? <div className="Grid-cell u-size6 u-spacer-base">
+                  <Link to="/manage-posts/create" className="BlankSlate">
+                    <StaticImg src="/icons/post_icon@1x.png" />
+                    <h1> Add Post </h1>
+                  </Link>
+                </div>
+
+              : feed.data.map((product, i) =>
+                  <ProductCard
+                    product={product}
+                    onEdit={this.handleEdit}
+                    onDelete={this.handleOpenDeletePrompt}
+                    key={product.id} />)
+            }
           </div>
         </Infinite>
 
@@ -119,13 +128,23 @@ class AppManagePostsHomeView extends Component {
         return res;
       })
       .catch((res) => {
-        this.setState(({feed}) => ({
-          feed: {
-            ...feed,
-            loading: false,
-            message: lang.errors.server
-          }
-        }));
+        if ( isServerError(res.status) ) {
+          this.setState(({feed}) => ({
+            feed: {
+              ...feed,
+              loading: false,
+              message: lang.errors.server
+            }
+          }));
+        } else {
+          this.setState(({feed}) => ({
+            feed: {
+              ...feed,
+              loading: false,
+              last: true
+            }
+          }));
+        }
 
         return Promise.reject(res);
       });
