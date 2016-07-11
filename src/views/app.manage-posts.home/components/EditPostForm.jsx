@@ -114,7 +114,7 @@ export default class EditPostForm extends Component {
                         id="location"
                         coordinates={{ latitude: this.state.latitude, longitude: this.state.longitude }}
                         onChange={this.handleLocation}
-                        onError={this.props.handleGeoError} />}
+                        onError={this.props.onGeoError} />}
                     error={state.errors.latitude || state.errors.longitude}
                     classNameModifier="FormInputGroup--danger" />
                 </div>
