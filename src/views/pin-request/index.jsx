@@ -50,7 +50,7 @@ class PinRequestView extends Component {
             <hr className="PortalWrapper-separator" />
 
             <div className="PortalWrapper-contentFooterText">
-              Not sure why you're here? <Link to="/registration" className="PortalWrapper-contentFooterLink">Go back</Link>.
+              Not sure why you're here? <Link to="/login" className="PortalWrapper-contentFooterLink">Go back</Link>.
             </div>
           </div>
 
