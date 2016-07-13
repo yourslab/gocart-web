@@ -74,7 +74,7 @@ class LoginView extends Component {
             <hr className="PortalWrapper-separator" />
 
             <div className="PortalWrapper-contentFooterText">
-              New to GoCart? <Link to="/registration" className="PortalWrapper-contentFooterLink">Sign Up!</Link>
+              Don't have Facebook? <Link to="/registration" className="PortalWrapper-contentFooterLink">Sign Up with Email!</Link>
             </div>
           </div>
 
