@@ -471,7 +471,7 @@ export function update(data) {
       .then((res) => {
         dispatch({
           type: AUTH_UPDATE_SUCCESS,
-          payload: data
+          payload: res.data
         })
 
         history.push(`/@${auth.user.username}`);
