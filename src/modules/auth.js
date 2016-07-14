@@ -474,6 +474,9 @@ export function update(data) {
           payload: res.data
         })
 
+        // be aware that if you remove this behavior
+        // you should update the `selected` state
+        // on PhotoUpload.jsx
         history.push(`/@${auth.user.username}`);
 
         return res;
