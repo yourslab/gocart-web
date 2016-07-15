@@ -103,7 +103,7 @@ export default class InputLocation extends Component {
       }, (error) => {
         this.setState({ loading: false });
 
-        switch(error) {
+        switch(error.code) {
           case error.PERMISSION_DENIED:
             this.props.onError('User denied the request for Geolocation.');
             break;
