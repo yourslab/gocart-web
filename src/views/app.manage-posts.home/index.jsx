@@ -114,9 +114,9 @@ class AppManagePostsHomeView extends Component {
   }
 
   handleRequest = () => {
-    const {loading, offset} = this.state.feed;
+    const {loading, last, offset} = this.state.feed;
 
-    if ( loading ) {
+    if ( loading || last ) {
       return;
     }
 
