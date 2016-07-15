@@ -9,8 +9,6 @@ export default class PhotoUpload extends Component {
   };
 
 	render() {
-    console.log(this.state.selected, this.props);
-
    return (
 			<div className="AvatarUploadWidget u-spacer-base">
         <input type="file" ref="input" onChange={this.handle} className="AvatarUploadWidget-input" />

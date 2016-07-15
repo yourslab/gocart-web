@@ -471,9 +471,12 @@ export function update(data) {
       .then((res) => {
         dispatch({
           type: AUTH_UPDATE_SUCCESS,
-          payload: data
+          payload: res.data
         })
 
+        // be aware that if you remove this behavior
+        // you should update the `selected` state
+        // on PhotoUpload.jsx
         history.push(`/@${auth.user.username}`);
 
         return res;
