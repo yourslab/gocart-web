@@ -82,10 +82,10 @@ class LoginView extends Component {
             <div className="ContainerFluid">
               <div className="Footer-inner">
                 <div className="Footer-section">
-                  <a href="//about.gocart.ph" className="Footer-link">About Us</a>
-                  <a href="//about.gocart.ph/support.html" className="Footer-link">Support</a>
-                  <a href="//about.gocart.ph/privacy.html" className="Footer-link">Privacy</a>
-                  <a href="//about.gocart.ph/terms.html" className="Footer-link">Terms</a>
+                  <a href="//about.gocart.ph" target="_blank" className="Footer-link">About Us</a>
+                  <a href="//about.gocart.ph/support.html" target="_blank" className="Footer-link">Support</a>
+                  <a href="//about.gocart.ph/privacy.html" target="_blank" className="Footer-link">Privacy</a>
+                  <a href="//about.gocart.ph/terms.html" target="_blank" className="Footer-link">Terms</a>
                 </div>
 
                 <div className="Footer-section">
