@@ -105,7 +105,14 @@ class AppManagePostsHomeView extends Component {
         // @NOTE: It doesn't really matter whether it's latitude
         // or longitude haha. Checkout `EditPostForm` to know
         // what I'm talking about. We just want to display the error.
-        errors: { latitude: error },
+        errors: {
+          // We'll retain old errors since `InputLocation`
+          // isn't a validation message coming from the
+          // server.
+          ...update.errors,
+          latitude: error
+        },
+
         message: lang.errors.input,
       }
     }));
