@@ -9,6 +9,7 @@ import Infinite from 'app/components/Infinite';
 import ProductCard from './components/ProductCard';
 import EditPostForm from './components/EditPostForm';
 import DeletePostForm from './components/DeletePostForm';
+import BlankSlate from './components/BlankSlate';
 
 class AppManagePostsHomeView extends Component {
   state = {
@@ -60,20 +61,14 @@ class AppManagePostsHomeView extends Component {
 
         <Infinite callback={this.handleRequest}>
           <div className="Grid">
-            { feed.last && !feed.data.length
-              ? <div className="Grid-cell u-size6 u-spacer-base">
-                  <Link to="/manage-posts/create" className="BlankSlate">
-                    <StaticImg src="/icons/post_icon@1x.png" />
-                    <h1> Add Post </h1>
-                  </Link>
-                </div>
-
+            {feed.last && !feed.data.length
+              ? <BlankSlate />
               : feed.data.map((product, i) =>
-                  <ProductCard
-                    product={product}
-                    onEdit={this.handleEdit}
-                    onDelete={this.handleOpenDeletePrompt}
-                    key={product.id} />)
+                <ProductCard
+                  product={product}
+                  onEdit={this.handleEdit}
+                  onDelete={this.handleOpenDeletePrompt}
+                  key={product.id} />)
             }
           </div>
         </Infinite>
