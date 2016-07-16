@@ -53,7 +53,7 @@ class AppProductView extends Component {
 
             <div className="ProductCardFull-thumbnailOverlay">
               <div className="ProductCardFull-thumbnailOverlaySection">
-                <h1 className="ProductCardFull-thumbnailOverlaySectionItem">P {formatCurrency(product.price)}</h1>
+                <h1 className="ProductCardFull-thumbnailOverlaySectionItem">{formatCurrency(product.price)}</h1>
               </div>
 
               <div className="ProductCardFull-thumbnailOverlaySection">

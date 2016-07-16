@@ -90,7 +90,7 @@ class LoginView extends Component {
 
                 <div className="Footer-section">
                   <span className="Footer-text">
-                    &copy; 2016 GoCart, Philippines.
+                    &copy; 2016 Gocart, Philippines.
                   </span>
                 </div>
               </div>
