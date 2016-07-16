@@ -51,6 +51,9 @@ $backdrop-small: 0 1px 1px $color-backdrop;
 $backdrop-base: 0 1px 5px $color-backdrop;
 $backdrop-large: 0 5px 5px $color-backdrop;
 
+$backdrop-card: 0px 1px 1px 0px rgba(0,0,0,0.3);
+$backdrop-card-hover: 0px 5px 30px 0px rgba(0,0,0,0.3);
+
 // Component-related variables
 $mainHeader-height: 90px;
 $mainHeader-borderSize: 3px;
