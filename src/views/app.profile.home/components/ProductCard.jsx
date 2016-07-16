@@ -1,7 +1,7 @@
 import React, {PropType} from 'react';
 import {Link} from 'react-router';
-import numeral from 'numeral';
 import getPostType from 'app/utils/getPostType';
+import formatCurrency from 'app/utils/formatCurrency';
 import StaticImg from 'app/components/StaticImg';
 import ProductImg from 'app/components/ProductImg';
 import ProductCardDescription from 'app/components/ProductCardDescription';
@@ -18,7 +18,7 @@ const ProductCard = ({product, onBump}) =>
 
           <div className="ProductCard-thumbnailOverlay">
             <h1 className="ProductCard-pricing">
-              P {numeral(product.price).format('0,0.00')}
+              {formatCurrency(product.price)}
             </h1>
           </div>
         </div>

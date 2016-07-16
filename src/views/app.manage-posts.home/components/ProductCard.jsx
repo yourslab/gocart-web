@@ -16,7 +16,7 @@ const ProductCard = ({product, onEdit, onDelete}) =>
 
           <div className="ProductCard-thumbnailOverlay">
             <h1 className="ProductCard-pricing">
-              P {formatCurrency(product.price)}
+              {formatCurrency(product.price)}
             </h1>
           </div>
         </div>

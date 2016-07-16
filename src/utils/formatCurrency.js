@@ -7,6 +7,6 @@ import numeral from 'numeral';
  * @return string
  */
 export default function formatCurrency(amount) {
-  // \u20B1 is Peso sign
-  return "\u20B1 "+numeral(amount).format('0,0');
+  // \u20B1 = peso sign = ₱
+  return `\u20B1 ${numeral(amount).format('0,0')}`;
 }
