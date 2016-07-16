@@ -14,7 +14,7 @@ const ProductCard = ({product}) =>
       <div>
         <h6 className="SearchProductCard-label">{getPostType(product.post_type)}</h6>
         <h4 className="SearchProductCard-title">{product.title}</h4>
-        <h4 className="SearchProductCard-price">P {formatCurrency(product.price)}</h4>
+        <h4 className="SearchProductCard-price">{formatCurrency(product.price)}</h4>
       </div>
     </Link>
   </div>
