@@ -89,7 +89,7 @@ const ProductCard = ({product, onFollow, onBump}) =>
 
           <div>
             <Link to={`/posts/${product.id}`} className="CommentMeta-count">
-              {product.num_comments} comments
+              {`${product.num_comments} ${product.num_comments === 1 ? 'comment' : 'comments'}`}
             </Link>
           </div>
         </div>
