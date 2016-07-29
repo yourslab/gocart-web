@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import getPostType from 'app/utils/getPostType';
 import formatCurrency from 'app/utils/formatCurrency';
+import pluralizer from 'app/utils/pluralizer';
 import StaticImg from 'app/components/StaticImg';
 import UserImg from 'app/components/UserImg';
 import ProductImg from 'app/components/ProductImg';
@@ -89,7 +90,7 @@ const ProductCard = ({product, onFollow, onBump}) =>
 
           <div>
             <Link to={`/posts/${product.id}`} className="CommentMeta-count">
-              {product.num_comments} comments
+              {`${product.num_comments} ${pluralizer('comment', product.num_comments)}`}
             </Link>
           </div>
         </div>

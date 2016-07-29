@@ -1,22 +1,44 @@
 import React, {PropTypes} from 'react';
+import pluralizer from 'app/utils/pluralizer';
+import connectOxfordItems from 'app/utils/connectOxfordItems';
 
 // @todo: Handle scenario where a user in
 // the `liked_by` list unlikes the product
-//
-// @todo: Handle scenario where the auth
-// bumped the post (e.g., `You, X, and 5 more bumped this`)
+
 const ProductBumpInfo = ({product}) => {
-  if ( product.liked_by.length ) {
-    const user = product.liked_by[0];
+  // Entries for the bump text will be converted to a string later on
+  // At most, there will be 3 entries
+  var entries = [];
 
-    if ( product.num_likes - 1 >= 1 ) {
-      return <span>{user.name} and {product.num_likes - 1} bumped this</span>
-    }
-
-    return <span>{user.name} bumped this</span>
+  if ( product.num_likes === 0 ) {
+    entries.push('0');
   }
 
-  return <span>{product.num_likes} bumped this</span>
+  if ( product.is_liked ) {
+    entries.push('You');
+  }
+
+  // Case 1: You is added (liked_by[0] is added)
+  // Case 2: You not added (liked_by[0] and liked_by[1] added)
+  // These cases are handled by MAX_FOLLOWING - entries.length
+  const MAX_FOLLOWING = 2;
+  var remaining = product.liked_by
+  .slice(0, MAX_FOLLOWING - entries.length)
+  .map((user) => user.name);
+
+  entries.concat(remaining);
+
+  const finalBumpCount = product.num_likes - entries.length;
+
+  if ( finalBumpCount > 0 ) {
+    var otherText = `${finalBumpCount} ${pluralizer('other', finalBumpCount)}`;
+    // We use '1 other' or 'x others' if it's not the only entry
+    entries.push((entries.length > 0) ? otherText : `${finalBumpCount}`);
+  }
+
+  const text = `${connectOxfordItems(entries)} bumped this`;
+
+  return <span>{text}</span>
 }
 
 ProductBumpInfo.propTypes = {

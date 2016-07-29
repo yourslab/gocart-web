@@ -13,6 +13,7 @@ import ProductImg from 'app/components/ProductImg';
 import RatingWidget from 'app/components/RatingWidget';
 import UserFollowWidget from 'app/components/UserFollowWidget';
 import BumpButton from 'app/components/BumpButton';
+import ProductBumpInfo from 'app/components/ProductBumpInfo';
 
 class AppProductView extends Component {
   state = {
@@ -107,7 +108,7 @@ class AppProductView extends Component {
             <div className="ProductCardFull-commentInfo">
               <div className="CommentMeta">
                 <div>
-                  <a href="#" className="CommentMeta-highlight">{product.num_likes} bumped this</a>
+                  <a href="#" className="CommentMeta-highlight"><ProductBumpInfo product={product} /></a>
                 </div>
 
                 <div>
