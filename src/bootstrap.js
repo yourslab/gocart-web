@@ -18,5 +18,10 @@ if ( process.env.NODE_ENV !== 'production' ) {
   };
 }
 
+// Initialize workaround for scrollbars
+document.addEventListener('DOMContentLoaded', () => {
+  require('scrollbar-compensate')('.ReactModal__Body--open');
+});
+
 import './utils/axios/interceptors/base';
 import './utils/axios/interceptors/auth';
